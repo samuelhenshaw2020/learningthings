@@ -1,0 +1,51 @@
+
+
+<button mat-mini-fab  color class="comment text-light bg-dark" (click)="showDialog()">
+    <mat-icon>chat_bubble</mat-icon>
+</button>
+
+<div class="dialogBox p-3 bg-light card" *ngIf="show"  >
+
+    <h3 class="lead">Hello! <mat-icon class="txtcol">comment_outline</mat-icon></h3>
+    <p class="small"> For inquiries, info, etc, please fill the following!</p>
+
+        <form   [formGroup]="commentForm" novalidate (ngSubmit)="sendComment()">
+
+            <div>
+                <br>
+                <!-- <p class="alert alert-success anim-show" *ngIf="data.status==true">{{data.message}}</p>
+                <p class="alert alert-danger anim-show" *ngIf="data.status==false">{{data.message}}</p> -->
+                
+            </div>
+      
+            
+            <div class="form-group">
+                <small class="text-secondary small">Email</small>
+                <input type="text" class="form-control " [class.anim-slow-infi]="mail.invalid && mail.touched"  name="mail" formControlName="mail"  required>
+                <small [class.d-none]="mail.valid && mail.dirty" style="font-size: 12px" class="text-danger lead float-right">Email is invalid</small>
+                <!-- <small [class.d-none]="mail."></small> -->
+            </div>
+     
+            <div class="form-group">
+                <small class="text-secondary small">Message</small>
+                <textarea class="form-control" [class.anim-slow-infi]="message.invalid && message.dirty"  name="message"  formControlName="message"  required></textarea>
+                 <small style="font-size: 12px" class="float-right lead text-secondary">Max of 500 characters</small>
+            </div>
+
+            <br>
+            <div class="form-group">
+                <button mat-button class="float-left small" (click)="showDialog()" type="button">Close!</button>
+                <button mat-raised-button class="float-right" type="submit" [disabled]="commentForm.invalid || submited">
+                       <span [hidden]="submited">Send</span>
+                       <span [hidden]="!submited">Sending...</span>
+                </button>
+            </div>
+
+
+        </form>
+</div>
+
+
+
+
+

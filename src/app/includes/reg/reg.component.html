@@ -1,0 +1,120 @@
+<p class="lead text-center" style="font-size: 20px;">Already have an account. <a routerLink="/login/signin"
+        class="font-weight-bold">Sign In?</a></p>
+<p class="text-center"> <a (click)="scroToSm(); " class="clickable small text-dark font-weight-bold ">Social media Sign
+        up</a></p>
+
+<div class="container d-flex justify-content-center ">
+    <form novalidate class="form" [formGroup]="formData" (submit)='submitForm()'>
+        <div class="form-group">
+
+            <div class="d-flex input-div">
+                <input class="input-cos w-100" placeholder="Full Name" formControlName="name">
+                <button mat-icon-button type="button" class="m-auto">
+                    <mat-icon class="text-danger" *ngIf="name.dirty && name.invalid">cancel</mat-icon>
+                    <mat-icon *ngIf="name.dirty && name.valid">check_circle</mat-icon>
+                </button>
+            </div>
+
+
+        </div>
+        <br>
+
+        <div class="form-group input-div d-flex">
+            <input class="input-cos w-100" placeholder="Email" formControlName="email">
+            <button mat-icon-button type="button" class="m-auto">
+                <mat-icon class="text-danger" *ngIf="email.dirty && email.invalid">cancel</mat-icon>
+                <mat-icon *ngIf="email.dirty && email.valid">check_circle</mat-icon>
+            </button>
+        </div>
+        <br>
+
+        <div class="form-group  input-div d-flex">
+            <input class="input-cos w-100" placeholder="Phone Number" type="Number" formControlName="tel">
+            <button mat-icon-button type="button" class="m-auto">
+                <mat-icon class="text-danger" *ngIf="tel.dirty && tel.invalid">cancel</mat-icon>
+                <mat-icon *ngIf="tel.dirty && tel.valid">check_circle</mat-icon>
+            </button>
+        </div>
+        <br>
+
+
+        <div class="form-group d-flex input-div">
+            <input class="input-cos w-100" placeholder="Password" [type]="hide ? 'password' : 'text'"
+                formControlName="password">
+            <button mat-icon-button (click)="hide = !hide" type="button" class="m-auto">
+                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+        </div>
+        <br>
+
+        <div class="form-group">
+            <div class="d-flex input-div">
+
+                <input class="w-100 input-cos" placeholder="Comfirm Password" [type]="hide ? 'password' : 'text'"
+                    formControlName="confirmPassword">
+                <button mat-icon-button type="button" class="m-auto">
+                    <mat-icon class="text-danger"
+                        *ngIf="confirmPassword.dirty && confirmPassword.value != password.value">cancel</mat-icon>
+                    <mat-icon *ngIf="confirmPassword.dirty && confirmPassword.value == password.value">check_circle
+                    </mat-icon>
+                </button>
+
+            </div>
+
+
+
+        </div>
+        <br>
+
+
+        <div class="form-group">
+            <button color="primary" mat-raised-button class="w-100  p-2 br-30" type="submit"
+                [disabled]="formData.invalid  || confirmPassword.value != password.value || submitted">
+                <span class="d-none d-md-inline lead">{{!submitted ? 'Sign up' : 'Processing...'}}</span>&nbsp;&nbsp;
+                <i class="fa fa-send font-weight-bold fa-lg " [hidden]="submitted"></i>
+                <!-- <i class="fa fa-circle-o-notch fa-spin font-weight-bold fa-lg" [hidden]="!submitted"></i> -->
+                <span [hidden]="!submitted">
+                    <app-loaderdot></app-loaderdot>
+                </span>
+            </button>
+
+        </div>
+
+    </form>
+
+
+
+</div>
+
+<br>
+<div class="d-flex justify-content-center">
+    <hr class="w-25 bg-dark">
+    <span class="font-wight-bold" style="font-family: cursive;">Or</span>
+    <hr class="w-25 bg-dark">
+</div>
+<br>
+
+
+
+<!-- /////////social media sign up////////////// -->
+
+<div class="container  d-flex justify-content-center " id="social-media">
+    <div class="form">
+        <div>
+            <button mat-raised-button class="w-100 bg-primary text-light p-2 br-30" type="button">
+                <i class="fa fa-facebook fa-lg text-light"></i>
+                <span>&nbsp;Sign up</span>
+            </button>
+        </div>
+        <br>
+        <div>
+            <button mat-raised-button class="w-100 bg-danger text-light p-2 br-30" type="button">
+                <i class="fa fa-google fa-lg text-light"></i> Sign up
+            </button>
+        </div>
+    </div>
+
+</div>
+
+<br>
+<br>

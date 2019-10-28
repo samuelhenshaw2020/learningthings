@@ -1,0 +1,11 @@
+.form{
+    width: 400px;
+}
+
+
+
+@media (max-width: 900px){
+     .form{
+         width: 90%;
+     }
+ }

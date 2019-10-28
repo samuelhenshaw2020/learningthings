@@ -1,0 +1,22 @@
+.icon-bar{
+    width: 25px;
+    height: 3px;
+    /* margin: 5px 0; */
+    background: #f8f9fa;
+    -webkit-transition: all 0.2s;
+    transition: all 0.3s;
+    border-radius: 20px ;
+}
+ 
+.top-bar{
+    -webkit-transform: rotate(20deg);
+    transform: rotate(40deg) translate(-5px, 6px);
+}
+.middle-bar{
+    display: none;
+}
+.bottom-bar{
+    transform: rotate(-40deg) translate(-2px, -8px);
+}
+
+

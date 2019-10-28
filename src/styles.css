@@ -1,4 +1,88 @@
-/* You can add global styles to this file, and also import other style files */
+@import "~bootstrap/dist/css/bootstrap.css";
+@import url("https://fonts.googleapis.com/icon?family=Material+Icons");
+@import url("https://fonts.googleapis.com/css?family=Roboto:300,400,500");
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css");
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html, body { height: 100%; scroll-behavior: smooth;}
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; -webkit-transition: all ease-in-out .5s; transition: all ease-in-out .5s; }
+button{
+    -webkit-transition: all .5 !important;
+    transition: all .5 !important;
+}
+.clickable{
+    cursor: pointer;
+}
+
+.input-cos, .textarea-cos{
+
+    border-radius: 30px;
+    border: none !important;
+    background: rgb(239, 239, 240);
+    padding: 15px;
+
+}
+
+.input-cos:focus, .textarea-cos:focus{
+box-shadow: 0px 0px 5px rgba(0,0,0,0.2) !important;
+background: rgb(230, 230, 230);
+}
+
+.input-div{
+    border-radius: 30px;
+    border: none !important;
+    background: rgb(239, 239, 240);
+    
+}
+.btn-cos{
+    padding: 15px !important;
+    padding-left: 25px ;
+    padding-right: 25px ;
+    background: white;
+    border: none;
+    box-shadow: 0px 0px 12px rgba(0,0,0,0.4);
+    border-radius: 50px;
+    transform: scale(1.02);
+    transition: all 0.2s;
+    cursor: pointer;
+    font-family: century Gothic;
+    font-weight: 600;
+    font-size: 15px;
+    
+   
+   
+
+}
+.btn-cos:hover{
+    box-shadow: 0px 0px 5px rgba(0,0,0,0.2);
+    transform: scale(1.03);
+    color:  rgba(0,0,0,0.7);
+}
+.btn-cos:active{
+    box-shadow: 0px 0px 15px rgba(0,0,0,0.4);
+    transform: scale(1.04);
+    outline: none !important;
+    border: none !important;
+    box-shadow: none !important;
+    -webkit-appearance: none !important;
+    
+}
+
+.pointer{
+    cursor: pointer;
+}
+
+
+
+
+.br-30{
+    border-radius: 30px !important;
+}
+
+ .anim-1{
+     -webkit-transition: all .4s;
+     transition: all .4s;
+ }
+
+ 
+

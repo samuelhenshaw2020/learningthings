@@ -1,0 +1,78 @@
+
+<mat-toolbar class="navbar navbar-expand-md sticky-top px-md-5" >
+
+   
+       
+    <button mat-icon-button style="font-size: 25px" routerLink="/home">
+        <mat-icon>adjust</mat-icon>
+         <b>Testing</b>
+    </button>
+
+    <div class="collapse navbar-collapse justify-content-end mx-1" >
+        <ul class="navbar-nav" [hidden]='!isLogPage'>
+
+                 <li class="nav-item mr-1">
+                    <button mat-flat-button style="border-radius: 30px;" >
+                        <span class="p-2">Register</span>
+                    </button>
+                </li>
+
+            
+        </ul>
+    </div>    
+    
+    <button mat-raised-button color class="br-30" routerLink='/login' [hidden]='!isLogPage'>
+        <span class="p-2">Sign in</span>
+    </button>
+    
+    <!-- <button  class="py-2 navbar-toggler" [hidden]='!isLogPage'>
+        <div class="icon-bar mt-1 bg-dark"></div>
+        <div class="icon-bar my-1 bg-dark"></div>
+        <div class="icon-bar bg-dark"></div>
+    </button>
+     -->
+
+    <button mat-icon-button (click)='goBack()' [hidden]='isLogPage'>
+        <mat-icon>close</mat-icon>
+    </button>
+       
+   
+
+</mat-toolbar>
+
+
+
+
+
+
+
+<!-- the drop down menw -->
+
+<mat-menu #rootMenu="matMenu">
+
+    <a mat-menu-item [matMenuTriggerFor]="subMenuLocation">
+        <mat-icon>pin_drop</mat-icon>
+        <span>Locations</span>
+    </a>
+
+    <a mat-menu-item >
+        <mat-icon>add_shopping_cart</mat-icon>
+       <span>Markets</span>
+    </a>
+
+    <a mat-menu-item [matMenuTriggerFor]="subMenuStoreType">
+        <mat-icon>store</mat-icon>
+        <span>Store</span>
+    </a>
+
+</mat-menu>
+
+<mat-menu #subMenuLocation="matMenu">
+    <a mat-menu-item *ngFor="let loc of locations">{{loc.name}}</a>
+</mat-menu>
+
+<mat-menu #subMenuStoreType="matMenu">
+        <a mat-menu-item *ngFor="let st of storeTypes">{{st.name}}</a>
+</mat-menu>
+<!-- ////////dropdown menu - end////// -->
+
