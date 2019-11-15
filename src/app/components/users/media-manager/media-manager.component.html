@@ -1,0 +1,42 @@
+<div mat-dialog-content  style="height: 400px">
+  <ul class="nav nav-tabs" >
+    <li class="nav-item">
+      <a class="nav-link" [class.active]="task == 'upload'"  (click)="task = 'upload'" >Upload</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" [class.active]="task == 'list'" (click)="task='list'">Media</a>
+    </li>
+   
+  </ul>
+  
+  <!-- Tab panes -->
+  <div class="" [ngSwitch]="task">
+    <div class="d-flex justify-content-center " #dropzone *ngSwitchCase="'upload'" >
+       
+       <div class="form-group py-5" >
+            <p class="text-center">Drag and drop files</p>
+            <p class="small text-center">or</p>
+            <input type="file" hidden #media (change)="imageUpload($event)">
+            <button mat-button (click)="media.click()">Click to upload a media file</button>
+       </div>
+
+    </div>
+    <div class="p-2"  *ngSwitchCase="'list'">
+
+      <input type="text" [(ngModel)]="link" hidden>
+
+        <div class="card-columns">
+            <div class="card border m-1" [ngClass]="i==prev? 'bt mat-elevation-z4': ''" (click)="selectLink(i); link = image.src" *ngFor="let img of imgList; let i =index" style="max-height: 150px; max-width: 150px;overflow: hidden;">
+                    <img  #image  src="{{'http://localhost/ihifixtest/img/'+img}}" alt="" class="card-img-top" >
+            </div>
+            
+        </div>
+        
+    </div>
+  </div>
+</div>
+
+<div mat-dialog-actions align="end">
+  <button mat-button (click)="closeDialog()">Cancel</button>
+  <button mat-button [mat-dialog-close]="link" cdkFocusInitial>Use</button>
+</div>

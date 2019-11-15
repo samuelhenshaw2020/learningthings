@@ -1,0 +1,189 @@
+<main class="container">
+
+        <!-- loaders  -->
+        <div>
+                <div class="theme1 p-5">
+
+                        <div class="d-flex justify-content-center">
+                                <div class="w-25 br-30 bg-light p-3"></div>
+                                <div class=" br-30 bg-light p-3 mx-2" style="width: 10%"></div>
+                                <div class="w-25 br-30 bg-light p-3"></div>
+                        </div>
+                </div>
+
+                <br><br>
+
+                <div class="card-columns">
+                        <div class="card border-0 theme2 p-5">
+                                <div class="d-flex justify-content-center">
+                                        <div class=" br-30 bg-light p-3 mx-2" style="width: 10%"></div>
+
+                                </div>
+                        </div>
+                        <div class="card border-0 theme2 p-5">
+                                <div class="w-75 br-30 bg-light p-3"></div><br><br>
+                                <div class="w-75 br-30 bg-light p-2"></div><br><br>
+                                <div class="w-25 br-30 bg-light p-2"></div>
+
+                        </div>
+                        <div class="card border-0 theme2 p-5">
+                                <div class=" br-30 bg-light p-3 mx-2" style="width: 10%"></div>
+                        </div>
+                </div>
+        </div>
+
+        <br><br>
+
+
+
+        <!-- the main content -->
+
+        <div class="p-3 text-center bg-white">
+                <h6 class="lead">SITE HEADER EDIT</h6>
+        </div>
+        <br>
+
+        <div class="container px-0 bg-white" style="position: relative;">
+                <div class="" style="max-height: 400px; overflow: hidden;">
+                        <img #img src="/assets/pic1.PNG" alt="" class="img img-fluid w-100">
+                </div>
+                <div style="position: absolute; top: 0px; left: 0px; right: 0%; bottom: 0px; background: rgba(0,0,0,0.3);"
+                        class="d-flex justify-content-center">
+                        <div class="m-auto">
+                                <button mat-fab color class="br-30 mat-elevation-z7" (click)="openMedia(img)">
+                                        <mat-icon>image</mat-icon>
+                                </button>
+                        </div>
+                </div>
+        </div>
+        <br><br>
+
+
+        <!-- nav <menu></menu> -->
+        <div class="container">
+
+                <div class="row">
+                        <!-- logo edit -->
+
+                        <div class="col-md">
+                                <form class="bg-white p-2">
+                                        <div class="formg-group">
+                                                <mat-checkbox [checked]="vision_check" #vision>Enable Mission</mat-checkbox>
+                                                <angular-editor *ngIf="vision.checked" [placeholder]="'What is the vision'"
+                                                        [config]="editorConfig"></angular-editor>
+                                        </div>
+                                        <br>
+                                        <div class="formg-group">
+                                                <mat-checkbox [checked]="mission_check" #mission>Enable Mission</mat-checkbox>
+                                                <angular-editor *ngIf="mission.checked" [placeholder]="'What is the Mission'"
+                                                        [config]="editorConfig"></angular-editor>
+                                        </div>
+                                </form>
+                        </div>
+
+                        <div class="col-md">
+                           
+                                        <div class="bg-white p-2 ">
+                                                <p>Edit Logo</p>
+                                                <input type="file" class="input-cos w-100 p-4 " #logo accept="image/*"
+                                                        hidden (change)="showImageProperty($event)">
+                                                <div class=" bg-dark  d-flex mx-auto mat-elevation-z7 logo-container">
+                                                        <div class=" align-self-center">
+                                                                <img src="" alt="" #display
+                                                                        style="width: 100%; height: 150px; clip-path: circle(50%);">
+                                                        </div>
+                                                        <button mat-mini-fab color class="btn-click"
+                                                                (click)="logo.click()" type="button">
+                                                                <mat-icon>image</mat-icon>
+                                                        </button>
+
+                                                </div>
+                                        </div>
+
+                                        
+
+                                
+
+                                <!-- //////////// -->
+                                
+                                        <div class="bg-white">
+                                                <div class="bg-white p-2 h-100">
+                                                        <p>Social Media</p>
+                                                        <mat-checkbox color="primary" #all>Enable Social media
+                                                        </mat-checkbox><br>
+                                                        <mat-checkbox color="primary" [disabled]="!all.checked"
+                                                                [checked]="all.checked">Enable Facebook</mat-checkbox>
+                                                        <br>
+                                                        <mat-checkbox color="primary" [disabled]="!all.checked"
+                                                                [checked]="all.checked">Enable Twitter</mat-checkbox>
+                                                        <br>
+                                                        <mat-checkbox color="primary" [disabled]="!all.checked"
+                                                                [checked]="all.checked"> Enable Instagram</mat-checkbox>
+                                                        <br>
+                                                        <mat-checkbox color="primary" [disabled]="!all.checked"
+                                                                [checked]="all.checked">Enable Linkedin</mat-checkbox>
+                                                        <br>
+                                                </div>
+                                        </div>
+                                
+
+                                <!-- Header menu edit -->
+                                
+                                        <div class="bg-white p-2 ">
+                                                <p>Header Menu</p>
+                                                <div class="p-1">
+                                                        <div class="p-2 bg-back my-3 " *ngFor="let nm of nav_menu"
+                                                                (click)="nm.active = !nm.active">
+                                                                <span>{{nm.menu}}</span>
+                                                                <i [hidden]="!nm.active"
+                                                                        class="text-dark font-weight-bold float-right fa fa-check fa-lg"></i>
+                                                        </div>
+
+                                                </div>
+                                        </div>
+                                
+
+                        </div>
+
+
+                </div>
+        </div>
+
+        <br>
+
+        <div class="p-3 d-flex justify-content-center">
+                <button mat-raised-button color=primary class="w-50 br-30 p-3">Save</button>
+        </div>
+        <!-- <div class="p-3 text-center bg-white ">
+                <h6 class="lead">SITE INFORMATION</h6>
+            </div>
+            <br>
+
+            
+                    <div class="row">
+                        <div class="col-md">
+                                <form class="bg-white p-2">
+                                       <div class="formg-group">
+                                        <mat-checkbox>Check me!</mat-checkbox>
+                                        <angular-editor [placeholder]="'What is the vision'"  [config]="editorConfig"></angular-editor>
+                                       </div>
+                                       <br>
+                                       <div class="formg-group">
+                                                <p>Mission</p>
+                                        <angular-editor  [placeholder]="'What is the Mission'"  [config]="editorConfig"></angular-editor>
+                                       </div>
+                                       <br>
+
+                                       <div class="formg-group">
+                                                <p>Objectives</p>
+                                        <angular-editor [placeholder]="'What are your Objectives'"  [config]="editorConfig"></angular-editor>
+                                       </div>
+                                </form>
+                        </div>
+                        <div class="col-md-5"></div>
+
+                    </div>
+             -->
+
+        <br><br><br>
+</main>

@@ -1,0 +1,113 @@
+.sidenav-container {
+    height: 100%;
+  }
+  
+  .sidenav {
+    width: 200px;
+  }
+  
+  .sidenav .mat-toolbar {
+    background: inherit;
+  }
+
+  .category:hover{
+    /* z-index: 1050; */
+    box-shadow: 0px 0px 5px rgba(0,0,0,0.5);
+}
+
+.label{
+    font-size: 30px
+}
+
+.logo-pane{
+    width: 100px; height: 100px; border-radius: 50%; overflow: hidden; ;
+}
+
+.logo-container{
+    width: 45px; height: 45px; border-radius: 50%; position: relative;
+}
+
+.btn-click{
+    position: absolute; bottom: 0%; ;right: 0px
+}
+
+.card-columns.temp{
+    grid-column: 2;
+}
+
+.scale-bk{
+    transform: scale(0.9);
+    opacity: 0.9;
+}
+
+.scale-ft{
+    transform: scale(1.03);
+}
+
+
+  
+  .mat-toolbar.mat-primary {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+  }
+
+  .font-1{
+      font: 500 14px 'Google Sans',Arial,Helvetica,sans-serif;
+      color: rgba(0,0,0,0.54);
+      letter-spacing: .25px;
+      -webkit-transition: all .4s;
+      transition: all .4s;
+      
+  }
+  .font-1:hover{
+      color: #3c4043;
+      /* font-weight: 600; */
+  }
+  
+
+  .sidenav-div{
+    /* position: relative; */
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    right: 0%;
+    bottom: 0%;
+    min-height: 600px;
+    /* background:   rgba(11, 11, 12, .9); */
+  }
+
+
+
+  
+  .sidenav::-webkit-scrollbar {
+    width: 6px;
+    /* background-color: #F5F5F5; */
+  }
+
+  .right-menu{
+    overflow: scroll; width: 200px; height: 100%; position: fixed; top: 0px; right: 8px; bottom: 0px; z-index: 1500;
+  }
+
+ 
+  @media (max-width: 1057px){
+ 
+  }
+  
+  
+
+
+  
+
+  
+
+  /* .logout{
+      position: relative;
+      bottom: 3%;
+      left: 0%;
+  } */
+
+
+
+
+  

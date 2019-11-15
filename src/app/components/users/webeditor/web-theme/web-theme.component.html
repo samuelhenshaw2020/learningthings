@@ -1,0 +1,65 @@
+<main class="container">
+
+    <h3>THEMES</h3>
+    <!-- The loader -->
+    <div class="card-columns loader">
+
+        <div class="card theme1  border-0 m-3 p-3 " style="height: 350px;">
+                <div class="w-75  bg-light p-3 mx-auto br-30"> </div>
+                <br>
+               
+             
+                <div class="d-flex justify-content-center">
+                    <div class="w-25 br-30 bg-light p-3"></div>
+                    <div class=" br-30 bg-light p-3 mx-2" style="width: 10%"></div>
+                    <div class="w-25 br-30 bg-light p-3"></div>
+                </div>
+                <br><br><br>
+                <div class="w-100 br-30 bg-light p-5 mx-auto"> </div>
+        </div>
+
+        <div class="card theme2 border-0  m-3 p-3 " style="height: 350px;">
+               
+                <div class="w-100 br-30 bg-light p-5 mx-auto"> </div>
+                <br><br><br>
+                <div class="w-75  bg-light p-3 mx-auto br-30"> </div>
+                <br>
+                <div class="d-flex justify-content-center">
+                    <div class="w-25 br-30 bg-light p-3"></div>
+                    <div class=" br-30 bg-light p-3 mx-2" style="width: 10%"></div>
+                    <div class="w-25 br-30 bg-light p-3"></div>
+                </div>
+        </div>
+
+
+        <div class="card theme3 m-3 p-3 border-0" style="height: 350px;">
+            <div class="w-75  bg-light p-3 mx-auto br-30"> </div>
+            <br>
+            <div class="w-100 br-30 bg-light p-5 mx-auto"> </div>
+            <br><br><br>
+            <div class="d-flex justify-content-center">
+                <div class="w-25 br-30 bg-light p-3"></div>
+                <div class=" br-30 bg-light p-3 mx-2" style="width: 10%"></div>
+                <div class="w-25 br-30 bg-light p-3"></div>
+            </div>
+
+            
+        </div>
+
+
+    </div>
+
+    <!-- The themes/ -->
+    <div class="card-columns ">
+        <div class="card theme border-0 m-3" *ngFor="let th of theme; let i = index"
+            [style.opacity]="i==prev ? 1: 0.8">
+            <img src="/assets/pic3.PNG" alt="" class="card-img-top">
+            <div class="card-body justify-content-center d-flex bg-light">
+                <button mat-raised-button [color]="i==prev? 'primary':''" (click)="selected(i)" class="br-30">
+                     {{i==prev ? 'activated': 'activate'}} <i [hidden]="i!=prev"
+                        class="fa fa-check"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</main>

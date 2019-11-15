@@ -1,6 +1,6 @@
 {
-    "/ihifixtest": {
-        "target": "http://localhost:80",
+    "/user": {
+        "target": "http://192.168.43.82:9000/api",
         "secure": false
     }
 }

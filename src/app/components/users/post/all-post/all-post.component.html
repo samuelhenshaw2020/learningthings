@@ -1,0 +1,72 @@
+<div class="   " >
+
+    <p><span class=" ml-3 font-1 font-weight-bold" style="font-size: 9px">POST</span></p>
+
+    <div class="d-flex justify-content-between">
+        
+        <div>          
+            <button mat-raised-button class="br-30"><mat-icon>add</mat-icon> &nbsp; add New</button>
+        </div>
+
+        <div>
+            <input type="text" class=" p-1"  (keyup)="filterTable($event)" placeholder="search post">
+            <button mat-raised-button class="br-30" (click)="advanceSearch()">Search</button>
+        </div>
+    </div>
+    <br>
+  
+
+    <div class="table-responsive bg-white" > <!--music player single start-->
+
+        <table class="table   table-hover table-lg">
+            <thead class="bg-dark ">
+                <tr >
+                    <!-- <th></th> -->
+                      <th class="small text-light">Title</th>
+                    <th class="small text-light">Category</th>
+                    <th class="small text-light"> Date</th>
+                    <th class="small text-light">Analysis</th>
+                </tr>
+            </thead>
+
+            <tbody>
+              <tr class=" bg-white" *ngFor="let post of usersList">
+                  <td class="m-auto">
+                      <div class="media my-auto white-1">
+                            <div class="media-body ml-2" >
+                                <a  [routerLink]="'/users/post/edit/'+post.userId">{{post.stageName}}</a>
+                                <p style="font-size: 11px">by Admin</p>
+                            </div>
+                       </div>
+                  </td>
+                  <td>
+                        <a href="#">
+                                <small class="">Education</small>
+                        </a>
+                  </td>
+                  <td>
+                      <div class="my-auto" >
+                            <span style="font-size: 10px">published</span><br>
+                          <small class="text-secondary">30th March, 2019</small>
+                      </div>
+                  </td>
+                  <td>
+                      <button mat-icon-button (click)="postAnalysis()">
+                         <i class="	fa fa-bar-chart fa-lg"></i>
+                      </button>
+                  </td>
+              </tr>
+            </tbody>
+          </table>
+
+   </div>   <!--music play single end-->
+
+
+</div>
+
+
+   <!-- the menu that is triggered -->
+   <mat-menu #userMenu="matMenu">
+        <a mat-menu-item><mat-icon class="text-danger">cancel</mat-icon> De-activate Subscription</a>
+        <a mat-menu-item ><mat-icon class="text-danger">cancel</mat-icon> De-activate Account</a>
+    </mat-menu>

@@ -3,6 +3,8 @@ import { FormBuilder, Validators } from "@angular/forms";
 import { fade } from 'src/app/animations/getstatedAnim';
 import { UserserviceService } from 'src/app/services/userservice.service';
 import { MatSnackBar } from '@angular/material';
+import { Route } from '@angular/compiler/src/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-reg',
@@ -17,22 +19,23 @@ export class RegComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private service: UserserviceService,
-    private snackbar: MatSnackBar
+    private snackbar: MatSnackBar,
+    private router: Router
   ) { }
 
   formData = this.fb.group({
     name: ['', [Validators.required]],
     email: ['', [Validators.required, Validators.email]],
-    tel: ['', [Validators.required]],
+    phone: ['', [Validators.required]],
     password: ['', [Validators.required]],
-    confirmPassword: ['', [Validators.required]],
+    password_confirmation: ['', [Validators.required]],
   });
 
   get name() { return this.formData.get('name') }
   get email() { return this.formData.get('email') }
-  get tel() { return this.formData.get('tel') }
+  get phone() { return this.formData.get('phone') }
   get password() { return this.formData.get('password') }
-  get confirmPassword() { return this.formData.get('confirmPassword') }
+  get password_confirmation() { return this.formData.get('password_confirmation') }
 
   submitted: boolean = false;
 
@@ -52,16 +55,16 @@ export class RegComponent implements OnInit {
       async (res: any) => {
         this.submitted = false;
         console.log(res);
-        if (res.status === 200) {
-          //  this.router.navigate(['/dash']);
+        if (res.success === true) {
+           this.router.navigate(['/login/signin']);
           await this.snackbar.open(res.message, 'close');
         } else {
           await this.snackbar.open(res.message, 'close');
         }
 
       },
-      async  err => {
-        await this.snackbar.open(err, 'close');
+       err => {
+         this.snackbar.open(err, 'close');
         this.submitted = false;
       }
     )

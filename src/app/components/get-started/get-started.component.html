@@ -17,41 +17,39 @@
                                                 [style.color]="bizname.valid ? '#029dc4': ''"></i>
                                         <input type="text" class="input-div w-100 p-3"
                                                 placeholder="Business/Website name" formControlName="bizname">
-                                                <button mat-icon-button type="button" class="m-auto">
-                                                                <mat-icon class="text-danger"
-                                                                        *ngIf="bizname.dirty && bizname.invalid">cancel
-                                                                </mat-icon>
-                                                                <mat-icon 
-                                                                        *ngIf="bizname.dirty && bizname.valid">
-                                                                        check_circle</mat-icon>
-                                                        </button>
+                                        <button mat-icon-button type="button" class="m-auto">
+                                                <mat-icon class="text-danger" *ngIf="bizname.dirty && bizname.invalid">
+                                                        cancel
+                                                </mat-icon>
+                                                <mat-icon *ngIf="bizname.dirty && bizname.valid">
+                                                        check_circle</mat-icon>
+                                        </button>
                                 </div>
                         </div>
                 </div>
                 <br>
 
-                  <!-- What is the name of your business? -->
-                  <div class="form-group align-self-center w-100 con" id="comp2" @fade>
-                                <br><br><br><br>
-                                <div>
-                                        <label for="" class="lead font-weight-bold label">Describe your business?</label>
-                                        <div class="d-flex input-div px-3">
-                                                <i class=" fa fa-adn m-auto fa-lg"
-                                                        [style.color]="bizdesc.valid ? '#029dc4': ''"></i>
-                                                <input type="text" class="input-div w-100 p-3"
-                                                        placeholder="Business/Website name" formControlName="bizdesc">
-                                                        <button mat-icon-button type="button" class="m-auto">
-                                                                        <mat-icon class="text-danger"
-                                                                                *ngIf="bizdesc.dirty && bizdesc.invalid">cancel
-                                                                        </mat-icon>
-                                                                        <mat-icon 
-                                                                                *ngIf="bizdesc.dirty && bizdesc.valid">
-                                                                                check_circle</mat-icon>
-                                                                </button>
-                                        </div>
+                <!-- What is the name of your business? -->
+                <div class="form-group align-self-center w-100 con" id="comp2" @fade>
+                        <br><br><br><br>
+                        <div>
+                                <label for="" class="lead font-weight-bold label">Describe your business?</label>
+                                <div class="d-flex input-div px-3">
+                                        <i class=" fa fa-adn m-auto fa-lg"
+                                                [style.color]="bizdesc.valid ? '#029dc4': ''"></i>
+                                        <input type="text" class="input-div w-100 p-3"
+                                                placeholder="Business/Website name" formControlName="bizdesc">
+                                        <button mat-icon-button type="button" class="m-auto">
+                                                <mat-icon class="text-danger" *ngIf="bizdesc.dirty && bizdesc.invalid">
+                                                        cancel
+                                                </mat-icon>
+                                                <mat-icon *ngIf="bizdesc.dirty && bizdesc.valid">
+                                                        check_circle</mat-icon>
+                                        </button>
                                 </div>
                         </div>
-                        <br>
+                </div>
+                <br>
 
 
 
@@ -135,8 +133,7 @@
                                                                 <mat-icon class="text-danger"
                                                                         *ngIf="bizmail.dirty && bizmail.invalid">cancel
                                                                 </mat-icon>
-                                                                <mat-icon 
-                                                                        *ngIf="bizmail.dirty && bizmail.valid">
+                                                                <mat-icon *ngIf="bizmail.dirty && bizmail.valid">
                                                                         check_circle</mat-icon>
                                                         </button>
                                                 </div>
@@ -148,14 +145,13 @@
                                                                 [style.color]="biztel.valid ?'#02e83c': ''"></i>
                                                         <input type="number" class="input-div w-100 p-3"
                                                                 placeholder="Telephone" formControlName="biztel">
-                                                                <button mat-icon-button type="button" class="m-auto">
-                                                                                <mat-icon class="text-danger"
-                                                                                        *ngIf="biztel.dirty && biztel.invalid">cancel
-                                                                                </mat-icon>
-                                                                                <mat-icon 
-                                                                                        *ngIf="biztel.dirty && biztel.valid">
-                                                                                        check_circle</mat-icon>
-                                                                        </button>
+                                                        <button mat-icon-button type="button" class="m-auto">
+                                                                <mat-icon class="text-danger"
+                                                                        *ngIf="biztel.dirty && biztel.invalid">cancel
+                                                                </mat-icon>
+                                                                <mat-icon *ngIf="biztel.dirty && biztel.valid">
+                                                                        check_circle</mat-icon>
+                                                        </button>
                                                 </div>
                                                 <br>
                                         </tr>
@@ -166,14 +162,14 @@
                                                         <input type="text" class="input-div w-100 p-3"
                                                                 placeholder="Physical Address"
                                                                 formControlName="bizaddress">
-                                                                <button mat-icon-button type="button" class="m-auto">
-                                                                                <mat-icon class="text-danger"
-                                                                                        *ngIf="bizaddress.dirty && bizaddress.invalid">cancel
-                                                                                </mat-icon>
-                                                                                <mat-icon 
-                                                                                        *ngIf="bizaddress.dirty && bizaddress.valid">
-                                                                                        check_circle</mat-icon>
-                                                                        </button>
+                                                        <button mat-icon-button type="button" class="m-auto">
+                                                                <mat-icon class="text-danger"
+                                                                        *ngIf="bizaddress.dirty && bizaddress.invalid">
+                                                                        cancel
+                                                                </mat-icon>
+                                                                <mat-icon *ngIf="bizaddress.dirty && bizaddress.valid">
+                                                                        check_circle</mat-icon>
+                                                        </button>
                                                 </div>
                                                 <br>
                                         </tr>
@@ -346,8 +342,8 @@
                                         <i class="fa fa-long-arrow-right font-weight-bold fa-lg "></i>
                                 </button>
 
-                                <button mat-fab color="primary" [hidden]="count!=END_COUNT" type="submit" [disabled]="submitted"
-                                        matTooltip="Submit data">
+                                <button mat-fab color="primary" [hidden]="count!=END_COUNT" type="submit"
+                                        [disabled]="submitted" matTooltip="Submit data">
                                         <i [hidden]="submitted" class="fa fa-send fa-lg font-weight-bold "></i>
                                         <span [hidden]="!submitted">
                                                 <app-loaderdot></app-loaderdot>

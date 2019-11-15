@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, Route, ActivatedRoute } from '@angular/router';
+import { Router, Route, ActivatedRoute, RouterStateSnapshot, RouterLink, NavigationEnd } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -10,14 +10,26 @@ export class LoginComponent implements OnInit {
   
   isLogPage: boolean = false;
   isUi: boolean = true;
+  isVerifymail: boolean; 
+
 
   constructor(
-    private param: Router
-  ) { }
+    private router: Router
+  ) {
+this.router.events.subscribe(async e =>{
+   if(e instanceof NavigationEnd){
+     if(e.url == '/login/verify'){
+      this.isVerifymail = true;
+     }else{
+      this.isVerifymail = false;
+     }
+   }
+})
+   }
 
   ngOnInit() {
     
-
+   
    
   }
 

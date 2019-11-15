@@ -1,0 +1,350 @@
+<main class="container-fluid">
+        <p><span class=" ml-3 font-1 font-weight-bold" style="font-size: 9px">ADD PRODUCT</span></p>
+
+
+
+
+        <form novalidate (submit)="sendProd()" [formGroup]='prodForm'>
+
+
+
+                <div class="row ">
+                        <div class="col-md-1"></div>
+                        <div class="col-md container">
+                                <div class="container  bg-white p-2">
+
+                                        <p><span class=" ml-3 font-1 font-weight-bold" style="font-size: 9px">Basic
+                                                        infomarion</span></p>
+                                        <!------------------------------------------
+                                                Product name and product price
+                                        -------------------------------------------->
+                                        <div class=" row container ">
+
+                                                <div class=" mr-md-3 col-md">
+                                                        <label for="">Product Name</label>
+                                                        <div class="d-flex input-div ">
+                                                                <input type="text" class=" p-2 w-100 input-div "
+                                                                        placeholder="Product Name"
+                                                                        formControlName="prod_name">
+                                                        </div>
+                                                </div>
+
+                                                <div class="col-md-4 mt-md-0 mt-4">
+                                                        <label for="">Product Price</label>
+                                                        <div class="d-flex input-div pl-3">
+                                                                <span class="font-weight-bold  m-auto"
+                                                                        style="text-decoration: line-through;">N</span>
+                                                                <input type="text" class="input-div w-100 p-2"
+                                                                        placeholder="Price"
+                                                                        formControlName="prod_price">
+
+                                                        </div>
+                                                </div>
+                                        </div>
+                                        <br><br>
+
+
+                                        <div class=" row container">
+                                        <!------------------------------------------
+                                                Sales price, discount and stock
+                                        -------------------------------------------->
+
+                                                <div class="col-md mt-md-0 mt-4">
+                                                        <label for="">Sales Price</label>
+                                                        <div class="d-flex input-div pl-3">
+                                                                <span class="font-weight-bold  m-auto"
+                                                                        style="text-decoration: line-through;">N</span>
+                                                                <input type="text" class="input-div w-100 p-2"
+                                                                        placeholder="Sales Price"
+                                                                        formControlName="prod_salesprice">
+
+                                                        </div>
+                                                </div>
+
+                                                <div class=" mr-md-3 col-md">
+                                                        <label for="">Discount</label>
+                                                        <div class="d-flex input-div ">
+                                                                <span class="font-weight-bold  m-auto"
+                                                                        style="text-decoration: line-through;">N</span>
+                                                                <input type="text" class=" p-2 w-100 input-div "
+                                                                        placeholder="Discount"
+                                                                        formControlName="prod_discount">
+                                                        </div>
+                                                </div>
+
+
+                                                <div class="col-md mt-md-0 mt-4">
+                                                        <label for="">Stock</label>
+                                                        <div class="d-flex input-div px-3 p-0">
+
+                                                                <select class="w-100 ml-1 p-0 form-control"
+                                                                        formControlName="prod_stock">
+                                                                        <option value="In Stock" selected>In Stock
+                                                                        </option>
+                                                                        <option value="Out of Stock">Out of Stock
+                                                                        </option>
+                                                                </select>
+
+                                                        </div>
+                                                </div>
+                                        </div>
+
+
+                                        <br><br>
+
+                                        <!-----------------------------------------
+                                Category and sub-category
+                        ----------------------------------->
+                                        <div class=" row container ">
+
+                                                <div class=" mr-md-2 col-md">
+                                                        <label for="">Category</label>
+                                                        <div class="input-div ">
+                                                                <input type="text" class=" p-2 w-100 input-div "
+                                                                        placeholder="Product Name">
+                                                        </div>
+                                                </div>
+
+                                                <div class="col-md mt-md-0 mt-4">
+                                                        <label for="">Sub-Category</label>
+                                                        <div class="input-div pl-3">
+                                                                <input type="text" class="input-div w-100 p-2"
+                                                                        placeholder="Price">
+
+                                                        </div>
+                                                </div>
+                                        </div>
+
+
+                                        <!------------------------------------
+                                        Desc and variant
+                                ---------------------------------------->
+                                        <br>
+                                        <div class="row">
+                                                <div class="col-md">
+                                                        <div class="form-group p-2">
+                                                                <label for="">Product Description</label>
+                                                                <angular-editor formControlName="prod_desc"
+                                                                        [placeholder]="'Enter text here...'"
+                                                                        [config]="editorConfig"></angular-editor>
+                                                        </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                        <div class="form-group container bg-white p-3 ">
+
+
+                                                                <br>
+                                                                <div>
+                                                                        <p>Product Variation</p>
+                                                                        <small>The variant can be size, color, height,
+                                                                                width, weight and so on.</small>
+                                                                </div>
+
+                                                                <div class="form-group">
+                                                                        <input type="text" class="   "
+                                                                                placeholder="Property key" #key>
+
+                                                                </div>
+                                                                <div class="form-group  ">
+
+                                                                        <input type="text" class="   "
+                                                                                placeholder="value1, value2..." #value>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                        <button mat-raised-button type="button" class=""
+                                                                                (click)="addVariant(key.value, value.value)">
+                                                                                <mat-icon>add</mat-icon>
+                                                                                Add
+                                                                        </button>
+                                                                </div>
+
+
+
+                                                                <br>
+                                                                <div>
+                                                                        <table class="table table-sm  small">
+                                                                                <tr>
+                                                                                        <th>Key</th>
+                                                                                        <th>Value</th>
+                                                                                        <th></th>
+                                                                                </tr>
+                                                                                <tr
+                                                                                        *ngFor="let items of prodVariants; let i = index">
+                                                                                        <td>{{items.key}}</td>
+                                                                                        <td>{{items.value}}</td>
+                                                                                        <td><a (click)="remove(i)"
+                                                                                                        style="cursor: pointer;">
+                                                                                                        <i
+                                                                                                                class="fa fa-close fa-lg"></i>
+                                                                                                </a></td>
+                                                                                </tr>
+                                                                        </table>
+                                                                </div>
+                                                        </div>
+                                                </div>
+                                        </div>
+
+
+                                        <br>
+
+
+                                        <br>
+
+                                        <div>
+                                                <!--------------------------------------------
+                                                Featured images 
+                                        ------------------------------------------>
+
+                                                <div class="row">
+
+                                                        <div class="col-md">
+                                                                <p class="text-center">Featured Image</p>
+                                                                <div class="" style="position: relative;">
+
+                                                                        <div style="cursor: pointer;"
+                                                                                class="border-0 card"
+                                                                                style="height: 250px; overflow: hidden;">
+                                                                                <!-- <input type="text" [value]="imglink" formControlName="prof_img"hidden> -->
+                                                                                <img #fimg src="{{imglink[0]}}"
+                                                                                        class="card-img-top">
+                                                                        </div>
+
+                                                                        <div style="position: absolute; top: 0%; left: 0%; right: 0%; bottom: 0%; background: rgba(0,0,0,0.2)"
+                                                                                class=" d-flex justify-content-center">
+                                                                                <a mat-fab color
+                                                                                        class="clickable mat-elevation-z7 align-self-center "
+                                                                                        (click)="addImage(0)">
+                                                                                        <mat-icon>image</mat-icon>
+                                                                                </a>
+                                                                        </div>
+                                                                </div>
+                                                                <br>
+
+
+
+
+
+                                                        </div>
+                                                        <div class="col-md">
+                                                                <p>Additional Images</p>
+
+                                                                <div class="d-flex flex-wrap p-2">
+
+                                                                        <div class="card m-1"
+                                                                                *ngFor="let selimg of imglink; let i = index"
+                                                                                style="width: 100px; height: 100px; overflow: hidden; position: relative;"
+                                                                                [hidden]="i ==0">
+
+                                                                                <img src="{{selimg}}" alt=""
+                                                                                        class="card-img-top"
+                                                                                        width="10px">
+                                                                                <div style="position: absolute; top: -2px;  right: -2px; background: rgba(0,0,0,0.2)"
+                                                                                        class=" d-flex justify-content-center">
+                                                                                        <a mat-icon-button color
+                                                                                                class="clickable mat-elevation-z7  "
+                                                                                                (click)="remove(i)">
+                                                                                                <mat-icon>close
+                                                                                                </mat-icon>
+                                                                                        </a>
+                                                                                </div>
+
+                                                                        </div>
+                                                                        <!-- <button  ><mat-icon>edit</mat-icon>Add additional image</button> -->
+                                                                        <div *ngIf="!(imglink.length >5 )">
+                                                                                <div *ngIf="(imglink.length > 0)"
+                                                                                        (click)="addImage(1)"
+                                                                                        class="clickable bg-light  border d-flex justify-content-center"
+                                                                                        style="width: 100px; height: 100px;">
+                                                                                        <mat-icon
+                                                                                                class="align-self-center">
+                                                                                                add</mat-icon>
+                                                                                </div>
+                                                                        </div>
+
+
+                                                                </div>
+                                                        </div>
+                                                </div>
+                                        </div>
+
+
+
+                                </div>
+
+
+                                        <!------------------------------------------
+                                                save button
+                                        -------------------------------------------->
+                                <div class="form-group bg-white p-2">
+                                        <button class="btn btn-dark ">Save</button>
+                                </div>
+
+
+
+
+
+
+
+
+
+                        </div>
+
+
+                        <div class="col-md-1"></div>
+
+                </div>
+
+
+
+
+
+
+
+
+
+                <!-- <div class="col-md-4 "> -->
+
+                <!-- <div class="form-group container bg-white p-3 ">
+            
+                                <div class="form-group d-flex justify-content-end">
+                                        <button mat-raised-button color="primary">Publish</button>
+                                    </div>
+            <br>        
+                                <p><span class=" ml-3 font-1 font-weight-bold" style="font-size: 9px">Product Variation</span></p>
+                                <small>The variant can be size, color, height, width, weight and so on.</small>
+                                <div class=" px-3">
+                                        
+                                        <input type="text" class="input-div  p-2" placeholder="Property key" #key>
+                                        <br><br>
+                                        <input type="text" class="input-div  p-2  " placeholder="value1, value2, value3,..." #value>
+                                        <br><br>
+                                        <button mat-raised-button type="button" class=""  (click)="addVariant(key.value, value.value)">
+                                                <mat-icon>add</mat-icon>
+                                                Add
+                                        </button>
+                                       
+                                </div>
+                <br>
+                                <div>
+                                    <table class="table table-sm  small">
+                                        <tr>
+                                            <th>Key</th>
+                                            <th>Value</th>
+                                            <th></th>
+                                        </tr>
+                                        <tr *ngFor="let items of prodVariants; let i = index">
+                                            <td>{{items.key}}</td>
+                                            <td>{{items.value}}</td>
+                                            <td><a (click)="remove(i)" style="cursor: pointer;"> <i class="fa fa-close fa-lg"></i> </a></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                        </div>
+            
+                        <br>
+                      
+                    </div>
+             -->
+                <!-- </div> -->
+        </form>
+</main>

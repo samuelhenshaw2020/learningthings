@@ -1,0 +1,149 @@
+<mat-toolbar color="" class=" div-shadow navbar sticky-top" >
+    <div>
+       <button class="" mat-icon-button (click)="drawer.toggle()" >
+           <i class="fa fa-navicon fa-lg fa-lg lead font-weight-bold" style="font-size: 30px"></i>
+         </button>
+         <span class="hd mat-elevation-z4 bg-dark text-light m-auto">A</span>
+    </div>
+     
+     
+
+     <div>
+       <!-- <a mat-button class="small m-auto">Henshaw Samuel</a>&nbsp; -->
+         <div >
+         
+             <a class="" style="font-size: 12px" mat-button>samuelhenshaw2020</a>&nbsp;
+             
+             <button mat-button class="br-30" routerLink="/users/preview">Preview</button>
+
+     </div>
+        <!-- <button mat-icon-button (click)='minimize = !minimize'><mat-icon class="lead font-weight-bold" >	person_outline</mat-icon></button> -->
+     </div>
+   </mat-toolbar>
+
+<mat-sidenav-container class="sidenav-container">
+
+    <mat-sidenav #drawer class="sidenav bg-dark " fixedInViewport="true" [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'" [mode]="(isHandset$ | async) ? 'hover' : 'side'" [opened]="!(isHandset$ | async)">
+      <div class="sidenav-div ">
+          <mat-toolbar  class="text-center " >
+              <button class="colo d-inine d-md-none" mat-icon-button (click)="drawer.toggle()" >
+                  <i class="fa fa-arrow-left fa-lg "></i>
+                </button>
+                <button mat-icon-button style="font-size: 25px" >
+                  <mat-icon class="d-none d-md-inine">adjust</mat-icon>
+                   <b>Testing</b>
+              </button>
+
+           
+          </mat-toolbar>
+          
+          <mat-nav-list class="br-30 px-2" >
+             
+
+            <a mat-list-item  class="txt br-30 small text-light" routerLink="/users/overview" ><mat-icon routerLinkActive="font-weight-bold">	show_chart</mat-icon>&nbsp;&nbsp;&nbsp;<small routerLinkActive="font-weight-bold">Overview</small></a>
+            <span class=" ml-3 font-1 font-weight-bold" style="font-size: 9px">BLOG</span>
+
+            <mat-expansion-panel class="bg-dark shadow-none br-30"   mat-list-item  >
+              <mat-expansion-panel-header style="border: none; outline: none;"  class="pl-3">
+                <mat-panel-title>
+                  <mat-icon class="text-light">	library_books</mat-icon>
+                  &nbsp;&nbsp;&nbsp;&nbsp;
+                  <small class="text-light">Blog</small>
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <a mat-list-item class="mx-0 br-30 text-light"    routerLink="/users/post/all" ><mat-icon routerLinkActive="font-weight-bold">		event_note</mat-icon>&nbsp;&nbsp;<small routerLinkActive="font-weight-bold">All Post</small> </a>
+              <a mat-list-item class="mx-0 br-30 text-light"   routerLink="/users/post/create"><mat-icon routerLinkActive="font-weight-bold">add	</mat-icon>&nbsp;<small routerLinkActive="font-weight-bold">Create Post</small></a>
+            </mat-expansion-panel>
+        
+            <a mat-list-item  class="txt br-30 small text-light" routerLink="/users/manmedia"><mat-icon>		perm_media</mat-icon>&nbsp;&nbsp;&nbsp;<small routerLinkActive="font-weight-bold">Media</small></a>
+            <span class=" ml-3 font-1 font-weight-bold" style="font-size: 9px">E-COMMERCE</span>
+            
+            <a mat-list-item  class="txt br-30 text-light" routerLink="/users/portfolio" ><mat-icon routerLinkActive="font-weight-bold">	person</mat-icon>&nbsp;&nbsp;&nbsp;<small routerLinkActive="font-weight-bold">Portfolio</small> </a>
+            
+            <mat-expansion-panel class="bg-dark shadow-none br-30"   mat-list-item  >
+                <mat-expansion-panel-header style="border: none; outline: none;"  class="pl-3">
+                  <mat-panel-title>
+                    <mat-icon>	shopping_cart</mat-icon>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <small class="text-light">E-Store</small>
+                  </mat-panel-title>
+                </mat-expansion-panel-header>
+                <a mat-list-item  class="txt br-30 text-light" routerLink="/users/customer" ><mat-icon routerLinkActive="font-weight-bold">	person</mat-icon>&nbsp;&nbsp;&nbsp;<small routerLinkActive="font-weight-bold">Customers</small> </a>
+                <a mat-list-item class="mx-0 br-30 text-light"    routerLink="/users/product/all" ><i class="fa fa-opencart fa-lg" routerLinkActive="font-weight-bold"></i>&nbsp;&nbsp;<small routerLinkActive="font-weight-bold">Product list</small> </a>
+                <a mat-list-item class="mx-0 br-30 text-light"   routerLink="/users/product/add" ><mat-icon routerLinkActive="font-weight-bold">add_shopping_cart</mat-icon>&nbsp;<small routerLinkActive="font-weight-bold">New Product</small></a>
+              </mat-expansion-panel>
+          
+             
+          </mat-nav-list>
+         
+          <mat-nav-list class="br-30 logout w-100" >
+              <span class=" ml-3 font-1 font-weight-bold" style="font-size: 9px">WEBSITE</span>
+              <mat-expansion-panel class="bg-dark shadow-none br-30"   mat-list-item  >
+                  <mat-expansion-panel-header style="border: none; outline: none;"  class="pl-3">
+                    <mat-panel-title>
+                      <mat-icon class="text-light">language</mat-icon>
+                      &nbsp;&nbsp;&nbsp;&nbsp;
+                      <small class="text-light">Website</small>
+                    </mat-panel-title>
+                  </mat-expansion-panel-header>
+                  <!-- <a mat-list-item class="mx-0  br-30 text-light"   routerLink="/users/website/edit"><i routerLinkActive="font-weight-bold" class="fa fa-ioxhost fa-lg"></i>&nbsp;&nbsp;<small routerLinkActive="font-weight-bold">Site Edit</small> </a> -->
+                  <a mat-list-item  class="mx-0 br-30 text-center text-light" routerLink="/users/website/theme" ><mat-icon routerLinkActive="font-weight-bold">web</mat-icon>&nbsp;<small routerLinkActive="font-weight-bold">Themes</small></a>
+                  <a mat-list-item  class="mx-0 br-30 text-center text-light" routerLink="/users/website/identity" ><mat-icon routerLinkActive="font-weight-bold">web</mat-icon>&nbsp;<small routerLinkActive="font-weight-bold">Identity</small></a>
+                  <a mat-list-item  class="mx-0 br-30 text-center text-light"  routerLink="/users/website/preference" ><i routerLinkActive="font-weight-bold" class="fa fa-cogs fa-lg"></i>&nbsp;<small routerLinkActive="font-weight-bold">Preferences</small></a>
+                </mat-expansion-panel>
+                <a mat-list-item  class="txt br-30 text-center text-light"  routerLink="/users/webform" ><mat-icon routerLinkActive="font-weight-bold">		info_outline</mat-icon>&nbsp;&nbsp;&nbsp;<small routerLinkActive="font-weight-bold">Web Form</small></a>
+                <a mat-list-item  class="txt br-30 text-center text-light"  routerLink="/users/support" ><mat-icon routerLinkActive="font-weight-bold">		info_outline</mat-icon>&nbsp;&nbsp;&nbsp;<small routerLinkActive="font-weight-bold">Support </small></a>
+            </mat-nav-list>
+      </div>
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+
+    
+
+      <!-- Add Content Here -->
+
+     <main class="container-fluid bg-back h-100" >
+
+        <div class="">
+            <div class=" ">
+              <router-outlet></router-outlet>
+            </div>
+
+            <!-- <app-right-aside></app-right-aside> -->
+
+           
+        </div>
+
+      
+     </main>
+
+    </mat-sidenav-content>
+
+  </mat-sidenav-container>
+
+
+
+
+
+
+
+
+
+
+
+  <!-- the drop down menw -->
+
+  <mat-menu #rootMenu="matMenu">
+   
+    <button mat-menu-item >
+      <mat-icon>person</mat-icon>
+      <span>Account</span>
+    </button>
+    <button mat-menu-item>
+      <mat-icon>close</mat-icon>
+      <span>Logout</span>
+    </button>
+  </mat-menu>
+
+<!-- ////////dropdown menu - end////// -->

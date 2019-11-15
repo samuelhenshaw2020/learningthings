@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { UserserviceService } from 'src/app/services/userservice.service';
 import { Router } from '@angular/router';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar, MatDialog } from '@angular/material';
+import { PwdForgetComponent } from 'src/app/dialogs/pwd-forget.component';
 
 
 @Component({
@@ -22,8 +23,11 @@ export class SignInComponent implements OnInit {
     private fb: FormBuilder,
     private service: UserserviceService,
     private router: Router,
-    private snackbar: MatSnackBar
-  ) { }
+    private snackbar: MatSnackBar,
+    public dialog: MatDialog
+  ) { 
+    
+  }
 
   formData = this.fb.group({
     email: ['', [Validators.required, Validators.email]],
@@ -47,22 +51,25 @@ export class SignInComponent implements OnInit {
       async (res: any) => {
         this.submitted = false;
         console.log(res)
-        if (res.status === 200) {
-          //  this.router.navigate(['/dash']);
-          await this.snackbar.open(res.message, 'close');
-        } else {
-          await this.snackbar.open(res.message, 'close');
-        }
+        if (res.success == true) {
+           localStorage.setItem('_token', res.token);
+            if(res.comfirmation === 1){
+              this.router.navigate(['/users']);
+            }else{
+              this.router.navigate(['/login/verify']);
+            }
+
+        } 
+        await this.snackbar.open(res.message, 'close');
       },
       async  err => {
-        await this.snackbar.open(err, 'close');
+        console.log(err)
         this.submitted = false;
       }
     )
   }
 
-  recoverPwd(): void {
 
-  }
+
 
 }

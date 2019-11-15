@@ -1,0 +1,122 @@
+<main class="container-fluid">
+
+    <br>
+    <form novalidate (submit)="submitPort()" [formGroup]="portForm">
+
+        <div class="row">
+            <div class="col-md-2"></div>
+            <!-----------------------------------
+                Data aspect
+          ---------------------------------------->
+            <div class="col-md   p-md-2 px-0">
+
+                <div class="bg-dark  p-2">
+                    <p class="font-weight-bold text-light text-center lead">Portfolio Image</p>
+                </div>
+
+                <!---------------------------------
+                Profile Image
+          ---------------------------------------->
+                <div class="bg-white  p-1" style="position: relative;">
+                    <div style="cursor: pointer;" class="border-0 card" style="height: 350px; overflow: hidden;">
+                        <input type="text" [value]="imglink" formControlName="prof_img"hidden>
+                        <img src="{{imglink}}" class="card-img-top">
+                    </div>
+
+                    <div style="position: absolute; top: 0%; left: 0%; right: 0%; bottom: 0%; background: rgba(0,0,0,0.2)" class=" d-flex justify-content-center">
+                        <a mat-fab color class="clickable mat-elevation-z7 align-self-center " (click)="openMediaManager()"><mat-icon>image</mat-icon></a>
+                    </div>
+                </div>
+                <!-------------------------------
+                Form data
+          ---------------------------------------->
+                <br>
+                <div class="bg-white ">
+                        <p class="bg-dark text-light text-center p-2">Personal Details</p>
+                        <div class="form-group p-3">
+                                <div class="row">
+                                    <div class="col-md">
+                                        <mat-form-field class="w-100" appearance="outline">
+                                            <mat-label>Personal name</mat-label>
+                                            <input type="text" matInput formControlName="prof_name">
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="col-md">
+                                        <mat-form-field class="w-100" appearance="outline">
+                                            <mat-label>Years of Professional Experience</mat-label>
+                                            <input type="text" matInput formControlName="prof_exp">
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="p-3">
+                               
+                                    <mat-label>Describe your self</mat-label>
+                                    <!-- <textarea matInput cdkTextareaAutosize  cdkAutosizeMinRows="10"
+                                        cdkAutosizeMaxRows="20"></textarea> -->
+                                        <angular-editor formControlName="prof_desc" [placeholder]="'Enter text here...'"  [config]="editorConfig"></angular-editor>
+
+                                
+                            </div>
+                </div>
+            <!-------------------------------
+                The Percentage aspect
+          ---------------------------------------->
+                <br><br>
+                <div class="bg-white ">
+                        <p class="bg-dark text-light text-center p-2">Personal Skills</p>
+                        <div class="p-3">
+                                <div class="form-group">
+                                        <mat-form-field class="w-100" appearance="outline">
+                                                <mat-label>Skill</mat-label>
+                                                <input type="text" matInput #skillname>
+                                        </mat-form-field>
+                                </div>
+        
+                                <div class="form-group">
+                                        <label for="formControlRange">Rate Skills %</label>
+                                        <mat-slider step="10" thumbLabel="true" class="w-100 " color="primary" #skillrange
+                                        >
+                                    </mat-slider>
+                                        
+                                </div>
+        
+                                <div>
+                                    <button class="br-30" mat-raised-button (click)="pushSkill(skillname.value, skillrange.value)">Add</button>
+                                </div>
+                                <br>
+                                <span class="small">Skills:</span>
+                                <mat-chip-list>
+                                    <mat-chip style="overflow: visible; " removable="true" *ngFor="let sk of skills; let i =index" 
+                                       >{{sk.value + ' ' + sk.range + '%'}}  
+                                        <mat-icon (removed)="remove(i)" >cancel</mat-icon>
+                                    </mat-chip>
+                                </mat-chip-list>
+                        </div>
+                </div>
+<br>
+                <div class="p-3  bg-white">
+                    <button mat-raised-button color="primary" class="br-30 w-100">Save</button>
+                </div>
+            </div>
+
+            <!-------------------------------
+                The image aspect
+          ---------------------------------------->
+            <div class="col-md-2 p-2 ">
+                <!-- <div class="bg-white  p-1" style="position: relative;">
+                    <div style="cursor: pointer;" class="border-0 card" style="height: 350px; overflow: hidden;">
+                        <img src="{{imglink}}" class="card-img-top">
+                    </div>
+
+                    <div style="position: absolute; top: 0%; left: 0%; right: 0%; bottom: 0%; background: rgba(0,0,0,0.2)" class=" d-flex justify-content-center">
+                        <a mat-fab color class="clickable mat-elevation-z7 align-self-center " (click)="openMediaManager()"><mat-icon>edit</mat-icon></a>
+                    </div>
+                </div> -->
+            </div>
+        </div>
+ 
+    </form>
+    <br><br>
+</main>

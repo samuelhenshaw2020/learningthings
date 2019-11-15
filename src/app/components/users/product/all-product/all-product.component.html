@@ -1,0 +1,73 @@
+<div class=" container-fluid p-2 bg-white" >
+
+        <p><span class=" ml-3 font-1 font-weight-bold" style="font-size: 9px">PRODUCT LIST</span></p>
+
+        <div class="d-flex justify-content-between">
+        
+                <div>          
+                    <button mat-raised-button color="primary">add New</button>
+                </div>
+        
+                <div>
+                    <input type="text" class=" p-1" style="border: 1px solid #3F51B5" (keyup)="filterTable($event)" placeholder="search product">
+                    <!-- <button mat-raised-button  (click)="advanceSearch()">Advance Search</button> -->
+                </div>
+            </div>
+            <br>
+
+       
+        <div class="table-responsive container" > <!--music player single start-->
+    
+            <table class="table  table-borderless table-hover table-lg">
+                <thead>
+                    <tr >
+                        <th class="small text-secondary">Products</th>
+                        <th class="small text-secondary">Price</th>
+                        <th class="small text-secondary"> Patronage</th>
+                        <th class="small text-secondary "></th>
+                    </tr>
+                </thead>
+    
+                <tbody >
+                  <tr class=" each-user" *ngFor="let users of productList">
+                      <td>
+                          <div class="media my-auto white-1">
+                                <div class="media-body ml-2" >
+                                        <a  href="#">Signed Language od Nigeria Deaf Child in Nigeria</a>
+                                    <!-- <p style="font-size: 11px">New York</p> -->
+                                </div>
+                           </div>
+                      </td>
+                      <td>
+                          <span class="bg-white py-1 px-2" style="font-size: 14px; border-radius: 14px">N1500</span><br>    
+                          <span class=" py-1 px-2 small" style="font-size: 12px; text-decoration: line-through;">N1800</span>
+                      </td>
+                      <td>
+                          <div class="my-auto" matTooltip="Subscribed on the 30rd March, 2019">
+                              <small class=""> 10 PUC</small>
+                          </div>
+                      </td>
+                      <td>
+                          <div class="d-flex justify-content-end">
+                              <!-- <button mat-icon-button matTooltip="samuelhenshaw2020@gmail.com" ><mat-icon class="text-secondary">mail_outline</mat-icon></button>
+                              <button mat-icon-button matTooltip="Edit Account"><mat-icon class="text-secondary">edit</mat-icon></button>
+                              <button mat-icon-button><mat-icon class="text-danger">delete</mat-icon></button>
+                              <button mat-icon-button color="" [matMenuTriggerFor]="userMenu"><mat-icon class="text-secondary">	more_horiz</mat-icon></button> -->
+                          </div>
+                      </td>
+                  </tr>
+                </tbody>
+              </table>
+    
+       </div>   <!--music play single end-->
+    
+    
+    </div>
+    
+    
+       <!-- the menu that is triggered -->
+       <mat-menu #userMenu="matMenu">
+            <a mat-menu-item><mat-icon class="text-danger">cancel</mat-icon> De-activate Subscription</a>
+            <a mat-menu-item ><mat-icon class="text-danger">cancel</mat-icon> De-activate Account</a>
+        </mat-menu>
+    

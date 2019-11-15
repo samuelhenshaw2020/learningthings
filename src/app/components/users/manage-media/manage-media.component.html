@@ -1,0 +1,15 @@
+<div class="p-3">
+       <div class="bg-white p-3">
+                <p class="bg-dark p-2 text-light">Media and images</p>
+                <div class="card-columns">
+                                <div class="card border m-1 frame "  (mouseenter)="selectLink(i)" *ngFor="let img of medialist; let i =index" >
+                                        <div style="position: absolute; top: 0px; right: 0px; bottom: 0px; left:0px; background: rgba(0,0,0,0.5)" class="p-4 w-100 m-auto" [hidden]="i==prev?false:true">
+                                                <button mat-mini-fab class="ml-2 mr-3" color=""  [hidden]="i==prev?false:true"><mat-icon>delete</mat-icon></button>
+                                                <button mat-mini-fab color=""  [hidden]="i==prev?false:true"><mat-icon>picture_in_picture</mat-icon></button>
+                                        </div>
+                                        <img  #image  src="{{'http://localhost/ihifixtest/img/'+img}}" alt=""  class="frame-img">
+                                </div>
+                                
+                        </div>
+       </div>
+</div>

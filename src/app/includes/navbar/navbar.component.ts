@@ -8,6 +8,7 @@ import { Component, OnInit, Input } from '@angular/core';
 export class NavbarComponent implements OnInit {
 
   @Input() isLogPage: boolean = true;
+  @Input() isVerifymail: boolean = false;
 
   constructor() { }
 

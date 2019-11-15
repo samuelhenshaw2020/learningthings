@@ -1,0 +1,71 @@
+<div class="row h-100">
+    <div class="col-md  d-flex bg-light">
+            <div class="container  align-self-center text-center ">
+                    <h3 class="font-weight-bold  ">Hello!</h3>
+                    <h3 class="font-weight-bold   " style="color:  #3F51B5;">{{name}}</h3>  
+                    <p class="lead">Please verify your mail</p> 
+                    <a class="clickable small text-dark font-weight-bold  text-center py-4" routerLink="/login/signin">Go back to login</a>
+            </div>
+           
+    </div>
+    <div class="col-md p-3 d-flex">
+            <div class="container align-self-center " >
+
+                    
+                
+                            <br>
+                 
+                        
+                        
+                            <!-- <div class="form-group" [hidden]="initSent">
+                                    <button type="submit" color="primary" mat-raised-button class="w-100  p-5 " #sendcode (click)="Send()">
+                                        <span >Send verification Code</span>
+                                    </button>
+                            </div> -->
+                
+                        
+                    
+                            
+               
+
+                    <form novalidate class=" p-md-5"  [formGroup]="verifyTokenForm" (ngSubmit)="verifyToken()">
+                            <!-- <p class="text-center small ">{{message}}</p> -->
+                
+                            <br>
+                 
+                            <div class=" form-group  ">
+                                    
+                                    <mat-form-field class="w-100" appearance="outline">
+                                                <mat-label>OTP</mat-label>
+                                                <input matInput type="text" placeholder="******"  class="  w-100 text-center font-weight-bold" style="letter-spacing: 20px;" formControlName="otp">
+                                    </mat-form-field>
+                            </div>
+                        
+                        
+                            <div class="form-group">
+                                    <button type="submit" color="primary" mat-raised-button class="w-100  p-2 " [disabled]="verifyTokenForm.invalid">
+                                        <span [hidden]="submitted">Validate Code</span>
+                                        <app-loaderdot [hidden]="!submitted"></app-loaderdot>
+                                    </button>
+                                </div>
+                
+                
+                                <div class="form-group text-center">
+                                        <button mat-button class="clickable small  font-weight-bold  text-center py-4" (click)='Send()' [disabled]=ifSent>
+                                             <span [hidden]="resent">Resend verification code</span>
+                                            <app-loaderdot [hidden]="!resent"></app-loaderdot>
+                                        </button> 
+                                        <span > {{count}}</span>
+                                       
+                                    </div>
+                        
+                    
+                            
+                    </form>
+
+
+                   
+                </div>
+                
+    </div>
+</div>

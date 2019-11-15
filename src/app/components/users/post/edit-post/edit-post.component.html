@@ -1,0 +1,60 @@
+<!-- <p class=""><span class=" ml-3 font-1 font-weight-bold" style="font-size: 9px">POST</span></p> -->
+
+
+
+
+<br>
+<div class="row p">
+        <div class="col-md-2"></div>
+        <div class="col-md bg-white p-2">
+
+                <p class="bg-dark text-light text-center p-2">Edit  Post</p>
+               <form novalidate (submit)="editBlogSubmit()" [formGroup]="blog_formgroup">
+                        <div>
+
+                                        <div class="   h-100   p-2">
+                                                <input type="file" class="input-cos w-100 p-4 " #logo hidden>
+                                                <div class=" bg-white border  d-flex mx-auto justify-content-center  "
+                                                        style="cursor: pointer;"
+                                                        style="position: relative; height: 140px; overflow: hidden;">
+                
+                                                        <div class="card align-self-center" [hidden]="imglink == null"
+                                                                style="max-height: 150px; max-width: 150px;overflow: hidden;">
+                                                                <img src="{{imglink}}" alt="" #img class="card-img-top">
+                                                        </div>
+                                                        <button mat-button color class="btn-clic w-100" (click)="openMediaManager()"
+                                                                type="button">
+                                                                <mat-icon>{{logo.files[0] === undefined ? 'add': 'edit'}}</mat-icon>
+                                                                Featured image
+                                                        </button>
+                                                </div>
+                                                <br>
+                
+                
+                                                <div class="form-group">
+                                                        <input type="text" class=" p-2 form-control" placeholder="Title of the Post">
+                                                </div>
+                                                <br>
+                
+                                                <div class="form-group">
+                                                        <!-- <textarea quill-editor cols="" rows="15" class=" p-2 form-control" placeholder="Title of the Post"></textarea> -->
+                                                        <angular-editor formControlName="blog_content" [placeholder]="'Enter text here...'" [config]="editorConfig">
+                                                        </angular-editor>
+                                                </div>
+                
+                                        </div>
+                
+                                        <div class="form-group d-flex justify-content-center">
+                                                <button mat-raised-button color='primary' class="br-30"> &nbsp;save</button>
+                                        </div>
+                
+                                </div>
+                
+               </form>
+
+        </div>
+
+        <div class="col-md-2"></div>
+
+
+</div>

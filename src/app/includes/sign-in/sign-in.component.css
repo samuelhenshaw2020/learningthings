@@ -2,7 +2,11 @@
     width: 400px;
 }
 
-
+.otp-box{
+    height: 50px;
+    width: 200px;
+    margin-right: 2%;
+}
 
 @media (max-width: 900px){
      .form{

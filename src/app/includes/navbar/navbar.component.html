@@ -1,5 +1,5 @@
 
-<mat-toolbar class="navbar navbar-expand-md sticky-top px-md-5" >
+<mat-toolbar class="navbar navbar-expand-md sticky-top px-md-5" [hidden]="isVerifymail">
 
    
        
@@ -12,7 +12,7 @@
         <ul class="navbar-nav" [hidden]='!isLogPage'>
 
                  <li class="nav-item mr-1">
-                    <button mat-flat-button style="border-radius: 30px;" >
+                    <button mat-flat-button style="border-radius: 30px;" routerLink='/users' >
                         <span class="p-2">Register</span>
                     </button>
                 </li>
@@ -32,7 +32,7 @@
     </button>
      -->
 
-    <button mat-icon-button (click)='goBack()' [hidden]='isLogPage'>
+    <button mat-icon-button routerLink="/home" [hidden]='isLogPage'>
         <mat-icon>close</mat-icon>
     </button>
        
@@ -46,33 +46,5 @@
 
 
 
-<!-- the drop down menw -->
 
-<mat-menu #rootMenu="matMenu">
-
-    <a mat-menu-item [matMenuTriggerFor]="subMenuLocation">
-        <mat-icon>pin_drop</mat-icon>
-        <span>Locations</span>
-    </a>
-
-    <a mat-menu-item >
-        <mat-icon>add_shopping_cart</mat-icon>
-       <span>Markets</span>
-    </a>
-
-    <a mat-menu-item [matMenuTriggerFor]="subMenuStoreType">
-        <mat-icon>store</mat-icon>
-        <span>Store</span>
-    </a>
-
-</mat-menu>
-
-<mat-menu #subMenuLocation="matMenu">
-    <a mat-menu-item *ngFor="let loc of locations">{{loc.name}}</a>
-</mat-menu>
-
-<mat-menu #subMenuStoreType="matMenu">
-        <a mat-menu-item *ngFor="let st of storeTypes">{{st.name}}</a>
-</mat-menu>
-<!-- ////////dropdown menu - end////// -->
 
