@@ -56,31 +56,32 @@ export class OtpComponent implements OnInit {
 
   reqsend(){
     this.submitted = true;
-    // this.service.postRequestOTP(this.reqform.value).subscribe(
-    //  async  (res: any) =>{
-    //     this.submitted = false;
-    //     console.log(res);
-    //     if(res.success  == true){
-    //       this.enableReqmail = false;
-    //       this.enableOTP = true;
-    //     }
+    this.service.postCheckEmail(this.reqform.value).subscribe(
+     async  (res: any) =>{
+        this.submitted = false;
+        console.log(res);
+        if(res.success  == true){
+          this.enableReqmail = false;
+          this.enableOTP = true;
+        }
 
-    //     await this.opendialog(res.message, res.success)
+        await this.opendialog(res.message, res.success);
+        // await this.snackbar.open(res.message, 'close');
 
         
     
-    //   },
-    //   async err => {
-    //     this.submitted = false;
-    //     await this.opendialog(err)
-    //   }
-    // );
+      },
+      async err => {
+        this.submitted = false;
+        await this.opendialog(err)
+      }
+    );
   }
 
 
   otpvalidate(){
     this.submitted = true;
-    this.service.postValidateOTP(this.otpform.value).subscribe(
+    this.service.postValidateOTP({email: this.email.value, otp: this.otpcode.value}).subscribe(
      async  (res: any) =>{
         this.submitted = false;
         console.log(res);
@@ -107,7 +108,7 @@ export class OtpComponent implements OnInit {
   pwdReset(){
     this.submitted = true;
     // console.log(this.pwdForm.value)
-    this.service.postResetPWD(this.pwdform.value).subscribe(
+    this.service.postResetPWD( {email: this.email.value, password: this.password.value, password_confirmation: this.password_confirmation.value}).subscribe(
      async  (res: any) =>{
         this.submitted = false;
         console.log(res);

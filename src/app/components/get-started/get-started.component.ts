@@ -1,12 +1,10 @@
-import { Component, OnInit, ViewChild, ElementRef, } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, AfterContentInit, } from '@angular/core';
 import { fade } from 'src/app/animations/getstatedAnim';
 import { FormBuilder, Validators } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
 import { UserserviceService } from 'src/app/services/userservice.service';
-import { throwError } from 'rxjs';
-import { catchError, retry } from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
+import { AngularEditorConfig } from '@kolkov/angular-editor';
 
 
 @Component({
@@ -15,7 +13,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./get-started.component.css'],
   animations: [fade]
 })
-export class GetStartedComponent implements OnInit {
+export class GetStartedComponent implements OnInit, AfterContentInit {
 
   isLogPage: boolean = false;
   index;
@@ -31,7 +29,9 @@ export class GetStartedComponent implements OnInit {
   count = this.START_COUNT;
   data: FormData = new FormData();
   submitted: boolean = false;
-
+  templates = [];
+  template_property;
+  filterTemplate = [];
 
 
 
@@ -87,13 +87,13 @@ export class GetStartedComponent implements OnInit {
 
 
   businessCat: object[] = [
-    { name: 'Education', icon: "		fa fa-graduation-cap fa-lg" },
-    { name: 'Portfolio and CV', icon: "fa fa-address-card-o fa-lg" },
+    { name: 'Education', icon: "		fa fa-graduation-cap fa-lg", type: 'blog' },
+    { name: 'Portfolio and CV', icon: "fa fa-address-card-o fa-lg", type: 'portfolio' },
     { name: 'Business', icon: "fa fa-bar-chart fa-lg" },
-    { name: 'Photography and Media', icon: "	fa fa-camera fa-lg" },
-    { name: 'Entertainment', icon: "fa fa-video-camera fa-lg" },
-    { name: 'E-commerce', icon: "fa fa-shopping-cart fa-lg" },
-    { name: 'Blog', icon: "fa fa-book fa-lg" }
+    { name: 'Photography and Media', icon: "	fa fa-camera fa-lg", type: 'blog' },
+    { name: 'Entertainment', icon: "fa fa-video-camera fa-lg", type:'blog' },
+    { name: 'E-commerce', icon: "fa fa-shopping-cart fa-lg", type: 'commerce' },
+    { name: 'Blog', icon: "fa fa-book fa-lg", type: 'blog' }
 
   ]
 
@@ -102,6 +102,24 @@ export class GetStartedComponent implements OnInit {
     window.onkeyup = () => {
       this.restrictNext();
     }
+  }
+
+  ngAfterContentInit(){
+    this.service.getTemplate().subscribe(
+      temp =>{
+      console.log(temp)
+      this.templates = temp;
+    }, 
+    err =>{
+      console.log(err)
+    })
+  }
+  
+  bindTemplate(val){
+    this.filterTemplate = this.templates.filter(tem => {
+      return tem.type === val;
+    });
+    console.log(this.filterTemplate);
   }
 
 
@@ -213,36 +231,38 @@ export class GetStartedComponent implements OnInit {
       case (this.START_COUNT + 2):
         if (this.prev == undefined) {
           (document.getElementById('nextbtn') as any).disabled = true;
+          // (document.getElementById('skipbtn') as any).disabled = true;
         } else {
           (document.getElementById('nextbtn') as any).disabled = false;
+          // (document.getElementById('skipbtn') as any).disabled = true;
         }
         break;
       case (this.START_COUNT + 3):
         if (this.logoname.invalid) {
           (document.getElementById('nextbtn') as any).disabled = false;
-          (document.getElementById('skipbtn') as any).disabled = true;
+          // (document.getElementById('skipbtn') as any).disabled = true;
         } else {
           (document.getElementById('nextbtn') as any).disabled = false;
-          (document.getElementById('skipbtn') as any).disabled = true;
+          // (document.getElementById('skipbtn') as any).disabled = true;
 
         }
         break;
       case (this.START_COUNT + 4):
         if (this.bizmail.valid && this.bizaddress.valid && this.biztel.valid) {
           (document.getElementById('nextbtn') as any).disabled = false;
-          (document.getElementById('skipbtn') as any).disabled = true;
+          // (document.getElementById('skipbtn') as any).disabled = true;
         } else {
           (document.getElementById('nextbtn') as any).disabled = true;
-          (document.getElementById('skipbtn') as any).disabled = true;
+          // (document.getElementById('skipbtn') as any).disabled = true;
         }
         break;
       case (this.START_COUNT + 5):
         if (this.smfacebook.valid || this.sminstagram.valid || this.smlinkedin.valid || this.smtwitter.valid || this.smpint.valid || this.smyoutube.valid) {
           (document.getElementById('nextbtn') as any).disabled = false;
-          (document.getElementById('skipbtn') as any).disabled = true;
+          // (document.getElementById('skipbtn') as any).disabled = true;
         } else {
           (document.getElementById('nextbtn') as any).disabled = false;
-          (document.getElementById('skipbtn') as any).disabled = true;
+          // (document.getElementById('skipbtn') as any).disabled = true;
         }
         break;
     }
@@ -272,7 +292,15 @@ export class GetStartedComponent implements OnInit {
     this.data.append('socinstagram', this.sminstagram.value);
     this.data.append('soctwitter', this.smtwitter.value);
     this.data.append('socfacebook', this.smfacebook.value);
-    this.data.append('theme', this.theme.value);
+    if(this.theme.value == ''){
+      try {
+        this.data.append('theme', this.filterTemplate[0].template_name);
+      } catch (error) {
+        this.snackbar.open('an Error occured', '', {duration: 4000, panelClass: ['bg-danger', 'text-light', 'font-weight-bold']})
+      }
+    }else{
+      this.data.append('theme', this.theme.value);
+    }
 
     if(this.logoname.value === "" || this.logoname.value === undefined){
       this.data.append('logoname', '');
@@ -291,11 +319,53 @@ export class GetStartedComponent implements OnInit {
           }
         },
         err => {
-          this.snackbar.open(err , 'close');
+          this.snackbar.open(err, '', {panelClass: ['bg-danger', 'text-light', 'font-weight-bold'], duration: 3000});
           this.submitted = false;
         }
       )
   }
+
+
+  /**********************************
+   * The config for the angular editor
+   ***********************************/
+  editorConfig: AngularEditorConfig = {
+    editable: true,
+      spellcheck: true,
+      height: 'auto',
+      minHeight: '250px',
+      maxHeight: 'auto',
+      width: 'auto',
+      minWidth: '0',
+      translate: 'yes',
+      enableToolbar: true,
+      showToolbar: true,
+      placeholder: 'Enter text here...',
+      fonts: [
+        {class: 'arial', name: 'Arial'},
+        {class: 'times-new-roman', name: 'Times New Roman'},
+        {class: 'calibri', name: 'Calibri'},
+        {class: 'comic-sans-ms', name: 'Comic Sans MS'}
+      ],
+      customClasses: [
+      {
+        name: 'quote',
+        class: 'quote',
+      },
+      {
+        name: 'redText',
+        class: 'redText'
+      },
+      {
+        name: 'titleText',
+        class: 'titleText',
+        tag: 'h1',
+      },
+    ],
+    uploadUrl: '',
+    sanitize: true,
+    toolbarPosition: 'top',
+};
 
 
 

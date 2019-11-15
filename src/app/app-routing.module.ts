@@ -24,7 +24,7 @@ const routes: Routes = [
 
   {path: 'start', component: GetStartedComponent},
 
-  {path: 'users', component: UsersComponent, loadChildren: ()=> import('./components/users/user.module').then(mod => mod.UserModule)},
+  {path: 'dash', component: UsersComponent, loadChildren: ()=> import('./components/users/user.module').then(mod => mod.UserModule)},
   {path: 'admin', component: AdminComponent, loadChildren: ()=> import('./components/admin/admin.module').then(mod => mod.AdminModule)},
 
   {path: '', redirectTo: 'home', pathMatch: 'full'},

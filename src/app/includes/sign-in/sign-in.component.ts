@@ -50,17 +50,21 @@ export class SignInComponent implements OnInit {
     this.service.postSignin(this.formData.value).subscribe(
       async (res: any) => {
         this.submitted = false;
-        console.log(res)
+        console.log(res.confirmation)
         if (res.success == true) {
            localStorage.setItem('_token', res.token);
-            if(res.comfirmation === 1){
-              this.router.navigate(['/users']);
+           console.log(res.confirmation)
+            if(res.confirmation === 1){
+              await this.snackbar.open(res.message, 'close', {panelClass: ['bg-success', 'text-light', 'font-weight-bold']});
+              this.router.navigate(['/dash']);
+              
             }else{
+              await this.snackbar.open( "Verify Email account!", 'close');
               this.router.navigate(['/login/verify']);
             }
 
         } 
-        await this.snackbar.open(res.message, 'close');
+        
       },
       async  err => {
         console.log(err)

@@ -86,7 +86,7 @@ export class VerifyMailComponent implements OnInit, AfterContentInit {
       this.submitted = false;
       console.log(res);
       if(res.success === true){
-        this.route.navigate(['/users']);
+        this.route.navigate(['/dash']);
       }
 
       this.snackbar.open(res.message, 'close', this.snackbarConfig);

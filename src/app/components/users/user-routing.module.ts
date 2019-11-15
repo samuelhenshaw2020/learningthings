@@ -14,7 +14,7 @@ import { WebformComponent } from './webform/webform.component';
 
 
 const routes: Routes = [
-  {path: 'overview', component: OverviewComponent, resolve: {info: UserResolverService}},
+  {path: 'overview', component: OverviewComponent},
   {path: 'manmedia', component: ManageMediaComponent},
   {path: 'product', component: ProductComponent, loadChildren: ()=> import('./product/product.module').then( mod => mod.ProductModule)},
   {path: 'website', component: WebeditorComponent, loadChildren: ()=> import('./webeditor/webeditor.module').then(mod => mod.WebeditorModule)},

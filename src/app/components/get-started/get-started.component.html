@@ -34,18 +34,10 @@
                         <br><br><br><br>
                         <div>
                                 <label for="" class="lead font-weight-bold label">Describe your business?</label>
-                                <div class="d-flex input-div px-3">
-                                        <i class=" fa fa-adn m-auto fa-lg"
-                                                [style.color]="bizdesc.valid ? '#029dc4': ''"></i>
-                                        <input type="text" class="input-div w-100 p-3"
-                                                placeholder="Business/Website name" formControlName="bizdesc">
-                                        <button mat-icon-button type="button" class="m-auto">
-                                                <mat-icon class="text-danger" *ngIf="bizdesc.dirty && bizdesc.invalid">
-                                                        cancel
-                                                </mat-icon>
-                                                <mat-icon *ngIf="bizdesc.dirty && bizdesc.valid">
-                                                        check_circle</mat-icon>
-                                        </button>
+                                <div class="  px-3">
+
+                                                <angular-editor  [config]="editorConfig" placeholder="Business/Website name" formControlName="bizdesc"></angular-editor>
+                                       
                                 </div>
                         </div>
                 </div>
@@ -64,12 +56,13 @@
                                 <br>
                                 <br>
                                 <div class="card-columns">
+                                        {{template_property}}
 
                                         <mat-card *ngFor="let type of businessCat; let num = index"
                                                 class="my-2 card clickable category anim-1 border border-secondary"
                                                 id="{{'a'+num}}"
                                                 [ngClass]=" num==prev ? 'bg-dark text-light font-weight-bold scale-ft': ''"
-                                                (click)="colorate(num); webtype.value = type.name; sel.innerHTML = type.name">
+                                                (click)="bindTemplate(type.type);colorate(num); webtype.value = type.name; sel.innerHTML = type.name; template_property = type.type">
 
                                                 <div class="card-body text-center">
                                                         <i [class]='type.icon'></i>
@@ -286,14 +279,14 @@
                                 <p class="lead font-weight-bold small" #tempSel></p>
                                 <div class="card-columns temp">
 
-                                        <mat-card *ngFor="let tem of businessCat; let num = index"
-                                                class="my-2 card clickable category border border-secondary"
+                                        <mat-card *ngFor="let tem of filterTemplate; let num = index"
+                                                class="my-2 card clickable category border border-secondary p-0"
                                                 id="{{'a'+num2}}"
                                                 [ngClass]=" num==prev2 ? 'scale-ft mat-elevation-z7': 'scale-bk'"
-                                                (click)="colorate(num); theme.value = tem.name; template.value = tem.name; tempSel.innerHTML = tem.name;">
-                                                <img src="/assets/pic1.PNG" class="card-img-top">
-                                                <div>
-                                                        <p class="text-center lead font-weight-bold">{{tem.name}}</p>
+                                                (click)="colorate(num); theme.value = tem.template_name; template.value = tem.template_id; tempSel.innerHTML = tem.template_name;">
+                                                <img [src]="tem.image" class="card-img-top">
+                                                <div class="p-2">
+                                                        <p class="text-center lead font-weight-bold">{{tem.template_name}}</p>
                                                 </div>
                                         </mat-card>
 
@@ -330,12 +323,12 @@
                                 <span class="d-none d-md-inline">Back</span>
                         </button>
                         <div>
-                                <button mat-flat-button class="br-30  mr-3 " (click)=skipComp()
-                                        [hidden]="count==END_COUNT || count == START_COUNT|| count==(START_COUNT+1)"
+                                <!-- <button mat-flat-button class="br-30  mr-3 " (click)=skipComp()
+                                        [hidden]="count==END_COUNT || count == START_COUNT|| count==(START_COUNT+1) ||count==(START_COUNT+2)"
                                         type="button" id="skipbtn">
                                         <span class="d-none d-md-inline">Skip</span>&nbsp;
                                         <i class="fa fa-rotate-right fa-lg font-weight-bold"></i>
-                                </button>
+                                </button> -->
                                 <button mat-raised-button class="br-30 " color="" (click)='nextComp()' type="button"
                                         [hidden]=' count==END_COUNT' [disabled]="bizname.invalid " id="nextbtn">
                                         <span class="d-none d-md-inline">Next </span>&nbsp;

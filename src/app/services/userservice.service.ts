@@ -24,10 +24,11 @@ export class UserserviceService {
   constructor(
     private http: HttpClient
   ) { }
+  ////////////////////////////////
 
 
   /*************************
-   * Get Request for OTP
+   * Validate email
    *************************/
 
    
@@ -39,9 +40,58 @@ export class UserserviceService {
     return this.http.get<any>(this.baseUrl+"resend_otp");
   }
 
+  PostVerifyToken(val){
+    return this.http.post<any>(this.baseUrl+"validate_otp", val);
+  }
+  //////////////////////////////////
+
+
   /**
-   * 
+   * Password Recovery
    */
+  postCheckEmail(val){
+    return this,this.http.post<any>(this.baseUrl+'check_email', val);
+  }
+
+  postValidateOTP(val){
+    return this.http.post<any>(this.baseUrl+"validate_pass_otp", val);
+  }
+
+  
+  postResetPWD(val){
+    return this.http.post<any>(this.baseUrl+"new_pass", val);
+  }
+  ///////////////////////////
+
+
+  /**
+   * for sign in
+   */
+  postSignin(val) {
+    return this.http.post<any>(this.baseUrl + "login", val);
+  }
+
+
+  /*************************
+   * for signup
+   **************************/
+
+  postRegister(val) {
+    return this.http.post<any>(this.baseUrl + "signup", val);
+  }
+  ////////////////////////////
+
+  /***
+   * For get started
+   */
+
+  getTemplate(): Observable<any>{
+    return this.http.get<any>(this.baseUrl + "get_template");
+  }
+
+  postGetstated(val) {
+    return this.http.post<any>(this.baseUrl + "create_site", val);
+  }
 
 
 
@@ -57,11 +107,6 @@ export class UserserviceService {
     return this.http.get<any>(this.baseUrl+"data.php");
   }
 
-  
-
-  // postRequestOTP(val){
-  //   return this.http.post<reqOTP>(this.baseUrl+"", val);
-  // }
 
 
   
@@ -82,40 +127,23 @@ export class UserserviceService {
     }
 
 
-  postGetstated(val) {
-    return this.http.post<any>(this.baseUrl + "server.php", val);
-  }
+ 
 
-  postSignin(val) {
-    return this.http.post<any>(this.baseUrl + "login", val);
-  }
-
-  postRegister(val) {
-    return this.http.post<any>(this.baseUrl + "signup", val);
-  }
 
  
 
-  postValidateOTP(val){
-    return this.http.post<any>(this.baseUrl+"validate_otp", val);
-  }
 
-  postResetPWD(val){
-    return this.http.post<any>(this.baseUrl+"server.php", val);
-  }
+
 
   /**The services for Verify-Email.component */
   postRequestToken(val){
     return this.http.post<any>(this.baseUrl+"server.php", val);
   }
 
-  PostVerifyToken(val){
-    return this.http.post<any>(this.baseUrl+"validate_otp", val);
-  }
-
+ 
 
   /**
-   * Get functions for global use
+   * For LocalStorage
    */
 
    getUserToken(){

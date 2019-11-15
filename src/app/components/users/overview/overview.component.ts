@@ -16,16 +16,16 @@ export class OverviewComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.activatedRoute.data.subscribe(
-      data =>{
-      // console.log(data.info.message)
-      this.info = data.info.message;
-    },
-    err => {
+    // this.activatedRoute.data.subscribe(
+    //   data =>{
+    //   // console.log(data.info.message)
+    //   // this.info = data.info.message;
+    // },
+    // err => {
 
-    }
+    // }
     
-    );
+    // );
     
   }
 

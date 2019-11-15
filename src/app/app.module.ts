@@ -28,6 +28,7 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import { AppInterceptorService } from './app-interceptor.service';
 import { VerifyMailComponent } from './components/verify-mail/verify-mail.component';
 import { RightAsideComponent } from './includes/right-aside/right-aside.component';
+import { AngularEditorModule } from '@kolkov/angular-editor';
 
 @NgModule({
   declarations: [
@@ -54,6 +55,7 @@ import { RightAsideComponent } from './includes/right-aside/right-aside.componen
     AppRoutingModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
+    AngularEditorModule,
     FormsModule,
     HttpClientModule,
     MatCheckboxModule,

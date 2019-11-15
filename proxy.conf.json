@@ -1,6 +1,6 @@
 {
     "/user": {
-        "target": "http://192.168.43.82:9000/api",
+        "target": "http://192.168.43.82:8000/api",
         "secure": false
     }
 }

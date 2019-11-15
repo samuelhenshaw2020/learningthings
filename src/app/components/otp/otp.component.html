@@ -8,13 +8,17 @@
 
         <form novalidate [formGroup]="reqform" (submit)="reqsend()" [hidden]="!enableReqmail">
                 <div class=" form-group ">
+                                <mat-form-field class="w-100" appearance="outline">
+                                                <mat-label>Email</mat-label>
+                                                <input matInput type="email" placeholder="Enter your email"  class="input-cos w-100 text-center" formControlName="email">
+                                    </mat-form-field>
                         
-                        <input type="email" placeholder="Enter your email"  class="input-cos w-100 text-center" formControlName="email">
+                       
                 </div>
             
             
                 <div class="form-group">
-                    <button type="submit" color="primary" mat-raised-button class="w-100  p-2 br-30 " [disabled]="email.invalid || submitted">
+                    <button type="submit" color="primary" mat-raised-button class="w-100  p-2 " [disabled]="email.invalid || submitted">
                         <span >Request OTP</span>
                     </button>
                 </div>
@@ -68,3 +72,8 @@
                 </div>
         </form>
 </div>  
+
+
+<div>
+        <button mat-button (click)="enableOTP = true; ">Already recieved a code</button>
+</div>

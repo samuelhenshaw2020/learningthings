@@ -14,7 +14,7 @@
          
              <a class="" style="font-size: 12px" mat-button>samuelhenshaw2020</a>&nbsp;
              
-             <button mat-button class="br-30" routerLink="/users/preview">Preview</button>
+             <button mat-button class="br-30" routerLink="/dash/preview">Preview</button>
 
      </div>
         <!-- <button mat-icon-button (click)='minimize = !minimize'><mat-icon class="lead font-weight-bold" >	person_outline</mat-icon></button> -->
@@ -40,7 +40,7 @@
           <mat-nav-list class="br-30 px-2" >
              
 
-            <a mat-list-item  class="txt br-30 small text-light" routerLink="/users/overview" ><mat-icon routerLinkActive="font-weight-bold">	show_chart</mat-icon>&nbsp;&nbsp;&nbsp;<small routerLinkActive="font-weight-bold">Overview</small></a>
+            <a mat-list-item  class="txt br-30 small text-light" routerLink="/dash/overview" ><mat-icon routerLinkActive="font-weight-bold">	show_chart</mat-icon>&nbsp;&nbsp;&nbsp;<small routerLinkActive="font-weight-bold">Overview</small></a>
             <span class=" ml-3 font-1 font-weight-bold" style="font-size: 9px">BLOG</span>
 
             <mat-expansion-panel class="bg-dark shadow-none br-30"   mat-list-item  >
@@ -51,14 +51,14 @@
                   <small class="text-light">Blog</small>
                 </mat-panel-title>
               </mat-expansion-panel-header>
-              <a mat-list-item class="mx-0 br-30 text-light"    routerLink="/users/post/all" ><mat-icon routerLinkActive="font-weight-bold">		event_note</mat-icon>&nbsp;&nbsp;<small routerLinkActive="font-weight-bold">All Post</small> </a>
-              <a mat-list-item class="mx-0 br-30 text-light"   routerLink="/users/post/create"><mat-icon routerLinkActive="font-weight-bold">add	</mat-icon>&nbsp;<small routerLinkActive="font-weight-bold">Create Post</small></a>
+              <a mat-list-item class="mx-0 br-30 text-light"    routerLink="/dash/post/all" ><mat-icon routerLinkActive="font-weight-bold">		event_note</mat-icon>&nbsp;&nbsp;<small routerLinkActive="font-weight-bold">All Post</small> </a>
+              <a mat-list-item class="mx-0 br-30 text-light"   routerLink="/dash/post/create"><mat-icon routerLinkActive="font-weight-bold">add	</mat-icon>&nbsp;<small routerLinkActive="font-weight-bold">Create Post</small></a>
             </mat-expansion-panel>
         
-            <a mat-list-item  class="txt br-30 small text-light" routerLink="/users/manmedia"><mat-icon>		perm_media</mat-icon>&nbsp;&nbsp;&nbsp;<small routerLinkActive="font-weight-bold">Media</small></a>
+            <a mat-list-item  class="txt br-30 small text-light" routerLink="/dash/manmedia"><mat-icon>		perm_media</mat-icon>&nbsp;&nbsp;&nbsp;<small routerLinkActive="font-weight-bold">Media</small></a>
             <span class=" ml-3 font-1 font-weight-bold" style="font-size: 9px">E-COMMERCE</span>
             
-            <a mat-list-item  class="txt br-30 text-light" routerLink="/users/portfolio" ><mat-icon routerLinkActive="font-weight-bold">	person</mat-icon>&nbsp;&nbsp;&nbsp;<small routerLinkActive="font-weight-bold">Portfolio</small> </a>
+            <a mat-list-item  class="txt br-30 text-light" routerLink="/dash/portfolio" ><mat-icon routerLinkActive="font-weight-bold">	person</mat-icon>&nbsp;&nbsp;&nbsp;<small routerLinkActive="font-weight-bold">Portfolio</small> </a>
             
             <mat-expansion-panel class="bg-dark shadow-none br-30"   mat-list-item  >
                 <mat-expansion-panel-header style="border: none; outline: none;"  class="pl-3">
@@ -68,9 +68,9 @@
                     <small class="text-light">E-Store</small>
                   </mat-panel-title>
                 </mat-expansion-panel-header>
-                <a mat-list-item  class="txt br-30 text-light" routerLink="/users/customer" ><mat-icon routerLinkActive="font-weight-bold">	person</mat-icon>&nbsp;&nbsp;&nbsp;<small routerLinkActive="font-weight-bold">Customers</small> </a>
-                <a mat-list-item class="mx-0 br-30 text-light"    routerLink="/users/product/all" ><i class="fa fa-opencart fa-lg" routerLinkActive="font-weight-bold"></i>&nbsp;&nbsp;<small routerLinkActive="font-weight-bold">Product list</small> </a>
-                <a mat-list-item class="mx-0 br-30 text-light"   routerLink="/users/product/add" ><mat-icon routerLinkActive="font-weight-bold">add_shopping_cart</mat-icon>&nbsp;<small routerLinkActive="font-weight-bold">New Product</small></a>
+                <a mat-list-item  class="txt br-30 text-light" routerLink="/dash/customer" ><mat-icon routerLinkActive="font-weight-bold">	person</mat-icon>&nbsp;&nbsp;&nbsp;<small routerLinkActive="font-weight-bold">Customers</small> </a>
+                <a mat-list-item class="mx-0 br-30 text-light"    routerLink="/dash/product/all" ><i class="fa fa-opencart fa-lg" routerLinkActive="font-weight-bold"></i>&nbsp;&nbsp;<small routerLinkActive="font-weight-bold">Product list</small> </a>
+                <a mat-list-item class="mx-0 br-30 text-light"   routerLink="/dash/product/add" ><mat-icon routerLinkActive="font-weight-bold">add_shopping_cart</mat-icon>&nbsp;<small routerLinkActive="font-weight-bold">New Product</small></a>
               </mat-expansion-panel>
           
              
@@ -86,13 +86,13 @@
                       <small class="text-light">Website</small>
                     </mat-panel-title>
                   </mat-expansion-panel-header>
-                  <!-- <a mat-list-item class="mx-0  br-30 text-light"   routerLink="/users/website/edit"><i routerLinkActive="font-weight-bold" class="fa fa-ioxhost fa-lg"></i>&nbsp;&nbsp;<small routerLinkActive="font-weight-bold">Site Edit</small> </a> -->
-                  <a mat-list-item  class="mx-0 br-30 text-center text-light" routerLink="/users/website/theme" ><mat-icon routerLinkActive="font-weight-bold">web</mat-icon>&nbsp;<small routerLinkActive="font-weight-bold">Themes</small></a>
-                  <a mat-list-item  class="mx-0 br-30 text-center text-light" routerLink="/users/website/identity" ><mat-icon routerLinkActive="font-weight-bold">web</mat-icon>&nbsp;<small routerLinkActive="font-weight-bold">Identity</small></a>
-                  <a mat-list-item  class="mx-0 br-30 text-center text-light"  routerLink="/users/website/preference" ><i routerLinkActive="font-weight-bold" class="fa fa-cogs fa-lg"></i>&nbsp;<small routerLinkActive="font-weight-bold">Preferences</small></a>
+                  <!-- <a mat-list-item class="mx-0  br-30 text-light"   routerLink="/dash/website/edit"><i routerLinkActive="font-weight-bold" class="fa fa-ioxhost fa-lg"></i>&nbsp;&nbsp;<small routerLinkActive="font-weight-bold">Site Edit</small> </a> -->
+                  <a mat-list-item  class="mx-0 br-30 text-center text-light" routerLink="/dash/website/theme" ><mat-icon routerLinkActive="font-weight-bold">web</mat-icon>&nbsp;<small routerLinkActive="font-weight-bold">Themes</small></a>
+                  <a mat-list-item  class="mx-0 br-30 text-center text-light" routerLink="/dash/website/identity" ><mat-icon routerLinkActive="font-weight-bold">web</mat-icon>&nbsp;<small routerLinkActive="font-weight-bold">Identity</small></a>
+                  <a mat-list-item  class="mx-0 br-30 text-center text-light"  routerLink="/dash/website/preference" ><i routerLinkActive="font-weight-bold" class="fa fa-cogs fa-lg"></i>&nbsp;<small routerLinkActive="font-weight-bold">Preferences</small></a>
                 </mat-expansion-panel>
-                <a mat-list-item  class="txt br-30 text-center text-light"  routerLink="/users/webform" ><mat-icon routerLinkActive="font-weight-bold">		info_outline</mat-icon>&nbsp;&nbsp;&nbsp;<small routerLinkActive="font-weight-bold">Web Form</small></a>
-                <a mat-list-item  class="txt br-30 text-center text-light"  routerLink="/users/support" ><mat-icon routerLinkActive="font-weight-bold">		info_outline</mat-icon>&nbsp;&nbsp;&nbsp;<small routerLinkActive="font-weight-bold">Support </small></a>
+                <a mat-list-item  class="txt br-30 text-center text-light"  routerLink="/dash/webform" ><mat-icon routerLinkActive="font-weight-bold">		info_outline</mat-icon>&nbsp;&nbsp;&nbsp;<small routerLinkActive="font-weight-bold">Web Form</small></a>
+                <a mat-list-item  class="txt br-30 text-center text-light"  routerLink="/dash/support" ><mat-icon routerLinkActive="font-weight-bold">		info_outline</mat-icon>&nbsp;&nbsp;&nbsp;<small routerLinkActive="font-weight-bold">Support </small></a>
             </mat-nav-list>
       </div>
     </mat-sidenav>
