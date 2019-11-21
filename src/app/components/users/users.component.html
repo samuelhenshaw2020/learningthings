@@ -1,25 +1,4 @@
-<mat-toolbar color="" class=" div-shadow navbar sticky-top" >
-    <div>
-       <button class="" mat-icon-button (click)="drawer.toggle()" >
-           <i class="fa fa-navicon fa-lg fa-lg lead font-weight-bold" style="font-size: 30px"></i>
-         </button>
-         <span class="hd mat-elevation-z4 bg-dark text-light m-auto">A</span>
-    </div>
-     
-     
 
-     <div>
-       <!-- <a mat-button class="small m-auto">Henshaw Samuel</a>&nbsp; -->
-         <div >
-         
-             <a class="" style="font-size: 12px" mat-button>samuelhenshaw2020</a>&nbsp;
-             
-             <button mat-button class="br-30" routerLink="/dash/preview">Preview</button>
-
-     </div>
-        <!-- <button mat-icon-button (click)='minimize = !minimize'><mat-icon class="lead font-weight-bold" >	person_outline</mat-icon></button> -->
-     </div>
-   </mat-toolbar>
 
 <mat-sidenav-container class="sidenav-container">
 
@@ -99,7 +78,30 @@
 
     <mat-sidenav-content>
 
+      <mat-toolbar color="" class=" div-shadow navbar sticky-top" >
+        <div>
+           <button class="" mat-icon-button (click)="drawer.toggle()" >
+               <i class="fa fa-navicon fa-lg fa-lg lead font-weight-bold" style="font-size: 30px"></i>
+             </button>
+             <span class="hd m-auto ml-1">
+               <img src="{{logo}}" alt="" class="navbar-brand" width="40px">
+             </span>
+        </div>
+         
+         
     
+         <div>
+           <!-- <a mat-button class="small m-auto">Henshaw Samuel</a>&nbsp; -->
+             <div >
+             
+                 <a class=""  mat-button color=primary>{{sitename}}</a>&nbsp;
+                 
+                 <button mat-button class="br-30" routerLink="/dash/preview">Preview</button>
+    
+         </div>
+            <!-- <button mat-icon-button (click)='minimize = !minimize'><mat-icon class="lead font-weight-bold" >	person_outline</mat-icon></button> -->
+         </div>
+       </mat-toolbar>
 
       <!-- Add Content Here -->
 

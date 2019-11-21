@@ -29,6 +29,8 @@ import { AppInterceptorService } from './app-interceptor.service';
 import { VerifyMailComponent } from './components/verify-mail/verify-mail.component';
 import { RightAsideComponent } from './includes/right-aside/right-aside.component';
 import { AngularEditorModule } from '@kolkov/angular-editor';
+import { SocialMediaComponent } from './includes/social-media/social-media.component';
+import { LoaderBlockOneComponent } from './includes/loader-block-one/loader-block-one.component';
 
 @NgModule({
   declarations: [

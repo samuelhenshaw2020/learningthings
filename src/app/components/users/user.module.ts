@@ -22,6 +22,7 @@ import { PreviewComponent } from './preview/preview.component';
 import { UserInterceptorService } from './user-interceptor.service';
 import { WebformComponent } from './webform/webform.component';
 import { ViewMessageComponent } from './webform/view-message/view-message.component';
+import { SocialMediaComponent } from 'src/app/includes/social-media/social-media.component';
 
 
 

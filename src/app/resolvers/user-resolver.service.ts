@@ -17,9 +17,9 @@ export class UserResolverService implements Resolve<any>{
     let view;
     
   
-      view = this.service.getUserInfo();
+      view = this.service.getWebData();
   
-
+    // console.log(view)
     return view;
   }
 }

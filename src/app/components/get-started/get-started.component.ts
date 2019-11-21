@@ -5,6 +5,7 @@ import { UserserviceService } from 'src/app/services/userservice.service';
 import { MatSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
+import { DomSanitizer } from '@angular/platform-browser';
 
 
 @Component({
@@ -32,6 +33,7 @@ export class GetStartedComponent implements OnInit, AfterContentInit {
   templates = [];
   template_property;
   filterTemplate = [];
+ 
 
 
 
@@ -40,7 +42,8 @@ export class GetStartedComponent implements OnInit, AfterContentInit {
     private fb: FormBuilder,
     private router: Router,
     private service: UserserviceService,
-    private snackbar: MatSnackBar
+    private snackbar: MatSnackBar,
+    private sanitize: DomSanitizer
   ) { }
 
   /**
@@ -294,7 +297,7 @@ export class GetStartedComponent implements OnInit, AfterContentInit {
     this.data.append('socfacebook', this.smfacebook.value);
     if(this.theme.value == ''){
       try {
-        this.data.append('theme', this.filterTemplate[0].template_name);
+        this.data.append('theme', this.filterTemplate[0].template_id);
       } catch (error) {
         this.snackbar.open('an Error occured', '', {duration: 4000, panelClass: ['bg-danger', 'text-light', 'font-weight-bold']})
       }
@@ -311,9 +314,9 @@ export class GetStartedComponent implements OnInit, AfterContentInit {
         async (res: any) => {
           await console.log(res);
           this.submitted = false;
-          if(res.status === 200){
-            // this.router.navigate(['/dash']);
-            await this.snackbar.open(res.message, 'close');
+          if(res.sucess === true){
+            this.router.navigate(['/dash']);
+            await this.snackbar.open(res.message, 'close', {panelClass: ['bg-primary', 'text-light', 'font-weight-bold']});
           }else{
            await this.snackbar.open(res.message, 'close');
           }

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material';
 import {  ActivatedRoute, Router } from '@angular/router';
+import { UserserviceService } from 'src/app/services/userservice.service';
+import { async } from 'q';
 
 @Component({
   selector: 'app-overview',
@@ -9,23 +11,15 @@ import {  ActivatedRoute, Router } from '@angular/router';
 })
 export class OverviewComponent implements OnInit {
 
-  public info: any;
+  public site_data: any;
 
   constructor(
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private service: UserserviceService
   ) { }
 
   ngOnInit() {
-    // this.activatedRoute.data.subscribe(
-    //   data =>{
-    //   // console.log(data.info.message)
-    //   // this.info = data.info.message;
-    // },
-    // err => {
-
-    // }
     
-    // );
     
   }
 

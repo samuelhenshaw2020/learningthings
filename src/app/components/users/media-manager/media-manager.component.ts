@@ -22,7 +22,6 @@ export class MediaManagerComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-
     this.service.postImageUpload(null).subscribe( event =>{
       this.imgList = event;
     });

@@ -1,50 +1,177 @@
 import { Component, OnInit, ViewChild, ElementRef, AfterContentInit, AfterViewInit } from '@angular/core';
-import { MatDialog } from '@angular/material';
+import { MatDialog, MatSnackBar } from '@angular/material';
 import { MediaManagerComponent } from '../../media-manager/media-manager.component';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
 import { UserserviceService } from 'src/app/services/userservice.service';
-import { Subject } from 'rxjs';
+import { FormBuilder } from '@angular/forms';
+import { identity_model, social_model, vission, mission, about } from '../web.model';
+
+
+
+
 
 @Component({
   selector: 'app-web-identity',
   templateUrl: './web-identity.component.html',
   styleUrls: ['./web-identity.component.css']
 })
-export class WebIdentityComponent implements OnInit, AfterContentInit, AfterViewInit{
+export class WebIdentityComponent implements OnInit, AfterContentInit{
 
-  vision_check = true;
-  mission_check = true;
+  submitted = false;
+  social_media = true;
+  imglink = null;
+  logolink = null;
+  
+  
+
+  isEditTitle = false;
+
+  /**********************
+   *for the NgModel
+   ***********************/
+  // hd_title =null;
+  vission: vission = {
+      enabled: null,
+      vission: ''
+  };
+  mission: mission = {
+    enabled: null,
+    mission: ''
+  };
+  head_title = null;
+  // facebook: social_model = null;
+  // twitter: social_model = null;
+  // linkedin: social_model = null;
+  // pinterest: social_model = null;
+  // youtube: social_model = null;
+  // instagram: social_model = null;
+  about: about = {
+    enabled: null,
+    about: ''
+   
+  };
+  socialMedia = {
+    enabled: null,
+    handles: []
+  };
+  
+  
    
 
   constructor(
     private dialog: MatDialog,
-    private serv: UserserviceService
-    
-  ) { }
-
-  ngOnInit() {
-      console.log()
-  }
-
-  ngAfterContentInit(){
+    private serv: UserserviceService,
+    private snackbar: MatSnackBar
+  ) { 
    
   }
 
-  ngAfterViewInit(){
-    // (this.serv.usersiteinfo as Subject<any>[]).success = false;
-    // console.log(this.serv.usersiteinfo.success);
+
+
+
+
+  ngOnInit() {
+    
+    
+    this.serv.siteData.subscribe((data:identity_model) => {
+      // console.log(data);
+      let info = data;
+      // console.log(data.site_data.logo)
+      this.logolink = info.logo;
+      this.head_title = info.header_title;
+      this.imglink = info.header_image;
+      
+      this.vission = info.vission;
+      // console.log(this.vission)
+      this.mission = info.mission;
+      this.socialMedia = info.social_media;
+      this.about = info.about;
+      
+    });
+
+    
+   
   }
 
-  nav_menu = [
-    {menu: 'Home', active: true},
-    {menu: 'Gallary', active: true},
-    {menu: 'About', active: true},
-    {menu: 'COntact', active: true}
-    // {menu: '', active: true}
-  ]
+  ngAfterContentInit(){
+    
+   
+  }
 
-  imglink;
-  openMedia(s){
+  save_site_data(){
+    this.submitted = true;
+    let newData: identity_model = {
+      // site_data: {
+        about: {
+            enabled: this.about.enabled,
+            about: this.about.about
+        },
+        business_name: this.head_title,
+        color: this.serv.siteData.value.color,
+        contact: {
+            address: this.serv.siteData.value.contact.address,
+            email: this.serv.siteData.value.contact.email,
+            enabled: this.serv.siteData.value.contact.enabled,
+            phone: this.serv.siteData.value.contact.phone
+        },
+        description: this.serv.siteData.value.description,
+        gallery: {
+            enabled: this.serv.siteData.value.gallery.enabled,
+            gallery: this.serv.siteData.value.gallery.gallery
+        },
+        header_image: this.imglink,
+        header_title: this.head_title,
+        logo: this.logolink,
+        mission: {
+            enabled:  this.mission.enabled ,
+            mission: this.mission.mission
+           
+        },
+        portfolio: {
+            description:  this.serv.siteData.value.portfolio.description,
+            image: this.serv.siteData.value.portfolio.image,
+            profile: this.serv.siteData.value.portfolio.profile,
+            skills: this.serv.siteData.value.portfolio.skills
+    
+        },
+        service: {
+            enabled: this.serv.siteData.value.service.enabled,
+            services: this.serv.siteData.value.service.services
+        },
+        site_id: this.serv.siteData.value.site_id,
+        social_media: {
+            enabled: this.socialMedia.enabled,
+            handles: this.socialMedia.handles
+        },
+        template_id: this.serv.siteData.value.template_id,
+        user_id: this.serv.siteData.value.user_id,
+        vission: {
+            enabled: this.vission.enabled,
+            vission: this.vission.vission
+    
+        }
+    
+    
+      //  }
+    }
+    // this.serv.siteData.next(newData);
+    this.serv.postWebIdentityData(newData).subscribe((d) => {
+      console.log(d);
+      this.submitted = false;
+      this.serv.siteData.next(d);
+      this.snackbar.open("Data saved Successfully!", '', {
+        panelClass: ["bg-white", "text-dark"],
+        duration: 4000
+      })
+    })
+    
+  }
+
+
+
+
+ 
+  openMedia(el, index?){
     const dialogRef = this.dialog.open(MediaManagerComponent, {
       minWidth: '90%',
       minHeight: "500px",
@@ -52,45 +179,17 @@ export class WebIdentityComponent implements OnInit, AfterContentInit, AfterView
       disableClose: true
     });
 
-    dialogRef.afterClosed().subscribe(link => {
-      console.log(link);
-      this.imglink = link;
-      s.src = link;
-    })
+    console.log(el)
+      dialogRef.afterClosed().subscribe(link => {
+        console.log(link);
+        // this.imglink = link;
+       if(link != undefined){
+         el.src = link;
+       }
+      })
+  
   }
 
-  logoimg: FileReader;
-  logospin: Boolean = false;
-  @ViewChild('display', {static: false}) display: ElementRef;
-  async showImageProperty($event) {
-
-    let display = $event.target.files[0];
-    let regex: RegExp = /\.(jpe?g|png|gif|svg)$/i;
-
-    if ($event.target.value.length > 0) {
-      if (regex.test(display.name)) {
-        this.logoimg = new FileReader();
-
-        this.logoimg.onloadstart = () => {
-          this.logospin = true;
-        }
-
-        this.logoimg.onloadend = async () => {
-          this.logospin = false;
-          this.display.nativeElement.src = this.logoimg.result;
-          // await this.data.append('logoname', display);
-        }
-        await this.logoimg.readAsDataURL($event.target.files[0]);
-
-      } else {
-        // await this.snackbar.open(`${display.type} is not type JPG|PNG|JPEG|SVG `, "Close")
-      }
-    } else {
-      // await this.snackbar.open(`Logo not selected. NEXT below to skip `, "Close")
-    }
-
-
-  }
 
 
   

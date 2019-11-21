@@ -36,7 +36,9 @@
                                 <label for="" class="lead font-weight-bold label">Describe your business?</label>
                                 <div class="  px-3">
 
-                                                <angular-editor  [config]="editorConfig" placeholder="Business/Website name" formControlName="bizdesc"></angular-editor>
+                                        <mat-form-field class="w-100" appearance="outline">
+                                                <textarea matInput  placeholder="Business/Website name" formControlName="bizdesc"></textarea>
+                                        </mat-form-field>
                                        
                                 </div>
                         </div>
@@ -136,7 +138,7 @@
                                                 <div class="d-flex input-div px-3">
                                                         <i class=" fa fa-phone m-auto fa-lg"
                                                                 [style.color]="biztel.valid ?'#02e83c': ''"></i>
-                                                        <input type="number" class="input-div w-100 p-3"
+                                                        <input type="tel" class="input-div w-100 p-3"
                                                                 placeholder="Telephone" formControlName="biztel">
                                                         <button mat-icon-button type="button" class="m-auto">
                                                                 <mat-icon class="text-danger"
@@ -283,7 +285,7 @@
                                                 class="my-2 card clickable category border border-secondary p-0"
                                                 id="{{'a'+num2}}"
                                                 [ngClass]=" num==prev2 ? 'scale-ft mat-elevation-z7': 'scale-bk'"
-                                                (click)="colorate(num); theme.value = tem.template_name; template.value = tem.template_id; tempSel.innerHTML = tem.template_name;">
+                                                (click)="colorate(num); theme.value = tem.template_id ; template.value = tem.template_id; tempSel.innerHTML = tem.template_name;">
                                                 <img [src]="tem.image" class="card-img-top">
                                                 <div class="p-2">
                                                         <p class="text-center lead font-weight-bold">{{tem.template_name}}</p>

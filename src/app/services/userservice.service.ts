@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { throwError, Observable, Subject } from 'rxjs';
+import { throwError, Observable, Subject, BehaviorSubject } from 'rxjs';
 import { catchError, retry, share, delay, tap, map } from 'rxjs/operators';
+import { identity_model } from '../components/users/webeditor/web.model';
 
 interface signin {
   email: string,
@@ -18,14 +19,86 @@ interface reqOTP{
 export class UserserviceService {
 
   private baseUrl = "/user/";
-  public usersiteinfo: Subject<any>[];
+  public usersiteinfo: identity_model = {
+    site_data: {
+      about: {
+        enabled: null,
+        about: ''
+    },
+    business_name: '',
+    color: '',
+    contact: {
+        address: '',
+        email: '',
+        enabled: null,
+        phone: ''
+    },
+    description: '',
+    gallery: {
+        enabled: null,
+        gallery: []
+    },
+    header_image: '',
+    header_title: '',
+    logo: '',
+    mission: {
+      enabled: null,
+      mission: ''
+        
+    },
+    portfolio: {
+        description: '',
+        image: '',
+        profile: '',
+        skills: []
+  
+    },
+    service: {
+        enabled: null,
+        services: []
+    },
+    site_id: null,
+    social_media: {
+        enabled: null,
+        handles: []
+    },
+    template_id: null,
+    user_id: null,
+    vission: {
+        enabled: null,
+        vission: ''
+  
+    },
+  
+    }
+  };
+  // public web_site_data: any;
+
+  public web_dommy = new BehaviorSubject<identity_model>(this.usersiteinfo);
+  
+   
+  
+  
 
 
   constructor(
     private http: HttpClient
-  ) { }
+  ) {
+    // this.web_dommy.value
+   }
   ////////////////////////////////
 
+
+  /*************************
+   * Getter and setter
+   *************************/
+  get siteData(){
+    return this.web_dommy;
+  }
+
+ 
+
+ 
 
   /*************************
    * Validate email
@@ -95,17 +168,36 @@ export class UserserviceService {
 
 
 
-   getAllSiteInfo(){
-    return this.http.get<any>(this.baseUrl+'naipod.json');
+  //  getAllSiteInfo(){
+  //   return this.http.get<any>(this.baseUrl+'naipod.json');
+  //  }
+
+  //  getUserInfo(): Observable<Object>{
+  //    return this.http.get(this.baseUrl+ 'naipod.json');
+  //  }
+
+  //  getIsEmailActive(){
+  //   return this.http.get<any>(this.baseUrl+"data.php");
+  // }
+
+
+
+
+  /***************************************
+   * Dashboard services
+   **************************************/
+
+   //overview page
+
+   getWebData(){
+     return this.http.get<any>(this.baseUrl + 'get_site');
    }
 
-   getUserInfo(): Observable<Object>{
-     return this.http.get(this.baseUrl+ 'naipod.json');
-   }
 
-   getIsEmailActive(){
-    return this.http.get<any>(this.baseUrl+"data.php");
-  }
+   //////Site identity////////
+   postWebIdentityData(val){
+     return this.http.post<any>(this.baseUrl + 'update_site', val);
+   }
 
 
 
