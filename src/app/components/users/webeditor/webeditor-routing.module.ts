@@ -4,15 +4,16 @@ import { WebThemeComponent } from './web-theme/web-theme.component';
 import { WebSettingComponent } from './web-setting/web-setting.component';
 import { WebEditComponent } from './web-edit/web-edit.component';
 import { WebIdentityComponent } from './web-identity/web-identity.component';
+import { UserResolverService } from 'src/app/resolvers/user-resolver.service';
 
 
 const routes: Routes = [
-  {path: 'edit', component: WebEditComponent},
   {path: 'identity', component: WebIdentityComponent},
-  {path: 'theme', component: WebThemeComponent},
+  {path: 'edit', component: WebEditComponent},
+  {path: 'theme', component: WebThemeComponent, resolve: {theme: UserResolverService}},
   {path: 'preference', component: WebSettingComponent},
-  {path: '', redirectTo: 'edit', pathMatch: 'full' },
-  {path: "**", component: WebEditComponent}
+  {path: '', redirectTo: 'identity', pathMatch: 'full' },
+  {path: "**", component: WebIdentityComponent}
 ];
 
 @NgModule({

@@ -19,7 +19,7 @@ export class WebIdentityComponent implements OnInit, AfterContentInit{
 
   submitted = false;
   social_media = true;
-  imglink = null;
+  imglink;
   logolink = null;
   
   
@@ -39,6 +39,7 @@ export class WebIdentityComponent implements OnInit, AfterContentInit{
     mission: ''
   };
   head_title = null;
+  business_name = null;
   // facebook: social_model = null;
   // twitter: social_model = null;
   // linkedin: social_model = null;
@@ -55,6 +56,7 @@ export class WebIdentityComponent implements OnInit, AfterContentInit{
     handles: []
   };
   
+  imgbaseUrl;
   
    
 
@@ -63,7 +65,7 @@ export class WebIdentityComponent implements OnInit, AfterContentInit{
     private serv: UserserviceService,
     private snackbar: MatSnackBar
   ) { 
-   
+   this.imgbaseUrl = this.serv.baseImgUrl;
   }
 
 
@@ -81,12 +83,13 @@ export class WebIdentityComponent implements OnInit, AfterContentInit{
       this.head_title = info.header_title;
       this.imglink = info.header_image;
       
+      
       this.vission = info.vission;
       // console.log(this.vission)
       this.mission = info.mission;
       this.socialMedia = info.social_media;
       this.about = info.about;
-      
+      this.business_name = info.business_name;
     });
 
     
@@ -106,7 +109,7 @@ export class WebIdentityComponent implements OnInit, AfterContentInit{
             enabled: this.about.enabled,
             about: this.about.about
         },
-        business_name: this.head_title,
+        business_name: this.business_name,
         color: this.serv.siteData.value.color,
         contact: {
             address: this.serv.siteData.value.contact.address,
@@ -119,9 +122,10 @@ export class WebIdentityComponent implements OnInit, AfterContentInit{
             enabled: this.serv.siteData.value.gallery.enabled,
             gallery: this.serv.siteData.value.gallery.gallery
         },
-        header_image: this.imglink,
+        header_image:  this.imglink,
         header_title: this.head_title,
-        logo: this.logolink,
+        link: this.serv.siteData.value.link,
+        logo:  this.logolink,
         mission: {
             enabled:  this.mission.enabled ,
             mission: this.mission.mission
@@ -138,6 +142,7 @@ export class WebIdentityComponent implements OnInit, AfterContentInit{
             enabled: this.serv.siteData.value.service.enabled,
             services: this.serv.siteData.value.service.services
         },
+        short: this.serv.siteData.value.short,
         site_id: this.serv.siteData.value.site_id,
         social_media: {
             enabled: this.socialMedia.enabled,
@@ -163,6 +168,9 @@ export class WebIdentityComponent implements OnInit, AfterContentInit{
         panelClass: ["bg-white", "text-dark"],
         duration: 4000
       })
+    }, err=>{
+      this.submitted = false;
+      this.snackbar.open("An error occured!", " close", {duration: 4000})
     })
     
   }
@@ -179,16 +187,33 @@ export class WebIdentityComponent implements OnInit, AfterContentInit{
       disableClose: true
     });
 
-    console.log(el)
+    // console.log(el)
       dialogRef.afterClosed().subscribe(link => {
         console.log(link);
-        // this.imglink = link;
+        
        if(link != undefined){
-         el.src = link;
+
+         if(index ===0 ){
+          this.logolink = link.substr(link.search('images'), link.length);
+         }
+
+
+         if(index ===1){
+           this.imglink = link.substr(link.search('images'), link.length);
+         }
+         
        }
       })
+
+
+
+
   
   }
+
+  // stripedImg(val){
+  //   return val.value.substr(val.value.search('images'), val.value.length)
+  // }
 
 
 

@@ -1,60 +1,81 @@
-<!-- <p class=""><span class=" ml-3 font-1 font-weight-bold" style="font-size: 9px">POST</span></p> -->
+<br><br>
+<div>
+        
+</div>
 
-
-
-
+<div class="p-2 m-blue d-flex">
+                <button mat-icon-button routerLink="/dash/post/all"><mat-icon class="text-light">arrow_back</mat-icon></button>    
+                <p class="text-light m-auto">Edit Blog Post</p>
+</div>
 <br>
-<div class="row p">
-        <div class="col-md-2"></div>
-        <div class="col-md bg-white p-2">
+<main class="container-fluid" *ngFor="let post of post_content">
+        
+               
 
-                <p class="bg-dark text-light text-center p-2">Edit  Post</p>
-               <form novalidate (submit)="editBlogSubmit()" [formGroup]="blog_formgroup">
-                        <div>
-
-                                        <div class="   h-100   p-2">
-                                                <input type="file" class="input-cos w-100 p-4 " #logo hidden>
-                                                <div class=" bg-white border  d-flex mx-auto justify-content-center  "
-                                                        style="cursor: pointer;"
-                                                        style="position: relative; height: 140px; overflow: hidden;">
-                
-                                                        <div class="card align-self-center" [hidden]="imglink == null"
-                                                                style="max-height: 150px; max-width: 150px;overflow: hidden;">
-                                                                <img src="{{imglink}}" alt="" #img class="card-img-top">
-                                                        </div>
-                                                        <button mat-button color class="btn-clic w-100" (click)="openMediaManager()"
-                                                                type="button">
-                                                                <mat-icon>{{logo.files[0] === undefined ? 'add': 'edit'}}</mat-icon>
-                                                                Featured image
-                                                        </button>
-                                                </div>
-                                                <br>
-                
-                
-                                                <div class="form-group">
-                                                        <input type="text" class=" p-2 form-control" placeholder="Title of the Post">
-                                                </div>
-                                                <br>
-                
-                                                <div class="form-group">
-                                                        <!-- <textarea quill-editor cols="" rows="15" class=" p-2 form-control" placeholder="Title of the Post"></textarea> -->
-                                                        <angular-editor formControlName="blog_content" [placeholder]="'Enter text here...'" [config]="editorConfig">
-                                                        </angular-editor>
-                                                </div>
-                
-                                        </div>
-                
-                                        <div class="form-group d-flex justify-content-center">
-                                                <button mat-raised-button color='primary' class="br-30"> &nbsp;save</button>
-                                        </div>
-                
-                                </div>
-                
-               </form>
-
+        <br>
+                <!-- Image       -->
+                <div class="bg-white">
+                                <span class="small">Featured Image</span>
+                                <!-- <input type="text" [(ngModel)]="post.featured_image"> -->
+                                 <div class="container px-0 " style="position: relative; cursor: pointer;" >
+                                                
+                                                 <div class="" style="max-height: 400px; overflow: hidden;">
+                                                          <img  [src]="'http://192.168.1.100:8000/'+imglink" alt="" class="img img-fluid w-100">
+                                                 </div>
+                                                 <div style="position: absolute; top: 0%; left: 0%; right: 0%; bottom: 0%; background: rgba(0,0,0,0.2)" class=" d-flex justify-content-center">
+                                                                <a mat-fab color=primary class="clickable mat-elevation-z7 align-self-center " (click)="openMedia()"><mat-icon>image</mat-icon></a>
+                                                            </div>
+                                         </div>
+                        </div>
+                        <br>
+        <!-- post <title></title> -->
+        <div class="form-group">
+                <span class="small">Post Title</span>
+                <input type="text" class="form-control" [(ngModel)]="post.post_title">
         </div>
 
-        <div class="col-md-2"></div>
+
+        <!-- Content -->
+        <div class="form-group border" >
+                        <span class="small">Post Content</span>
+                        <angular-editor [(ngModel)]="post.post_body" [placeholder]="'Enter text here...'" [config]="editorConfig">
+                        </angular-editor>
+        </div>
+        <br>
+
+        <div class="form-group">
+                <span class="small">Category</span>
+
+                <div class="form-search  d-flex border">
+                        <!-- <i class="fa fa-search  m-auto"></i> -->
+                        <input type="text" class=" p-2 w-100" placeholder="Category"
+                                [(ngModel)]="post.category" [matAutocomplete]="auto">
+                        <mat-autocomplete #auto="matAutocomplete">
+                                <mat-option>{{post.category}}</mat-option>
+                                <mat-option *ngFor="let option of sug_categories"
+                                        [value]="option">
+                                        <span
+                                                class="badge badge-dark p-1 px-2 small">{{option[0].toUpperCase()}}</span>
+                                        &nbsp;
+                                        <span class="small">{{option}}</span>
+                                </mat-option>
+                        </mat-autocomplete>
+                </div>
+        </div>
+        <br>
 
 
-</div>
+        <div class="d-flex justify-content-between">
+                        <button [disabled]="isDeleting" mat-stroked-button color="warn" (click)="deletePost()">
+                                <mat-icon [hidden]="isDeleting">delete</mat-icon>
+                                <i [hidden]="!isDeleting" class="fa fa-circle-o-notch"></i>
+                                <!-- <span class="d-none d-md-inline">{{!isDeleting ? 'Delete' : 'Deleting...'}}</span> -->
+                        </button>
+                        <button [disabled]="isUpdating" mat-stroked-button color='primary'  (click)="updatePost()">
+                                <span [hidden]="isUpdating">Update</span> 
+                                <span [hidden]="!isUpdating">Updating...</span> 
+                        </button>
+        </div>
+
+</main>
+<br><br><br>

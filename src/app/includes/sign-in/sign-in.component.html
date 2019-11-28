@@ -1,12 +1,18 @@
 <br><br>
 <main class="mat-elevation-z4  mx-auto form ">
-        <mat-progress-bar mode="indeterminate" color="primary" [hidden]='!submitted'></mat-progress-bar>
-  <div class="p-2 " [style.opacity]="submitted ? 0.5 : 1">
-        <p class="text-center"><span class="numbers bg-primary text-light">a</span></p>
-        <p class="lead text-center" style="font-size: 16px;">Welcome Ihifix Platform.
+    <br>
+        <!-- <mat-progress-bar mode="indeterminate" color="primary" [hidden]='!submitted'></mat-progress-bar> -->
+  <div class="p-2 " [style.opacity]="submitted ? 0.9 : 1">
+        <p class="text-center">
+            <button mat-icon-button routerLink="/home">
+                    <span class="numbers m-blue text-light" style="width: 40px; height: 40px; line-height: 35px;">
+                            <i class="	fa fa-home fa-lg" [hidden]="submitted "></i>
+                            <span class="spinner-grow spinner-grow-sm text-light" [hidden]="!submitted "></span>
+                        </span>
+            </button>
+        </p>
+        <p class="lead text-center" style="font-size: 15px;">Welcome Ihifix Platform.
             <a routerLink="/login/signup" class="font-weight-bold">Sign Up?</a></p>
-        
-        
         
         
         <div class="container d-flex justify-content-center ">
@@ -15,20 +21,22 @@
         
             <form novalidate class="form" [formGroup]='formData' (submit)="submitForm()">
         
-                <p class="text-center br-30">
-                    <app-loaderdot [hidden]="!submitted"></app-loaderdot>
-                </p>
+                <!-- <p class="text-center br-30"> -->
+                    <!-- <app-loaderdot [hidden]="!submitted"></app-loaderdot> -->
+                    <!-- <span class="spinner-grow spinner-grow-lg m-blue-f" [hidden]="!submitted "></span> -->
+                <!-- </p> -->
         
                 <!-- <mat-form-field class="w-100" floatLabel='never' appearance="outline"  > -->
                 <div class=" form-group d-flex ">
-                   <mat-form-field class="w-100" >
-                        <input  placeholder="Email" formControlName='email' class=" m-auto" matInput>
-                   </mat-form-field>
+                   <div class="w-100 form-search d-flex shadow border p-2" [ngClass]="email.touched && email.invalid ? 'border-danger anim-glow': ''" >
+                        <input  placeholder="Email" formControlName='email' class="w-100" >
+                   </div>
                     <!-- <button mat-icon-button type="button" class="m-auto">
                         <mat-icon class="text-danger" *ngIf="email.dirty && email.invalid">cancel</mat-icon>
                         <mat-icon *ngIf="email.dirty && email.valid">check_circle</mat-icon>
                     </button> -->
                 </div>
+                <br>
                 <!-- </mat-form-field> -->
         
         
@@ -36,28 +44,31 @@
         
                 <p style="line-height: 1px;" class="text-right mr-3 clickable small text-dark font-weight-bold "
                     routerLink="/login/rpwd">Forget Password?</p>
-                <div class="form-group d-flex ">
-                    <mat-form-field class="w-100">
-                            <input matInput class=" w-100 " placeholder="Password" [type]="hide ? 'password' : 'text'"
+                <div class="form-group  ">
+                    <div class="w-100 form-search d-flex shadow border p-1" [ngClass]="password.dirty && password.invalid ? 'border-danger': ''">
+                            <input  class=" w-100 " placeholder="Password" [type]="hide ? 'password' : 'text'"
                             formControlName='password'>
-                    </mat-form-field>
-                    <!-- <button mat-icon-button (click)="hide = !hide" type="button" class="m-auto">
-                        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-                    </button> -->
+                            <button mat-icon-button (click)="hide = !hide" type="button" class="m-auto">
+                                    <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                                </button>
+                    </div>
+                   
                 </div>
         
         
         
                 <br>
                 <div class="form-group">
-                    <button color="primary" mat-raised-button class="w-100  p-2 " type="submit"
+                    <button color="primary" mat-raised-button class="w-100  p-1 " type="submit"
                         [disabled]="formData.invalid || (formData.valid && submitted)">
+                        <span class="spinner-grow spinner-grow-lg" [hidden]="!submitted"></span>
                         <span class="d-none d-md-inline lead">{{!submitted ? 'Login' : 'Loading...'}}</span>&nbsp;&nbsp;
                         <i class="fa fa-sign-in font-weight-bold fa-lg " [hidden]="submitted"></i>
+                        
                         <!-- <i class="fa fa-circle-o-notch fa-spin font-weight-bold fa-lg" [hidden]="!submitted"></i> -->
-                        <span [hidden]="!submitted">
+                        <!-- <span [hidden]="!submitted">
                             <app-loaderdot></app-loaderdot>
-                        </span>
+                        </span> -->
                     </button>
                 </div>
             </form>
@@ -79,14 +90,14 @@
         <div class="container  d-flex justify-content-center ">
             <div class="form">
                 <div>
-                    <button mat-raised-button class="w-100 bg-primary text-light p-2 " type="button">
+                    <button mat-stroked-button class="w-100 bg-primary p-1 text-light  " type="button">
                         <i class="fa fa-facebook fa-lg text-light lead"></i>&nbsp;&nbsp;
                         <span class="d-none d-md-inline lead">Google Login</span>
                     </button>
                 </div>
                 <br>
                 <div>
-                    <button mat-raised-button class="w-100 bg-danger text-light p-2 " type="button">
+                    <button mat-stroked-button class="w-100 bg-danger text-light p-1 " type="button">
                         <i class="fa fa-google fa-lg text-light lead"></i> &nbsp;&nbsp;
                         <span class="d-none d-md-inline lead">Facebook login</span>
                     </button>

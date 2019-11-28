@@ -10,14 +10,20 @@ import { UserserviceService } from 'src/app/services/userservice.service';
 export class ManageMediaComponent implements OnInit {
 
   medialist;
+  base;
 
   constructor(
-    private service: UserserviceService
-  ) { }
+    private service: UserserviceService,
+    private activeRoute: ActivatedRoute
+  ) { 
+    this.base = this.service.baseImgUrl;
+  }
 
   ngOnInit() {
-    this.service.postImageUpload(null).subscribe( event =>{
-      this.medialist = event;
+    this.activeRoute.data.subscribe( event =>{
+      this.medialist = event.media;
+      console.log(this.medialist)
+      
     });
   }
 

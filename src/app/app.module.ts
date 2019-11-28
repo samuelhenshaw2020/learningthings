@@ -31,6 +31,8 @@ import { RightAsideComponent } from './includes/right-aside/right-aside.componen
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { SocialMediaComponent } from './includes/social-media/social-media.component';
 import { LoaderBlockOneComponent } from './includes/loader-block-one/loader-block-one.component';
+import { UsersGuard } from './guards/users.guard';
+import { LoginGuard } from './guards/login.guard';
 
 @NgModule({
   declarations: [

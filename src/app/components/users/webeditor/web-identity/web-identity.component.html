@@ -3,7 +3,7 @@
          <!----------------------------
                  LOader
         -------------------------- -->
-                <div>
+                <!-- <div>
                                 <div class="theme1 p-5">
                       
                                         <div class="d-flex justify-content-center">
@@ -32,7 +32,7 @@
                                                 <div class=" br-30 bg-light p-3 mx-2" style="width: 10%"></div>
                                         </div>
                                 </div>
-                        </div>
+                        </div> -->
        
 
 
@@ -41,7 +41,7 @@
                  Site Header Edit
         -------------------------- -->
 
-        <div class="p-3 text-center bg-dark">
+        <div class="p-3 text-center m-blue      ">
                 
                         <h6 class="lead text-light">SITE HEADER EDIT</h6>
                 </div>
@@ -59,7 +59,7 @@
                                                
                                                 <div class=" bg-dark  d-flex mx-auto mat-elevation-z7 logo-container" (click)="openMedia(display, 0)" style="cursor: pointer;">
                                                         <div class=" align-self-center">
-                                                                <img src="{{logolink}}" style="width: 100%; height: 150px; clip-path: circle(50%);">
+                                                                <img src="{{imgbaseUrl+ logolink}}" style="width: 100%; height: 150px; clip-path: circle(50%);" #display>
                                                         </div>
                                                    
         
@@ -72,33 +72,47 @@
                 <br><br>
         
                 <div class="bg-white p-2">
-                        <span>Edit Header Title</span>
+                        <span>Edit Business Name</span>
                         <button type="button" (click)="isEditTitle = !isEditTitle" mat-icon-button><mat-icon>{{!isEditTitle ? 'edit': 'check'}}</mat-icon></button>
                         <div class="d-flex justify-content-center">
-                                <mat-form-field class=" w-75">
-                                        <input matInput  [(ngModel)]="head_title" type="text" value="IHIFIX TECHnologies" class="lead text-center ">
-                                </mat-form-field><br>
+                                        <div class="form-search pl-2 d-flex w-100" >
+                                                        <input  [(ngModel)]="business_name" type="text"  class="lead py-2 text-center w-100 ">
+                                        </div>
+                              
                                 
                         </div>
                        
                        
                 </div>
                 <br><br>
+
+                <div class="bg-white p-2">
+                        <span>Edit Header Title </span>
+                <div class="d-flex justify-content-center">
+                        <div class="form-search pl-2 d-flex w-100" >
+                                        <input  [(ngModel)]="head_title" type="text"  class="lead py-2 text-center w-100 ">
+                        </div>
+              
+                
+        </div>
+                </div>
+        <br><br>
+       
+
            <!----------------------------
                          Header Image
                 -------------------------- -->
         
                <div class="bg-white">
                        <p class="m-3">Edit Header Image</p>
-                        <div class="container px-0 " style="position: relative; cursor: pointer;" (click)="openMedia(img, 1)">
+                        <div class="container px-0 " style="position: relative; cursor: pointer;" >
                                
                                         <div class="" style="max-height: 400px; overflow: hidden;">
-                                                <img #img src="{{imglink}}" alt="" class="img img-fluid w-100">
+                                                <img #img src="{{imgbaseUrl+imglink}}" alt="" class="img img-fluid w-100">
                                         </div>
-                                        <div style="position: absolute; top: 0px; left: 0px; right: 0%; bottom: 0px; background: rgba(0,0,0,0.1);"
-                                                class="d-flex justify-content-center">
-                                              
-                                        </div>
+                                        <div style="position: absolute; top: 0%; left: 0%; right: 0%; bottom: 0%; background: rgba(0,0,0,0.2)" class=" d-flex justify-content-center">
+                                                        <a mat-fab color class="clickable mat-elevation-z7 align-self-center " (click)="openMedia(img, 1)"><mat-icon>image</mat-icon></a>
+                                                    </div>
                                 </div>
                </div>
                 <br><br>
@@ -114,7 +128,7 @@
                 <!--------------------------------------------
                         MISSION and VISSION
                 ---------------------------------------------->
-                <div class="p-3 text-center bg-dark">
+                <div class="p-3 text-center m-blue">
                         
                                 <h6 class="lead text-light">MISSION & VISSION</h6>
                         </div>
@@ -123,13 +137,22 @@
                 
                                 <div class="bg-white p-2">
                                                 <div class="formg-group">
-                                                        <mat-checkbox [checked]="vission.enabled" >Enable Vission</mat-checkbox>
+                                                        
+                                                        <label class="switch ">
+                                                                        <input type="checkbox" [checked]="vission.enabled" >
+                                                                        <span class="slider round"></span>
+                                                        </label>
+                                                        <strong> Vision</strong>
                                                         <angular-editor [(ngModel)]="vission.vission"  [placeholder]="'What is the vision'"
                                                                 [config]="editorConfig"></angular-editor>
                                                 </div>
                                                 <br>
                                                 <div class="formg-group">
-                                                        <mat-checkbox [checked]="mission.enabled" >Enable Mission</mat-checkbox>
+                                                        <label class="switch ">
+                                                                        <input type="checkbox" [checked]="mission.enabled" >
+                                                                        <span class="slider round"></span>
+                                                        </label>
+                                                        <strong > Mission</strong>
                                                         <angular-editor [(ngModel)]="mission.mission"  [placeholder]="'What is the Mission'"
                                                                 [config]="editorConfig"></angular-editor>
                                                 </div>
@@ -143,19 +166,24 @@
                  <!--------------------------------------------
                         SOCIAL MEDIA SITES
                 ---------------------------------------------->
-                <div class="p-3 text-center bg-dark">
+                <div class="p-3 text-center m-blue">
                                 <h6 class="lead text-light">SITE SOCIAL LINKS</h6>
                         </div>
         
                         <br>
         
-                        <div class="d-flex bg-dark my-2" *ngFor="let soc of socialMedia.handles"> <!--Facebook-->
-                                <span class=" text-light p-2  " >
+                        <div class="d-flex  my-2" *ngFor="let soc of socialMedia.handles"> <!--Facebook-->
+                                <span class=" text-light p-2  m-blue" >
                                         <i class="{{'fa fa-'+ soc.name}}"></i>
                                 </span>
                                 <input  type="text" class="w-100 text-center small" [(ngModel)]="soc.link">
-                                <div class="p-2">
-                                        <input type="checkbox" class="" #fb_check [checked]="soc.enabled" >
+                                &nbsp;
+                                <div class="p-0">
+                                                <label class="switch h-100">
+                                                                <input type="checkbox" class="" #fb_check [checked]="soc.enabled" >
+                                                                <span class="slider round my-auto"></span>
+                                                </label>
+                                                              
                                 </div>
                                 
                         </div>
@@ -166,13 +194,14 @@
                 <!--------------------------------------------
                         BUSINESS DESCRIPTION ABOUT US
                 ---------------------------------------------->
-                <div class="p-3 text-center bg-dark">
+                <div class="p-3 text-center m-blue">
                                 <h6 class="lead text-light">SHORT DESCRIPTION OF BUSINESS</h6>
                         </div>
-        
+                        <br>
                 <div class="formg-group">
-                                <angular-editor  [(ngModel)]="about.about" [placeholder]="'About '"
-                                        [config]="editorConfig"></angular-editor>
+                                <mat-form-field class="w-100" appearance="outline">
+                                        <textarea matInput  [(ngModel)]="about.about" [placeholder]="'About '" rows="10px"></textarea>
+                                </mat-form-field>
                 </div>
         
         

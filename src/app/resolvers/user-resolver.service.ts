@@ -14,12 +14,35 @@ export class UserResolverService implements Resolve<any>{
 
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> | Promise<any> | any{
-    let view;
-    
-  
-      view = this.service.getWebData();
-  
-    // console.log(view)
-    return view;
+
+      let path = route.url[0].path;
+      // console.log(state)
+
+      // for path: /dash
+      if(path === 'dash'){
+        return this.service.getWebData();
+      }
+
+      //for path: /post
+      if(path === 'post'){
+        return this.service.getAllPost();
+      }
+
+      //for path: /manmedia
+      if(path === 'manmedia'){
+        return this.service.postUploadedImg();
+      }
+
+      if(path === 'start' || path === 'theme'){
+        return this.service.getTemplate();
+      }
+
+      // if(path === 'theme'){
+      //   return this.service.getTemplate();
+      // }
+
+      
+
+      
   }
 }

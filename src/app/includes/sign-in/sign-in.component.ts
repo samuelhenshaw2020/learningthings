@@ -56,13 +56,8 @@ export class SignInComponent implements OnInit {
            localStorage.setItem('_token', res.token);
            console.log(res.confirmation)
             if(res.confirmation === 1){
-              // await this.snackbar.open(res.message, 'close', {panelClass: ['bg-success', 'text-light', 'font-weight-bold']});
+              await this.snackbar.open(res.message, 'close', {panelClass: ['bg-success', 'text-light', 'font-weight-bold']});
               this.router.navigate(['/dash']);
-              this.router.events.subscribe(e=>{ 
-                if(e instanceof ResolveStart){
-                  this.snackbar.open("Authenticated! Redirecting to user dashboard!",'',{duration:5000, panelClass: ['bg-light', 'text-dark']});
-                }
-              })
             }else{
               await this.snackbar.open( "Verify Email account!", 'close');
               this.router.navigate(['/login/verify']);
@@ -70,7 +65,7 @@ export class SignInComponent implements OnInit {
 
         }
 
-        await this.snackbar.open(res.message, 'close', {panelClass: ['bg-light', 'text-dark', 'font-weight-bold']});
+       
         
       },
       async  err => {

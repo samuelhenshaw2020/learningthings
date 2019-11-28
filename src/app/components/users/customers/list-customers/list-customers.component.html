@@ -1,0 +1,57 @@
+<div class=" container-fluid px-0 " >
+
+       
+    <div class="table-responsive container" > <!--music player single start-->
+
+        <table class="table  table-borderless table-hover table-lg">
+            <thead>
+                <tr >
+                    <th class="small text-secondary">User</th>
+                    <th class="small text-secondary">Package</th>
+                    <th class="small text-secondary"> End Date</th>
+                    <th class="small text-secondary "></th>
+                </tr>
+            </thead>
+
+            <tbody >
+              <tr class=" each-user" *ngFor="let users of usersList">
+                  <td>
+                      <div class="media my-auto white-1">
+                             <button mat-icon-button><mat-icon>person_outline</mat-icon></button>
+                            <div class="media-body ml-2" >
+                                <h6 style="font-size: 12px">Henshaw Samuel</h6>
+                                <p style="font-size: 11px">New York</p>
+                            </div>
+                       </div>
+                  </td>
+                  <td>
+                      <span class="bg-secondary py-1 px-2" style="font-size: 10px; border-radius: 14px">Full Music</span>
+                  </td>
+                  <td>
+                      <div class="my-auto" matTooltip="Subscribed on the 30rd March, 2019">
+                          <small class="text-secondary"> 30 days remains </small>
+                      </div>
+                  </td>
+                  <td>
+                      <div class="d-flex justify-content-end">
+                          <button mat-icon-button matTooltip="samuelhenshaw2020@gmail.com" ><mat-icon class="text-secondary">mail_outline</mat-icon></button>
+                          <button mat-icon-button matTooltip="Edit Account"><mat-icon class="text-secondary">edit</mat-icon></button>
+                          <button mat-icon-button><mat-icon class="text-danger">delete</mat-icon></button>
+                          <button mat-icon-button color="" [matMenuTriggerFor]="userMenu"><mat-icon class="text-secondary">	more_horiz</mat-icon></button>
+                      </div>
+                  </td>
+              </tr>
+            </tbody>
+          </table>
+
+   </div>   <!--music play single end-->
+
+
+</div>
+
+
+   <!-- the menu that is triggered -->
+   <mat-menu #userMenu="matMenu">
+        <a mat-menu-item><mat-icon class="text-danger">cancel</mat-icon> De-activate Subscription</a>
+        <a mat-menu-item ><mat-icon class="text-danger">cancel</mat-icon> De-activate Account</a>
+    </mat-menu>

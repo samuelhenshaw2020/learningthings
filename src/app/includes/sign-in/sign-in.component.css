@@ -8,6 +8,22 @@
     margin-right: 2%;
 }
 
+.anim-glow{
+    -webkit-animation: enter ease-in-out 0.3s  2;
+    animation: enter ease-in-out 0.3s  2;
+     -webkit-transition: all 0.1s;
+    transition: all 0.1s;
+}
+
+@-webkit-keyframes enter{
+    from{opacity: 0.3; transform: scale(0.9)}
+    to{ opacity: 1;  transform: scale(1)}
+}
+@keyframes enter{
+    from{opacity: 0.3; transform: scale(0.9)}
+    to{ opacity: 1;  transform: scale(1)}
+}
+
 @media (max-width: 900px){
      .form{
          width: 90%;

@@ -10,6 +10,8 @@ import { AdminComponent } from './components/admin/admin.component';
 import { OtpComponent } from './components/otp/otp.component';
 import { VerifyMailComponent } from './components/verify-mail/verify-mail.component';
 import { UserResolverService } from './resolvers/user-resolver.service';
+import { UsersGuard } from './guards/users.guard';
+import { LoginGuard } from './guards/login.guard';
 
 
 const routes: Routes = [
@@ -23,11 +25,11 @@ const routes: Routes = [
     {path: '', redirectTo: 'signin', pathMatch: 'full'} 
   ]},
 
-  {path: 'start', component: GetStartedComponent},
+  {path: 'start', component: GetStartedComponent,  resolve: {temp: UserResolverService}},
   // {path: 'dash', component: UsersComponent, loadChildren: ()=> import('./components/users/user.module').then(mod => mod.UserModule)},
 
-  {path: 'dash', component: UsersComponent ,resolve: {site_data: UserResolverService} , loadChildren: ()=> import('./components/users/user.module').then(mod => mod.UserModule)},
-  {path: 'admin', component: AdminComponent, loadChildren: ()=> import('./components/admin/admin.module').then(mod => mod.AdminModule)},
+  {path: 'dash', component: UsersComponent , canActivate: [UsersGuard],  resolve: {site_data: UserResolverService} , loadChildren: ()=> import('./components/users/user.module').then(mod => mod.UserModule)},
+  {path: 'admin', canActivate: [UsersGuard], component: AdminComponent, loadChildren: ()=> import('./components/admin/admin.module').then(mod => mod.AdminModule)},
 
   {path: '', redirectTo: 'home', pathMatch: 'full'},
   {path: '**', component: HomeComponent}

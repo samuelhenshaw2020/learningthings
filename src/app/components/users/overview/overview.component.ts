@@ -18,8 +18,18 @@ export class OverviewComponent implements OnInit {
     private service: UserserviceService
   ) { }
 
+  no_site;
+  temp;
   ngOnInit() {
     
+    this.no_site = this.service.no_site;
+    this.service.getTemplate().subscribe(d => {
+       this.temp = d.filter(d => {
+         return d.template_id === this.service.siteData.value.template_id;
+       })
+       console.log(this.service.siteData.value.template_id);
+    })
+
     
   }
 

@@ -5,6 +5,7 @@ import { UserserviceService } from 'src/app/services/userservice.service';
 import { MatSnackBar } from '@angular/material';
 import { Route } from '@angular/compiler/src/core';
 import { Router } from '@angular/router';
+import { interval } from 'rxjs';
 
 @Component({
   selector: 'app-reg',
@@ -56,7 +57,9 @@ export class RegComponent implements OnInit {
         this.submitted = false;
         console.log(res);
         if (res.success === true) {
-           this.router.navigate(['/login/signin']);
+           interval(2000).subscribe(()=>{
+            this.router.navigate(['/login/signin']);
+           })
           await this.snackbar.open(res.message, 'close');
         } else {
           await this.snackbar.open(res.message, 'close');

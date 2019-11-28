@@ -19,6 +19,7 @@ export interface identity_model {
     },
     header_image: string,
     header_title: string,
+    link: string,
     logo: string,
     mission?: {
         mission: string,
@@ -35,6 +36,7 @@ export interface identity_model {
         enabled: boolean,
         services: object[]
     },
+    short: string,
     site_id: number,
     social_media?: {
         enabled: boolean,

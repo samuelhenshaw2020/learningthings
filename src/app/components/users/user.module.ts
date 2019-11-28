@@ -12,7 +12,7 @@ import { SupportComponent } from './support/support.component';
 import { ProductComponent } from './product/product.component';
 import { ReactiveFormsModule, FormsModule, NgModel } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { MatCheckboxModule, MatExpansionModule, MatMenuModule, MatListModule, MatDialogModule, MatToolbarModule, MatButtonModule, MatIconModule, MatInputModule, MatBadgeModule, MatTooltipModule, MatGridListModule, MatCardModule, MatChipsModule, MatStepperModule, MatSnackBarModule, MatProgressBarModule, MatSidenavModule, MatSliderModule } from '@angular/material';
+import { MatCheckboxModule, MatExpansionModule, MatMenuModule, MatListModule, MatDialogModule, MatToolbarModule, MatButtonModule, MatIconModule, MatInputModule, MatBadgeModule, MatTooltipModule, MatGridListModule, MatCardModule, MatChipsModule, MatStepperModule, MatSnackBarModule, MatProgressBarModule, MatSidenavModule, MatSliderModule, MatSelectModule, MatOptionModule, MatAutocompleteModule } from '@angular/material';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { MediaManagerComponent } from './media-manager/media-manager.component';
 import { PortfolioComponent } from './portfolio/portfolio.component';
@@ -23,6 +23,7 @@ import { UserInterceptorService } from './user-interceptor.service';
 import { WebformComponent } from './webform/webform.component';
 import { ViewMessageComponent } from './webform/view-message/view-message.component';
 import { SocialMediaComponent } from 'src/app/includes/social-media/social-media.component';
+import { UsersGuard } from 'src/app/guards/users.guard';
 
 
 
@@ -43,6 +44,7 @@ import { SocialMediaComponent } from 'src/app/includes/social-media/social-media
     WebformComponent
   ],
   imports: [
+    
     CommonModule,
     UserRoutingModule,
     AngularEditorModule,
@@ -52,6 +54,7 @@ import { SocialMediaComponent } from 'src/app/includes/social-media/social-media
     HttpClientModule,
     MatCheckboxModule,
     MatExpansionModule,
+    MatAutocompleteModule,
     MatCardModule,
     MatMenuModule,
     MatListModule,
@@ -70,13 +73,14 @@ import { SocialMediaComponent } from 'src/app/includes/social-media/social-media
     MatProgressBarModule,
     MatSidenavModule,
     ScrollingModule,
-    MatSliderModule
+    MatSliderModule,
+    MatSelectModule
   ],
   entryComponents: [
     MediaManagerComponent
   ],
   providers: [
-    
+    UsersGuard
   ]
 })
 export class UserModule { }

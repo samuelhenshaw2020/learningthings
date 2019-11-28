@@ -31,6 +31,7 @@ import { LoaderBlockOneComponent } from 'src/app/includes/loader-block-one/loade
     HttpClientModule,
     MatCheckboxModule,
     MatExpansionModule,
+    MatToolbarModule,
     MatMenuModule,
     MatListModule,
     MatDialogModule,

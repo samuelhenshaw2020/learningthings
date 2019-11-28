@@ -34,18 +34,20 @@
                             <br>
                  
                             <div class=" form-group  ">
-                                    
-                                    <mat-form-field class="w-100" appearance="outline">
-                                                <mat-label>OTP</mat-label>
-                                                <input matInput type="text" placeholder="******"  class="  w-100 text-center font-weight-bold" style="letter-spacing: 20px;" formControlName="otp">
-                                    </mat-form-field>
+                                      <span class="small ">OTP</span>
+                                    <div class="w-100 form-search d-flex shadow border p-3" [ngClass]="otp.dirty && otp.invalid ? 'border-danger': ''" appearance="outline">
+                                                <input  type="text" placeholder="******"  class="  w-100 text-center font-weight-bold" style="letter-spacing: 20px;" formControlName="otp">
+                                    </div>
                             </div>
+                            <br>
                         
                         
                             <div class="form-group">
                                     <button type="submit" color="primary" mat-raised-button class="w-100  p-2 " [disabled]="verifyTokenForm.invalid">
-                                        <span [hidden]="submitted">Validate Code</span>
-                                        <app-loaderdot [hidden]="!submitted"></app-loaderdot>
+                                        <span class="spinner-grow spinner-grow-md " [hidden]="!submitted "></span>
+                                        <span [hidden]="submitted" class="d-none d-md-inline">Validate Code</span>
+                                        <i class="fa fa-send fa-lg text-light d-inline d-md-none" [hidden]="submitted"></i>
+
                                     </button>
                                 </div>
                 

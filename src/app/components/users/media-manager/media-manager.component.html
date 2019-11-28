@@ -1,10 +1,10 @@
 <div mat-dialog-content  style="height: 400px">
   <ul class="nav nav-tabs" >
-    <li class="nav-item">
+    <li class="nav-item clickable">
       <a class="nav-link" [class.active]="task == 'upload'"  (click)="task = 'upload'" >Upload</a>
     </li>
-    <li class="nav-item">
-      <a class="nav-link" [class.active]="task == 'list'" (click)="task='list'">Media</a>
+    <li class="nav-item  clickable">
+      <a class="nav-link" [class.active]="task == 'list'" (click)="task='list'" #mediaview>Media</a>
     </li>
    
   </ul>
@@ -14,23 +14,50 @@
     <div class="d-flex justify-content-center " #dropzone *ngSwitchCase="'upload'" >
        
        <div class="form-group py-5" >
-            <p class="text-center">Drag and drop files</p>
-            <p class="small text-center">or</p>
-            <input type="file" hidden #media (change)="imageUpload($event)">
-            <button mat-button (click)="media.click()">Click to upload a media file</button>
+            <div  [hidden]="media.value != ''">
+                <p class="text-center">Drag and drop files</p>
+                <p class="small text-center">or</p>
+                <input type="file" hidden #media (change)="previewimage($event)" >
+                <button mat-button (click)="media.click()">Click to upload a media file</button>
+            </div>
+            <br>
+            <div class="" [hidden]="media.value == ''">
+                <div style="position: relative;">
+                    <img [src]="imagelink" alt="" class="img img-fluid" style="width: 200px;">
+                    <div  style="position: absolute; top: 0%; left: 0%; right: 0%; bottom: 0%; background: rgba(0,0,0,0.2)" class=" d-flex justify-content-center">
+                        <i [hidden]="!uploading" style="font-size: 30px"  class=" align-self-center fa fa-circle-o-notch fa-spin fa-lg" ></i>
+                    </div>
+                </div>
+                <br>
+               <div>
+                  <button  mat-stroked-button (click)="media.click()" >Change</button>
+                  &nbsp;&nbsp;
+                <button [disabled]="uploading" type="button" mat-raised-button (click)="uploadimage(mediaview)">
+                  <span [hidden]="uploading">Upload</span>
+                  <span [hidden]="!uploading">Uploading...</span>
+                </button>
+               </div>
+            </div>
        </div>
 
     </div>
+
+    <!-- //////////////////////// -->
     <div class="p-2"  *ngSwitchCase="'list'">
 
       <input type="text" [(ngModel)]="link" hidden>
 
-        <div class="card-columns">
+       
+
+        <div class="card-columns" >
             <div class="card border m-1" [ngClass]="i==prev? 'bt mat-elevation-z4': ''" (click)="selectLink(i); link = image.src" *ngFor="let img of imgList; let i =index" style="max-height: 150px; max-width: 150px;overflow: hidden;">
-                    <img  #image  src="{{'http://localhost/ihifixtest/img/'+img}}" alt="" class="card-img-top" >
+                    <img  #image  src="{{baseUrl+img.link}}" alt="" class="card-img-top" >
             </div>
             
         </div>
+        <div [hidden]="isLoading">
+            <p class="text-center">Loading Images</p>
+          </div>
         
     </div>
   </div>

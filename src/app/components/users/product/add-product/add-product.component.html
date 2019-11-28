@@ -1,6 +1,12 @@
 <main class="container-fluid">
-        <p><span class=" ml-3 font-1 font-weight-bold" style="font-size: 9px">ADD PRODUCT</span></p>
+        <br>
 
+        <div class="p-2 bg-dark d-flex">
+                        <button mat-icon-button routerLink="/dash/product/all">
+                                <mat-icon class="text-light">arrow_back</mat-icon>
+                        </button>
+                        <p class="text-light m-auto">ADD PRODUCT</p>
+                </div>
 
 
 
@@ -22,21 +28,21 @@
 
                                                 <div class=" mr-md-3 col-md">
                                                         <label for="">Product Name</label>
-                                                        <div class="d-flex input-div ">
-                                                                <input type="text" class=" p-2 w-100 input-div "
+                                                        <div class="d-flex form-search border">
+                                                                <input type="text" class=" p-2 w-100  "
                                                                         placeholder="Product Name"
-                                                                        formControlName="prod_name">
+                                                                        formControlName="product_name">
                                                         </div>
                                                 </div>
 
                                                 <div class="col-md-4 mt-md-0 mt-4">
                                                         <label for="">Product Price</label>
-                                                        <div class="d-flex input-div pl-3">
+                                                        <div class="d-flex ml-2 form-search border pl-1">
                                                                 <span class="font-weight-bold  m-auto"
                                                                         style="text-decoration: line-through;">N</span>
-                                                                <input type="text" class="input-div w-100 p-2"
+                                                                <input #r type="number" class=" w-100 p-2"
                                                                         placeholder="Price"
-                                                                        formControlName="prod_price">
+                                                                        formControlName="price">
 
                                                         </div>
                                                 </div>
@@ -51,34 +57,31 @@
 
                                                 <div class="col-md mt-md-0 mt-4">
                                                         <label for="">Sales Price</label>
-                                                        <div class="d-flex input-div pl-3">
+                                                        <div class="d-flex form-search border pl-3">
                                                                 <span class="font-weight-bold  m-auto"
                                                                         style="text-decoration: line-through;">N</span>
-                                                                <input type="text" class="input-div w-100 p-2"
+                                                                <input type="number" class=" w-100 p-2"
                                                                         placeholder="Sales Price"
-                                                                        formControlName="prod_salesprice">
+                                                                        formControlName="sales_price">
 
                                                         </div>
                                                 </div>
 
                                                 <div class=" mr-md-3 col-md">
                                                         <label for="">Discount</label>
-                                                        <div class="d-flex input-div ">
-                                                                <span class="font-weight-bold  m-auto"
-                                                                        style="text-decoration: line-through;">N</span>
-                                                                <input type="text" class=" p-2 w-100 input-div "
-                                                                        placeholder="Discount"
-                                                                        formControlName="prod_discount">
+                                                        <div class="d-flex form-search border">
+                                                                <input [value]="r.value" disabled type="number" class=" p-2 w-100  "
+                                                                        placeholder="Discount">
                                                         </div>
                                                 </div>
 
 
                                                 <div class="col-md mt-md-0 mt-4">
                                                         <label for="">Stock</label>
-                                                        <div class="d-flex input-div px-3 p-0">
+                                                        <div class="d-flex form-search px-2 p-0 border">
 
-                                                                <select class="w-100 ml-1 p-0 form-control"
-                                                                        formControlName="prod_stock">
+                                                                <select class="w-100 ml-1 py-2"
+                                                                        formControlName="stock_status">
                                                                         <option value="In Stock" selected>In Stock
                                                                         </option>
                                                                         <option value="Out of Stock">Out of Stock
@@ -87,6 +90,16 @@
 
                                                         </div>
                                                 </div>
+
+                                                <div class="col-md mt-md-0 mt-4">
+                                                                <label for="">Qualtity</label>
+                                                                <div class="d-flex form-search px-2 p-0 border">
+        
+                                                                        <input type="number" class="w-100 ml-1 py-2"
+                                                                                formControlName="amount_in_stock">
+        
+                                                                </div>
+                                                        </div>
                                         </div>
 
 
@@ -99,20 +112,28 @@
 
                                                 <div class=" mr-md-2 col-md">
                                                         <label for="">Category</label>
-                                                        <div class="input-div ">
-                                                                <input type="text" class=" p-2 w-100 input-div "
-                                                                        placeholder="Product Name">
+                                                        <div class="form-search px-2 p-0 border">
+                                                               
+                                                                <select class="w-100 ml-1 py-2"
+                                                                        formControlName="category_id">
+                                                                        <option value="In Stock" selected>Food
+                                                                        </option>
+                                                                        <option value="Out of Stock">Phone
+                                                                        </option>
+                                                                </select>
                                                         </div>
                                                 </div>
 
                                                 <div class="col-md mt-md-0 mt-4">
                                                         <label for="">Sub-Category</label>
-                                                        <div class="input-div pl-3">
-                                                                <input type="text" class="input-div w-100 p-2"
-                                                                        placeholder="Price">
+                                                        <div class="form-search border">
+                                                                <input type="text" class=" w-100 p-2"
+                                                                        placeholder="" formControlName="sub_category">
 
                                                         </div>
                                                 </div>
+
+                                                
                                         </div>
 
 
@@ -122,9 +143,9 @@
                                         <br>
                                         <div class="row">
                                                 <div class="col-md">
-                                                        <div class="form-group p-2">
+                                                        <div class="form-group p-2 form-search">
                                                                 <label for="">Product Description</label>
-                                                                <angular-editor formControlName="prod_desc"
+                                                                <angular-editor formControlName="product_description"
                                                                         [placeholder]="'Enter text here...'"
                                                                         [config]="editorConfig"></angular-editor>
                                                         </div>
@@ -250,7 +271,7 @@
 
                                                                         </div>
                                                                         <!-- <button  ><mat-icon>edit</mat-icon>Add additional image</button> -->
-                                                                        <div *ngIf="!(imglink.length >5 )">
+                                                                        <div *ngIf="!(imglink.length > 5 )">
                                                                                 <div *ngIf="(imglink.length > 0)"
                                                                                         (click)="addImage(1)"
                                                                                         class="clickable bg-light  border d-flex justify-content-center"
@@ -276,7 +297,7 @@
                                                 save button
                                         -------------------------------------------->
                                 <div class="form-group bg-white p-2">
-                                        <button class="btn btn-dark ">Save</button>
+                                        <button class="btn btn-dark " type="submit">Save</button>
                                 </div>
 
 
@@ -299,52 +320,5 @@
 
 
 
-
-
-
-                <!-- <div class="col-md-4 "> -->
-
-                <!-- <div class="form-group container bg-white p-3 ">
-            
-                                <div class="form-group d-flex justify-content-end">
-                                        <button mat-raised-button color="primary">Publish</button>
-                                    </div>
-            <br>        
-                                <p><span class=" ml-3 font-1 font-weight-bold" style="font-size: 9px">Product Variation</span></p>
-                                <small>The variant can be size, color, height, width, weight and so on.</small>
-                                <div class=" px-3">
-                                        
-                                        <input type="text" class="input-div  p-2" placeholder="Property key" #key>
-                                        <br><br>
-                                        <input type="text" class="input-div  p-2  " placeholder="value1, value2, value3,..." #value>
-                                        <br><br>
-                                        <button mat-raised-button type="button" class=""  (click)="addVariant(key.value, value.value)">
-                                                <mat-icon>add</mat-icon>
-                                                Add
-                                        </button>
-                                       
-                                </div>
-                <br>
-                                <div>
-                                    <table class="table table-sm  small">
-                                        <tr>
-                                            <th>Key</th>
-                                            <th>Value</th>
-                                            <th></th>
-                                        </tr>
-                                        <tr *ngFor="let items of prodVariants; let i = index">
-                                            <td>{{items.key}}</td>
-                                            <td>{{items.value}}</td>
-                                            <td><a (click)="remove(i)" style="cursor: pointer;"> <i class="fa fa-close fa-lg"></i> </a></td>
-                                        </tr>
-                                    </table>
-                                </div>
-                        </div>
-            
-                        <br>
-                      
-                    </div>
-             -->
-                <!-- </div> -->
         </form>
 </main>

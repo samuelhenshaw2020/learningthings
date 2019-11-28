@@ -5,13 +5,14 @@ import { EditPostComponent } from './edit-post/edit-post.component';
 import { AllPostComponent } from './all-post/all-post.component';
 import { CreatePostComponent } from './create-post/create-post.component';
 import { PostRoutingModule } from './post-routing.module';
-import { MatCheckboxModule, MatExpansionModule, MatMenuModule, MatListModule, MatDialogModule, MatToolbarModule, MatButtonModule, MatIconModule, MatInputModule, MatBadgeModule, MatTooltipModule, MatGridListModule, MatCardModule, MatChipsModule, MatStepperModule, MatSnackBarModule, MatProgressBarModule, MatSidenavModule, MatSelectModule, MatSlideToggleModule } from '@angular/material';
+import { MatCheckboxModule, MatExpansionModule, MatMenuModule, MatListModule, MatDialogModule, MatToolbarModule, MatButtonModule, MatIconModule, MatInputModule, MatBadgeModule, MatTooltipModule, MatGridListModule, MatCardModule, MatChipsModule, MatStepperModule, MatSnackBarModule, MatProgressBarModule, MatSidenavModule, MatSelectModule, MatSlideToggleModule, MatAutocompleteModule } from '@angular/material';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { LoaderdotComponent } from 'src/app/includes/loaderdot/loaderdot.component';
 import { PostAnalysisComponent } from './post-analysis/post-analysis.component';
 import { AngularEditorModule } from '@kolkov/angular-editor';
+import { TableLoaderComponent } from './post-include/table-loader/table-loader.component';
 
 
 
@@ -21,7 +22,8 @@ import { AngularEditorModule } from '@kolkov/angular-editor';
     AllPostComponent,
     CreatePostComponent,
     EditPostComponent,
-    PostAnalysisComponent
+    PostAnalysisComponent,
+    TableLoaderComponent
   ],
   imports: [
     CommonModule,
@@ -32,6 +34,7 @@ import { AngularEditorModule } from '@kolkov/angular-editor';
     HttpClientModule,
     MatCheckboxModule,
     MatExpansionModule,
+    MatAutocompleteModule,
     MatMenuModule,
     MatListModule,
     MatDialogModule,

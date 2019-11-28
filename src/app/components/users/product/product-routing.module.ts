@@ -8,7 +8,7 @@ import { EditProductComponent } from './edit-product/edit-product.component';
 const routes: Routes = [
   {path: 'alla', component: AllProductComponent},
   {path: 'add', component: AddProductComponent},
-  {path: 'edit', component: EditProductComponent},
+  {path: 'edit/:prod_id', component: EditProductComponent},
   {path: '', redirectTo: 'all', pathMatch: 'full'},
   {path: '**', component: AllProductComponent}
 ];

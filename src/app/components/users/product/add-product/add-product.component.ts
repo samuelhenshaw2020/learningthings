@@ -14,6 +14,9 @@ import { MediaManagerComponent } from '../../media-manager/media-manager.compone
 export class AddProductComponent implements OnInit {
 
   prodVariants: any[] = [ ];
+  imglink = [];
+  formData : FormData;
+  site_id;
  
 
 
@@ -24,21 +27,27 @@ export class AddProductComponent implements OnInit {
     private snackbar: MatSnackBar
   ) { }
 
+
+
   prodForm = this.fb.group({
-    prod_name: ['', [Validators.required]],
-    prod_price: [0, [Validators.required]],
-    prod_discount: [0 , [Validators.required]],
-    prod_salesprice: [0, [Validators.required]],
-    prod_stock: ['', [Validators.required]],
-    prod_desc: ['', [Validators.required]]
+    product_name: ['', []],
+    price: [0 , []],
+    sales_price: [0, []],
+    amount_in_stock: [0, []],
+    stock_status: ['', []],
+    sub_category: ['', []],
+    product_description: ['', []],
+    category_id: ['', []],
   });
 
-  get prod_name(){return this.prodForm.get('prod_name')}
-  get prod_price(){return this.prodForm.get('prod_price')}
-  get prod_discount(){return this.prodForm.get('prod_discount')}
-  get prod_salesprice(){return this.prodForm.get('prod_salesprice')}
-  get prod_stock(){return this.prodForm.get('prod_stock')}
-  get prod_desc(){return this.prodForm.get('prod_desc')}
+  get product_name(){return this.prodForm.get('product_name')}
+  get price(){return this.prodForm.get('price')}
+  get sales_price(){return this.prodForm.get('sales_price')}
+  get amount_in_stock(){return this.prodForm.get('amount_in_stock')}
+  get stock_status(){return this.prodForm.get('stock_status')}
+  get sub_category(){return this.prodForm.get('sub_category')}
+  get product_description(){return this.prodForm.get('product_description')}
+  get category_id(){return this.prodForm.get('category_id')}
 
   ngOnInit() {
   }
@@ -59,7 +68,7 @@ export class AddProductComponent implements OnInit {
       console.log(index +'  '+ (index+1))
   }
 
-  imglink: any[] = []
+  
   addImage(index){
     if(this.imglink.length === 6 && index === 1){
       this.snackbar.open("Cant add more than 6 images", "close");
@@ -93,20 +102,25 @@ export class AddProductComponent implements OnInit {
   }
 
 
-  formData = new FormData();
+  
   sendProd(){
-    console.log(this.prodForm.value)
-   
-    this.formData.append('prod_name', this.prod_name.value);
-    this.formData.append('prod_price', this.prod_price.value);
-    this.formData.append('prod_discount', this.prod_discount.value);
-    this.formData.append('prod_salesprice', this.prod_salesprice.value);
-    this.formData.append('prod_stock', this.prod_stock.value);
-    this.formData.append('prod_desc', this.prod_desc.value);
-    this.formData.append('prod_props', Object(this.prodVariants));
-    this.service.postAdvanceSearch(this.formData).subscribe((data)=>{
-        console.log(data)
-    });
+    this.formData = new FormData();
+    // this.formData.append("product_name", this.product_name.value);
+    this.formData.set('product_name', this.product_name.value);
+    this.formData.set('price', this.price.value);
+    this.formData.set('sales_price', this.sales_price.value);
+    this.formData.set('amount_in_stock', this.amount_in_stock.value);
+    this.formData.set('stock_status', this.stock_status.value);
+    this.formData.set('sub_category', this.sub_category.value);
+    this.formData.set('variations', Object(this.prodVariants));
+    this.formData.set('product_descriptions', this.product_description.value);
+    this.formData.set('category_id', this.category_id.value)
+    this.formData.set('images', Object(this.imglink))
+    console.log(this.formData);
+    // this.service.postSaveCat(this.formData).subscribe(d=>{
+    //   console.log(d)
+    // })
+    
   }
 
 

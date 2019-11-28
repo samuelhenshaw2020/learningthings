@@ -1,79 +1,90 @@
-<br>
-<app-loadernav [hidden]="!submitted"></app-loadernav>
-<!--
-    Input an email
--->
-<div class="container d-flex justify-content-center " >
+<main class="container p-3">
+                <br><br><br><br>
 
-
-        <form novalidate [formGroup]="reqform" (submit)="reqsend()" [hidden]="!enableReqmail">
-                <div class=" form-group ">
-                                <mat-form-field class="w-100" appearance="outline">
-                                                <mat-label>Email</mat-label>
-                                                <input matInput type="email" placeholder="Enter your email"  class="input-cos w-100 text-center" formControlName="email">
-                                    </mat-form-field>
-                        
-                       
+                <div class=" d-flex">
+                                <button mat-icon-button routerLink="/login/signin">
+                                        <mat-icon class="m-blue-f">arrow_back</mat-icon>
+                                </button>
+                                <p class="m-blue-f font-weight-bold m-auto">Password Reset</p>
                 </div>
-            
-            
-                <div class="form-group">
-                    <button type="submit" color="primary" mat-raised-button class="w-100  p-2 " [disabled]="email.invalid || submitted">
-                        <span >Request OTP</span>
-                    </button>
+                <br>
+
+                <app-loadernav [hidden]="!submitted"></app-loadernav>
+                <!--
+                    Input an email
+                -->
+                <div class="container d-flex justify-content-center " >
+                
+                
+                        <form novalidate [formGroup]="reqform" (submit)="reqsend()" [hidden]="!enableReqmail">
+                                <div class=" form-group ">
+                                                <mat-form-field class="w-100" appearance="outline">
+                                                                <mat-label>Email</mat-label>
+                                                                <input matInput type="email" placeholder="Enter your email"  class="input-cos w-100 text-center" formControlName="email">
+                                                    </mat-form-field>
+                                        
+                                       
+                                </div>
+                            
+                            
+                                <div class="form-group">
+                                    <button type="submit" color="primary" mat-raised-button class="w-100  p-2 " [disabled]="email.invalid || submitted">
+                                        <span >Request OTP</span>
+                                    </button>
+                                </div>
+                        </form>
                 </div>
-        </form>
-</div>
-
-
-
-
-
-<!---
-    OTP COde area for OTP Validation
-
--->
-
-<div class="container d-flex justify-content-center " >
-
-
-        <form novalidate [formGroup]="otpform" (submit)="otpvalidate()" [hidden]="!enableOTP">
-                <div class=" form-group ">
-                        <input type="text" placeholder="*  *  *  *  *  * "  class="input-cos w-100 text-center" formControlName="otpcode">
+                
+                
+                
+                
+                
+                <!---
+                    OTP COde area for OTP Validation
+                
+                -->
+                
+                <div class="container d-flex justify-content-center " >
+                
+                
+                        <form novalidate [formGroup]="otpform" (submit)="otpvalidate()" [hidden]="!enableOTP">
+                                <div class=" form-group ">
+                                        <input type="text" placeholder="*  *  *  *  *  * "  class="input-cos w-100 text-center" formControlName="otpcode">
+                                </div>
+                            
+                               
+                                <div class="form-group">
+                                    <button color="primary" mat-raised-button class="w-100  p-2 br-30 " [disabled]="otpcode.invalid">Validate OTP</button>
+                                </div>
+                        </form>
                 </div>
-            
-               
-                <div class="form-group">
-                    <button color="primary" mat-raised-button class="w-100  p-2 br-30 " [disabled]="otpcode.invalid">Validate OTP</button>
+                
+                
+                
+                <!--
+                    New password
+                -->
+                
+                <div class="container d-flex justify-content-center " >
+                
+                        <form novalidate  [formGroup]="pwdform" (submit)="pwdReset()" [hidden]="!enablePwd">
+                                <div class=" form-group ">
+                                        <input type="text" placeholder="New Password"  class="input-cos w-100 text-center" formControlName="password">
+                                </div>
+                
+                                <div class=" form-group ">
+                                        <input type="text"  placeholder="Confirm Password"  class="input-cos w-100 text-center" formControlName="password_confirmation">
+                                </div>
+                            
+                               
+                                <div class="form-group">
+                                    <button color="primary" mat-raised-button class="w-100  p-2 br-30 " [disabled]=" pwdform.invalid || submitted">Reset Password</button>
+                                </div>
+                        </form>
+                </div>  
+                
+                
+                <div class="d-flex justify-content-center">
+                        <!-- <button [hidden]="!enableReqmail" mat-button (click)="enableOTP = true; enableReqmail = false ">Resend Code</button> -->
                 </div>
-        </form>
-</div>
-
-
-
-<!--
-    New password
--->
-
-<div class="container d-flex justify-content-center " >
-
-        <form novalidate  [formGroup]="pwdform" (submit)="pwdReset()" [hidden]="!enablePwd">
-                <div class=" form-group ">
-                        <input type="text" placeholder="New Password"  class="input-cos w-100 text-center" formControlName="password">
-                </div>
-
-                <div class=" form-group ">
-                        <input type="text"  placeholder="Confirm Password"  class="input-cos w-100 text-center" formControlName="password_confirmation">
-                </div>
-            
-               
-                <div class="form-group">
-                    <button color="primary" mat-raised-button class="w-100  p-2 br-30 " [disabled]=" pwdform.invalid || submitted">Reset Password</button>
-                </div>
-        </form>
-</div>  
-
-
-<div>
-        <button mat-button (click)="enableOTP = true; ">Already recieved a code</button>
-</div>
+</main>

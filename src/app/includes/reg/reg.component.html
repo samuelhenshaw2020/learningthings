@@ -1,6 +1,14 @@
 <div class="row">
     <div class=" col-md bg-light d-flex p-2">
             <div class="container  align-self-center text-center ">
+                    <p class="text-center">
+                            <button mat-icon-button routerLink="/home">
+                                    <span class="numbers m-blue text-light" style="width: 40px; height: 40px; line-height: 35px;">
+                                            <i class="	fa fa-home fa-lg" [hidden]="submitted "></i>
+                                            <span class="spinner-grow spinner-grow-sm text-light" [hidden]="!submitted "></span>
+                                        </span>
+                            </button>
+                        </p>
                     <h3 class="font-weight-bold  ">Hello!</h3>
                     <!-- <h3 class="font-weight-bold   " style="color:  #3F51B5;"></h3>   -->
                     <p class="lead text-center" style="font-size: 20px;">Already have an account. <a routerLink="/login/signin"
@@ -21,59 +29,59 @@
                         <form novalidate class="form" [formGroup]="formData" (submit)='submitForm()'>
                             <div class="form-group">
                     
-                              <mat-form-field class="w-100">
-                                    <input matInput placeholder="Full Name" formControlName="name">
-                                    <mat-icon matSuffix class="text-danger" *ngIf="name.dirty && name.invalid">cancel</mat-icon>
-                                        <mat-icon matSuffix *ngIf="name.dirty && name.valid">check_circle</mat-icon>
-                              </mat-form-field>
+                              <div class="w-100 form-search shadow border p-3" [ngClass]="name.dirty && name.invalid ? 'border-danger': ''">
+                                    <input class="w-100" placeholder="Full Name" formControlName="name">
+                                    <!-- <mat-icon matSuffix class="text-danger" *ngIf="name.dirty && name.invalid">cancel</mat-icon>
+                                        <mat-icon matSuffix *ngIf="name.dirty && name.valid">check_circle</mat-icon> -->
+                              </div>
                     
                     
                             </div>
                             <br>
                     
                             <div class="form-group ">
-                                <mat-form-field class="w-100">
-                                        <input class="" matInput placeholder="Email" formControlName="email">
-                                        <mat-icon matSuffix class="text-danger" *ngIf="email.dirty && email.invalid">cancel</mat-icon>
-                                        <mat-icon matSuffix *ngIf="email.dirty && email.valid">check_circle</mat-icon>
-                                </mat-form-field>
+                                <div class="w-100 form-search shadow border p-3" [ngClass]="email.dirty && email.invalid ? 'border-danger': ''">
+                                        <input class="w-100"  placeholder="Email" formControlName="email">
+                                        <!-- <mat-icon matSuffix class="text-danger" *ngIf="email.dirty && email.invalid">cancel</mat-icon>
+                                        <mat-icon matSuffix *ngIf="email.dirty && email.valid">check_circle</mat-icon> -->
+                                </div>
                               
                             </div>
                             <br>
                     
                             <div class="form-group  ">
-                               <mat-form-field class="w-100">
-                                    <input matInput placeholder="Phone Number" type="text" formControlName="phone">
-                                    <mat-icon matSiffix class="text-danger" *ngIf="phone.dirty && phone.invalid">cancel</mat-icon>
-                                    <mat-icon matSuffix *ngIf="phone.dirty && phone.valid">check_circle</mat-icon>
-                               </mat-form-field>
+                               <div class="w-100 form-search shadow border p-3" [ngClass]="phone.dirty && phone.invalid ? 'border-danger': ''">
+                                    <input class="w-100" placeholder="Phone Number" type="text" formControlName="phone">
+                                    <!-- <mat-icon matSiffix class="text-danger" *ngIf="phone.dirty && phone.invalid">cancel</mat-icon>
+                                    <mat-icon matSuffix *ngIf="phone.dirty && phone.valid">check_circle</mat-icon> -->
+                               </div>
                             </div>
                             <br>
                     
                     
                             <div class="form-group ">
-                                <mat-form-field class="w-100">
-                                        <input matInput placeholder="Password" [type]="hide ? 'password' : 'text'"
+                                <div class="w-100 form-search d-flex shadow border p-2" [ngClass]="password.dirty && password.invalid ? 'border-danger': ''">
+                                        <input class="w-100" placeholder="Password" [type]="hide ? 'password' : 'text'"
                                         formControlName="password">
                                     <button  matSuffix mat-icon-button (click)="hide = !hide" type="button" class="m-auto">
                                         <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
                                     </button>
-                                </mat-form-field>
+                                </div>
                             </div>
                             <br>
                     
                             <div class="form-group">
                                
-                                    <mat-form-field class="w-100">
-                                            <input matInput placeholder="Comfirm Password" [type]="hide ? 'password' : 'text'"
+                                    <div class="w-100 form-search  shadow border p-3" [ngClass]="password_confirmation.dirty && password_confirmation.value != password.value ? 'border-danger': ''">
+                                            <input class="w-100" placeholder="Comfirm Password" [type]="hide ? 'password' : 'text'"
                                             formControlName="password_confirmation">
-                                        <button matSuffix mat-icon-button type="button" class="m-auto">
+                                        <!-- <button matSuffix mat-icon-button type="button" class="m-auto">
                                             <mat-icon class="text-danger"
                                                 *ngIf="password_confirmation.dirty && password_confirmation.value != password.value">cancel</mat-icon>
                                             <mat-icon *ngIf="password_confirmation.dirty && password_confirmation.value == password.value">check_circle
                                             </mat-icon>
-                                        </button>
-                                    </mat-form-field>
+                                        </button> -->
+                                    </div>
                     
                              
                     
@@ -86,12 +94,13 @@
                             <div class="form-group">
                                 <button color="primary" mat-raised-button class="w-100  p-2 " type="submit"
                                     [disabled]="formData.invalid || submitted">
+                                    <span class="spinner-grow spinner-grow-md " [hidden]="!submitted "></span>
                                     <span class="d-none d-md-inline lead">{{!submitted ? 'Sign up' : 'Processing...'}}</span>&nbsp;&nbsp;
                                     <i class="fa fa-send font-weight-bold fa-lg " [hidden]="submitted"></i>
                                     <!-- <i class="fa fa-circle-o-notch fa-spin font-weight-bold fa-lg" [hidden]="!submitted"></i> -->
-                                    <span [hidden]="!submitted">
+                                    <!-- <span [hidden]="!submitted">
                                         <app-loaderdot></app-loaderdot>
-                                    </span>
+                                    </span> -->
                                 </button>
                     
                             </div>
@@ -117,14 +126,14 @@
                     <div class="container  d-flex justify-content-center " id="social-media">
                         <div class="form">
                             <div>
-                                <button mat-raised-button class="w-100 bg-primary text-light p-2 " type="button">
+                                <button mat-raised-button class="w-100 bg-primary text-light p-1 " type="button">
                                     <i class="fa fa-facebook fa-lg text-light"></i>
                                     <span class="d-none d-md-inline">&nbsp;Sign up</span>
                                 </button>
                             </div>
                             <br>
                             <div>
-                                <button mat-raised-button class="w-100 bg-danger text-light p-2 " type="button">
+                                <button mat-raised-button class="w-100 bg-danger text-light p-1 " type="button">
                                     <i class="fa fa-google fa-lg text-light"></i> 
                                     <span class="d-none d-md-inline"> Sign up</span>
                                 </button>

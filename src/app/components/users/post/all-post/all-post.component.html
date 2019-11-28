@@ -1,63 +1,167 @@
-<div class="   " >
+<br>
+<div class="   " id="table">
 
     <p><span class=" ml-3 font-1 font-weight-bold" style="font-size: 9px">POST</span></p>
 
-    <div class="d-flex justify-content-between">
+    <div class="d-flex justify-content-between" id="table">
         
         <div>          
-            <button mat-raised-button class="br-30"><mat-icon>add</mat-icon> &nbsp; add New</button>
+            <div >
+                    <button mat-raised-button class="br-30 d-md-inline" routerLink="/dash/post/create" >
+                        <mat-icon>add</mat-icon> 
+                        <span class="d-none d-md-inline">add New</span>
+                    </button>
+                    &nbsp;
+                    <button mat-mini-fab color class="" (click)="fetchPost('current')">
+                        <i class="fa fa-refresh " [hidden]="isLoading "></i>
+                        <i class="	fa fa-circle-o-notch fa-spin" [hidden]="!isLoading "></i>
+                    </button>
+                    &nbsp;
+                    <span>  
+                            <span class="small badge">Page</span>
+                            <span class="numbers" style="width: 30px; height: 30px; line-height: 30px">{{currentPage}}</span>
+                    </span>
+            </div>
         </div>
 
-        <div>
-            <input type="text" class=" p-1"  (keyup)="filterTable($event)" placeholder="search post">
-            <button mat-raised-button class="br-30" (click)="advanceSearch()">Search</button>
+        <div class="">
+            <div style="position: relative;">
+                    <div class="form-search  d-flex br-30 mat-elevation-z7"  >
+                            <!-- <i class="fa fa-search  d-none d-md-inline m-auto"></i> -->
+                            <button mat-icon-button (click)="isSearch=!isSearch" >
+                                    <i [hidden]="isSearch" class="fa fa-search icon m-auto"></i>
+                                    <i [hidden]="!isSearch" class="fa fa-close icon m-auto"></i>
+                            </button>
+                            <input *ngIf="isSearch"  class="" type="text"  [(ngModel)]="q"  (keyup)="filterTable(q, 0)" placeholder="search post">
+                            <button *ngIf="isSearch" class=" br-30" mat-button  (click)="advanceSearch()">Search</button>
+                    </div>
+            </div>
         </div>
+        <!-- <div class=" d-md-none">
+            <button   mat-mini-fab color><mat-icon>search</mat-icon></button>
+        </div> -->
     </div>
     <br>
   
 
     <div class="table-responsive bg-white" > <!--music player single start-->
 
-        <table class="table   table-hover table-lg">
-            <thead class="bg-dark ">
+        <table class="table   table-hover table-md " >
+            <thead class="m-blue">
                 <tr >
                     <!-- <th></th> -->
-                      <th class="small text-light">Title</th>
-                    <th class="small text-light">Category</th>
-                    <th class="small text-light"> Date</th>
-                    <th class="small text-light">Analysis</th>
+                    <th class="small text-light">Title</th>
+                    <th class="small text-light">
+                        <a style="cursor: pointer;" [matMenuTriggerFor]="postMenu">
+                                {{sel_category}}
+                                &nbsp;
+                                <i class="fa fa-angle-down fg-lg"></i>
+                        </a>
+                       
+                    </th>
+                    <th class="small text-light" >
+                        <span class="d-none d-md-inline">Date created</span>
+                    </th>
+                    <th class="small text-light">
+                       
+                         <i class="	fa fa-bar-chart fa-lg"></i>
+                    </th>
                 </tr>
             </thead>
-
-            <tbody>
-              <tr class=" bg-white" *ngFor="let post of usersList">
+            
+            
+            
+            <tbody >
+              
+              <tr class=" bg-white" *ngFor="let post of postList; let i = index">
                   <td class="m-auto">
                       <div class="media my-auto white-1">
+                            <!-- <span class="numbers" style="width: 30px; height: 30px; line-height: 30px">{{i +1}}</span> -->
                             <div class="media-body ml-2" >
-                                <a  [routerLink]="'/users/post/edit/'+post.userId">{{post.stageName}}</a>
+                                
+                                <a class="text-dark" [routerLink]="'/dash/post/edit/'+post.post_id">{{post.post_title}}</a>
                                 <p style="font-size: 11px">by Admin</p>
                             </div>
                        </div>
                   </td>
                   <td>
-                        <a href="#">
-                                <small class="">Education</small>
-                        </a>
+                       
+                                <small class="badge badge-white text-secondary br-30">{{post.category}}</small>
+
                   </td>
-                  <td>
-                      <div class="my-auto" >
-                            <span style="font-size: 10px">published</span><br>
-                          <small class="text-secondary">30th March, 2019</small>
+                  <td >
+                      <div  class=" my-auto d-none d-md-inline" >
+                            <small class="badge badge-white text-secondary">{{post.created_at | date}}</small>
+                            <br>
+                            <small class="badge text-secondary" >last update {{post.updated_at | date}}</small>
                       </div>
                   </td>
                   <td>
-                      <button mat-icon-button (click)="postAnalysis()">
-                         <i class="	fa fa-bar-chart fa-lg"></i>
+                      <button mat-icon-button   (click)="postAnalysis()">
+                         <i class="	fa fa-bar-chart fa-lg m-blue-f"></i>
                       </button>
                   </td>
               </tr>
             </tbody>
           </table>
+          
+
+           <!--------------------------------------
+            Pagination
+        ------------------------------------------->
+
+            <div  style="position: relative; " >
+                    <div class="p-2 d-flex justify-content-end bg-white z-depth-4" style="position: fixed; bottom: 0; right: 1%; left: 0;">
+                            <div class="my-auto">
+                                    <span>
+                                            <span class="small badge">Total: </span>
+                                            <span class="numbers badge" style="width: 25px; height: 25px; line-height: 20px">{{totalPost}}</span>
+                                    </span>
+            
+                                    
+            
+                                    <span>  
+                                            <span class="small badge">Page</span>
+                                            <span class="numbers badge" style="width: 25px; height: 25px; line-height: 20px">{{currentPage}}</span>
+                                    </span>
+                           
+                            </div>
+                            &nbsp;
+                            <div >
+                                    <!-- <a mat-icon-button href="dash/post/all#table">top</a> -->
+                                    <button mat-mini-fab  class="bg-dark text-light mx-1" (click)="fetchPost('first')">{{firstPage}}</button>
+                                    <button mat-mini-fab class="bg-dark text-light" (click)="fetchPost('prev')"><i class="fa fa-chevron-left fa-lg"></i></button>
+                                    <button mat-mini-fab  class="bg-dark text-light mx-1" (click)="fetchPost('next')"><i class="fa fa-chevron-right fa-lg"></i></button>
+                                    <button mat-mini-fab class="bg-dark text-light" (click)="fetchPost('last')">{{lastPage}}</button>
+                            </div>
+                        </div>
+            </div>
+
+
+          <!--------------------------------------
+            Loader
+        ------------------------------------------->
+
+          <div class="container" *ngIf="!postList">
+                <app-table-loader></app-table-loader>
+                <app-table-loader></app-table-loader>
+                <app-table-loader></app-table-loader>
+                <app-table-loader></app-table-loader>
+                <app-table-loader></app-table-loader>
+                <app-table-loader></app-table-loader>
+                <app-table-loader></app-table-loader>
+                <app-table-loader></app-table-loader>
+                <app-table-loader></app-table-loader>
+                <app-table-loader></app-table-loader>
+                <app-table-loader></app-table-loader>
+                <app-table-loader></app-table-loader>
+                <app-table-loader></app-table-loader>
+                <app-table-loader></app-table-loader>
+          </div>
+
+          <br><br><br><br><br>
+
+        
 
    </div>   <!--music play single end-->
 
@@ -66,7 +170,15 @@
 
 
    <!-- the menu that is triggered -->
-   <mat-menu #userMenu="matMenu">
-        <a mat-menu-item><mat-icon class="text-danger">cancel</mat-icon> De-activate Subscription</a>
-        <a mat-menu-item ><mat-icon class="text-danger">cancel</mat-icon> De-activate Account</a>
+   <mat-menu #postMenu="matMenu">
+        <button mat-menu-item (click)="filterTable('', 1)" > 
+            <span class="badge badge-dark p-1 px-2 small">A</span>
+            &nbsp;
+            <span class="small">All categories</span>
+        </button>
+        <button mat-menu-item *ngFor="let cat of postCat" (click)="filterTable(cat, 1)">
+            <span class="badge badge-dark p-1 px-2 small">{{cat[0].toUpperCase()}}</span>
+            &nbsp;
+            <span class="small">{{cat}}</span>
+        </button>
     </mat-menu>

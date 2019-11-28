@@ -1,56 +1,106 @@
-<!-- <p class=""><span class=" ml-3 font-1 font-weight-bold" style="font-size: 9px">POST</span></p> -->
+<form novalidate (submit)="createPost()" [formGroup]="createpostFG">
+        <!-- <p class=""><span class=" ml-3 font-1 font-weight-bold" style="font-size: 9px">POST</span></p> -->
 
 
 
 
-<br>
-<div class="row p">
+        <br>
+        <div class="row p">
                 <div class="col-md-2"></div>
-    <div class="col-md bg-white p-2">
+                <div class="col-md bg-white p-2">
 
-                <p class="bg-dark text-light text-center p-2">Create Blog Post</p>
-        <div>
 
-                        <div class="   h-100   p-2">
-                                        <input type="file" class="input-cos w-100 p-4 " #logo hidden>
-                                <div class=" bg-white border  d-flex mx-auto justify-content-center  "  style="cursor: pointer;" style="position: relative; height: 140px; overflow: hidden;">
-                                       
-                                        <div class="card align-self-center"  [hidden]="imglink == null" style="max-height: 150px; max-width: 150px;overflow: hidden;">
-                                                <img src="{{imglink}}" alt="" #img
-                                                class="card-img-top">
+                        <div class="p-2 m-blue d-flex">
+                                <button mat-icon-button routerLink="/dash/post/all">
+                                        <mat-icon class="text-light">arrow_back</mat-icon>
+                                </button>
+                                <p class="text-light m-auto">Create Blog Post</p>
+                        </div>
+                        <div>
+
+                                <div class="   h-100   p-2">
+                                        
+
+
+                                        <div class="form-group ">
+                                                <span class="small">Title</span>
+                                                <div class="form-search border">
+
+                                                        <input type="text" class=" p-2 w-100"
+                                                                placeholder="Title of the Post" formControlName="title">
+                                                </div>
                                         </div>
-                                        <button mat-button color class="btn-clic w-100" (click)="openMediaManager()"
-                                                type="button">
-                                                <mat-icon>{{logo.files[0] === undefined ? 'add': 'edit'}}</mat-icon>
-                                                Featured image
+                                        <br>
+
+                                        <div class="form-group form-search border">
+                                                <span class="small">Body</span>
+                                                <angular-editor [placeholder]="'Enter text here...'"
+                                                        [config]="editorConfig" formControlName="content">
+                                                </angular-editor>
+                                        </div>
+                                        <br>
+
+                                        <div>
+                                                        <input type="text" class="input-cos w-100 p-4 " formControlName="featured_image"
+                                                        #logo hidden>
+                                                <div class=" bg-white border  d-flex mx-auto justify-content-center  "
+                                                        style="cursor: pointer;"
+                                                        style="position: relative; height: 140px; overflow: hidden;">
+        
+                                                       
+                                                        <button mat-stroked-button color class=""
+                                                                (click)="openMediaManager()" type="button">
+                                                                <div class="card align-self-center" [hidden]="imglink == null"
+                                                                style="max-height: 150px; max-width: 150px;overflow: hidden;">
+                                                                <img src="{{imglink}}" alt="" #img class="card-img-top">
+                                                        </div>
+                                                                <!-- <mat-icon>{{logo.files[0] === undefined ? 'add': 'edit'}}</mat-icon> -->
+                                                                <span [hidden]="imglink != null">Featured image</span>
+                                                        </button>
+                                                </div>
+                                        </div>
+                                        
+
+                                        <br>
+                                        <div class="form-group">
+                                                <span class="small">Category</span>
+
+                                                <div class="form-search  d-flex border">
+                                                        <!-- <i class="fa fa-search  m-auto"></i> -->
+                                                        <input type="text" class=" p-2 w-100" placeholder="Category"
+                                                                formControlName="category" [matAutocomplete]="auto">
+                                                        <mat-autocomplete #auto="matAutocomplete">
+                                                                <mat-option *ngFor="let option of sug_categories"
+                                                                        [value]="option">
+                                                                        <span
+                                                                                class="badge badge-dark p-1 px-2 small">{{option[0].toUpperCase()}}</span>
+                                                                        &nbsp;
+                                                                        <span class="small">{{option}}</span>
+                                                                </mat-option>
+                                                        </mat-autocomplete>
+                                                </div>
+                                        </div>
+
+                                </div>
+
+                                <div class="form-group ">
+                                        <button [disabled]="submitted" type="submit" mat-stroked-button color='primary' class=""
+                                                [disabled]="!submitted">
+                                                <span [hidden]="submitted">Publish</span>
+                                                <span [hidden]="!submitted">Publishing...</span>
                                         </button>
                                 </div>
-                                <br>
+
+                        </div>
 
 
-            <div class="form-group">
-                <input type="text" class=" p-2 form-control" placeholder="Title of the Post">
-            </div>
-            <br>
+                </div>
 
-            <div class="form-group">
-                <!-- <textarea quill-editor cols="" rows="15" class=" p-2 form-control" placeholder="Title of the Post"></textarea> -->
-                <angular-editor  [placeholder]="'Enter text here...'"  [config]="editorConfig"></angular-editor>
-            </div>
+                <div class="col-md-2"></div>
+
 
         </div>
 
-        <div class="form-group d-flex justify-content-center">
-                        <button mat-raised-button color='primary' class="br-30"> &nbsp;Publish</button>
-                    </div>
- 
-    </div>
-   
-      
-    </div>
+</form>
 
-    <div class="col-md-2"></div>
-
-
-    </div>
-    
+<br><br><br>

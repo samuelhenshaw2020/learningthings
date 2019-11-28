@@ -1,8 +1,11 @@
 
 
-.selected{
-    transform: scale(0.90);
+
+
+.selected:hover{
+    transform: scale(1.05);
 }
+
 
 .theme1, .theme2, .theme3{
 
@@ -23,6 +26,9 @@
     -webkit-animation-delay: .45;
     animation-delay: .45;
 }
+.card-columns{
+    column-count: 2 !important;
+}
 
 @-webkit-keyframes preload{
     0%, 100%{background: rgba(0,0,0,0.05)}
@@ -32,4 +38,12 @@
 @keyframes preload{
     0%, 100%{background: rgba(0,0,0,0.05)}
     45%, 75%{background: white}
+}
+
+
+@media (max-width: 900px){
+    .card-columns{
+        column-count: 1 !important;
+    }
+    
 }

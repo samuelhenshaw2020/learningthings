@@ -36,6 +36,9 @@ export class PortfolioComponent implements OnInit {
   get prof_exp(){return this.portForm.get('prof_exp')}
 
   ngOnInit() {
+    this.service.siteData.subscribe(d => {
+      console.log(d.portfolio)
+    })
   }
 
   pushSkill(val, rg){

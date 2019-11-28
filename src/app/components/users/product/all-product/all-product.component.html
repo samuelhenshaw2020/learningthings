@@ -1,19 +1,61 @@
 <div class=" container-fluid p-2 bg-white" >
 
-        <p><span class=" ml-3 font-1 font-weight-bold" style="font-size: 9px">PRODUCT LIST</span></p>
 
-        <div class="d-flex justify-content-between">
+
+       <!-- ///////////////////////////////////////////////// -->
+
+       <p><span class=" ml-3 font-1 font-weight-bold" style="font-size: 9px">PRODUCT LIST</span></p>
+
+    
+      
+
+
+
+        <div class="d-flex justify-content-between" id="table">
         
                 <div>          
-                    <button mat-raised-button color="primary">add New</button>
+                    <div >
+                            <button mat-raised-button class="br-30 d-md-inline" routerLink="/dash/product/add" >
+                                <mat-icon>add</mat-icon> 
+                                <span class="d-none d-md-inline">add New</span>
+                            </button>
+                            &nbsp;
+                            <button mat-mini-fab color class="" (click)="fetchPost('current')">
+                                <i class="fa fa-refresh " [hidden]="isLoading "></i>
+                                <i class="	fa fa-circle-o-notch fa-spin" [hidden]="!isLoading "></i>
+                            </button>
+                            &nbsp;
+                            <span>  
+                                    <span class="small badge">Page</span>
+                                    <!-- <span class="numbers" style="width: 30px; height: 30px; line-height: 30px">{{currentPage}}</span> -->
+                            </span>
+                    </div>
                 </div>
         
-                <div>
-                    <input type="text" class=" p-1" style="border: 1px solid #3F51B5" (keyup)="filterTable($event)" placeholder="search product">
-                    <!-- <button mat-raised-button  (click)="advanceSearch()">Advance Search</button> -->
+                <div class="">
+                    <div style="position: relative;">
+                            <div class="form-search  d-flex br-30 mat-elevation-z7"  >
+                                    <!-- <i class="fa fa-search  d-none d-md-inline m-auto"></i> -->
+                                    <button mat-icon-button (click)="isSearch=!isSearch" >
+                                            <i [hidden]="isSearch" class="fa fa-search icon m-auto"></i>
+                                            <i [hidden]="!isSearch" class="fa fa-close icon m-auto"></i>
+                                    </button>
+                                    <input *ngIf="isSearch"  class="" type="text"  [(ngModel)]="q"  (keyup)="filterTable(q, 0)" placeholder="search post">
+                                    <button *ngIf="isSearch" class=" br-30" mat-button  (click)="advanceSearch()">Search</button>
+                            </div>
+                    </div>
                 </div>
+                <!-- <div class=" d-md-none">
+                    <button   mat-mini-fab color><mat-icon>search</mat-icon></button>
+                </div> -->
             </div>
             <br>
+
+
+
+
+
+      
 
        
         <div class="table-responsive container" > <!--music player single start-->
@@ -33,7 +75,7 @@
                       <td>
                           <div class="media my-auto white-1">
                                 <div class="media-body ml-2" >
-                                        <a  href="#">Signed Language od Nigeria Deaf Child in Nigeria</a>
+                                        <a  routerLink="/dash/product/edit/12">Signed Language od Nigeria Deaf Child in Nigeria</a>
                                     <!-- <p style="font-size: 11px">New York</p> -->
                                 </div>
                            </div>

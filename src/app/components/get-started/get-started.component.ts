@@ -3,7 +3,7 @@ import { fade } from 'src/app/animations/getstatedAnim';
 import { FormBuilder, Validators } from '@angular/forms';
 import { UserserviceService } from 'src/app/services/userservice.service';
 import { MatSnackBar } from '@angular/material';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
 import { DomSanitizer } from '@angular/platform-browser';
 
@@ -43,7 +43,8 @@ export class GetStartedComponent implements OnInit, AfterContentInit {
     private router: Router,
     private service: UserserviceService,
     private snackbar: MatSnackBar,
-    private sanitize: DomSanitizer
+    private sanitize: DomSanitizer,
+    private activeRoute: ActivatedRoute
   ) { }
 
   /**
@@ -90,17 +91,24 @@ export class GetStartedComponent implements OnInit, AfterContentInit {
 
 
   businessCat: object[] = [
-    { name: 'Education', icon: "		fa fa-graduation-cap fa-lg", type: 'blog' },
-    { name: 'Portfolio and CV', icon: "fa fa-address-card-o fa-lg", type: 'portfolio' },
-    { name: 'Business', icon: "fa fa-bar-chart fa-lg" },
-    { name: 'Photography and Media', icon: "	fa fa-camera fa-lg", type: 'blog' },
-    { name: 'Entertainment', icon: "fa fa-video-camera fa-lg", type:'blog' },
-    { name: 'E-commerce', icon: "fa fa-shopping-cart fa-lg", type: 'commerce' },
-    { name: 'Blog', icon: "fa fa-book fa-lg", type: 'blog' }
+    { name: 'Education', icon: "		fa fa-graduation-cap fa-lg", type: 'blog', short_name: 'blg'},
+    { name: 'Portfolio and CV', icon: "fa fa-address-card-o fa-lg", type: 'portfolio', short_name: 'ptf' },
+    { name: 'Business', icon: "fa fa-bar-chart fa-lg" , type: 'portfolio', short_name: 'bis'},
+    { name: 'Photography and Media', icon: "	fa fa-camera fa-lg", type: 'blog', short_name: 'blg' },
+    { name: 'Entertainment', icon: "fa fa-video-camera fa-lg", type:'blog', short_name: 'blg' },
+    { name: 'E-commerce', icon: "fa fa-shopping-cart fa-lg", type: 'ecommerce', short_name: 'cmc' },
+    { name: 'Blog', icon: "fa fa-book fa-lg", type: 'blog', short_name: 'blg' }
 
   ]
-
+ 
   ngOnInit() {
+
+    if(!localStorage.getItem('_token')){
+        console.log("there is no token")
+        this.router.navigate(['/login'])
+        this.snackbar.open("You have to login before creating a site!");
+    }
+
     this.hideComponents(1);
     window.onkeyup = () => {
       this.restrictNext();
@@ -108,10 +116,10 @@ export class GetStartedComponent implements OnInit, AfterContentInit {
   }
 
   ngAfterContentInit(){
-    this.service.getTemplate().subscribe(
+    this.activeRoute.data.subscribe(
       temp =>{
-      console.log(temp)
-      this.templates = temp;
+      console.log(temp.temp)
+      this.templates = temp.temp;
     }, 
     err =>{
       console.log(err)
@@ -162,7 +170,7 @@ export class GetStartedComponent implements OnInit, AfterContentInit {
         this.logoimg.onloadend = async () => {
           this.logospin = false;
           this.img.nativeElement.src = this.logoimg.result;
-          await this.data.append('logoname', img);
+          await this.data.set('logoname', img);
         }
         await this.logoimg.readAsDataURL($event.target.files[0]);
 
@@ -273,40 +281,43 @@ export class GetStartedComponent implements OnInit, AfterContentInit {
   }
 
 
-
+  shortName(val){
+    this.data.set('shortname', val);
+  }
 
 
   /**
    * For submiting data to a backend RESTFul API
    */
+  
   submitData(): void {
 
     this.submitted = true;
-
-    this.data.append('bizname', this.bizname.value);
-    this.data.append('bizdesc', this.bizdesc.value);
-    this.data.append('webtype', this.webtype.value);
-    this.data.append('bizmail', this.bizmail.value);
-    this.data.append('biztel', this.biztel.value);
-    this.data.append('bizaddr', this.bizaddress.value);
-    this.data.append('soclinkedin', this.smlinkedin.value);
-    this.data.append('socpinterest', this.smpint.value);
-    this.data.append('socyoutube', this.smyoutube.value);
-    this.data.append('socinstagram', this.sminstagram.value);
-    this.data.append('soctwitter', this.smtwitter.value);
-    this.data.append('socfacebook', this.smfacebook.value);
+    
+    this.data.set('bizname', this.bizname.value);
+    this.data.set('bizdesc', this.bizdesc.value);
+    this.data.set('webtype', this.webtype.value);
+    this.data.set('bizmail', this.bizmail.value);
+    this.data.set('biztel', this.biztel.value);
+    this.data.set('bizaddr', this.bizaddress.value);
+    this.data.set('soclinkedin', this.smlinkedin.value);
+    this.data.set('socpinterest', this.smpint.value);
+    this.data.set('socyoutube', this.smyoutube.value);
+    this.data.set('socinstagram', this.sminstagram.value);
+    this.data.set('soctwitter', this.smtwitter.value);
+    this.data.set('socfacebook', this.smfacebook.value);
     if(this.theme.value == ''){
       try {
-        this.data.append('theme', this.filterTemplate[0].template_id);
+        this.data.set('theme', this.filterTemplate[0].template_id);
       } catch (error) {
         this.snackbar.open('an Error occured', '', {duration: 4000, panelClass: ['bg-danger', 'text-light', 'font-weight-bold']})
       }
     }else{
-      this.data.append('theme', this.theme.value);
+      this.data.set('theme', this.theme.value);
     }
 
     if(this.logoname.value === "" || this.logoname.value === undefined){
-      this.data.append('logoname', '');
+      this.data.set('logoname', '');
     }
 
    
@@ -314,7 +325,7 @@ export class GetStartedComponent implements OnInit, AfterContentInit {
         async (res: any) => {
           await console.log(res);
           this.submitted = false;
-          if(res.sucess === true){
+          if(res.success === true){
             this.router.navigate(['/dash']);
             await this.snackbar.open(res.message, 'close', {panelClass: ['bg-primary', 'text-light', 'font-weight-bold']});
           }else{

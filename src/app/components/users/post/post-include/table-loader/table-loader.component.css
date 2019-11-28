@@ -1,0 +1,30 @@
+.theme1, .theme2, .theme3{
+
+    -webkit-animation-name: preload ;
+    -webkit-animation-duration: 1.5s;
+    -webkit-animation-iteration-count: infinite;
+    animation-name: preload ;
+    animation-duration: 1.5s;
+    animation-iteration-count: infinite;
+
+    
+}
+
+ .theme2{
+    -webkit-animation-delay: .25;
+    animation-delay: .25;
+}
+ .theme3{
+    -webkit-animation-delay: .45;
+    animation-delay: .45;
+}
+
+@-webkit-keyframes preload{
+    0%, 100%{background: rgba(0,0,0,0.05)}
+    45%, 75%{background: rgb(73, 72, 72, .04)}
+}
+
+@keyframes preload{
+    0%, 100%{background: rgba(0,0,0,0.05)}
+    45%, 75%{background: rgb(73, 72, 72, .04)}
+}

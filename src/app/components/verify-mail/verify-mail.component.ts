@@ -18,7 +18,7 @@ export class VerifyMailComponent implements OnInit, AfterContentInit {
   resent: boolean = false;
   submitted: boolean = false;
   name = '';
-  TOKEN_TIME = 2;
+  TOKEN_TIME = 30;
   message = ''
  
   constructor(
@@ -86,7 +86,9 @@ export class VerifyMailComponent implements OnInit, AfterContentInit {
       this.submitted = false;
       console.log(res);
       if(res.success === true){
-        this.route.navigate(['/dash']);
+         interval(2000).subscribe(()=>{
+          this.route.navigate(['/dash']);
+         })
       }
 
       this.snackbar.open(res.message, 'close', this.snackbarConfig);

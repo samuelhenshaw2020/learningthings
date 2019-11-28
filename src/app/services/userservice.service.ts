@@ -18,9 +18,11 @@ interface reqOTP{
 })
 export class UserserviceService {
 
+  // private 
   private baseUrl = "/user/";
+  public baseImgUrl = 'http://192.168.1.100:8000/';
   public usersiteinfo: identity_model = {
-    site_data: {
+    // site_data: {
       about: {
         enabled: null,
         about: ''
@@ -40,6 +42,7 @@ export class UserserviceService {
     },
     header_image: '',
     header_title: '',
+    link: '',
     logo: '',
     mission: {
       enabled: null,
@@ -57,6 +60,7 @@ export class UserserviceService {
         enabled: null,
         services: []
     },
+    short: '',
     site_id: null,
     social_media: {
         enabled: null,
@@ -68,13 +72,18 @@ export class UserserviceService {
         enabled: null,
         vission: ''
   
-    },
+    // },
   
     }
   };
   // public web_site_data: any;
 
-  public web_dommy = new BehaviorSubject<identity_model>(this.usersiteinfo);
+  private web_dommy = new BehaviorSubject<identity_model>(this.usersiteinfo);
+  // private posts: BehaviorSubject<any> = new BehaviorSubject<any>({}); 
+
+  public site_status = false;
+
+
   
    
   
@@ -95,6 +104,13 @@ export class UserserviceService {
   get siteData(){
     return this.web_dommy;
   }
+
+  get no_site(){
+    return this.site_status;
+  }
+
+  
+
 
  
 
@@ -168,38 +184,83 @@ export class UserserviceService {
 
 
 
-  //  getAllSiteInfo(){
-  //   return this.http.get<any>(this.baseUrl+'naipod.json');
-  //  }
+  /////////user dash
 
-  //  getUserInfo(): Observable<Object>{
-  //    return this.http.get(this.baseUrl+ 'naipod.json');
-  //  }
+  postGetSiteList(){
+    return this.http.get<any>(this.baseUrl+"site_list");
+  }
 
-  //  getIsEmailActive(){
-  //   return this.http.get<any>(this.baseUrl+"data.php");
-  // }
-
-
+  postSwitchSite(val){
+    return this.http.post<any>(this.baseUrl+"switch_site", val)
+  }
 
 
   /***************************************
-   * Dashboard services
+   * overview page
    **************************************/
-
-   //overview page
 
    getWebData(){
      return this.http.get<any>(this.baseUrl + 'get_site');
    }
 
 
-   //////Site identity////////
+    /***************************************
+   * Site identity
+   **************************************/
    postWebIdentityData(val){
      return this.http.post<any>(this.baseUrl + 'update_site', val);
    }
 
 
+    /****************************************
+   * Post component
+   **************************************/
+   getAllPost(header?){
+     return this.http.post<any>(this.baseUrl + 'get_posts', {id: this.siteData.value.site_id}, header);
+   }
+
+   postCreatePost(val){
+    return this.http.post<any>(this.baseUrl +"create_post", val);
+   }
+
+   postUpdatePost(val){
+     return (
+      val.site_id =  this.siteData.value.site_id,
+      this.http.post<any>(this.baseUrl+"update_post", val)
+     )
+   }
+
+   postDeletePost(val){ 
+    return this.http.post<any>(this.baseUrl+"delete_post", {post_id: val, site_id: this.siteData.value.site_id});
+  }
+
+  postPostCategory(){
+    return this.http.post<any>(this.baseUrl+ "get_categories", {site_id: this.siteData.value.site_id});
+  }
+
+   /////////////////////Manage media
+   postUploadedImg(){
+    return this.http.post<any>(this.baseUrl+"get_media", {id: this.siteData.value.site_id});
+  }
+
+  postuploadImg(val){
+    return this.http.post<any>(this.baseUrl+"save_media", val);
+  }
+
+
+
+  postAdvanceSearch(val){
+    return this.http.post<any>(this.baseUrl+"search_post", {site_id: this.siteData.value.site_id, text: val})
+  }
+
+
+  /**********************
+   * E-Store
+   */
+
+  //  postSaveCat(val){
+  //    return this.http.post<any>(this.baseUrl+ "savecat", val)
+  //  }
 
   
   /***************************
@@ -210,13 +271,9 @@ export class UserserviceService {
     return this.http.post<any>(this.baseUrl + "image.php", val);
   }
 
-   postAdvanceSearch(val){
-    return this.http.post<any>(this.baseUrl+"data.php", val);
-  }
+ 
    
-    postImageUpload(val){
-      return this.http.post(this.baseUrl+"image.php", val);
-    }
+   
 
 
  
@@ -231,15 +288,28 @@ export class UserserviceService {
   postRequestToken(val){
     return this.http.post<any>(this.baseUrl+"server.php", val);
   }
-
+ 
  
 
   /**
-   * For LocalStorage
+   * For LocalStorage and Authnetication guard
    */
 
    getUserToken(){
      return localStorage.getItem('_token');
+   }
+
+   getToken(){
+    return localStorage.getItem('_token') ? true : false;
+  }
+
+   getUserConf(){
+    return this.http.post<any>(this.baseUrl+"has_activated", {});
+  }
+
+
+   isAllowed(){
+     return this.http.post<any>(this.baseUrl + "is_allowed", {id: 1})
    }
 
   

@@ -1,1 +1,14 @@
-<router-outlet></router-outlet>
+<mat-divider></mat-divider>
+<div class=" p-2 px-3 sticky-top bg-light" style="top: 50px;">
+    <button routerLink="/dash/website/theme" routerLinkActive="m-blue-f font-weight-bold" mat-button color class=" "><mat-icon>web</mat-icon>&nbsp;<span class="d-none d-md-inline ">Themes</span></button>
+    &nbsp;
+    <button routerLink="/dash/website/identity" routerLinkActive="m-blue-f font-weight-bold" mat-button color class=""><mat-icon>info</mat-icon>&nbsp;<span class="d-none d-md-inline ">site Identity</span></button>
+    &nbsp;
+    <button routerLink="/dash/website/preference" routerLinkActive="m-blue-f font-weight-bold" mat-button color class=""><mat-icon>settings</mat-icon>&nbsp;<span class="d-none d-md-inline ">Preferences</span></button>
+    &nbsp;
+</div>
+
+<mat-divider></mat-divider>
+<div class="container-fluid p-2">
+    <router-outlet></router-outlet>
+</div>
