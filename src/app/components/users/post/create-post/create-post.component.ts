@@ -65,7 +65,7 @@ export class CreatePostComponent implements OnInit {
 
   submitted= false;
   createPost(){
-  
+    alert();
     let newPost = {
       featured_image:  this.featured_image.value.substr(this.featured_image.value.search('images'), this.featured_image.value.length),
       post_title: this.title.value,

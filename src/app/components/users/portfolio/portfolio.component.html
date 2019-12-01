@@ -1,7 +1,7 @@
 <main class="container-fluid">
 
     <br>
-    <form novalidate (submit)="submitPort()" [formGroup]="portForm">
+    <!-- <form novalidate (submit)="submitPort()" [formGroup]="portForm"> -->
 
         <div class="row">
             <div class="col-md-2"></div>
@@ -19,7 +19,7 @@
           ---------------------------------------->
                 <div class="bg-white  p-1" style="position: relative;">
                     <div style="cursor: pointer;" class="border-0 card" style="height: 350px; overflow: hidden;">
-                        <input type="text" [value]="imglink" formControlName="prof_img"hidden>
+                        <!-- <input type="text" [value]="imglink" formControlName="prof_img"hidden> -->
                         <img src="{{imglink}}" class="card-img-top">
                     </div>
 
@@ -38,13 +38,13 @@
                                     <div class="col-md">
                                         <mat-form-field class="w-100" appearance="outline">
                                             <mat-label>Personal name</mat-label>
-                                            <input type="text" matInput formControlName="prof_name">
+                                            <input type="text" matInput >
                                         </mat-form-field>
                                     </div>
                                     <div class="col-md">
                                         <mat-form-field class="w-100" appearance="outline">
                                             <mat-label>Years of Professional Experience</mat-label>
-                                            <input type="text" matInput formControlName="prof_exp">
+                                            <input type="text" matInput >
                                         </mat-form-field>
                                     </div>
                                 </div>
@@ -55,7 +55,7 @@
                                     <mat-label>Describe your self</mat-label>
                                     <!-- <textarea matInput cdkTextareaAutosize  cdkAutosizeMinRows="10"
                                         cdkAutosizeMaxRows="20"></textarea> -->
-                                        <angular-editor formControlName="prof_desc" [placeholder]="'Enter text here...'"  [config]="editorConfig"></angular-editor>
+                                        <angular-editor [(ngModel)]="portfolio.description" [placeholder]="'Enter text here...'"  [config]="editorConfig"></angular-editor>
 
                                 
                             </div>
@@ -88,9 +88,9 @@
                                 <br>
                                 <span class="small">Skills:</span>
                                 <mat-chip-list>
-                                    <mat-chip style="overflow: visible; " removable="true" *ngFor="let sk of skills; let i =index" 
+                                    <mat-chip style="overflow: visible; "  *ngFor="let sk of skills; let i =index" 
                                        >{{sk.value + ' ' + sk.range + '%'}}  
-                                        <mat-icon (removed)="remove(i)" >cancel</mat-icon>
+                                        <mat-icon (click)="remove(i)" >cancel</mat-icon>
                                     </mat-chip>
                                 </mat-chip-list>
                         </div>
@@ -117,6 +117,6 @@
             </div>
         </div>
  
-    </form>
+    <!-- </form> -->
     <br><br>
 </main>

@@ -84,8 +84,9 @@
                                 </div>
 
                                 <div class="form-group ">
-                                        <button [disabled]="submitted" type="submit" mat-stroked-button color='primary' class=""
-                                                [disabled]="!submitted">
+                                        <button [disabled]="submitted || createpostFG.invalid"  mat-raised-button color='primary' class=""
+                                                [disabled]="!submitted" (click)="createPost()">
+                                                <span class="spinner-grow spinner-grow-lg" [hidden]="!submitted"></span>
                                                 <span [hidden]="submitted">Publish</span>
                                                 <span [hidden]="!submitted">Publishing...</span>
                                         </button>

@@ -22,7 +22,7 @@ export class WebIdentityComponent implements OnInit, AfterContentInit{
   imglink;
   logolink = null;
   
-  
+  description  = null;
 
   isEditTitle = false;
 
@@ -90,6 +90,7 @@ export class WebIdentityComponent implements OnInit, AfterContentInit{
       this.socialMedia = info.social_media;
       this.about = info.about;
       this.business_name = info.business_name;
+      this.description = info.description;
     });
 
     

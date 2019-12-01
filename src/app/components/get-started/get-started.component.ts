@@ -57,7 +57,7 @@ export class GetStartedComponent implements OnInit, AfterContentInit {
     logoname: ['', []],
     contactinfo: this.fb.group({
       bizmail: ['', [Validators.required, Validators.email]],
-      biztel: ['', [Validators.required]],
+      biztel: ['', [Validators.required, Validators.minLength(11)]],
       bizaddress: ['', [Validators.required]]
     }),
     socialmedia: this.fb.group({
@@ -68,7 +68,8 @@ export class GetStartedComponent implements OnInit, AfterContentInit {
       smtwitter: ['', []],
       smfacebook: ['', []],
     }),
-    theme: ['', []]
+    theme: ['', []],
+    store_name: ['', [Validators.required, Validators.maxLength(20), Validators.pattern(/[a-zA-Z0-9]/)]]
   });
 
   /**
@@ -88,6 +89,7 @@ export class GetStartedComponent implements OnInit, AfterContentInit {
   get smtwitter() { return this.formData.get('socialmedia').get('smtwitter') }
   get smfacebook() { return this.formData.get('socialmedia').get('smfacebook') }
   get theme() { return this.formData.get('theme') }
+  get store_name() { return this.formData.get('store_name')}
 
 
   businessCat: object[] = [
@@ -319,6 +321,7 @@ export class GetStartedComponent implements OnInit, AfterContentInit {
     if(this.logoname.value === "" || this.logoname.value === undefined){
       this.data.set('logoname', '');
     }
+    this.data.set('store_name', this.store_name.value);
 
    
     this.service.postGetstated(this.data).subscribe(

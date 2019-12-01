@@ -20,6 +20,7 @@ export class OverviewComponent implements OnInit {
 
   no_site;
   temp;
+  blog_post = null;
   ngOnInit() {
     
     this.no_site = this.service.no_site;
@@ -28,6 +29,7 @@ export class OverviewComponent implements OnInit {
          return d.template_id === this.service.siteData.value.template_id;
        })
        console.log(this.service.siteData.value.template_id);
+       
     })
 
     

@@ -30,7 +30,7 @@ export class AllPostComponent implements OnInit {
   currentPage;
   totalPost =null;
 
-
+ 
   
 
   constructor(
@@ -42,12 +42,15 @@ export class AllPostComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+
+    // this.fetch('current');
     
-      this.postServ.blogall.subscribe( async data => {
+      this.postServ.blogall.subscribe( data => {
         this.postList = data.data;
         this.lastPage = this.postServ.blogall.value.last_page;
         this.totalPost = this.postServ.blogall.value.total;
         this.currentPage = this.postServ.blogall.value.current_page;
+        console.log(data)
       })
 
       this.postServ.category.subscribe(d => {

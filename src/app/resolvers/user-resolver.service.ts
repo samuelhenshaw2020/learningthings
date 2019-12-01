@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
 import { UserserviceService } from '../services/userservice.service';
 import { Observable } from 'rxjs';
+import { HttpHeaders } from '@angular/common/http';
+import { retry } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -25,6 +27,7 @@ export class UserResolverService implements Resolve<any>{
 
       //for path: /post
       if(path === 'post'){
+        
         return this.service.getAllPost();
       }
 

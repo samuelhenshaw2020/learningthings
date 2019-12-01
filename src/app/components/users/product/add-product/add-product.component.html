@@ -1,7 +1,7 @@
 <main class="container-fluid">
         <br>
 
-        <div class="p-2 bg-dark d-flex">
+        <div class="p-2 m-blue d-flex">
                         <button mat-icon-button routerLink="/dash/product/all">
                                 <mat-icon class="text-light">arrow_back</mat-icon>
                         </button>
@@ -47,7 +47,7 @@
                                                         </div>
                                                 </div>
                                         </div>
-                                        <br><br>
+                                        <br>
 
 
                                         <div class=" row container">
@@ -101,9 +101,10 @@
                                                                 </div>
                                                         </div>
                                         </div>
+                                        <br>
 
 
-                                        <br><br>
+                                        
 
                                         <!-----------------------------------------
                                 Category and sub-category
@@ -141,8 +142,8 @@
                                         Desc and variant
                                 ---------------------------------------->
                                         <br>
-                                        <div class="row">
-                                                <div class="col-md">
+                                        <div class="">
+                                                <div class="">
                                                         <div class="form-group p-2 form-search">
                                                                 <label for="">Product Description</label>
                                                                 <angular-editor formControlName="product_description"
@@ -150,7 +151,8 @@
                                                                         [config]="editorConfig"></angular-editor>
                                                         </div>
                                                 </div>
-                                                <div class="col-md-4">
+                                                <br>
+                                                <div class="">
                                                         <div class="form-group container bg-white p-3 ">
 
 
@@ -161,55 +163,57 @@
                                                                                 width, weight and so on.</small>
                                                                 </div>
 
-                                                                <div class="form-group">
-                                                                        <input type="text" class="   "
-                                                                                placeholder="Property key" #key>
-
-                                                                </div>
-                                                                <div class="form-group  ">
-
-                                                                        <input type="text" class="   "
-                                                                                placeholder="value1, value2..." #value>
-                                                                </div>
-                                                                <div class="form-group">
-                                                                        <button mat-raised-button type="button" class=""
-                                                                                (click)="addVariant(key.value, value.value)">
-                                                                                <mat-icon>add</mat-icon>
-                                                                                Add
-                                                                        </button>
+                                                                <div class="row">
+                                                                                <div class="form-group col-md">
+                                                                                                <div class="form-search p-1 border">
+                                                                                                                <input type="text" class="w-100   "
+                                                                                                                placeholder="Property key" #key>
+                                                                                                </div>
+                        
+                                                                                        </div>
+                                                                                        <div class="form-group col-md ">
+                        
+                                                                                                        <div class="form-search p-1 border">
+                                                                                                                        <input type="text" class=" w-100  "
+                                                                                                                        placeholder="Property key" #value>
+                                                                                                        </div>
+                                                                                        </div>
+                                                                                        <div class="form-group col-md">
+                                                                                                <button mat-stroked-button type="button" color=primary class=""
+                                                                                                        (click)="addVariant(key.value, value.value)">
+                                                                                                        <mat-icon>add</mat-icon>
+                                                                                                        Add
+                                                                                                </button>
+                                                                                        </div>
                                                                 </div>
 
 
 
                                                                 <br>
                                                                 <div>
-                                                                        <table class="table table-sm  small">
-                                                                                <tr>
-                                                                                        <th>Key</th>
-                                                                                        <th>Value</th>
-                                                                                        <th></th>
-                                                                                </tr>
-                                                                                <tr
-                                                                                        *ngFor="let items of prodVariants; let i = index">
-                                                                                        <td>{{items.key}}</td>
-                                                                                        <td>{{items.value}}</td>
-                                                                                        <td><a (click)="remove(i)"
-                                                                                                        style="cursor: pointer;">
-                                                                                                        <i
-                                                                                                                class="fa fa-close fa-lg"></i>
-                                                                                                </a></td>
-                                                                                </tr>
-                                                                        </table>
+                                                                        <!-- <table class="table table-sm  small"> -->
+                                                                               
+                                                                                
+                                                                                <div *ngFor="let items of prodVariants; let i = index" class="d-flex my-1">
+                                                                                        <strong>{{items.key}}: </strong>&nbsp;
+                                                                                        <mat-chip-list>
+                                                                                                <mat-chip   *ngFor="let f of items.value" >
+                                                                                                        {{f}}
+                                                                                                </mat-chip>
+                                                                                                <mat-chip (click)="remove(i, 1)" >
+                                                                                                                
+                                                                                                        <i class="fa fa-close fa-lg"></i>
+                                                                                                </mat-chip>
+                                                                                        </mat-chip-list>
+                                                                                </div>
+                                                                        <!-- </table> -->
                                                                 </div>
                                                         </div>
                                                 </div>
                                         </div>
 
 
-                                        <br>
-
-
-                                        <br>
+                                        
 
                                         <div>
                                                 <!--------------------------------------------
@@ -263,7 +267,7 @@
                                                                                         class=" d-flex justify-content-center">
                                                                                         <a mat-icon-button color
                                                                                                 class="clickable mat-elevation-z7  "
-                                                                                                (click)="remove(i)">
+                                                                                                (click)="remove(i, 0)">
                                                                                                 <mat-icon>close
                                                                                                 </mat-icon>
                                                                                         </a>
@@ -276,7 +280,7 @@
                                                                                         (click)="addImage(1)"
                                                                                         class="clickable bg-light  border d-flex justify-content-center"
                                                                                         style="width: 100px; height: 100px;">
-                                                                                        <mat-icon
+                                                                                        <mat-icon color=primary
                                                                                                 class="align-self-center">
                                                                                                 add</mat-icon>
                                                                                 </div>
@@ -297,7 +301,7 @@
                                                 save button
                                         -------------------------------------------->
                                 <div class="form-group bg-white p-2">
-                                        <button class="btn btn-dark " type="submit">Save</button>
+                                        <button mat-stroked-button color=primary type="submit">Save</button>
                                 </div>
 
 

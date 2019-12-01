@@ -1,61 +1,101 @@
-<main class="container">
+<div class="container-fluid">
+       <div class="row">
+                <div class="col-md">
+                        <main class="container">
 
 
-        <br>
-        <div class=" p-2 row">
-
-               
-                       
-                <div class="  col"> 
-                                <div *ngIf="!temp" class="w-100 h-100 bg-secondary theme1">
-                       
-                                 </div>
-
-                        <div class="card  div-shadow h-100 w-100"  *ngFor="let tm of temp">
-                                <img src="{{tm.image}}" alt="" class="card-img-top"  >
-                                <div class="card-body">
-                                        <p class="card-text small text-center font-1 font-weight-bold">{{tm.template_name}}</p>
-                                </div>
-                        </div>
-                        &nbsp;
-                        &nbsp;
+                                <br>
+                                <div class=" p-2 row">
                         
-                </div>
-                <div class="col">
-                                <div class="card div-shadow h-100" >
-                                                <button mat-raised-button color=primary class="my-auto w-100 h-100  " routerLink="/start">
-                                                                <mat-icon>add</mat-icon>
-                                                                <p>Create Website</p>
-                                                </button>
-                                       </div>
-                </div>
-        </div>
-
-        <br>
-
-       <div *ngIf="no_site" >
-                <div class=" bg-white">
-                                <p class="m-blue p-2 text-light">Customers</p>
-                                <div class="p-5">
-                
-                                </div>
-                        </div>
-                         <br>
-                
-                         <div class=" bg-white">
-                                        <p class="m-blue p-2 text-light">Products</p>
-                                        <div class="p-5">
+                                       
+                                               
+                                        <div class="  col" *ngIf="no_site" > 
+                                                        <div *ngIf="!temp" class="w-100 h-100 bg-secondary theme1">
+                                               
+                                                         </div>
                         
-                                        </div>
-                                </div>
-                <br>
-                                <div class=" bg-white">
-                                                <p class="m-blue p-2 text-light">Blog Review</p>
-                                                <div class="p-5">
-                                
+                                                <div class="card  div-shadow h-100 w-100"  *ngFor="let tm of temp">
+                                                        <img src="{{tm.image}}" alt="" class="card-img-top"  >
+                                                        <div class="card-body">
+                                                                <p class="card-text small text-center font-1 font-weight-bold">{{tm.template_name}}</p>
+                                                        </div>
                                                 </div>
+                                                &nbsp;
+                                                &nbsp;
+                                                
                                         </div>
-                
-       </div>
+                                        <div class="col">
+                                                        <div class="card div-shadow h-100" >
+                                                                        <button mat-stroked-button color=primary class="my-auto w-100 h-100  " routerLink="/start">
+                                                                                        <mat-icon>add</mat-icon>
+                                                                                        <p>Create Website</p>
+                                                                        </button>
+                                                               </div>
+                                        </div>
+                                </div>
+                        
+                                <br>
+                        
+                               <div *ngIf="no_site" >
+                                        <div class=" bg-white">
+                                                        <p class="m-blue p-2 text-light">Customers</p>
+                                                        <div class="p-5">
+                                        
+                                                        </div>
+                                                </div>
+                                                 <br>
+                                        
+                                                 <div class=" bg-white">
+                                                                <p class="m-blue p-2 text-light">Products</p>
+                                                                <div class="p-5">
+                                                
+                                                                </div>
+                                                        </div>
+                                        <br>
+                                                        <div class=" bg-white">
+                                                                        <p class="m-blue p-2 text-light">Blog Review</p>
+                                                                        <div class="p-5">
+                                                        
+                                                                        </div>
+                                                                </div>
+                                        
+                               </div>
+                        
+                        </main>
+                </div>
 
-</main>
+
+                <!--------------------------
+                        site information
+                ------------------------------>
+                <div class="col-md-3">
+                                <br><br>        
+                        <div class="bg-white">
+                                       
+                                        <p class="m-blue p-2 text-light">site information</p>
+                                       <div class="p-2 small">
+                                                <p>
+                                                                <strong>Site Name:</strong>&nbsp;
+                                                                <span>Henshaw</span>
+                                                        </p>
+                                                        <p>
+                                                                <strong>IP Address</strong>&nbsp;
+                                                                <span>192.168.43.101</span>
+                                                        </p>
+                                                        <p>
+                                                                        <strong>Customers</strong>&nbsp;
+                                                                        <span>101</span>
+                                                                </p>
+                                                                <p>
+                                                                                <strong>Blog post</strong>&nbsp;
+                                                                                <span>10</span>
+                                                                        </p>
+                                                                        <p>
+                                                                                        <strong>Notifications</strong><br>
+                                                                                        <span>Who is you mother?</span>
+                                                                                </p>
+                                       </div>
+                        </div>
+                </div>
+       </div>
+</div>

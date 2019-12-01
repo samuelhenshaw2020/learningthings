@@ -1,0 +1,25 @@
+.notificate{
+    position: relative;
+  }
+    .notificate::before{
+      position: absolute;
+      content: "";
+      top: -30px;
+      left: 50%;
+      height: 20px;
+      border-left: 18px solid transparent;
+      border-bottom: 30px solid rgb(245, 243, 243);
+      border-right: 18px solid transparent;
+      box-shadow: 0px 0px 5px rgba(0,0,0,0.3) inset;
+    
+    }
+  
+    .not_cont{
+      right: 80px;
+    }
+
+    @media (max-width: 768px){
+        .not_cont{
+          right: 15px;
+        }
+      }

@@ -44,27 +44,36 @@
     <br>
   
 
-    <div class="table-responsive bg-white" > <!--music player single start-->
+    <div class="table-responsive " > <!--music player single start-->
 
         <table class="table   table-hover table-md " >
             <thead class="m-blue">
                 <tr >
-                    <!-- <th></th> -->
-                    <th class="small text-light">Title</th>
+                  
                     <th class="small text-light">
-                        <a style="cursor: pointer;" [matMenuTriggerFor]="postMenu">
+                        <span>Title</span>&nbsp;
+                        <a style="cursor: pointer;" mat-icon-button [matMenuTriggerFor]="postMenu" class="d-md-none">
+                                <!-- {{sel_category[0]}} -->
+                                <span class="numbers m-blue" style="width: 30px; height: 30px; line-height: 30px;"><mat-icon >	filter_list</mat-icon></span>
+
+                               
+                        </a>
+                    </th>
+                    <th class="small text-light p-0 p-md-2">
+                        <a style="cursor: pointer;" [matMenuTriggerFor]="postMenu" class="d-none d-md-inline">
                                 {{sel_category}}
                                 &nbsp;
                                 <i class="fa fa-angle-down fg-lg"></i>
                         </a>
-                       
+
                     </th>
-                    <th class="small text-light" >
+                    <th class="small text-light p-0 p-md-2" >
                         <span class="d-none d-md-inline">Date created</span>
                     </th>
-                    <th class="small text-light">
+                    <th class="small text-light text-center" style="width: 50px;">
                        
                          <i class="	fa fa-bar-chart fa-lg"></i>
+                         
                     </th>
                 </tr>
             </thead>
@@ -73,23 +82,24 @@
             
             <tbody >
               
-              <tr class=" bg-white" *ngFor="let post of postList; let i = index">
+              <tr class=" bg-white shadow" *ngFor="let post of postList; let i = index">
                   <td class="m-auto">
-                      <div class="media my-auto white-1">
-                            <!-- <span class="numbers" style="width: 30px; height: 30px; line-height: 30px">{{i +1}}</span> -->
-                            <div class="media-body ml-2" >
-                                
-                                <a class="text-dark" [routerLink]="'/dash/post/edit/'+post.post_id">{{post.post_title}}</a>
-                                <p style="font-size: 11px">by Admin</p>
-                            </div>
-                       </div>
+                       <div class="media my-auto white-1">
+                                  <div class="media-body ml-2" >
+                                      
+                                      <a class="" [routerLink]="'/dash/post/edit/'+post.post_id">{{post.post_title}}</a><br>
+                                      <span style="font-size: 11px">by Admin</span>
+                                  </div>
+                                  
+                             </div>
+                             <small class="badge m-blue text-light d-md-none p-2 m-auto br-30 shadow">{{post.category}}</small>
                   </td>
-                  <td>
+                  <td class="p-0 p-md-2">
                        
-                                <small class="badge badge-white text-secondary br-30">{{post.category}}</small>
+                                <small class="badge d-none d-md-inline m-blue text-light p-2 m-auto br-30 shadow">{{post.category}}</small>
 
                   </td>
-                  <td >
+                  <td class="p-0 p-md-2">
                       <div  class=" my-auto d-none d-md-inline" >
                             <small class="badge badge-white text-secondary">{{post.created_at | date}}</small>
                             <br>
@@ -97,14 +107,67 @@
                       </div>
                   </td>
                   <td>
-                      <button mat-icon-button   (click)="postAnalysis()">
-                         <i class="	fa fa-bar-chart fa-lg m-blue-f"></i>
-                      </button>
+                      <!-- <p class="text-right text-md-center my-0 "> -->
+                                    <button mat-icon-button color=primary   (click)="postAnalysis()">
+                                            <span class="numbers " style="width: 30px; height: 30px; line-height: 25px;"><i class="	fa fa-bar-chart fa-lg"></i></span>
+                                         </button>
+                            <!-- </p> -->
                   </td>
               </tr>
             </tbody>
           </table>
-          
+
+          <!-- <div class="container">
+                <div class="row m-blue text-light p-2 small">
+                    <div class="col">
+                        <span class="d-none d-md-inline">TITLE</span>
+                        <p class="d-md-none text-center my-0">POST</p>
+                    </div>
+                    <div class="col d-none d-md-inline">
+                            <a style="cursor: pointer;" [matMenuTriggerFor]="postMenu">
+                                    {{sel_category.toUpperCase()}}
+                                    &nbsp;
+                                    <i class="fa fa-angle-down fg-lg"></i>
+                            </a>
+                    </div>
+                    <div class="col d-none d-md-inline">
+                            <span class="d-none d-md-inline">DATE CREATED</span>
+                    </div>
+                    <div class="col d-none d-md-inline text-md-center text-light">  <i class="	fa fa-bar-chart fa-lg"></i></div>
+                </div>
+
+                <div  class=" row bg-white shadow my-3 p-2" *ngFor="let post of postList; let i = index">
+                        <div class="m-auto col">
+                            <div class="media my-auto white-1">
+                                  <div class="media-body ml-2" >
+                                      
+                                      <a class="" [routerLink]="'/dash/post/edit/'+post.post_id">{{post.post_title}}</a><br>
+                                      <span style="font-size: 11px">by Admin</span>
+                                  </div>
+                             </div>
+                        </div>
+                        <div class="col-md my-auto">
+                             
+                                      <small class="badge m-blue text-light p-2 m-auto br-30 shadow">{{post.category}}</small>
+      
+                        </div>
+                        <div  class="col">
+                            <div  class=" my-auto" >
+                                  <small class="badge badge-white text-secondary">{{post.created_at | date}}</small>
+                                  <br>
+                                  <small class="badge text-secondary  d-none d-md-inline" >last update {{post.updated_at | date}}</small>
+                            </div>
+                        </div>
+                        <div class="col-md">
+                            <p class="text-right text-md-center my-0 ">
+                                    <button mat-icon-button color=primary   (click)="postAnalysis()">
+                                            <span class="numbers " style="width: 40px; height: 40px; line-height: 35px;"><i class="	fa fa-bar-chart fa-lg"></i></span>
+                                         </button>
+                            </p>
+                        </div>
+                    </div>
+          </div>
+           -->
 
            <!--------------------------------------
             Pagination
@@ -174,7 +237,7 @@
         <button mat-menu-item (click)="filterTable('', 1)" > 
             <span class="badge badge-dark p-1 px-2 small">A</span>
             &nbsp;
-            <span class="small">All categories</span>
+            <span class="small">ALL CATEGORY</span>
         </button>
         <button mat-menu-item *ngFor="let cat of postCat" (click)="filterTable(cat, 1)">
             <span class="badge badge-dark p-1 px-2 small">{{cat[0].toUpperCase()}}</span>

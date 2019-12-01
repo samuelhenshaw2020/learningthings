@@ -33,6 +33,7 @@ import { SocialMediaComponent } from './includes/social-media/social-media.compo
 import { LoaderBlockOneComponent } from './includes/loader-block-one/loader-block-one.component';
 import { UsersGuard } from './guards/users.guard';
 import { LoginGuard } from './guards/login.guard';
+import { NotificationComponent } from './components/users/notification/notification.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +53,8 @@ import { LoginGuard } from './guards/login.guard';
     PwdForgetComponent,
     OtpComponent,
     VerifyMailComponent,
-    RightAsideComponent
+    RightAsideComponent,
+    NotificationComponent
   ],
   imports: [
     BrowserModule,

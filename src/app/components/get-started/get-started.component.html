@@ -270,14 +270,18 @@
 
                 <div class="con" id="comp8">
                         <div>
-                                <p class="text-center display-2 font-weight-bold">
+                                <p class="text-center display-4 font-weight-bold">
                                         <span [hidden]="submitted">Bravo!</span>
                                         <span [hidden]="!submitted">
                                                 <app-loaderdot></app-loaderdot>
                                         </span>
                                 </p>
-                                <p class="text-center lead">You are one step to an owesome experience. Begin!</p>
+                                <p class="text-center ">You are one step to an owesome experience. Begin!</p>
+                                <p>Please, chose a unique site unique word, </p>
 
+                                 <div class="form-search border p-2" [ngClass]="store_name.valid ? 'border-success': 'border-danger'" > 
+                                        <input type="text" class=" w-100 " formControlName="store_name" >
+                                 </div>
                         </div>
 
 
@@ -306,8 +310,9 @@
                                 </button>
 
                                 <button mat-stroked-button color="primary" [hidden]="count!=END_COUNT" type="submit"
-                                        [disabled]="submitted" matTooltip="Submit data">
-                                        <i [hidden]="submitted" class="fa fa-send fa-lg font-weight-bold "></i>
+                                        [disabled]="submitted || store_name.invalid" matTooltip="Submit data">
+                                        <span class="spinner-grow spinner-grow-lg" [hidden]="!submitted"></span>
+                                        <i  class="fa fa-send fa-lg font-weight-bold d-md-none"></i>
                                         <span class="d-none d-md-inline">Submit</span>
                                         &nbsp;
                                         <span [hidden]="!submitted">

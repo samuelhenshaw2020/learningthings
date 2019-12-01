@@ -4,6 +4,7 @@ import { PostService } from './post.service';
 import { post_model } from './post.model';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MatSnackBar } from '@angular/material';
+import { timer } from 'rxjs';
 
 @Component({
   selector: 'app-post',
@@ -24,16 +25,21 @@ export class PostComponent implements OnInit {
 
   
   ngOnInit() {
-    this.fetchPost();
+    
     this.fetchCategory()
+  
+        this.fetchPost();
+
+    
+
   }
 
-  async fetchPost(){
-   await  this.route.data
+  fetchPost(){
+   this.route.data
     .subscribe(
         async data => {
-      console.log(data.post)
-     await  this.postserv.blogall.next(data.post);
+      console.log(data)
+     this.postserv.blogall.next(data.post);
       // if(data){
         this.postserv.isPost = true;
   

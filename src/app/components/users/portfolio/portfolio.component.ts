@@ -4,6 +4,14 @@ import { MatDialog } from '@angular/material';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
 import { FormBuilder, Validators } from '@angular/forms';
 import { UserserviceService } from 'src/app/services/userservice.service';
+import { from } from 'rxjs';
+
+interface port_str{
+  description: string,
+  image: string,
+  profile: string,
+  skills: any[]
+}
 
 @Component({
   selector: 'app-portfolio',
@@ -15,6 +23,7 @@ export class PortfolioComponent implements OnInit {
   skills = [];
   hover = false;
   formdata: FormData = new FormData();
+  portfolio: port_str;
 
 
   constructor(
@@ -37,7 +46,9 @@ export class PortfolioComponent implements OnInit {
 
   ngOnInit() {
     this.service.siteData.subscribe(d => {
-      console.log(d.portfolio)
+      this.portfolio = d.portfolio;
+      this.imglink = this.portfolio.image;
+      console.log(d.portfolio.skills)
     })
   }
 
@@ -65,7 +76,11 @@ export class PortfolioComponent implements OnInit {
   }
 
   remove(val): void {
-    this.skills.splice(val, val+1)
+      
+
+      this.skills.splice(val, 1);
+    
+    console.log(  )
   }
 
   /**********************************

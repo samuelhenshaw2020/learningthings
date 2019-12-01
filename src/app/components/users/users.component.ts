@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { UserserviceService } from 'src/app/services/userservice.service';
 import { MatSnackBar, fadeInContent } from '@angular/material';
-import { Observable, interval } from 'rxjs';
+import { Observable, interval, timer } from 'rxjs';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { map } from 'rxjs/operators';
+import { map, filter } from 'rxjs/operators';
 import { ActivatedRoute, Router } from '@angular/router';
 import { identity_model } from './webeditor/web.model';
 import { inject } from '@angular/core/testing';
@@ -23,10 +23,23 @@ export class UsersComponent implements OnInit {
   minimize: boolean = false;
   public site_data: any;
   logo ;
-  sitename;
+  sitename = 'No site';
   selected_site  = '';
   imgBaseUrl ;
   isfetching = false;
+  template_type;
+  isCommerce = false;
+
+  not = [
+    {subject: "System upgrade", message: "i am a boy from the house we came from", date: new Date()},
+    {subject: "System upgrade", message: "i am a boy from the house we came from", date: new Date()},
+    {subject: "System upgrade", message: "i am a boy from the house we came from", date: new Date()}
+  ]
+
+  not_open = false;
+  
+
+  
 
   constructor(
     private breakpointObserver: BreakpointObserver,
@@ -37,21 +50,31 @@ export class UsersComponent implements OnInit {
   
   ) { 
     this.imgBaseUrl =this.service.baseImgUrl;
+    
   }
 
   no_site = false;
   othersites ;
+  web_type;
   ngOnInit() {
     this.fetchData();
     this.getSite();
-    
-    
+
+  
   }
+
+
+ 
+
+ 
 
 
   getSite(){
     this.service.postGetSiteList().subscribe(async d =>{
       this.othersites = d;
+      console.log(d)
+      
+      
    }, 
    err => {
       this.snackbar.open("an error occured please contact admin", 'close', {duration: 4000})
@@ -60,16 +83,17 @@ export class UsersComponent implements OnInit {
 
 
   fetchData(){
-    this.activatedRoute.data.subscribe(
+    let m =this.activatedRoute.data.subscribe(
       async (data) =>{
         console.log(data)
-        // if(data.site_data.success === true){
-        //   this.no_site = true;
-          
+        
+         if(data.site_data.success !== false){
+          this.web_type = data.site_data.type;
           let stripData: identity_model = data.site_data;
           
           this.service.siteData.next(stripData)
-        // }
+      
+         }
 
         if(data.site_data.success === false){
           this.no_site = false;
@@ -81,13 +105,16 @@ export class UsersComponent implements OnInit {
         
      },
      err => {
+      
       console.log(err);
      }
      
      );
 
     
-     this.service.siteData.subscribe(d => {this.logo = d.logo; this.sitename = d.business_name; this.selected_site = d.business_name});
+     if(this.no_site === true){
+      this.service.siteData.subscribe(d => {this.logo = d.logo; this.sitename = d.business_name; this.selected_site = d.business_name});
+     }
 
   }
 
@@ -118,6 +145,40 @@ export class UsersComponent implements OnInit {
     localStorage.removeItem("_token");
     this.router.navigate(["/home"]);
   }
+
+
+  isContext = true;
+  conf($event){
+   $event.preventDefault();
+   (document.getElementById('menu') as any).style.top =  $event.pageY +"px";
+   (document.getElementById('menu') as any).style.left =   ($event.pageX - 50) +"px";
+   this.isContext = false;
+  }
+
+  closeContext(val?){
+      timer(100).subscribe(d =>{
+        this.isContext = true
+    
+        if(val === 'site'){
+          this.router.navigate(["/dash/website/identity"])
+        }
+    
+        if(val === 'user'){
+          // this.router.navigate(["/dash/website/identity"])
+        }
+    
+        if(val === 'back'){
+          window.history.back();
+        }
+    
+        if(val === 'forward'){
+          window.history.forward();
+        }
+      })
+    
+    
+    }
+
 
   
 

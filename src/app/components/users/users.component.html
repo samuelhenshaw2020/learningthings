@@ -1,6 +1,7 @@
 
+<app-notification [not_open]="not_open" [not]="not"></app-notification>
 
-<mat-sidenav-container class="sidenav-container">
+<mat-sidenav-container class="sidenav-container" (contextmenu)="conf($event)" >
 
     <mat-sidenav #drawer class="sidenav m-blue " fixedInViewport="true" [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'" [mode]="(isHandset$ | async) ? 'hover' : 'side'" [opened]="!(isHandset$ | async)">
       <div class="sidenav-div ">
@@ -13,7 +14,7 @@
                       <span class="small numbers badge" style="width: 30px; height: 30px; line-height: 20px; font-size: medium;">{{count}}</span>
                   </span>
                 
-                <button [hidden]="isfetching" mat-button  [matMenuTriggerFor]="rootMenu"  class="w-100 border border-secondary " style="overflow: hidden;" >
+                <button [hidden]="isfetching || !no_site" mat-button  [matMenuTriggerFor]="rootMenu"  class="w-100 border border-secondary " style="overflow: hidden;" >
                    <span class="text-light small">{{selected_site}}</span>
                    &nbsp; &nbsp; 
                    <i class="fa fa-angle-down fg-lg text-light"></i>
@@ -37,11 +38,12 @@
                 <span class=" ml-3 font-1 font-weight-bold" style="font-size: 9px">BLOG</span>
                 <a mat-list-item class="mx-0 br-30 text-light"     routerLink="/dash/post/all" ><mat-icon routerLinkActive="font-weight-bold">		event_note</mat-icon>&nbsp;&nbsp;<small routerLinkActive="font-weight-bold">Post</small> </a>
                 <a mat-list-item  class="txt br-30 small text-light" routerLink="/dash/manmedia"><mat-icon>		perm_media</mat-icon>&nbsp;&nbsp;&nbsp;<small routerLinkActive="font-weight-bold">Media</small></a>
-                <span class=" ml-3 font-1 font-weight-bold" style="font-size: 9px">E-COMMERCE</span>
                 
-                <a mat-list-item  class="txt br-30 text-light" routerLink="/dash/portfolio" ><mat-icon routerLinkActive="font-weight-bold">	person</mat-icon>&nbsp;&nbsp;&nbsp;<small routerLinkActive="font-weight-bold">Portfolio</small> </a>
-                  <a mat-list-item class="mx-0 br-30 text-light"   routerLink="/dash/product/all" ><mat-icon routerLinkActive="font-weight-bold">add_shopping_cart</mat-icon>&nbsp;<small routerLinkActive="font-weight-bold">E-Store</small></a>
-                  <a mat-list-item  class="txt br-30 text-light" routerLink="/dash/customer/list" ><mat-icon routerLinkActive="font-weight-bold">	person</mat-icon>&nbsp;&nbsp;&nbsp;<small routerLinkActive="font-weight-bold">Customers</small> </a>
+                <span  *ngIf="web_type == 'portfolio'" class=" ml-3 font-1 font-weight-bold" style="font-size: 9px">PORTFOLIO</span>  
+                <a mat-list-item *ngIf="web_type == 'portfolio'" class="txt br-30 text-light" routerLink="/dash/portfolio" ><mat-icon routerLinkActive="font-weight-bold">	person</mat-icon>&nbsp;&nbsp;&nbsp;<small routerLinkActive="font-weight-bold">Portfolio</small> </a>
+                <span *ngIf="web_type == 'ecommerce'" class=" ml-3 font-1 font-weight-bold" style="font-size: 9px">E-COMMERCE</span>  
+                <a mat-list-item *ngIf="web_type == 'ecommerce'" class="mx-0 br-30 text-light"   routerLink="/dash/product/all" ><mat-icon routerLinkActive="font-weight-bold">add_shopping_cart</mat-icon>&nbsp;<small routerLinkActive="font-weight-bold">E-Store</small></a>
+                  <a mat-list-item  *ngIf="web_type == 'ecommerce'" class="txt br-30 text-light" routerLink="/dash/customer/list" ><mat-icon routerLinkActive="font-weight-bold">	person</mat-icon>&nbsp;&nbsp;&nbsp;<small routerLinkActive="font-weight-bold">Customers</small> </a>
                  
             
           </mat-nav-list>
@@ -52,21 +54,10 @@
 
            
                
-                <!-- <mat-expansion-panel class="m-blue shadow-none br-30"   mat-list-item  >
-                    <mat-expansion-panel-header style="border: none; outline: none;"  class="pl-3">
-                      <mat-panel-title>
-                        <mat-icon class="text-light">language</mat-icon>
-                        &nbsp;&nbsp;&nbsp;&nbsp;
-                        <small class="text-light">Website</small>
-                      </mat-panel-title>
-                    </mat-expansion-panel-header>
-                    <a mat-list-item class="mx-0  br-30 text-light"   routerLink="/dash/website/edit"><i routerLinkActive="font-weight-bold" class="fa fa-ioxhost fa-lg"></i>&nbsp;&nbsp;<small routerLinkActive="font-weight-bold">Site Edit</small> </a>
-                    <a mat-list-item  class="mx-0 br-30 text-center text-light" routerLink="/dash/website/identity" ><mat-icon routerLinkActive="font-weight-bold">web</mat-icon>&nbsp;<small routerLinkActive="font-weight-bold">Identity</small></a>
-                    <a mat-list-item  class="mx-0 br-30 text-center text-light"  routerLink="/dash/website/preference" ><i routerLinkActive="font-weight-bold" class="fa fa-cogs fa-lg"></i>&nbsp;<small routerLinkActive="font-weight-bold">Preferences</small></a>
-                  </mat-expansion-panel> -->
+             
                   <a mat-list-item  class="txt br-30 text-center text-light"  routerLink="/dash/webform" ><mat-icon routerLinkActive="font-weight-bold">		info_outline</mat-icon>&nbsp;&nbsp;&nbsp;<small routerLinkActive="font-weight-bold">Web Form</small></a>
                   
-           
+                  <span class=" ml-3 font-1 font-weight-bold" style="font-size: 9px">HELP?</span>
             <a mat-list-item  class="txt br-30 text-center text-light"  routerLink="/dash/support" ><mat-icon routerLinkActive="font-weight-bold">		info_outline</mat-icon>&nbsp;&nbsp;&nbsp;<small routerLinkActive="font-weight-bold">Support </small></a>
             </mat-nav-list>
       </div>
@@ -94,15 +85,19 @@
          <div>
            <!-- <a mat-button class="small m-auto">Henshaw Samuel</a>&nbsp; -->
              <div >
-                  <span style="font-size: 12px"   [class]="no_site ? 'p-1 badge badge-sm badge-success small': 'p-1 badge badge-sm badge-danger small'">
+                  <span style="font-size: 12px"   [class]="no_site ? 'p-1 badge badge-sm badge-success small m-auto': 'p-1 badge badge-sm badge-danger small m-auto'">
                       <span class="d-none d-md-inline">active</span>
                       <span class=" d-md-none">A</span>
                   </span>&nbsp;
+                  
+                  <a mat-icon-button [matBadge]="not.length" matBadgeColor="" matBadgePosition="after"  matBadgeSize="small" color="primary" (click)="not_open = !not_open" >
+                      <mat-icon >notifications</mat-icon>
+                  </a>
                  
                   <!-- <a class=" small "  mat-icon-button color=primary (click)="fetchData()"><mat-icon class="d-md-none">refresh</mat-icon></a>&nbsp; -->
 
-                  <a class=" small d-md-none" routerLink="/dash/preview" mat-icon-button color=primary><mat-icon class="d-md-none">visibility</mat-icon></a>&nbsp;
-                  <a class=" small d-none d-md-inline" routerLink="/dash/preview" mat-button color=primary>Preview</a>&nbsp;
+                  <a class=" small d-md-none" routerLink="/dash/preview" mat-icon-button color><mat-icon class="d-md-none">visibility</mat-icon></a>&nbsp;
+                  <a class=" small d-none d-md-inline" routerLink="/dash/preview" mat-button color>Preview</a>&nbsp;
                   
                  <a class=" small d-none d-md-inline py-2" [matMenuTriggerFor]="userMenu" mat-stroked-button color=primary>{{sitename | slice:0:8}} <span>{{sitename.length > 8 ? '...': ''}}</span></a>
                  <a class="  text-light d-md-none m-blue br-30" [matMenuTriggerFor]="userMenu"  mat-icon-button color=primary>{{sitename[0]+sitename[1]}}</a>
@@ -116,7 +111,7 @@
 
       <!-- Add Content Here -->
 
-     <main class="container-fluid px-0 bg-back h-100" >
+     <main class="container-fluid px-0 bg-back h-100" (click)="not_open = false">
 
         <div class="">
             <div class=" ">
@@ -124,6 +119,8 @@
             </div>
 
             <!-- <app-right-aside></app-right-aside> -->
+            
+
 
            
         </div>
@@ -147,7 +144,7 @@
 
   <!-- the drop down menw -->
 
-  <mat-menu #rootMenu="matMenu" >
+  <mat-menu #rootMenu="matMenu">
    
     <button mat-menu-item class="d-flex px-3"  *ngFor="let site of othersites" (click)="newsite(site.id)" style="outline: none; border: none;">
       <div style="overflow: hidden; width: 30px; height: 100%; border-radius: 10px;" >
@@ -157,6 +154,7 @@
       <!-- <span class="badge badge-dark p-1 px-2 small m-auto">{{site.business_name[0].toUpperCase()}}</span> -->
       <span>{{site.business_name}}</span>
     </button>
+    
   </mat-menu>
 
 
@@ -172,3 +170,16 @@
   </mat-menu>
 
 <!-- ////////dropdown menu - end////// -->
+
+
+<mat-action-list  [hidden]="isContext" class="bg-light div-shadow  rounded " id="menu" style="position: fixed; z-index: 2000;">
+    <mat-list-item (click)="closeContext('forward')"> <mat-icon mat-list-icon>arrow_forward</mat-icon><span mat-line >Forward</span></mat-list-item>
+    <mat-list-item (click)="closeContext('back')"><mat-icon mat-list-icon>arrow_back</mat-icon><span mat-line>Back</span></mat-list-item>
+    <mat-list-item (click)="closeContext('users')"><mat-icon mat-list-icon>person_outline</mat-icon><span mat-line>User Profile</span></mat-list-item>
+    <mat-list-item (click)="closeContext('site')"><mat-icon mat-list-icon>web</mat-icon><span mat-line>site information</span></mat-list-item>
+    <mat-list-item (click)="closeContext()"><mat-icon mat-list-icon>close</mat-icon><span mat-line>close</span></mat-list-item>
+</mat-action-list>
+
+
+
+

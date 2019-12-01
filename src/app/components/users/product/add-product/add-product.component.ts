@@ -63,9 +63,12 @@ export class AddProductComponent implements OnInit {
     }
   }
 
-  remove(index){
-      this.imglink.splice(index, index)
-      console.log(index +'  '+ (index+1))
+  remove(index, task?){
+      if(task === 0){
+        this.imglink.splice(index, 1);
+      }else if(task === 1){
+        this.prodVariants.splice(index, 1);
+      }
   }
 
   
