@@ -1,4 +1,4 @@
-import { Component, OnInit, HostListener } from '@angular/core';
+import { Component, OnInit, HostListener, ViewChild, ElementRef } from '@angular/core';
 import { UserserviceService } from 'src/app/services/userservice.service';
 import { MatSnackBar, fadeInContent } from '@angular/material';
 import { Observable, interval, timer } from 'rxjs';
@@ -19,6 +19,8 @@ export class UsersComponent implements OnInit {
   .pipe(
     map(result => result.matches)
   );
+
+  @ViewChild('main', {static: false}) main: ElementRef;
 
   minimize: boolean = false;
   public site_data: any;
@@ -60,7 +62,7 @@ export class UsersComponent implements OnInit {
     this.fetchData();
     this.getSite();
 
-  
+    
   }
 
 
@@ -83,7 +85,7 @@ export class UsersComponent implements OnInit {
 
 
   fetchData(){
-    let m =this.activatedRoute.data.subscribe(
+    this.activatedRoute.data.subscribe(
       async (data) =>{
         console.log(data)
         

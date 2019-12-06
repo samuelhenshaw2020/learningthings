@@ -14,7 +14,8 @@ export class AppInterceptorService{
 
   constructor(
     private injector: Injector,
-    private router:  Router
+    private router:  Router,
+    
   ) { }
 
   handleError(error: HttpErrorResponse){
@@ -22,7 +23,8 @@ export class AppInterceptorService{
     return throwError('Server Error! Please try again later.');
   }
 
-  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> | Observable<HttpResponse<any>>{
+
       let getToken = this.injector.get(UserserviceService);
       
 
@@ -30,11 +32,9 @@ export class AppInterceptorService{
         'Authorization': `Bearer ${getToken.getUserToken()}`
       })
 
+      
       const clone = req.clone({
-        headers: header,
-        reportProgress: true
-
-
+        headers: header
       });
 
     

@@ -61,6 +61,7 @@ export class MediaManagerComponent implements OnInit {
           this.logospin = false;
           this.imagelink = this.image.result;
           this.formdata.set("image", img);
+          
         }
         await this.image.readAsDataURL($event.target.files[0]);
 

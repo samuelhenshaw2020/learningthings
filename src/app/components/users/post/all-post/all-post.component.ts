@@ -51,6 +51,16 @@ export class AllPostComponent implements OnInit {
         this.totalPost = this.postServ.blogall.value.total;
         this.currentPage = this.postServ.blogall.value.current_page;
         console.log(data)
+
+        if(data.data.length < 1){
+          this.service.getAllPost().subscribe((nd:any) => {
+           console.log(nd)
+           this.postServ.blogall.next(nd)
+          })
+
+          console.log(3)
+        }
+        
       })
 
       this.postServ.category.subscribe(d => {

@@ -170,7 +170,7 @@ this.currentPage = this.postServ.blogall.value.current_page;
         // console.log(link);
         // this.imglink = link;
        if(link != undefined){
-        this.imglink = link.substr(link.search('images'), link.length);;
+        this.imglink = link.substr(link.search('images'), link.length);
        }
       })
 

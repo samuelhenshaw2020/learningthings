@@ -79,9 +79,11 @@ export class UserserviceService {
   // public web_site_data: any;
 
   private web_dommy = new BehaviorSubject<identity_model>(this.usersiteinfo);
-  // private posts: BehaviorSubject<any> = new BehaviorSubject<any>({}); 
+  private products: BehaviorSubject<any> = new BehaviorSubject<any>({}); 
 
   public site_status = false;
+
+  public isProd  = new BehaviorSubject<boolean>(false); 
 
 
   
@@ -107,6 +109,10 @@ export class UserserviceService {
 
   get no_site(){
     return this.site_status;
+  }
+
+  get product(){
+    return this.products;
   }
 
   
@@ -258,9 +264,9 @@ export class UserserviceService {
    * E-Store
    */
 
-  //  postSaveCat(val){
-  //    return this.http.post<any>(this.baseUrl+ "savecat", val)
-  //  }
+   postGetProducts(header?){
+     return this.http.post<any>(this.baseUrl+ "get_products", {site_id: this.siteData.value.site_id}, header);
+   }
 
   
   /***************************

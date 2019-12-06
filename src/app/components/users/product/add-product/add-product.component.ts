@@ -5,6 +5,8 @@ import { HttpClient } from '@angular/common/http';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
 import { MatDialog, MatSnackBar } from '@angular/material';
 import { MediaManagerComponent } from '../../media-manager/media-manager.component';
+import { timer } from 'rxjs';
+import { ProdVariationComponent } from 'src/app/dialogs/prod-variation/prod-variation.component';
 
 @Component({
   selector: 'app-add-product',
@@ -14,9 +16,11 @@ import { MediaManagerComponent } from '../../media-manager/media-manager.compone
 export class AddProductComponent implements OnInit {
 
   prodVariants: any[] = [ ];
-  imglink = [];
+  imglink:any[] = [];
   formData : FormData;
   site_id;
+  discount: string | number = 0;
+  baseImgUrl = null;
  
 
 
@@ -25,7 +29,9 @@ export class AddProductComponent implements OnInit {
     private service: UserserviceService,
     private dialog: MatDialog,
     private snackbar: MatSnackBar
-  ) { }
+  ) {
+    this.baseImgUrl = this.service.baseImgUrl;
+   }
 
 
 
@@ -52,6 +58,16 @@ export class AddProductComponent implements OnInit {
   ngOnInit() {
   }
 
+  getDiscount(){
+    setTimeout(()=>{
+      let disc = Math.floor((Number(this.sales_price.value) * 100 /Number(this.price.value)));
+      this.discount = disc <= 100 ? disc + '%' : 'above 100%';
+      console.log(Number(this.sales_price.value) * 100 /Number(this.price.value) );
+    }, 1000);
+
+    
+  }
+
   addVariant(key, value){
     console.log(this.prodVariants)
     if(key != '' && value != ''){
@@ -59,7 +75,7 @@ export class AddProductComponent implements OnInit {
       let splitval: any[] = value.split(',');
      
         this.prodVariants.push({'key': key, 'value': splitval});
-        // console.log();
+      
     }
   }
 
@@ -93,15 +109,29 @@ export class AddProductComponent implements OnInit {
              } catch (error) {
                
              }finally{
-              this.imglink.unshift(link);
+              this.imglink.unshift(link.substr(link.search('images'), link.length));
              }
           }else{
-            this.imglink.push(link);
+            this.imglink.push(link.substr(link.search('images'), link.length));
           }
         }
         console.table(this.imglink);
       })
     }
+  }
+
+
+  add_variation(){
+    let dialogRef = this.dialog.open(ProdVariationComponent, {
+        minWidth: '300px',
+        minHeight: "400px",
+        maxHeight: "400px",
+        disableClose: true
+    })
+
+    dialogRef.afterClosed().subscribe(va => {
+      console.log(va);
+    })
   }
 
 
@@ -120,9 +150,9 @@ export class AddProductComponent implements OnInit {
     this.formData.set('category_id', this.category_id.value)
     this.formData.set('images', Object(this.imglink))
     console.log(this.formData);
-    // this.service.postSaveCat(this.formData).subscribe(d=>{
-    //   console.log(d)
-    // })
+    this.service.postSignin(this.formData).subscribe(d=>{
+      console.log(d)
+    })
     
   }
 

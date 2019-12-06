@@ -18,7 +18,7 @@ export class UserResolverService implements Resolve<any>{
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> | Promise<any> | any{
 
       let path = route.url[0].path;
-      // console.log(state)
+      console.log(path)
 
       // for path: /dash
       if(path === 'dash'){
@@ -40,9 +40,9 @@ export class UserResolverService implements Resolve<any>{
         return this.service.getTemplate();
       }
 
-      // if(path === 'theme'){
-      //   return this.service.getTemplate();
-      // }
+      if(path === 'product'){
+        return this.service.postGetProducts();
+      }
 
       
 

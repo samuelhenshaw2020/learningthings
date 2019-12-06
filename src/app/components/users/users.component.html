@@ -76,7 +76,13 @@
                   <span class="small font-weight-bold" style="font-size: small;">Reload</span>
                     <span class="small numbers badge" style="width: 30px; height: 30px; line-height: 20px; font-size: medium;">{{count}}</span>
                 </span>
-              <a routerLink="/dash/overview"> <img src="{{imgBaseUrl+logo}}" alt="" class="navbar-brand" style="width: 40px; " [hidden]="isfetching"></a>
+             
+                  
+                    <a mat-icon-button routerLink="/dash/overview" class="m-auto logo"> 
+                      <img src="{{imgBaseUrl+logo}}" alt=""   [hidden]="isfetching">
+                    </a>
+                  
+              
              </span>
         </div>
          

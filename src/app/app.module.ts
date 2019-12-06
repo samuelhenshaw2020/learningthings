@@ -34,6 +34,9 @@ import { LoaderBlockOneComponent } from './includes/loader-block-one/loader-bloc
 import { UsersGuard } from './guards/users.guard';
 import { LoginGuard } from './guards/login.guard';
 import { NotificationComponent } from './components/users/notification/notification.component';
+import { ProductPipe } from './pipes/product.pipe';
+import { ScrollProdDirective } from './directives/scroll-prod.directive';
+import { ProdVariationComponent } from './dialogs/prod-variation/prod-variation.component';
 
 @NgModule({
   declarations: [
@@ -54,7 +57,10 @@ import { NotificationComponent } from './components/users/notification/notificat
     OtpComponent,
     VerifyMailComponent,
     RightAsideComponent,
-    NotificationComponent
+    NotificationComponent,
+    ProductPipe,
+    ScrollProdDirective,
+    ProdVariationComponent
   ],
   imports: [
     BrowserModule,
@@ -85,7 +91,8 @@ import { NotificationComponent } from './components/users/notification/notificat
     ScrollingModule
   ],
   entryComponents: [
-    PwdForgetComponent
+    PwdForgetComponent,
+    ProdVariationComponent
   ],
   providers: [
     {

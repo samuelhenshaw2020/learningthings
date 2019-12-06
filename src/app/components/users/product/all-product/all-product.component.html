@@ -1,4 +1,4 @@
-<div class=" container-fluid p-2 bg-white" >
+<div class=" container p-2 " >
 
 
 
@@ -8,7 +8,7 @@
 
     
       
-
+ 
 
 
         <div class="d-flex justify-content-between" id="table">
@@ -20,14 +20,16 @@
                                 <span class="d-none d-md-inline">add New</span>
                             </button>
                             &nbsp;
-                            <button mat-mini-fab color class="" (click)="fetchPost('current')">
+                            <!-- <button mat-mini-fab color class="" (click)="fetchPost('current')">
                                 <i class="fa fa-refresh " [hidden]="isLoading "></i>
                                 <i class="	fa fa-circle-o-notch fa-spin" [hidden]="!isLoading "></i>
-                            </button>
+                            </button> -->
                             &nbsp;
                             <span>  
-                                    <span class="small badge">Page</span>
-                                    <!-- <span class="numbers" style="width: 30px; height: 30px; line-height: 30px">{{currentPage}}</span> -->
+                                    <span class="small badge">total</span>
+                                    <span class="numbers" style="width: 30px; height: 30px; line-height: 30px">{{total}}</span>
+                                    <span class="small badge">current</span>
+                                    <span class="numbers" style="width: 30px; height: 30px; line-height: 30px">{{productList.length}}</span>
                             </span>
                     </div>
                 </div>
@@ -40,7 +42,7 @@
                                             <i [hidden]="isSearch" class="fa fa-search icon m-auto"></i>
                                             <i [hidden]="!isSearch" class="fa fa-close icon m-auto"></i>
                                     </button>
-                                    <input *ngIf="isSearch"  class="" type="text"  [(ngModel)]="q"  (keyup)="filterTable(q, 0)" placeholder="search post">
+                                    <input *ngIf="isSearch"  class="" type="text"  [(ngModel)]="q"  (keyup)="filterTable(q, 1)" placeholder="search post">
                                     <button *ngIf="isSearch" class=" br-30" mat-button  (click)="advanceSearch()">Search</button>
                             </div>
                     </div>
@@ -58,48 +60,91 @@
       
 
        
-        <div class="table-responsive container" > <!--music player single start-->
+        <div class="table-responsive bg-white" > <!--music player single start-->
     
-            <table class="table  table-borderless table-hover table-lg">
-                <thead>
+            <table class="table   table-hover table-lg">
+                <thead class="m-blue text-light ">
                     <tr >
-                        <th class="small text-secondary">Products</th>
-                        <th class="small text-secondary">Price</th>
-                        <th class="small text-secondary"> Patronage</th>
-                        <th class="small text-secondary "></th>
+                        <th class="small "></th>
+                        <th class="small "></th>
+                        <th class="small "> </th>
+                        <th class="small"></th>
+                        <th class="small"></th>
+                        <th></th>
+                        <th></th>
                     </tr>
                 </thead>
     
-                <tbody >
-                  <tr class=" each-user" *ngFor="let users of productList">
-                      <td>
-                          <div class="media my-auto white-1">
-                                <div class="media-body ml-2" >
-                                        <a  routerLink="/dash/product/edit/12">Signed Language od Nigeria Deaf Child in Nigeria</a>
-                                    <!-- <p style="font-size: 11px">New York</p> -->
-                                </div>
-                           </div>
+                <tbody class="p-2">
+                  <tr class=" clickable " *ngFor="let prod of productList; let i=index">
+                      <td class="m-auto">
+                            <div class="prod_img  clickable">
+                                    <img  [src]="prod.product_image" alt="...">
+                            </div>
                       </td>
-                      <td>
-                          <span class="bg-white py-1 px-2" style="font-size: 14px; border-radius: 14px">N1500</span><br>    
-                          <span class=" py-1 px-2 small" style="font-size: 12px; text-decoration: line-through;">N1800</span>
-                      </td>
-                      <td>
-                          <div class="my-auto" matTooltip="Subscribed on the 30rd March, 2019">
-                              <small class=""> 10 PUC</small>
-                          </div>
-                      </td>
-                      <td>
-                          <div class="d-flex justify-content-end">
-                              <!-- <button mat-icon-button matTooltip="samuelhenshaw2020@gmail.com" ><mat-icon class="text-secondary">mail_outline</mat-icon></button>
-                              <button mat-icon-button matTooltip="Edit Account"><mat-icon class="text-secondary">edit</mat-icon></button>
-                              <button mat-icon-button><mat-icon class="text-danger">delete</mat-icon></button>
-                              <button mat-icon-button color="" [matMenuTriggerFor]="userMenu"><mat-icon class="text-secondary">	more_horiz</mat-icon></button> -->
-                          </div>
-                      </td>
-                  </tr>
+                    <td class="m-auto">
+                   
+
+                                      <!-- <span class="numbers">{{prod.product_id}}</span> -->
+                                                <p class="my-auto"><a  routerLink="/dash/product/edit/{{prod.product_id}}" >{{prod.product_name}}</a></p>
+                                 
+
+                                      
+                             
+                                   
+                    
+                              <!-- <small class="badge m-blue text-light d-md-none p-2 m-auto br-30 shadow">20% off</small> -->
+                   </td>
+                   <td class="p-0 p-md-2">
+                        
+                  
+                        <span class="d-none d-md-inline small" >{{prod.sub_category}}</span>
+
+                    </td>
+                    <td>
+                            <small class="badge text-light p-1 m-auto" [ngClass]="users !>= 10  ? 'badge-danger': (users !>= 20 ? 'badge-warning' : 'badge-success')">
+                                    <span>{{prod.amount_in_stock}}</span>
+                                    {{prod.stock_status}}
+                            </small>
+                    </td>
+                   <td class="p-0 p-md-2">
+                        
+                                 <small class="badge d-none d-md-inline m-blue text-light p-1 m-auto ">{{((prod.sales_price * 100) /  prod.price) | number: '2.0-0' }}% off</small>
+ 
+                   </td>
+                   <td class="p-0 p-md-2">
+                       <div  class=" my-auto d-none d-md-inline" >
+                             <small class="badge badge-white text-secondary"><del>{{prod.price | currency}}</del></small>
+                             <br>
+                             <span class="" >&nbsp;{{prod.sales_price |currency}}</span>
+                       </div>
+                   </td>
+                   <td>
+                      
+                                     <button mat-icon-button color=primary  >
+                                            <i class="	fa fa-bar-chart fa-lg"></i>
+                                     </button>
+
+                                     <button mat-icon-button color=warn  >
+                                        <mat-icon>delete</mat-icon>
+                                    </button>
+                               
+                            
+                   </td>
+               </tr>
                 </tbody>
               </table>
+
+             <p  class="text-center" > 
+                    <button mat-fab color (click)="getMore()" [hidden]="no_data">
+                             <mat-icon [hidden]="loading"> add_circle</mat-icon>
+                            <i class="spinner-grow spinner-grow-lg" [hidden]="!loading"></i>    
+                    </button>
+                    
+             </p>
+
+              <br>
+              <br>
     
        </div>   <!--music play single end-->
     

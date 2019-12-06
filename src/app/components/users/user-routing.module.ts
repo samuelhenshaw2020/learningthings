@@ -17,7 +17,7 @@ import { UsersGuard } from 'src/app/guards/users.guard';
 const routes: Routes = [
   {path: 'overview', component: OverviewComponent},
   {path: 'manmedia', component: ManageMediaComponent, resolve: {media: UserResolverService},   loadChildren: ()=> import('./manage-media/manage-media.module').then(mod => mod.ManageMediaModule)},
-  {path: 'product', component: ProductComponent, loadChildren: ()=> import('./product/product.module').then( mod => mod.ProductModule)},
+  {path: 'product', component: ProductComponent , resolve: {product: UserResolverService}, loadChildren: ()=> import('./product/product.module').then( mod => mod.ProductModule)},
   {path: 'website', component: WebeditorComponent , loadChildren: ()=> import('./webeditor/webeditor.module').then(mod => mod.WebeditorModule)},
   {path: 'support', component: SupportComponent},
   {path: 'post', component: PostComponent , resolve:{post: UserResolverService} ,loadChildren: ()=> import('./post/post.module').then(mod => mod.PostModule)},
