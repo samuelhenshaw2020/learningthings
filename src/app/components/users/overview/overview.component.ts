@@ -23,14 +23,14 @@ export class OverviewComponent implements OnInit {
   blog_post = null;
   ngOnInit() {
     
-    this.no_site = this.service.no_site;
-    this.service.getTemplate().subscribe(d => {
-       this.temp = d.filter(d => {
-         return d.template_id === this.service.siteData.value.template_id;
-       })
-       console.log(this.service.siteData.value.template_id);
+    // this.no_site = this.service.no_site;
+    // this.service.getTemplate().subscribe(d => {
+    //    this.temp = d.filter(d => {
+    //      return d.template_id === this.service.siteData.value.template_id;
+    //    })
+    //    console.log(this.service.siteData.value.template_id);
        
-    })
+    // })
 
     
   }

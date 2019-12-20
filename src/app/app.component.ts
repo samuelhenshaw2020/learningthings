@@ -1,5 +1,18 @@
 import { Component, OnInit, ViewChild, ElementRef} from '@angular/core';
 import { Router, NavigationStart, NavigationEnd, ResolveStart, ResolveEnd, NavigationError } from '@angular/router';
+import { LyTheme2, ThemeVariables } from '@alyle/ui';
+
+const STYLES = (theme: ThemeVariables) => ({
+  '@global': {
+    body: {
+      backgroundColor: theme.background.default,
+      color: theme.text.default,
+      fontFamily: theme.typography.fontFamily,
+      margin: 0,
+      direction: theme.direction
+    }
+  }
+});
 
 @Component({
   selector: 'app-root',
@@ -7,16 +20,20 @@ import { Router, NavigationStart, NavigationEnd, ResolveStart, ResolveEnd, Navig
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  readonly classes = this.theme.addStyleSheet(STYLES);
+
   title = 'testing';
   resolving: boolean = false;
   @ViewChild('view', {static:false}) view: ElementRef
 
 
- constructor(route: Router){
+ constructor(private theme: LyTheme2,
+              route: Router){
     route.events.subscribe(e=>{
       if(e instanceof ResolveStart){
         // console.log('started');
         this.resolving = true;
+        console.log()
       }else if(e instanceof ResolveEnd){
         // console.log('ended');
         this.resolving = false;

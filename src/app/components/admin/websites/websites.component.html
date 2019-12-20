@@ -1,0 +1,71 @@
+<main class="container">
+   <div class="container p-md-4">
+               <ly-paper bg='primary'>
+                <div class="row  text-dark p-2 small">
+                    <div class="col">
+                        <span class="d-none d-md-inline">SITE</span>
+                        <p class="d-md-none text-center my-0">SITE</p>
+                    </div>
+                    <div class="col d-none d-md-inline">
+                            <a style="cursor: pointer;">
+                                    
+                                    &nbsp;
+                                    <i class="fa fa-angle-down fg-lg"></i>
+                            </a>
+                    </div>
+                    <div class="col d-none d-md-inline">
+                            <span class="d-none d-md-inline">USERS</span>
+                    </div>
+                    <div class="col d-none d-md-inline text-md-center text-light">  <i class="	fa fa-bar-chart fa-lg"></i></div>
+                </div>
+               </ly-paper>
+
+                <div  class=" row bg-white  border p-2" *ngFor="let site of sites; let i = index">
+                        <div class="m-auto col">
+                           
+                                      
+                                      <p><a class="lead text_dark"><strong>{{site.business_name}}</strong></a></p>
+                                      
+                              
+                        </div>
+                        <div class="col-md m-auto">
+                             
+                                      <span class="my-primary-fade text-dark p-1 m-auto small  ">{{site.category}}</span>&nbsp;
+                                      <span class=" my-primary-fade text-dark p-1 m-auto small " >
+                                          active
+                                          <i class="fa fa-circle" [ngClass]="site.active === 0 ? 'text-danger': 'text-success'"></i>
+                                    </span>
+      
+                        </div>
+                        <div  class="col m-auto">
+                          
+                               
+                                    
+                            <a class="text-secondary">
+                                <span class="">{{site.subscription | subDate}}</span>
+                            </a>
+                            
+                    
+                </div>
+                        <div  class="col m-auto">
+                          
+                               
+                                    
+                                    <a class="text-secondary">
+                                        <span class="badge badge-light p-3">{{site.user_name ? site.user_name[0] : ''}}</span>
+                                        {{site.user_name}}
+                                    </a>
+                                    
+                            
+                        </div>
+
+                        <div class="col m-auto">
+                            <span>{{site.updated_date |date:"MMM d"}}</span>
+                        </div>
+
+                       
+                    </div>
+          </div>
+          
+
+</main>

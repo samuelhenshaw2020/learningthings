@@ -1,0 +1,59 @@
+<main>
+    
+    <div >
+        <p lyTpe="title" class="text-center my-primary-f">Send Mail</p>
+    </div>
+
+    <form novalidate [formGroup]="mailFG" (submit)="sendMail()">
+
+           
+                
+
+                <div class="form-group">
+                        <mat-form-field class="w-100">
+                                <mat-chip-list #chipList>
+                                  <mat-chip *ngFor="let fruit of fruits" [selectable]="selectable"
+                                           [removable]="removable" (removed)="remove(fruit)">
+                                    {{fruit}}
+                                    <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                                  </mat-chip>
+                                  <input placeholder="Recipients"
+                                         [matChipInputFor]="chipList"
+                                         [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                                         matChipInputAddOnBlur="true"
+                                         (matChipInputTokenEnd)="add($event)"
+                                         [matAutocomplete]="auto"
+                                         matInput
+                                         #r>
+                                </mat-chip-list>
+                              </mat-form-field>
+                              <mat-autocomplete #auto="matAutocomplete">
+                                    <mat-option *ngFor="let g of [1,2,3]" [value]="g" (click)="r.value = g ">{{g}}</mat-option>
+                                           
+                            </mat-autocomplete>
+                   
+                </div>
+            
+                <div class="form-group">
+                        <mat-form-field class="w-100">
+                                <input type="text" matInput  formControlName="subject" placeholder="Subject">
+                        </mat-form-field>
+                    </div>
+            
+                    <div class="form-group">
+                        <span class="small">Body</span>
+                        <mat-form-field class="w-100">
+                                <textarea formControlName="body" matInput  cols="30" rows="10"></textarea>
+                        </mat-form-field>
+                    </div>
+            
+                <div mat-dialog-actions align="end">
+                    <button mat-button type="button" (click)="closeDialog()">Close</button>
+                    <button mat-button  type="submit">
+                        <span>Send</span>
+                        &nbsp;
+                        <span [hidden]="!submitted">{{progress + '%'}}</span>
+                    </button>
+                  </div>
+    </form>
+</main>

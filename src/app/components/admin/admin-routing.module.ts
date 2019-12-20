@@ -1,11 +1,22 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AnalysisComponent } from './analysis/analysis.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { AccountsComponent } from './accounts/accounts.component';
+import { WebsitesComponent } from './websites/websites.component';
+import { SettingsComponent } from './settings/settings.component';
+import { PaymentComponent } from './payment/payment.component';
+import { AdminResolverService } from 'src/app/resolvers/admin-resolver.service';
 
 
 const routes: Routes = [
+  {path: 'dashboard', component: DashboardComponent},
+  {path: 'accounts', component: AccountsComponent},
+  {path: 'websites', resolve: {web: AdminResolverService}, component: WebsitesComponent},
+  {path: 'settings', component: SettingsComponent},
   {path: 'analysis', component: AnalysisComponent},
-  {path: '', redirectTo: 'analysis', pathMatch:'full'}
+  {path: 'pay', component: PaymentComponent},
+  {path: '', redirectTo: 'dashboard', pathMatch:'full'}
 ];
 
 @NgModule({

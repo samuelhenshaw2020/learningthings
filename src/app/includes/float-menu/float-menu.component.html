@@ -1,0 +1,33 @@
+
+
+<button ly-button appearance="icon" bg=primary class="comment " (click)="showDialog()">
+    <mat-icon>chat_bubble</mat-icon>
+    <ly-badge bg="warn">23</ly-badge>
+</button>
+
+<div class="dialogBox   w-25" *ngIf="show" >
+
+    <p class="bg-light p-2 div-shadow stroke">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus explicabo vel, illum beatae, voluptas minus sunt officia nihil porro exercitationem, perferendis pariatur. Explicabo repellendus necessitatibus in ea assumenda et maiores!
+    </p>
+    <br>
+    <p class="bg-light p-2 div-shadow stroke">
+        ea assumenda et maiores!
+    </p>
+
+            <br>
+            <!-- <div class="form-group">
+                <button mat-button class="float-left small" (click)="showDialog()" type="button">Close!</button>
+                <button mat-raised-button class="float-right" type="submit" [disabled]="commentForm.invalid || submited">
+                       <span [hidden]="submited">Send</span>
+                       <span [hidden]="!submited">Sending...</span>
+                </button>
+            </div> -->
+
+
+</div>
+
+
+
+
+

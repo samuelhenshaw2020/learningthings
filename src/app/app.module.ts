@@ -1,4 +1,4 @@
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -38,6 +38,29 @@ import { ProductPipe } from './pipes/product.pipe';
 import { ScrollProdDirective } from './directives/scroll-prod.directive';
 import { ProdVariationComponent } from './dialogs/prod-variation/prod-variation.component';
 
+import { LyThemeModule, LY_THEME, LyHammerGestureConfig } from '@alyle/ui';
+import { MinimaLight, MinimaDark } from '@alyle/ui/themes/minima';
+import { LyCommonModule } from '@alyle/ui';
+import { LyButtonModule } from '@alyle/ui/button';
+import { ThemeMinimaModule } from '@alyle/ui/themes/minima';
+import { LyCardModule } from '@alyle/ui/card';
+import { LyDrawerModule } from '@alyle/ui/drawer';
+import { LyToolbarModule } from '@alyle/ui/toolbar';
+import { LyListModule } from '@alyle/ui/list';
+import { LyRadioModule } from '@alyle/ui/radio';
+import { LyTypographyModule } from '@alyle/ui/typography';
+import { LyIconModule } from '@alyle/ui/icon';
+import { ResponsiveModule } from '@alyle/ui/responsive';
+import { LyBadgeModule } from '@alyle/ui/badge';
+import { ControlComponent } from './control/control.component';
+import { ValNumComponent } from './includes/val-num/val-num.component';
+import {DragDropModule} from '@angular/cdk/drag-drop';
+import { LyMenuModule } from '@alyle/ui/menu';
+import { LyAvatarModule } from '@alyle/ui/avatar';
+import { LyGridModule } from '@alyle/ui/grid';
+import { LyDividerModule } from '@alyle/ui/divider';
+import { FloatMenuComponent } from './includes/float-menu/float-menu.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -60,7 +83,10 @@ import { ProdVariationComponent } from './dialogs/prod-variation/prod-variation.
     NotificationComponent,
     ProductPipe,
     ScrollProdDirective,
-    ProdVariationComponent
+    ProdVariationComponent,
+    ControlComponent,
+    ValNumComponent,
+    FloatMenuComponent
   ],
   imports: [
     BrowserModule,
@@ -88,7 +114,30 @@ import { ProdVariationComponent } from './dialogs/prod-variation/prod-variation.
     MatSnackBarModule,
     MatProgressBarModule,
     MatSidenavModule,
-    ScrollingModule
+    ScrollingModule,
+    DragDropModule,
+
+    LyThemeModule.setTheme('minima-light'),
+    LyCommonModule,
+    ThemeMinimaModule, 
+    LyCommonModule,
+    LyCardModule,
+    LyButtonModule,
+    LyDrawerModule,
+    LyToolbarModule,
+    LyListModule,
+    LyButtonModule,
+    LyRadioModule,
+    LyTypographyModule,
+    LyIconModule,
+    LyBadgeModule,
+    ResponsiveModule,
+    LyMenuModule,
+    LyAvatarModule,
+    LyGridModule,
+    LyDividerModule
+    
+    
   ],
   entryComponents: [
     PwdForgetComponent,
@@ -99,8 +148,14 @@ import { ProdVariationComponent } from './dialogs/prod-variation/prod-variation.
       provide: HTTP_INTERCEPTORS,
       useClass: AppInterceptorService,
       multi: true
-    }
+    },
+    { provide: LY_THEME, useClass: MinimaLight, multi: true },
+    { provide: LY_THEME, useClass: MinimaDark, multi: true },
+    { provide: HAMMER_GESTURE_CONFIG, useClass: LyHammerGestureConfig }
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  exports: [
+    AppComponent
+  ]
 })
 export class AppModule { }

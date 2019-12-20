@@ -19,17 +19,20 @@
     </div>
 
     <!--The form -->
-    <div class="col-md">
-            <main class="container-fluid p-2 ">
-                    <br><br>
+    <div class="col-md ">
+            <main class="container-fluid ">
+                    <br>
                       
                   
-                    
+                  <div class="form sh p-2 ">
+                      
+                      <p class="lead text-center">Create your Account now</p>
+                        
                     <div class="container d-flex justify-content-center ">
-                        <form novalidate class="form" [formGroup]="formData" (submit)='submitForm()'>
+                        <form novalidate class="form transparent" [formGroup]="formData" (submit)='submitForm()'>
                             <div class="form-group">
                     
-                              <div class="w-100 form-search shadow border p-3" [ngClass]="name.dirty && name.invalid ? 'border-danger': ''">
+                              <div class="w-100 form-search shadow border p-2" [ngClass]="name.dirty && name.invalid ? 'border-danger': ''">
                                     <input class="w-100" placeholder="Full Name" formControlName="name">
                                     <!-- <mat-icon matSuffix class="text-danger" *ngIf="name.dirty && name.invalid">cancel</mat-icon>
                                         <mat-icon matSuffix *ngIf="name.dirty && name.valid">check_circle</mat-icon> -->
@@ -40,7 +43,7 @@
                             <br>
                     
                             <div class="form-group ">
-                                <div class="w-100 form-search shadow border p-3" [ngClass]="email.dirty && email.invalid ? 'border-danger': ''">
+                                <div class="w-100 form-search shadow border p-2" [ngClass]="email.dirty && email.invalid ? 'border-danger': ''">
                                         <input class="w-100"  placeholder="Email" formControlName="email">
                                         <!-- <mat-icon matSuffix class="text-danger" *ngIf="email.dirty && email.invalid">cancel</mat-icon>
                                         <mat-icon matSuffix *ngIf="email.dirty && email.valid">check_circle</mat-icon> -->
@@ -50,7 +53,7 @@
                             <br>
                     
                             <div class="form-group  ">
-                               <div class="w-100 form-search shadow border p-3" [ngClass]="phone.dirty && phone.invalid ? 'border-danger': ''">
+                               <div class="w-100 form-search shadow border p-2" [ngClass]="phone.dirty && phone.invalid ? 'border-danger': ''">
                                     <input class="w-100" placeholder="Phone Number" type="text" formControlName="phone">
                                     <!-- <mat-icon matSiffix class="text-danger" *ngIf="phone.dirty && phone.invalid">cancel</mat-icon>
                                     <mat-icon matSuffix *ngIf="phone.dirty && phone.valid">check_circle</mat-icon> -->
@@ -60,7 +63,7 @@
                     
                     
                             <div class="form-group ">
-                                <div class="w-100 form-search d-flex shadow border p-2" [ngClass]="password.dirty && password.invalid ? 'border-danger': ''">
+                                <div class="w-100 form-search d-flex shadow border p-0 pl-2" [ngClass]="password.dirty && password.invalid ? 'border-danger': ''">
                                         <input class="w-100" placeholder="Password" [type]="hide ? 'password' : 'text'"
                                         formControlName="password">
                                     <button  matSuffix mat-icon-button (click)="hide = !hide" type="button" class="m-auto">
@@ -72,7 +75,7 @@
                     
                             <div class="form-group">
                                
-                                    <div class="w-100 form-search  shadow border p-3" [ngClass]="password_confirmation.dirty && password_confirmation.value != password.value ? 'border-danger': ''">
+                                    <div class="w-100 form-search  shadow border p-2" [ngClass]="password_confirmation.dirty && password_confirmation.value != password.value ? 'border-danger': ''">
                                             <input class="w-100" placeholder="Comfirm Password" [type]="hide ? 'password' : 'text'"
                                             formControlName="password_confirmation">
                                         <!-- <button matSuffix mat-icon-button type="button" class="m-auto">
@@ -93,7 +96,7 @@
                     
                             <div class="form-group">
                                 <button color="primary" mat-raised-button class="w-100  p-1 " type="submit"
-                                    [disabled]="formData.invalid || submitted">
+                                    [disabled]="submitted">
                                     <span class="spinner-grow spinner-grow-md " [hidden]="!submitted "></span>
                                     <span class="d-none d-md-inline ">{{!submitted ? 'SIGN UP' : 'PROCESSING...'}}</span>&nbsp;&nbsp;
                                     <i class="fa fa-send font-weight-bold fa-lg d-md-none    " [hidden]="submitted"></i>
@@ -110,7 +113,7 @@
                     
                     
                     </div>
-                    
+
                     <br>
                     <div class="d-flex justify-content-center">
                         <hr class="w-25 bg-dark">
@@ -141,6 +144,11 @@
                             </div>
                         
                         </div>
+
+                        <br>
+                  </div>
+                    
+                  
                     
                     <br>
                     <br>
