@@ -38,8 +38,24 @@ export class AdminserviceService {
     return this.http.post<any>(this.baseUrl+'send_email', val, {observe: 'events', reportProgress: true})
   }
 
-  get_sites(){
-    return this.http.get<any>(this.baseUrl+'get_sites');
+  get_sites(header){
+    return this.http.post<any>(this.baseUrl+'get_sites', header);
+  }
+
+  suspendAccount(val){
+    return this.http.post<any>(this.baseUrl + "acc_suspend", val);
+  }
+
+  search_items(val, endpoint){
+    return this.http.post<any>(this.baseUrl+ endpoint, val);
+  }
+
+  pending_acc(){
+    return this.http.get<any>(this.baseUrl+'pending');
+  }
+
+  get_user_mail(user){
+   return  this.http.post<any>(this.baseUrl+'get_mail', {user_id: String(user)})
   }
 
   isLoggedIn(){

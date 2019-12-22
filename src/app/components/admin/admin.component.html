@@ -6,75 +6,96 @@
   
     <ly-drawer-container [withClass]="classes.drawerContainer" >
   
-      <ly-drawer #_drawer="lyDrawer" ly-paper opened position="before" [width]="width"  class="bg-dark"  (mouseover)="mini = false" (mouseleave)="mini =true">
+      <ly-drawer #_drawer="lyDrawer" ly-paper opened position="before" [width]="width"  class="bg-black " >
         <ly-list>
+
+          <div ly-list-item class="text-center">
+            <ly-icon  disablePadding color="primary" style="font-size: 45px;">cloud_queue</ly-icon>
+            <mat-divider></mat-divider>
+          </div>
           
-          <button ly-list-item  routerLink="/admin/dashboard" >
-            <ly-icon ly-list-icon disablePadding class="text-light">dashboard</ly-icon>
-            <span ly-line class="text-light">dashboard</span>
+          <button ly-list-item  routerLink="/admin/dashboard" routerLinkActive="bg-black-light">
+             <p class="text-center m-auto py-2" >
+              <ly-icon  disablePadding class="text-fade " routerLinkActive="m-blue-f" style="font-size: 35px;">dashboard</ly-icon><br>
+              <span  class="text-fade small" routerLinkActive="text-light">Dashboard</span>
+             </p>
           </button>
-          <button ly-list-item routerLink="/admin/websites">
-            <ly-icon ly-list-icon disablePadding class="text-light">language</ly-icon>
-            <span ly-line class="text-light">Sites</span>
+          <button ly-list-item routerLink="/admin/websites" routerLinkActive="bg-black-light">
+           <p class="text-center m-auto py-2">
+            <ly-icon disablePadding class="text-fade" routerLinkActive="m-blue-f" style="font-size: 35px;">language</ly-icon>
+            <span class="text-fade small" routerLinkActive="text-light">Sites</span>
+           </p>
           </button>
-          <button ly-list-item routerLink="/admin/accounts">
-            <ly-icon ly-list-icon disablePadding class="text-light">supervisor_account</ly-icon>
-            <span ly-line class="text-light">Accounts</span>
+          <button ly-list-item routerLink="/admin/accounts" routerLinkActive="bg-black-light">
+           <p class="text-center m-auto py-2">
+            <ly-icon  disablePadding class="text-fade"  routerLinkActive="m-blue-f" style="font-size: 35px;">supervisor_account</ly-icon>
+            <span  class="text-fade small" routerLinkActive="text-light">Accounts</span>
+           </p>
           </button>
-          <button ly-list-item routerLink="/admin/pay">
-            <ly-icon ly-list-icon disablePadding class="text-light">payment</ly-icon>
-            <span ly-line class="text-light">Payment</span>
+          <button ly-list-item routerLink="/admin/pay" routerLinkActive="bg-black-light">
+            <p class="text-center m-auto py-2">
+              <ly-icon  disablePadding class="text-fade" routerLinkActive="m-blue-f" style="font-size: 35px;">payment</ly-icon>
+              <span  class="text-fade small" routerLinkActive="text-light">Payment</span>
+             </p>
           </button>
-          <button ly-list-item routerLink="/admin/settings">
-                <ly-icon ly-list-icon disablePadding class="text-light">build</ly-icon>
-                <span ly-line class="text-light">Settings</span>
+          <br><br><br>
+          <button ly-list-item routerLink="/admin/settings" routerLinkActive="bg-black-light">
+            <p class="text-center m-auto py-2">
+              <ly-icon  disablePadding class="text-fade" routerLinkActive="m-blue-f" style="font-size: 35px;">build</ly-icon>
+             </p>
+          </button>
+          <button ly-list-item >
+            <p class="text-center m-auto py-2">
+              <ly-icon  disablePadding class="text-fade" style="font-size: 35px;">power_settings_new</ly-icon>
+             </p>
           </button>
         </ly-list>
-        <div [className]="classes.icon">
+        <!-- <div [className]="classes.icon">
           <button ly-button (click)="toggleMini()" appearance="icon">
             <ly-icon *ngIf="mini" class="text-light">chevron_left</ly-icon>
             <ly-icon *ngIf="!mini" class="text-light">chevron_right</ly-icon>
           </button>
-        </div>
+        </div> -->
        
       </ly-drawer>
 
      
   
-      <ly-drawer-content [withClass]="classes.drawerContent" class="bg-back p-0">
-          <ly-toolbar position="static"  [elevation]="3"  class="sticky-top" >
+      <ly-drawer-content [withClass]="classes.drawerContent" class="bg-black-light p-0">
+          <ly-toolbar position="static"  [elevation]="0"  class="bg-black " >
               <button ly-button color="primary"  appearance="icon" (click)="_drawer.toggle()" lyShow="XSmall">
                 <ly-icon>menu</ly-icon>
               </button>
         
-              <h6 lyTyp="title" [withClass]="classes.grow">
-                  <strong class="lead d-none d-md-inline" >Welcome back </strong>
-                  <span class="font-weight-bold ">Henshaw</span>
+              <h6 lyTyp="title " >
+                  <strong class="lead d-none d-md-inline text-fade" >Welcome back </strong>
+                  <span class="font-weight-bold text-fade">Henshaw</span>
                   <!-- <span class="small d-none d-md-inline">, Monday, 29 April, 2019</span> -->
               </h6>
+
+            <span class="d-none d-md-inline">&nbsp;&nbsp;</span>
+      
         
-              <button color="primary:contrast" ly-button outlined >
-                    <ly-icon color="primary">message</ly-icon>
-                    <!-- <span lyTyp="caption" class="d-none d-md-inline">Broadcast</span> -->
-              </button>
-        
-              <button color="primary:contrast" ly-button appearance="icon" (click)="not_open = !not_open">
-                  <ly-icon color="primary">notifications<ly-badge bg="warn" >{{not.length}}</ly-badge></ly-icon>
+              <button color="primary:contrast" ly-button appearance="icon" (click)="not_open = !not_open" >
+                  <ly-icon color="primary">message<ly-badge bg="warn" >{{not.length}}</ly-badge></ly-icon>
                 </button>
         
-              <button color="primary:contrast" ly-button  routerLink="/admin/analysis">
+              <button color="primary:contrast" ly-button  routerLink="/admin/analysis" >
                     <ly-icon color="primary">pie_chart</ly-icon>
+                    <span class=" text-fade lead d-none d-md-inline">&nbsp;&nbsp;Insights</span>
               </button>
+
+              <span [withClass]="classes.grow"></span>
              
               <!-- &nbsp; -->
             
-              <button ly-button [lyMenuTriggerFor]="user" color="primary" appearance="icon">
+              <a ly-button  color="primary" class="clickable">
                   <ly-avatar>
                       <img alt="Larm Rmah" src="https://firebasestorage.googleapis.com/v0/b/alyle-ui.appspot.com/o/img%2Flarm-rmah-47685-unsplash.jpeg?alt=media&token=1db05ae5-9c03-437b-9e8c-764dfb257061">
                     </ly-avatar>
                    
-                <h6 lyTyp="caption" class="d-none d-md-inline"> &nbsp;&nbsp;{{name | uppercase | slice:0:8  }} </h6>
-              </button>
+                <span class="d-none d-md-inline lead  text-fade" > &nbsp;&nbsp;Samuel Henshaw </span>
+              </a>
               
             </ly-toolbar>
 
@@ -100,18 +121,6 @@
 
 
 
-  <ng-template #user let-M>
-    <ly-menu [ref]="M">
-      <button ly-button ly-menu-item >
-          <ly-icon>person</ly-icon>
-        <span>Profile</span>
-      </button>
-      <button ly-button ly-menu-item  (click)="logout()">
-          <ly-icon>power_settings_new</ly-icon>
-        <span>Log out</span>
-      </button>
-    </ly-menu>
-  </ng-template>
 
 
 

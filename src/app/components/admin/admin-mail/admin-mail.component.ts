@@ -1,9 +1,15 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { MatDialogRef, MatChipInputEvent } from '@angular/material';
+import { Component, OnInit, ViewEncapsulation, Inject } from '@angular/core';
+import { MatDialogRef, MatChipInputEvent, MAT_DIALOG_DATA } from '@angular/material';
 import { FormBuilder, Validators } from '@angular/forms';
 import { AdminserviceService } from 'src/app/services/adminservice.service';
 import { tap } from 'rxjs/operators';
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
+import { inject } from '@angular/core/testing';
+
+interface DialogData{
+  email: string | string[] | any
+  task: string 
+}
 
 @Component({
   selector: 'app-admin-mail',
@@ -15,11 +21,20 @@ export class AdminMailComponent implements OnInit {
   progress = 1 ;
   color = 'warn';
   submitted = false;
+  visible = true;
+  selectable = true;
+  removable = true;
+  
+  readonly separatorKeysCodes: number[] = [ENTER, COMMA];
+  fruits = [
+    
+  ];
 
   constructor(
     private dialogRef: MatDialogRef<AdminMailComponent>,
     private fb: FormBuilder,
-    private adminServ: AdminserviceService
+    private adminServ: AdminserviceService,
+    @Inject(MAT_DIALOG_DATA) public data: DialogData
   ) { }
 
   mailFG = this.fb.group({
@@ -33,6 +48,10 @@ export class AdminMailComponent implements OnInit {
   get body(){return this.mailFG.get('body')}
 
   ngOnInit() {
+    if(this.data.task === '_target'){
+      console.log(this.data.email)
+      this.fruits.push(this.data.email)
+    }
   }
 
   
@@ -64,14 +83,7 @@ export class AdminMailComponent implements OnInit {
     })
   }
 
-  visible = true;
-  selectable = true;
-  removable = true;
-  
-  readonly separatorKeysCodes: number[] = [ENTER, COMMA];
-  fruits: string[] = [
-    
-  ];
+
 
 
 

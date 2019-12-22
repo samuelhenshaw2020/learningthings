@@ -60,6 +60,7 @@ import { LyAvatarModule } from '@alyle/ui/avatar';
 import { LyGridModule } from '@alyle/ui/grid';
 import { LyDividerModule } from '@alyle/ui/divider';
 import { FloatMenuComponent } from './includes/float-menu/float-menu.component';
+import { WebsiteListComponent } from './components/admin/websites/website-list/website-list.component';
 
 @NgModule({
   declarations: [

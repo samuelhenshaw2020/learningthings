@@ -1,5 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { MatDialog } from '@angular/material';
+import { ViewSiteComponent } from '../view-site/view-site.component';
+import { AdminserviceService } from 'src/app/services/adminservice.service';
+import { tap, filter, switchMap } from 'rxjs/operators';
+import { from, BehaviorSubject } from 'rxjs';
+import { HttpHeaders } from '@angular/common/http';
+import { AdminService } from '../admin.service';
 
 @Component({
   selector: 'app-websites',
@@ -8,22 +15,36 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class WebsitesComponent implements OnInit {
 
-  sites = [];
 
   constructor(
-    private activeRoute: ActivatedRoute
+    private activeRoute: ActivatedRoute,
+    
+    private innerServ: AdminService
   ) { }
 
   ngOnInit() {
     this.activeRoute.data.subscribe(
       data => {
         console.log(data);
-        this.sites = data.web.message;
+        
+       try {
+        this.innerServ.sitesItems.next(data.web)
+       } catch (error) {
+         
+       }finally{
+       
+       }
+        
       },
       err => {
         console.log(err)
       }
     );
+
+   
   }
+
+ 
+
 
 }

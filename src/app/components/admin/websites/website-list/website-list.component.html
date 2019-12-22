@@ -1,35 +1,30 @@
-<nav class="nav bg-black">
-    <li class="nav-item p-md-1" routerLinkActive="bg-black-light">
-        <a class="nav-link text-fade" routerLink="/admin/websites/list" routerLinkActive="text-light">
-            <ly-icon class="d-md-none">language</ly-icon>
-            <span class="d-none d-md-inline">All Sites</span>
-        </a>
-      </li>
-      <li class="nav-item p-md-1" routerLinkActive="bg-black-light ">
-        <a class="nav-link text-fade" routerLinkActive="text-light" routerLink="/admin/websites/pending">
-            <ly-icon class="d-md-none">pan_tool</ly-icon>
-            <span class="d-none d-md-inline">Pending Sites</span>
-        </a>
-      </li>
-
-</nav>
-<router-outlet></router-outlet>
-
-<!-- <main class="container">
+<br>
+<main class="container">
     <div class="container p-md-4">
 
         <div class="d-flex justify-content-between">
             <div>
                 <span>  
-                    <span class="small text-fade">total </span>
+                    <span class="small text-fade d-none d-md-inline">total </span>
                     <span class="numbers bg-black text-fade border-0" style="width: 30px; height: 30px; line-height: 30px">{{total}}</span>&nbsp;
-                    <span class="small text-fade">current </span>
+                    <span class="small text-fade d-none d-md-inline">current </span>
                     <span class="numbers bg-black text-fade border-0" style="width: 30px; height: 30px; line-height: 30px">{{sites.length}}</span>
             </span>
             </div>
     
-            <div>
-                <input type="search" [(ngModel)]="qr" class="form-control bg-black-light-2 border-0" placeholder="Search..." (keyup)="search_sites(qr.value)">
+            <div class="d-flex">
+                <div class="   ">
+                    <!-- <i class="fa fa-search  m-auto"></i> -->
+                    
+                    <select  class=" form-control bg-black-light-2 text-fade border-0">
+                            <option *ngFor="let option of ['All', 'Suspended', 'Pending']"
+                                    [value]="option">
+                                    <span class="small ">{{option}}</span>
+                            </option>
+                    </select>
+            </div>
+                <input type="search" [(ngModel)]="qr" class="form-control bg-black-light-2 text-light  border-0" placeholder="Search..." (keyup)="search_sites(qr.value)">
+               
             </div>
         </div>
 
@@ -37,7 +32,7 @@
         <br>
 
         <div class="table-responsive ">
-            <table class="table table-borderless table-striped shadow">
+            <table class="table table-borderless table-striped mat-elevation-z7">
                 <tbody class="bg-black-light-2">
                     <tr class="    p-2" *ngFor="let site of sites; let i = index">
                         <td class="m-auto ">
@@ -46,7 +41,7 @@
                         <td class=" m-auto">
                             <span class="badge  badge-dark bg-black-light text-fade p-2 m-auto   ">{{site.category}}</span>&nbsp;
                             <span class=" badge badge-dark bg-black-light text-fade p-2 m-auto  ">
-                                active
+                                online
                                 <i class="fa fa-circle fa-lg" [ngClass]="site.active === 0 ? 'text-danger': 'running'"></i>
                                 
                             </span>
@@ -70,8 +65,8 @@
                         </td>
             
                         <td>
-                            <button class="text-light" ly-button appearance="icon" raised [ngClass]="site.active === 1 ? 'bg-warning': 'bg-success'" (click)="suspend(site.site_id, site.active);">
-                                <ly-icon>{{site.active === 1 ? 'block' : 'swap_horiz' }}</ly-icon>
+                            <button class="text-light" ly-button appearance="icon" raised [ngClass]="site.online === 1 ? 'bg-warning': 'bg-success'" (click)="suspend(site.site_id, site.online);">
+                                <ly-icon>{{site.online === 1 ? 'block' : 'swap_horiz' }}</ly-icon>
                             </button>
                         </td>
             
@@ -91,4 +86,4 @@
     <br>
 
 
-</main> -->
+</main>

@@ -22,15 +22,11 @@
                                          [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
                                          matChipInputAddOnBlur="true"
                                          (matChipInputTokenEnd)="add($event)"
-                                         [matAutocomplete]="auto"
                                          matInput
                                          #r>
                                 </mat-chip-list>
                               </mat-form-field>
-                              <mat-autocomplete #auto="matAutocomplete">
-                                    <mat-option *ngFor="let g of [1,2,3]" [value]="g" (click)="r.value = g ">{{g}}</mat-option>
-                                           
-                            </mat-autocomplete>
+                             
                    
                 </div>
             

@@ -1,12 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { AdminRoutingModule } from './admin-routing.module';
-import { AnalysisComponent } from './analysis/analysis.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { SettingsComponent } from './settings/settings.component';
-import { AccountsComponent } from './accounts/accounts.component';
-import { WebsitesComponent } from './websites/websites.component';
+import { WebsitesRoutingModule } from './websites-routing.module';
+import { WebsiteListComponent } from './website-list/website-list.component';
+import { WebsiteSuspendedComponent } from './website-suspended/website-suspended.component';
+import { WebsitePendingComponent } from './website-pending/website-pending.component';
+
 import { MatDividerModule, MatCheckboxModule, MatExpansionModule, MatMenuModule, MatListModule, MatDialogModule, MatToolbarModule, MatButtonModule, MatIconModule, MatInputModule, MatBadgeModule, MatTooltipModule, MatGridListModule, MatCardModule, MatChipsModule, MatStepperModule, MatSnackBarModule, MatProgressBarModule, MatSidenavModule, MatAutocompleteModule } from '@angular/material';
 import { AppComponent } from 'src/app/app.component';
 import { LyThemeModule, LY_THEME, LyHammerGestureConfig } from '@alyle/ui';
@@ -32,20 +31,17 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { HttpClientModule } from '@angular/common/http';
 import { ScrollingModule } from '@angular/cdk/scrolling';
-import { PaymentComponent } from './payment/payment.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-import { AdminGuard } from 'src/app/guards/admin.guard';
-import { AdminMailComponent } from './admin-mail/admin-mail.component';
-
-import { ViewSiteComponent } from './view-site/view-site.component';
+import { SubDatePipe } from '../websites/sub-date.pipe';
 
 
 
 @NgModule({
-  declarations: [AnalysisComponent, DashboardComponent, SettingsComponent, AccountsComponent, WebsitesComponent, PaymentComponent, AdminMailComponent, ViewSiteComponent],
+  declarations: [WebsiteListComponent, WebsiteSuspendedComponent, WebsitePendingComponent,  SubDatePipe],
   imports: [
     CommonModule,
-    AdminRoutingModule,
+    WebsitesRoutingModule,
+
     MatDividerModule,
     ReactiveFormsModule,
     AngularEditorModule,
@@ -93,10 +89,6 @@ import { ViewSiteComponent } from './view-site/view-site.component';
     LyAvatarModule,
     LyGridModule,
     LyDividerModule
-    
-  ],
-  entryComponents: [AdminMailComponent, ViewSiteComponent],
-  providers: [AdminGuard]
- 
+  ] 
 })
-export class AdminModule { }
+export class WebsitesModule { }

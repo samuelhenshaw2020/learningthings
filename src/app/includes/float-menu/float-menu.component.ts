@@ -1,6 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
+import { ThemeVariables, LyTheme2 } from '@alyle/ui';
+
+
+const styles = (theme: ThemeVariables) => ({
+
+  
+})
 
 @Component({
   selector: 'app-float-menu',
@@ -8,6 +15,8 @@ import { MatSnackBar } from '@angular/material';
   styleUrls: ['./float-menu.component.css']
 })
 export class FloatMenuComponent implements OnInit {
+
+  classes = this._theme.addStyleSheet(styles);
 
   show = false;
   form = {};
@@ -17,7 +26,8 @@ export class FloatMenuComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private snackbar: MatSnackBar
+    private snackbar: MatSnackBar,
+    private _theme: LyTheme2
     ) { }
 
   commentForm = this.fb.group({

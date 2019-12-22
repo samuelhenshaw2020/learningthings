@@ -21,7 +21,7 @@ const STYLES = ({
   }
 });
 const DEFAULT = '170px over@XSmall';
-const MINI = '56px over@XSmall';
+const MINI = '90px over@XSmall';
 
 @Component({
   selector: 'app-admin',
