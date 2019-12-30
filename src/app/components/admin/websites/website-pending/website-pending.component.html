@@ -19,23 +19,28 @@
                             
                         </span>
                     </td>
-        
+                    
                    
         
-                    <td>
-                        <button ly-button appearance="icon" color='white' >
-                            <ly-icon >check</ly-icon>
+                    <td >
+                        <button ly-button appearance="icon" color='white' [hidden]="i==prev ? true : false" (click)=" approveSite(site.site_id);  prev = i">
+                            <ly-icon [hidden]="i==prev ? true : false">check</ly-icon>
+                            <span class="spinner-grow spinner-grow-lg text-light" [hidden]="i==prev ? false : true"></span>
                         </button>
-                        <button ly-button appearance="icon" color='warn' >
-                            <ly-icon >delete</ly-icon>
+                        <button ly-button appearance="icon" color='warn' [hidden]="i==prev ? true : false">
+                            <ly-icon [hidden]="i==prev ? true : false">delete</ly-icon>
+                            <span class="spinner-grow spinner-grow-lg text-light" [hidden]="i==prev ? false : true"></span>
                         </button>
-                        <button ly-button appearance="icon" color='white' (click)="sendMail(site.user); prev = i">
+                        <button ly-button appearance="icon" color='white' (click)="sendMail(site.user); prev = i" >
                             <ly-icon [hidden]="i==prev ? true : false">email</ly-icon>
-                            <span class="spinner-grow spinner-grow-lg" [hidden]="i==prev ? false : true"></span>
+                            <span class="spinner-grow spinner-grow-lg text-light" [hidden]="i==prev ? false : true"></span>
+                            
                         </button>
-                        <button ly-button appearance="icon" color='white' >
-                            <ly-icon >person</ly-icon>
+                        <button ly-button appearance="icon" color='white' (click)="userProfile(site.user, $event); prev = i" >
+                            <ly-icon [hidden]="i==prev ? true : false">person</ly-icon>
+                            <span class="spinner-grow spinner-grow-lg text-light" [hidden]="i==prev ? false : true"></span>
                         </button>
+                        
                     </td>
         
                 </tr>

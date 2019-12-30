@@ -59,8 +59,8 @@ export class UsersComponent implements OnInit {
   othersites ;
   web_type;
   ngOnInit() {
-    // this.fetchData();
-    // this.getSite();
+    this.fetchData();
+    this.getSite();
 
     
   }

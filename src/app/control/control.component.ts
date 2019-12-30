@@ -60,8 +60,13 @@ export class ControlComponent implements OnInit {
     .subscribe( (data:any)=> {
       console.log((data))
      if(data.type === 4){
-      localStorage.setItem('_token', data.body.token);
-      this.router.navigate(["/admin"]);
+        if(data.body.success && data.body.success !== undefined && data.body.success !== null){
+          localStorage.setItem('_token', data.body.token);
+          this.router.navigate(["/admin"]);
+        }
+
+        
+
      }
         
     },
@@ -73,12 +78,17 @@ export class ControlComponent implements OnInit {
           this.snackbar.open(err.error.message, 'Close', {duration: 4000})
         }
        }
-      
-      // this.snackbar.open(err.error.message, 'Close', {duration: 4000})
-      this.submitted = false
+    
+    
       this.display = "Error occured"
       console.log(err)
-    })
+    }
+    ,
+    
+      ()=>{
+       this.submitted = false;
+      }
+      )
     
   }
 

@@ -1,0 +1,98 @@
+<br>
+<main class="container">
+    <div class="container p-md-4">
+
+        <div class="d-flex justify-content-between">
+            <div>
+                <span>  
+                    <span class="small text-fade d-none d-md-inline">total </span>
+                    <span class="numbers bg-black text-fade border-0" style="width: 30px; height: 30px; line-height: 30px">{{total}}</span>&nbsp;
+                    <span class="small text-fade d-none d-md-inline">current </span>
+                    <span class="numbers bg-black text-fade border-0" style="width: 30px; height: 30px; line-height: 30px">{{user_acc.length}}</span>
+            </span>
+            </div>
+    
+            <div class="d-flex">
+                <div class="   ">
+                    <!-- <i class="fa fa-search  m-auto"></i> -->
+                    
+                    <select  class=" form-control bg-black-light-2 text-fade border-0">
+                            <option *ngFor="let option of ['All', 'Active', 'Suspended']"
+                                    [value]="option">
+                                    <span class="small ">{{option}}</span>
+                            </option>
+                    </select>
+            </div>
+                <input type="search" class="form-control bg-black-light-2 text-light  border-0" placeholder="Search..." >
+               
+            </div>
+        </div>
+
+
+        <br>
+
+        <div class="table-responsive ">
+            <table class="table table-borderless table-striped mat-elevation-z7">
+                <tbody class="bg-black-light-2">
+                    <tr class="    p-2" *ngFor="let acc of user_acc; let i = index">
+
+                        <td class="m-auto ">
+                            <p>
+                                <span class="badge  badge-dark bg-black-light text-fade p-2 m-auto   ">{{acc.country_code}}</span>&nbsp;
+                                <a class="lead text_dark clickable text-light"  ><strong>{{acc.user_name}}</strong></a>
+                            </p>
+                        </td>
+
+                        <td class=" m-auto">
+                            
+                            <span class="  text-fade p-2 m-auto  ">
+                                <img [src]="'https://www.countryflags.io/'+acc.country_code +'/flat/32.png'" [alt]="acc.country_code" loading="lazy">
+                               {{ acc.country}}
+                                
+                            </span>
+                        </td>
+
+                        <td>
+                            <span class=" badge badge-dark bg-black-light text-fade p-2 m-auto  ">
+                                session
+                                <i class="fa fa-circle fa-lg" [ngClass]="acc.user_session === 0 ? 'text-danger': 'running'"></i>
+                                
+                            </span>
+                        </td>
+            
+                
+            
+            
+                        <td class=" m-auto">
+                            <a class="">
+                                <span class="text-fade" #sub>{{acc.reg_date | date:"MMM d, y"}}</span>
+                            </a>
+                        </td>
+
+                        <td>
+
+                        </td>
+            
+                        <!-- <td>
+                            <button class="text-light" ly-button appearance="icon" raised [ngClass]="acc.online === 1 ? 'bg-warning': 'bg-success'" (click)="suspend(acc.user_id, acc.online);">
+                                <ly-icon>{{acc.online === 1 ? 'block' : 'swap_horiz' }}</ly-icon>
+                            </button>
+                        </td> -->
+            
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+
+    <div>
+        <p class="text-center">
+            <button [hidden]="total === user_acc.length" class="btn m-blue  text-fade px-md-5 py-2 " (click)="getMore()">More</button>
+        </p>
+    </div>
+    <br>
+
+
+</main>

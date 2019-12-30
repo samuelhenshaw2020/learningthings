@@ -1,7 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy, NgZone } from '@angular/core';
 import { LyTheme2 } from '@alyle/ui';
 import { AdminserviceService } from 'src/app/services/adminservice.service';
 import { Router } from '@angular/router';
+import { AdminSseService } from './admin-sse.service';
+import { AdminService } from './admin.service';
+import { MatSnackBar } from '@angular/material';
+// import {SwPush} from 'servi'';
 
 const STYLES = ({
   drawerContainer: {
@@ -29,7 +33,7 @@ const MINI = '90px over@XSmall';
   styleUrls: ['./admin.component.css']
 })
 
-export class AdminComponent implements OnInit {
+export class AdminComponent implements OnInit{
 
   readonly classes = this._theme.addStyleSheet(STYLES);
   mini = true;
@@ -50,14 +54,36 @@ export class AdminComponent implements OnInit {
   constructor(
     private _theme: LyTheme2,
     private adminServ: AdminserviceService,
-    private router: Router
-    ) { }
+    private router: Router,
+    private sse: AdminService,
+    private snackbar: MatSnackBar,
+    private ngZone: NgZone
+    ) {
+
+      // ngZone.runOutsideAngular( ()=>{
+      //   let token = localStorage.getItem('_token')
+      //   this.adminServ.check_token(token).subscribe(s => {
+      //     ngZone.run(()=> {
+      //       console.log(s)
+      //     })
+      //   });
+      // })
+
+     }
 
   toggleMini() {
     this.mini = !this.mini;
   }
 
   ngOnInit() {
+
+      
+
+    this.sse.adminSSE('/home/sse').subscribe(d => {
+      console.log(d)
+    })
+
+
     console.log(this.adminServ.isLoggedIn());
     this.adminServ.postLoggedAdmin().subscribe(
       (data:any) => {
@@ -72,18 +98,33 @@ export class AdminComponent implements OnInit {
     );
   }
 
+  ngOnDestroy(){
+    this.router.dispose();
+  }
+
 
   logout(){
-    this.adminServ.postLogout().subscribe(d => {
-      console.log(d)
-      localStorage.removeItem('_token');
-      this.router.navigate(['/control'])
-    }, 
-    err => {
-      console.log(err)
+    let confirm = window.confirm("Sure to end session?");
+    if(confirm){
+      this.adminServ.postLogout().subscribe(d => {
+        console.log(d)
+        this.adminServ.logOut()
+        this.router.navigate(['/control'])
+      }, 
+      err => {
+        console.log(err)
+      }
+      )
     }
-    )
+
+    if(!confirm || confirm === undefined){
+      this.snackbar.open("Session preserved!", '', {
+        duration: 4000
+      })
+    }
   }
+
+
 
   
 

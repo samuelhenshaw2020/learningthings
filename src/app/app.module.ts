@@ -61,6 +61,9 @@ import { LyGridModule } from '@alyle/ui/grid';
 import { LyDividerModule } from '@alyle/ui/divider';
 import { FloatMenuComponent } from './includes/float-menu/float-menu.component';
 import { WebsiteListComponent } from './components/admin/websites/website-list/website-list.component';
+import { MiniProfileComponent } from './includes/mini-profile/mini-profile.component';
+import { RecaptchaModule, RecaptchaFormsModule } from 'ng-recaptcha';
+
 
 @NgModule({
   declarations: [
@@ -87,7 +90,8 @@ import { WebsiteListComponent } from './components/admin/websites/website-list/w
     ProdVariationComponent,
     ControlComponent,
     ValNumComponent,
-    FloatMenuComponent
+    FloatMenuComponent,
+    MiniProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -136,13 +140,18 @@ import { WebsiteListComponent } from './components/admin/websites/website-list/w
     LyMenuModule,
     LyAvatarModule,
     LyGridModule,
-    LyDividerModule
+    LyDividerModule,
+
+    RecaptchaModule,
+    RecaptchaFormsModule
+    
     
     
   ],
   entryComponents: [
     PwdForgetComponent,
-    ProdVariationComponent
+    ProdVariationComponent,
+    MiniProfileComponent
   ],
   providers: [
     {

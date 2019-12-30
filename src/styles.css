@@ -123,6 +123,26 @@ button{
   /* height: 40px; */
 }
 
+.running{
+  -webkit-animation-name: run ;
+  -webkit-animation-iteration-count:infinite ;
+  -webkit-animation-duration: 1.4s;
+  animation-name: run ;
+  animation-iteration-count:infinite ;
+  animation-duration: 1.4s;
+  
+}
+
+@-webkit-keyframes run {
+  0%, 30%, 50%, 80%, 100%{color: #28A745}
+  20%, 40%{color: white}
+}
+
+@keyframes run {
+  0%, 30%, 50%, 80%, 100%{color: #28A745}
+  20%, 40%{color: white}
+}
+
 
 /* You can add global styles to this file, and also import other style files */
 /* ------------------------------------------------------------------------------

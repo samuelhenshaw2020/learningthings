@@ -44,7 +44,7 @@
               <ly-icon  disablePadding class="text-fade" routerLinkActive="m-blue-f" style="font-size: 35px;">build</ly-icon>
              </p>
           </button>
-          <button ly-list-item >
+          <button ly-list-item (click)="logout()">
             <p class="text-center m-auto py-2">
               <ly-icon  disablePadding class="text-fade" style="font-size: 35px;">power_settings_new</ly-icon>
              </p>
@@ -61,7 +61,7 @@
 
      
   
-      <ly-drawer-content [withClass]="classes.drawerContent" class="bg-black-light p-0">
+      <ly-drawer-content [withClass]="classes.drawerContent" class="bg-black-light p-0 h-100">
           <ly-toolbar position="static"  [elevation]="0"  class="bg-black " >
               <button ly-button color="primary"  appearance="icon" (click)="_drawer.toggle()" lyShow="XSmall">
                 <ly-icon>menu</ly-icon>

@@ -17,7 +17,7 @@
                     <!-- <i class="fa fa-search  m-auto"></i> -->
                     
                     <select  class=" form-control bg-black-light-2 text-fade border-0">
-                            <option *ngFor="let option of ['All', 'Suspended', 'Pending']"
+                            <option *ngFor="let option of ['All', 'Online', 'Suspended']"
                                     [value]="option">
                                     <span class="small ">{{option}}</span>
                             </option>
@@ -42,7 +42,7 @@
                             <span class="badge  badge-dark bg-black-light text-fade p-2 m-auto   ">{{site.category}}</span>&nbsp;
                             <span class=" badge badge-dark bg-black-light text-fade p-2 m-auto  ">
                                 online
-                                <i class="fa fa-circle fa-lg" [ngClass]="site.active === 0 ? 'text-danger': 'running'"></i>
+                                <i class="fa fa-circle fa-lg" [ngClass]="site.online === 0 ? 'text-danger': 'running'"></i>
                                 
                             </span>
                         </td>
@@ -65,8 +65,10 @@
                         </td>
             
                         <td>
-                            <button class="text-light" ly-button appearance="icon" raised [ngClass]="site.online === 1 ? 'bg-warning': 'bg-success'" (click)="suspend(site.site_id, site.online);">
-                                <ly-icon>{{site.online === 1 ? 'block' : 'swap_horiz' }}</ly-icon>
+                            <span class="spinner-grow spinner-grow-lg text-light" [hidden]="i==prev ? false : true"></span>
+                            <button [hidden]="i!=prev ? false : true" class="text-light" ly-button appearance="icon" raised [ngClass]="site.online === 1 ? 'bg-warning': 'bg-success'" (click)="suspend(site.site_id, site.online, i);">
+                                <ly-icon >{{site.online === 1 ? 'block' : 'swap_horiz' }}</ly-icon>
+                                
                             </button>
                         </td>
             
@@ -80,7 +82,10 @@
 
     <div>
         <p class="text-center">
-            <button [hidden]="total === sites.length" class="btn m-blue  text-fade px-md-5 py-2 " (click)="getMore()">More</button>
+            <button [hidden]="total === sites.length" class="btn m-blue  text-fade px-md-5 py-2 " (click)="getMore()">
+                <span>More</span>
+                <span class="spinner-grow  text-light" [hidden]="!isFetching"></span>
+            </button>
         </p>
     </div>
     <br>

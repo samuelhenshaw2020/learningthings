@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { AdminserviceService } from 'src/app/services/adminservice.service';
 import { MatDialog } from '@angular/material';
 import { AdminService } from '../../admin.service';
@@ -46,8 +46,9 @@ export class WebsiteListComponent implements OnInit {
     })
   }
 
+  isFetching = false;
   getMore(){
-
+    this.isFetching = true;
     if(this.innerServ.sitesItems.value.start <= this.innerServ.sitesItems.value.total){
       this.innerServ.start = this.innerServ.sitesItems.value.start + 2;
 
@@ -74,17 +75,20 @@ export class WebsiteListComponent implements OnInit {
         this.innerServ.sitesItems.next(newSites)
   
   
-      })
+      },
+      err => {
+
+      },
+      ()=>{
+        this.isFetching = false;
+      }
+      )
       
      console.log(this.innerServ.start)
     }else{
       console.log("no date")
 
     }
-
-
-
-    
 
    
   }
@@ -104,7 +108,9 @@ export class WebsiteListComponent implements OnInit {
 
   }
 
-  suspend(id, act){
+  prev;
+  suspend(id, act, index){
+    this.prev = index
     if(act ===0){
       act = 1;
     }else if(act === 1){
@@ -117,10 +123,19 @@ export class WebsiteListComponent implements OnInit {
     }
     this.adminServ.suspendAccount(info)
     .subscribe(d => {
-      this.getSites()
+      // this.getSites()
+      if(d.success){
+        this.sites[index].online = d.active
+      }
       console.log(d);
-    })
-  }
+    },
+    err => {
+
+    },
+    ()=>{
+      this.prev = null;
+    }
+    )}
 
 
   search_sites(){

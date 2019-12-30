@@ -1,6 +1,8 @@
 import { Component, OnInit, ViewChild, ElementRef} from '@angular/core';
 import { Router, NavigationStart, NavigationEnd, ResolveStart, ResolveEnd, NavigationError } from '@angular/router';
 import { LyTheme2, ThemeVariables } from '@alyle/ui';
+import { HttpClient } from '@angular/common/http';
+
 
 const STYLES = (theme: ThemeVariables) => ({
   '@global': {
@@ -27,8 +29,11 @@ export class AppComponent {
   @ViewChild('view', {static:false}) view: ElementRef
 
 
- constructor(private theme: LyTheme2,
-              route: Router){
+ constructor(
+        private theme: LyTheme2,
+        private route: Router,
+        private http: HttpClient
+              ){
     route.events.subscribe(e=>{
       if(e instanceof ResolveStart){
         // console.log('started');
@@ -42,10 +47,19 @@ export class AppComponent {
       }
     })
 
-
-
+   
+   
  
  }
+
+ 
+
+//  public ifRobot(): void {
+//   this.recaptchaV3Service.execute('importantAction')
+//     .subscribe((token) => console.log(token));
+// }
+
+ 
 
  top;
  left;

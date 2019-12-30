@@ -92,11 +92,15 @@
                     
                             </div>
                             <br>
+
+                            <div class="form-group d-flex mx-auto">
+                                <re-captcha (resolved)="resolved($event)" formControlName="recaptchaReactive" siteKey="6LfhYsoUAAAAAMSovXp6j_dzbUUVL7s10SYAY5fb"></re-captcha>
+                            </div>
                     
                     
                             <div class="form-group">
                                 <button color="primary" mat-raised-button class="w-100  p-1 " type="submit"
-                                    [disabled]="submitted">
+                                    [disabled]="submitted " [hidden]='recaptchaReactive.invalid'>
                                     <span class="spinner-grow spinner-grow-md " [hidden]="!submitted "></span>
                                     <span class="d-none d-md-inline ">{{!submitted ? 'SIGN UP' : 'PROCESSING...'}}</span>&nbsp;&nbsp;
                                     <i class="fa fa-send font-weight-bold fa-lg d-md-none    " [hidden]="submitted"></i>

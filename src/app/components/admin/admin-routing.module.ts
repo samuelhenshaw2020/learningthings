@@ -11,7 +11,7 @@ import { AdminResolverService } from 'src/app/resolvers/admin-resolver.service';
 
 const routes: Routes = [
   {path: 'dashboard', component: DashboardComponent},
-  {path: 'accounts', component: AccountsComponent},
+  {path: 'accounts', resolve: {acc: AdminResolverService}, component: AccountsComponent, loadChildren: ()=>import('./accounts/accounts.module').then(m => m.AccountsModule)},
   {path: 'websites', resolve: {web: AdminResolverService}, component: WebsitesComponent, loadChildren: ()=>import('./websites/websites.module').then(m => m.WebsitesModule)},
   {path: 'settings', component: SettingsComponent},
   {path: 'analysis', component: AnalysisComponent},

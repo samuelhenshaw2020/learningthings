@@ -33,7 +33,7 @@ const routes: Routes = [
   // {path: 'dash', component: UsersComponent, loadChildren: ()=> import('./components/users/user.module').then(mod => mod.UserModule)},
 
   {path: 'dash', component: UsersComponent  , loadChildren: ()=> import('./components/users/user.module').then(mod => mod.UserModule)},
-  {path: 'admin',  component: AdminComponent, canActivate:[AdminGuard],  loadChildren: ()=> import('./components/admin/admin.module').then(mod => mod.AdminModule)},
+  {path: 'admin',  component: AdminComponent, canActivate: [AdminGuard], canLoad: [AdminGuard], loadChildren: ()=> import('./components/admin/admin.module').then(mod => mod.AdminModule)},
 
   {path: '', redirectTo: 'home', pathMatch: 'full'},
   {path: '**', component: HomeComponent}

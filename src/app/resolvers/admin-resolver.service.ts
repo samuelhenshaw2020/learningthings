@@ -29,6 +29,14 @@ export class AdminResolverService implements Resolve<any>{
       return this.adminServ.pending_acc();
     }
 
+    if(path === "accounts"){
+      let headerOpt = {
+        start: 0,
+        limit: this.innerServ.accLimit
+      }
+      return this.adminServ.get_users(headerOpt);
+    }
+
   }
 
 
