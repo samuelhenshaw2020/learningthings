@@ -5,6 +5,8 @@ import { tap } from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
+import { AppService } from '../app.service';
+import { AdminService } from '../components/admin/admin.service';
 
 @Component({
   selector: 'app-control',
@@ -17,14 +19,17 @@ export class ControlComponent implements OnInit {
   submitted: boolean = false;
   display = "Admin Login";
   color = "bg-dark";
+  night;
+  height = window.innerHeight + 'px';
 
   constructor(
     private fb: FormBuilder,
     private adminServ: AdminserviceService,
     private snackbar: MatSnackBar,
-    private router: Router
+    private router: Router,
+    private nightMode: AdminService
   ) {
-    
+     
    }
 
   adminFG = this.fb.group({
@@ -37,6 +42,9 @@ export class ControlComponent implements OnInit {
   
 
   ngOnInit() {
+    this.nightMode.night.subscribe(d => {
+        this.night = d;
+    })
   }
 
   authenticate(){
@@ -90,6 +98,10 @@ export class ControlComponent implements OnInit {
       }
       )
     
+  }
+
+  showPwd($event){
+    this.hide = $event.target.checked;
   }
 
 }

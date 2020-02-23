@@ -12,11 +12,11 @@
                         <div>
                                 <label for="" class="lead font-weight-bold label">What is the name of your
                                         business?</label>
-                                <div class="d-flex form-search border shadow px-3" >
-                                        <input type="text" class=" w-100 p-3"
+                                <div class=" px-3" >
+                                        <input type="text" class=" w-100 p-4 form-control font-weight-bold"
                                                 placeholder="Business/Website name" formControlName="bizname">
                                 </div>
-                        </div>
+                         </div>
                 </div>
                 <br>
 
@@ -35,7 +35,7 @@
                         </div>
                 </div>
                 <br>
-
+ 
 
 
                 <!-- which kind of website do you want -->
@@ -49,20 +49,26 @@
                                 <br>
                                 <br>
                                 <div class="card-columns">
-                                        {{template_property}}
 
-                                        <mat-card *ngFor="let type of businessCat; let num = index"
+                                        <div *ngFor="let type of businessCat; let num = index"
                                                 class="my-2 card clickable category anim-1 border border-secondary"
-                                                id="{{'a'+num}}"
-                                                [ngClass]=" num==prev ? 'bg-dark text-light font-weight-bold scale-ft': ''"
-                                                (click)="bindTemplate(type.type);colorate(num); shortName(type.short_name);
-                                                        webtype.value = type.name; sel.innerHTML = type.name; template_property = type.type">
+                                                [ngClass]=" num==prev ? 'bg-primary text-light font-weight-bold shadow': ''"
+                                                
+                                                (click)="
+                                                bindTemplate(type.type);
+                                                colorate(num);
+                                                prev2=num; 
+                                                shortName(type.short_name);
+                                                setWebType(type.name);
+                                                sel.innerHTML = type.name; 
+                                                template_property = type.type
+                                                        ">
 
                                                 <div class="card-body text-center">
                                                         <i [class]='type.icon'></i>
                                                         <p class="text-center">{{type.name}}</p>
                                                 </div>
-                                        </mat-card>
+                                        </div>
 
                                 </div>
                         </div>
@@ -108,35 +114,51 @@
                         <div>
                                 <label for="" class="lead font-weight-bold label">Add other contact details?</label>
                                 <br>
-                                <table class="table-borderless table" formGroupName="contactinfo">
-                                        <tr>    
-                                                <span class="small text-secondary">Email</span>
-                                                <div class="d-flex form-search border shadow px-3" [ngClass]="bizmail.dirty && bizmail.invalid ? 'border-danger' : ''">
+                                <div formGroupName="contactinfo">
+                                        <div class="form-group">    
+                                                <span class="">Email</span>
+                                                <div  [ngClass]="bizmail.dirty && bizmail.invalid ? 'border-danger' : ''">
                                 
-                                                        <input type="text" class=" w-100 p-3"
+                                                        <input type="email" class=" w-100 p-4 form-control"
                                                                 placeholder="Business email" formControlName="bizmail">
+                                                                <span class="text-danger small" *ngIf="bizmail.touched && bizmail.invalid">
+                                                                        <i class="fa fa-exclamation-triangle small fa-sm"></i>
+                                                                        <span> Email not valid!</span>
+
+                                                                </span>
                                                
                                                 </div>
                                                 <br>
-                                        </tr>
-                                        <tr>    
-                                                <span class="small text-secondary">Phone</span>
-                                                <div class="d-flex form-search border shadow px-3" [ngClass]="biztel.dirty && biztel.invalid ? 'border-danger' : ''">
-                                                        <input type="tel" class=" w-100 p-3"
+                                        </div>
+                                        <div class="form-group">    
+                                                <span class="">Phone</span>
+                                                <div  [ngClass]="biztel.dirty && biztel.invalid ? 'border-danger' : ''">
+                                                        <input type="tel" class=" w-100 p-4 form-control"
                                                                 placeholder="Telephone" formControlName="biztel">
+                                                                <span class="text-danger small" *ngIf="biztel.touched && biztel.invalid">
+                                                                        <i class="fa fa-exclamation-triangle small fa-sm"></i>
+                                                                        <span> Not valid! must be 11!</span>
+
+                                                                </span>
                                                 </div>
                                                 <br>
-                                        </tr>
-                                        <tr>    <span class="small text-secondary">Address</span>
-                                                <div class="d-flex form-search border  shadow px-3" [ngClass]="bizaddress.dirty && bizaddress.invalid ? 'border-danger' : ''">
-                                                        <input type="text" class=" w-100 p-3"
+                                        </div>
+                                        <div class="form-group">    
+                                                <span class="">Address</span>
+                                                <div  [ngClass]="bizaddress.dirty && bizaddress.invalid ? 'border-danger' : ''">
+                                                        <input type="text" class=" w-100 p-4 form-control "
                                                                 placeholder="Physical Address"
                                                                 formControlName="bizaddress">
+                                                                <span class="text-danger small" *ngIf="bizaddress.touched && bizaddress.invalid">
+                                                                        <i class="fa fa-exclamation-triangle small fa-sm"></i>
+                                                                        <span> Address is required!</span>
+
+                                                                </span>
                                                 </div>
                                                 <br>
-                                        </tr>
+                                        </div>
 
-                                </table>
+                                </div>
 
 
                         </div>
@@ -153,10 +175,10 @@
                                 <table class="table-borderless table" formGroupName="socialmedia">
                                         <tr>    
                                                 <!-- <span class="small text-secondary">Phone</span> -->
-                                                <div class="d-flex form-search border px-3">
+                                                <div class="d-flex border pl-3">
                                                         <i class=" fa fa-linkedin m-auto"
                                                                 [style.color]="smlinkedin.valid ? ' #0e76a8': ''"></i>
-                                                        <input type="text" class=" w-100 p-3"
+                                                        <input type="text" class=" w-100 p-3 form-control border-0"
                                                                 placeholder="Linkedin" formControlName="smlinkedin">
                                                         <mat-icon class="small font-weight-bold m-auto"
                                                                 *ngIf="smlinkedin.dirty && smlinkedin.valid">check
@@ -165,10 +187,10 @@
                                                 <br>
                                         </tr>
                                         <tr>
-                                                <div class="d-flex form-search border px-3">
+                                                <div class="d-flex  border pl-3">
                                                         <i class=" fa fa-pinterest m-auto fa-lg"
                                                                 [style.color]="smpint.valid ? '#c8232c': ''"></i>
-                                                        <input type="text" class=" w-100 p-3"
+                                                        <input type="text" class="w-100 p-3 form-control border-0"
                                                                 placeholder="Pinterest" formControlName="smpint">
                                                         <mat-icon class="small font-weight-bold m-auto"
                                                                 *ngIf="smpint.dirty && smpint.valid">check
@@ -177,10 +199,10 @@
                                                 <br>
                                         </tr>
                                         <tr>
-                                                <div class="d-flex form-search border px-3">
+                                                <div class="d-flex border pl-3">
                                                         <i class=" fa fa-youtube-play m-auto"
                                                                 [style.color]="smyoutube.valid ?'#c4302b': ''"></i>
-                                                        <input type="text" class=" w-100 p-3"
+                                                        <input type="text" class=" w-100 p-3 form-control border-0"
                                                                 placeholder="Youtube" formControlName="smyoutube">
                                                         <mat-icon class="small font-weight-bold m-auto"
                                                                 *ngIf="smyoutube.dirty && smyoutube.valid">check
@@ -189,10 +211,10 @@
                                                 <br>
                                         </tr>
                                         <tr>
-                                                <div class="d-flex form-search border px-3">
+                                                <div class="d-flex  border pl-3">
                                                         <i class=" fa fa-instagram fa-lg m-auto"
                                                                 [style.color]="sminstagram.valid ?'#3f729b': ''"></i>
-                                                        <input type="text" class=" w-100 p-3"
+                                                        <input type="text" class=" w-100 p-3 form-control border-0"
                                                                 placeholder="Instagram" formControlName="sminstagram">
                                                         <mat-icon class="small font-weight-bold m-auto"
                                                                 *ngIf="sminstagram.dirty && sminstagram.valid">check
@@ -201,10 +223,10 @@
                                                 <br>
                                         </tr>
                                         <tr>
-                                                <div class="d-flex form-search border px-3">
+                                                <div class="d-flex  border px-3">
                                                         <i class=" fa fa-twitter fa-lg m-auto font-weight-bold"
                                                                 [style.color]="smtwitter.valid ?'#00acee ': ''"></i>
-                                                        <input type="text" class=" w-100 p-3"
+                                                        <input type="text" class=" w-100 p-3 form-control border-0"
                                                                 placeholder="Twitter" formControlName="smtwitter">
                                                         <mat-icon class="small font-weight-bold m-auto"
                                                                 *ngIf="smtwitter.dirty && smtwitter.valid">check
@@ -216,10 +238,10 @@
                                         <tr>
 
 
-                                                <div class="d-flex form-search border px-3">
+                                                <div class="d-flex  border px-3">
                                                         <i class=" fa fa-facebook-f fa-lg m-auto font-weight-bold"
                                                                 [style.color]='smfacebook.valid ? "#3b5998" : ""'></i>
-                                                        <input type="text" class=" w-100 p-3"
+                                                        <input type="text" class="w-100 p-3 form-control border-0"
                                                                 placeholder="Facebook" formControlName="smfacebook">
                                                         <mat-icon class=" small font-weight-bold m-auto"
                                                                 *ngIf="smfacebook.dirty && smfacebook.valid">check
@@ -249,16 +271,20 @@
                                  <p class="lead font-weight-bold small" #tempSel></p>
                                 <div class="card-columns temp">
 
-                                        <mat-card *ngFor="let tem of filterTemplate; let num = index"
-                                                class="my-2 card clickable category border border-secondary p-0"
-                                                id="{{'a'+num2}}"
-                                                [ngClass]=" num==prev2 ? 'scale-ft mat-elevation-z7': 'scale-bk'"
-                                                (click)="colorate(num); theme.value = tem.template_id ; template.value = tem.template_id; tempSel.innerHTML = tem.template_name;">
-                                                <img src="{{tem.image}}" class="card-img-top">
-                                                <div class="p-2">
-                                                        <p class="text-center lead font-weight-bold">{{tem.template_name}}</p>
+                                        <div *ngFor="let tem of filterTemplate; let num = index"
+                                                class="my-2 card clickable   p-0"
+                                                [ngClass]=" num==prev2 ? 'shadow m-border ': 'm-shadow'"
+                                                (click)=" 
+                                                        prev2=num; 
+                                                        setTheme(tem.template_id);
+                                                         template.value = tem.template_id;
+                                                          tempSel.innerHTML = tem.template_name;">
+                                                <img src="{{imagebase + tem.image}}" class="card-img-top">
+                                                <div class="card-content pt-1">
+                                                        <p class="text-center cart-title lead font-weight-bold">{{tem.template_name}}</p>
                                                 </div>
-                                        </mat-card>
+                                        </div>
+                                       
 
                                 </div>
                         </div>
@@ -275,12 +301,11 @@
                                         <span [hidden]="!submitted">
                                                 <app-loaderdot></app-loaderdot>
                                         </span>
-                                </p>
-                                <p class="text-center ">You are one step to an owesome experience. Begin!</p>
+                                </p>>
                                 <p>Please, chose a unique site unique word, </p>
 
-                                 <div class="form-search border p-2" [ngClass]="store_name.valid ? 'border-success': 'border-danger'" > 
-                                        <input type="text" class=" w-100 " formControlName="store_name" >
+                                 <div class="p-2" [ngClass]="store_name.valid ? 'border-success': 'border-danger'" > 
+                                        <input type="text" class="w-100 p-3 form-control " formControlName="store_name" >
                                  </div>
                         </div>
 
@@ -291,7 +316,7 @@
                 <div class=" pb-md-5 pb-4 pt-1 w-100 d-flex justify-content-around "
                         style="position: fixed; bottom: 0px; right: 2px; box-shadow: 0px 0px 30px rgba(255, 253, 253, 0.9); background: white">
 
-                        <button mat-button color=primary class="  mr-3 " (click)="backComp()" [hidden]='count==START_COUNT '
+                        <button class="btn btn-outline-primary  mr-3 "   (click)="backComp()" [hidden]='count==START_COUNT '
                                 type="button">
                                 <i class="fa fa-long-arrow-left font-weight-bold fa-lg "></i>&nbsp;
                                 <span class="d-none d-md-inline">Back</span>
@@ -303,22 +328,24 @@
                                         <span class="d-none d-md-inline">Skip</span>&nbsp;
                                         <i class="fa fa-rotate-right fa-lg font-weight-bold"></i>
                                 </button> -->
-                                <button mat-stroked-button class="" color="primary" (click)='nextComp()' type="button"
+                                <button  class="btn btn-primary" color="" (click)='nextComp()' type="button"
                                         [hidden]=' count==END_COUNT' [disabled]="bizname.invalid " id="nextbtn">
                                         <span class="d-none d-md-inline">Next </span>&nbsp;
                                         <i class="fa fa-long-arrow-right font-weight-bold fa-lg "></i>
                                 </button>
 
-                                <button mat-stroked-button color="primary" [hidden]="count!=END_COUNT" type="submit"
+                              <div class="text-center">
+                                <button class="btn btn-primary btn-lg px-3 py-2 br-30" [hidden]="count!=END_COUNT" type="submit"
                                         [disabled]="submitted || store_name.invalid" matTooltip="Submit data">
-                                        <span class="spinner-grow spinner-grow-lg" [hidden]="!submitted"></span>
+                                        <span class="fa fa-circle-o-notch fa-spin" [hidden]="!submitted"></span>
                                         <i  class="fa fa-send fa-lg font-weight-bold d-md-none"></i>
                                         <span class="d-none d-md-inline">Submit</span>
                                         &nbsp;
                                         <span [hidden]="!submitted">
                                                 <app-loaderdot></app-loaderdot>
                                         </span>
-                                </button>
+                                 </button>
+                              </div>
 
 
                         </div>

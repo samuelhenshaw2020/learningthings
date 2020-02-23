@@ -1,14 +1,16 @@
-<mat-divider></mat-divider>
-<div class="  pl-1 sticky-top bg-light" style="top: 50px;">
-    <button routerLink="/dash/website/theme" routerLinkActive="m-blue-f font-weight-bold b-border" mat-button color class=" "><mat-icon>web</mat-icon>&nbsp;<span class="d-none d-md-inline ">Themes</span></button>
+
+<div class="  p-1" >
+    <button routerLink="/dash/website/theme"  mat-button color class="text-secondary " routerLinkActive="border ">
+        <span class="small font-weight-bold" routerLinkActive="text-primary ">THEMES</span>
+    </button>
     &nbsp;
-    <button routerLink="/dash/website/identity" routerLinkActive="m-blue-f font-weight-bold b-border" mat-button color class="" ><mat-icon>info</mat-icon>&nbsp;<span class="d-none d-md-inline ">site Identity</span></button>
-    &nbsp;
-    <button routerLink="/dash/website/preference" routerLinkActive="m-blue-f font-weight-bold b-border" mat-button color class=""><mat-icon>settings</mat-icon>&nbsp;<span class="d-none d-md-inline ">Preferences</span></button>
+    <button routerLink="/dash/website/identity" routerLinkActive="text-primary" mat-button color class="text-secondary" routerLinkActive="border " >
+        <span  class="small font-weight-bold" routerLinkActive="text-primary" >PREFERENCES</span>
+    </button>
     &nbsp;
 </div>
 
-<mat-divider></mat-divider>
-<div class="container-fluid p-2">
+
+<div class="container p-md-2 px-md-5">
     <router-outlet></router-outlet>
 </div>

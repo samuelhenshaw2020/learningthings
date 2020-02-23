@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, Route, ActivatedRoute, RouterStateSnapshot, RouterLink, NavigationEnd } from '@angular/router';
+import { slideInAnimation } from 'src/app/animations';
 
 @Component({
   selector: 'app-login',

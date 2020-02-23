@@ -1,3 +1,7 @@
+.front{
+    z-index: 2000 !important;
+}
+
 @media(max-width: 500px){
     .card-columns{
         column-count: 2;

@@ -3,7 +3,7 @@
          <div  class="bg-black shadow  rounded notificate">
             <div>
                 <mat-action-list>
-                    <mat-list-item *ngFor="let info of not" (click)="views(info.subject)">
+                    <mat-list-item *ngFor="let info of not" >
                         <mat-icon mat-list-icon class="text-fade">info</mat-icon>
                         <h4 mat-line ><strong class="text-fade">{{info.subject}}</strong></h4>
                         <p mat-line class="text-secondary">{{info.message}}</p>

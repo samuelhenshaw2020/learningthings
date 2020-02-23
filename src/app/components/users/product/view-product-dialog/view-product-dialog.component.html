@@ -1,0 +1,119 @@
+<!-- <ly-toolbar
+  position="static"
+  class="light"
+  [elevation]="3"
+>
+
+  <h6 lyTyp="title">Product Informations</h6>
+  
+  
+
+</ly-toolbar> -->
+
+<nav class="sticky-top  pr-2 d-flex light justify-content-between p-2" >
+    <h6 lyTyp="title " class="text-primary my-auto">Product Informations</h6>
+    <div>
+        <button mat-icon-button class="float-right " color="warn" (click)="close()"><mat-icon>close</mat-icon></button>
+ 
+    <button mat-icon-button class="float-right ml-1"  (click)="closeAndNavigate()"><mat-icon class="text-primary">edit</mat-icon></button>
+    </div>
+   </nav>
+
+<div ly-dialog-content>
+    <div >
+
+       
+
+        <!-- content -->
+        <div class="p-2 " >
+          
+            <br>
+          <div>
+            <p class="lead">Product images</p> 
+            <div style="width: 100wv; " class="d-flex overflow">
+                <!-- <div class="mx-1">
+                    <img [src]="imageurl+data.product_image" alt="" style="width: 150px;">
+                </div> -->
+                <div *ngFor="let pics of data.images" class="mx-1">
+                    <img [src]="imageurl+pics" alt="" style="width: 150px;">
+                </div>
+            </div>
+          </div>
+         
+            <hr>
+          
+            <!-- futher details -->
+            <p class="lead">Product Details</p>
+            <div class="row ">
+                <div class="col-md">
+                    <div class="form-group">
+                        <span class="  ">Product Name</span>
+                        <input type="text" disabled [value]="data.product_name" class="form-control border-0 text-primary">
+                    </div>
+        
+                    <div class="form-group">
+                        <span class="  ">Stock Status</span>
+                        <input type="text" disabled [value]="data.stock_status" class="form-control border-0 text-primary">
+                    </div>
+        
+                    <div class="form-group">
+                        <span class=" ">Number in Stock</span>
+                        <input type="text" disabled [value]="data.amount_in_stock" class="form-control border-0 text-primary">
+                    </div>
+        
+                    <div class="form-group">
+                        <span class=" ">Category</span>
+                        <input type="text" disabled [value]="data.category_name" class="form-control border-0 text-primary">
+                    </div>
+        
+                    <div class="form-group">
+                        <span class=" ">Sub-category</span>
+                        <input type="text" disabled [value]="data.sub_category" class="form-control border-0 text-primary">
+                    </div>
+        
+                </div>
+
+                <div class="col-md">
+                    <div class="form-group">
+                        <span class="  ">Price</span>
+                        <input type="text" disabled [value]="data.price" class="form-control border-0 text-primary">
+                    </div>
+        
+                    <div class="form-group">
+                        <span class="  ">Sales price</span>
+                        <input type="text" disabled [value]="data.sales_price" class="form-control border-0 text-primary">
+                    </div>
+        
+                    <div class="form-group">
+                        <span class=" ">Weight</span>
+                        <input type="text" disabled [value]="data.weight" class="form-control border-0 text-primary">
+                    </div>
+        
+                    <div class="form-group">
+                        <span class=" ">Product Description</span>
+                        <input type="text" disabled [value]="data.product_description" class="form-control border-0 text-primary">
+                    </div>
+        
+                    <div class="form-group">
+                        <span class="  ">Last updated</span>
+                        <input type="text" disabled [value]="data.updated_at | date" class="form-control border-0 text-primary">
+                    </div>
+                </div>
+            </div>
+
+
+            <div>
+                <p class="lead">Product Variation</p>
+                <div  *ngFor="let ky of data.variation">
+                    <hr>
+                    <span class="small p-1">{{ky.key}}:</span>
+                    <span class="badge badge-primary p-1 ml-1 " *ngFor="let va of ky.value">{{va}}</span>
+                    
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    <br><br><br><br>
+</div>

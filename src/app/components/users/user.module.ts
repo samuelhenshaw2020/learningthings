@@ -24,6 +24,7 @@ import { WebformComponent } from './webform/webform.component';
 import { ViewMessageComponent } from './webform/view-message/view-message.component';
 import { SocialMediaComponent } from 'src/app/includes/social-media/social-media.component';
 import { UsersGuard } from 'src/app/guards/users.guard';
+import {DragDropModule} from '@angular/cdk/drag-drop';
 
 
 
@@ -38,7 +39,7 @@ import { UsersGuard } from 'src/app/guards/users.guard';
     CustomersComponent,
     SupportComponent,
     ProductComponent,
-    MediaManagerComponent,
+   
     PortfolioComponent,
     PreviewComponent,
     WebformComponent
@@ -75,10 +76,11 @@ import { UsersGuard } from 'src/app/guards/users.guard';
     MatSidenavModule,
     ScrollingModule,
     MatSliderModule,
-    MatSelectModule
+    MatSelectModule,
+    DragDropModule
+    
   ],
   entryComponents: [
-    MediaManagerComponent
   ],
   providers: [
     UsersGuard

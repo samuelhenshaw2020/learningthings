@@ -28,3 +28,26 @@ export interface post_model{
 export interface post_data{
     data: post_model[]
 }
+
+
+
+export interface profile_model{
+    education: any[]
+    experience: any[]
+    project: any[]
+    lastname: string,
+    firstname: string
+    lang: string
+    birthday: string
+    email: string
+    nationality: string
+    linkedin: string
+    twitter: string
+    facebook: string
+    address: string
+    freelance: string
+    instagram: string
+    github: string
+    year_of_experience: number| any
+    phone: number | string | any
+}

@@ -1,1 +1,17 @@
-<h1 mat-dialog-title>Hi {{data.site_id}}</h1>
+
+<main mat-dialog-content>
+
+    <button mat-icon-button class="close" (click)="close()"><mat-icon>close</mat-icon></button>
+
+    {{data |json}}
+
+    <br><br>
+    <div class="card">
+        <p>{{data.business_name}}</p>
+    </div>
+
+    <div class="border">
+
+    </div>
+
+</main>

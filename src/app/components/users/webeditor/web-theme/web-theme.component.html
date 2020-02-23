@@ -53,7 +53,7 @@
     <div class="card-columns ">
         <div class="card shadow m-3 clickable selected" *ngFor="let th of theme; let i = index"
             [style.opacity]="i==prev ? 1: 0.8" style="position: relative;" (click)="selected(th.template_id, 1)">
-            <img src="{{th.image}}" alt="" class="card-img-top">
+            <img src="{{baseimg + th.image}}" alt="" class="card-img-top">
             <div class="card-body  bg-light">
                 <p class="card-title text-center">
                     <span>{{th.template_name}}</span>

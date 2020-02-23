@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { throwError, Observable, Subject, BehaviorSubject } from 'rxjs';
-import { catchError, retry, share, delay, tap, map } from 'rxjs/operators';
+
 import { identity_model } from '../components/users/webeditor/web.model';
 
 interface signin {
@@ -19,11 +19,12 @@ interface reqOTP{
 export class UserserviceService {
 
   // private 
-  private baseUrl = "/user/";
-  public baseImgUrl = 'http://192.168.1.100:8000/';
+  private baseUrl = "http://end.ihifix.com.ng/api/user/";
+  // public baseImgUrl = 'http://192.168.1.100:8000/';
+  public  baseImgUrl = "https://app.ihifix.com.ng"
   public usersiteinfo: identity_model = {
-    // site_data: {
-      about: {
+    
+    about: {
         enabled: null,
         about: ''
     },
@@ -50,7 +51,7 @@ export class UserserviceService {
         
     },
     portfolio: {
-        description: '',
+        description : '',
         image: '',
         profile: '',
         skills: []
@@ -61,7 +62,7 @@ export class UserserviceService {
         services: []
     },
     short: '',
-    site_id: null,
+    id: null,
     social_media: {
         enabled: null,
         handles: []
@@ -80,6 +81,7 @@ export class UserserviceService {
 
   private web_dommy = new BehaviorSubject<identity_model>(this.usersiteinfo);
   private products: BehaviorSubject<any> = new BehaviorSubject<any>({}); 
+  public site_color = new BehaviorSubject<any>('');
 
   public site_status = false;
 
@@ -103,8 +105,12 @@ export class UserserviceService {
   /*************************
    * Getter and setter
    *************************/
-  get siteData(){
+  siteData(){
     return this.web_dommy;
+  }
+
+  setSiteData(value){
+    this.web_dommy.next(value)
   }
 
   get no_site(){
@@ -113,6 +119,10 @@ export class UserserviceService {
 
   get product(){
     return this.products;
+  }
+
+  setProduct(value){
+    this.products.next(value)
   }
 
   
@@ -222,7 +232,7 @@ export class UserserviceService {
    * Post component
    **************************************/
    getAllPost(header?){
-     return this.http.post<any>(this.baseUrl + 'get_posts', {id: this.siteData.value.site_id}, header);
+     return this.http.post<any>(this.baseUrl + 'get_posts', {id: this.siteData().value.id}, header);
    }
 
    postCreatePost(val){
@@ -231,22 +241,22 @@ export class UserserviceService {
 
    postUpdatePost(val){
      return (
-      val.site_id =  this.siteData.value.site_id,
+      val.site_id =  this.siteData().value.id,
       this.http.post<any>(this.baseUrl+"update_post", val)
      )
    }
 
    postDeletePost(val){ 
-    return this.http.post<any>(this.baseUrl+"delete_post", {post_id: val, site_id: this.siteData.value.site_id});
+    return this.http.post<any>(this.baseUrl+"delete_post", {post_id: val, site_id: this.siteData().value.id});
   }
 
   postPostCategory(){
-    return this.http.post<any>(this.baseUrl+ "get_categories", {site_id: this.siteData.value.site_id});
+    return this.http.post<any>(this.baseUrl+ "get_categories", {site_id: this.siteData().value.id});
   }
 
    /////////////////////Manage media
    postUploadedImg(){
-    return this.http.post<any>(this.baseUrl+"get_media", {id: this.siteData.value.site_id});
+    return this.http.post<any>(this.baseUrl+"get_media", {id: this.siteData().value.id});
   }
 
   postuploadImg(val){
@@ -256,7 +266,7 @@ export class UserserviceService {
 
 
   postAdvanceSearch(val){
-    return this.http.post<any>(this.baseUrl+"search_post", {site_id: this.siteData.value.site_id, text: val})
+    return this.http.post<any>(this.baseUrl+"search_post", {site_id: this.siteData().value.id, text: val})
   }
 
 
@@ -265,7 +275,7 @@ export class UserserviceService {
    */
 
    postGetProducts(header?){
-     return this.http.post<any>(this.baseUrl+ "get_products", {site_id: this.siteData.value.site_id}, header);
+     return this.http.post<any>(this.baseUrl+ "get_products", {site_id: this.siteData().value.id}, header);
    }
 
   
@@ -274,9 +284,18 @@ export class UserserviceService {
    *****************************/
 
   postPortfolio(val){
-    return this.http.post<any>(this.baseUrl + "image.php", val);
+    return this.http.post<any>(this.baseUrl + "", val);
   }
 
+
+
+  publishService(data){
+    return this.http.post<any>(this.baseUrl+'publish', data)
+  }
+
+  getAnalysis(){
+    return this.http.get<any>(this.baseUrl+"count");
+  }
  
    
    
@@ -291,9 +310,9 @@ export class UserserviceService {
 
 
   /**The services for Verify-Email.component */
-  postRequestToken(val){
-    return this.http.post<any>(this.baseUrl+"server.php", val);
-  }
+  // postRequestToken(val){
+  //   return this.http.post<any>(this.baseUrl+"server.php", val);
+  // }
  
  
 
@@ -302,11 +321,11 @@ export class UserserviceService {
    */
 
    getUserToken(){
-     return localStorage.getItem('_token');
+     return localStorage.getItem('_itk');
    }
 
    getToken(){
-    return localStorage.getItem('_token') ? true : false;
+    return localStorage.getItem('_itk') ? true : false;
   }
 
    getUserConf(){
@@ -317,6 +336,10 @@ export class UserserviceService {
    isAllowed(){
      return this.http.post<any>(this.baseUrl + "is_allowed", {id: 1})
    }
+
+   isSiteValid(){
+    return this.siteData().value.short == 'cmc' ? true : false;
+  }
 
   
 

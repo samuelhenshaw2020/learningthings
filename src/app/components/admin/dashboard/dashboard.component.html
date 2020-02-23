@@ -13,16 +13,20 @@
             
                     <div class="  row">
                         <!-- Websites -->
-                        <div class=" col-md bg-white m-1 p-2 bg-black-light-2 shadow">
+                        <div class=" col-md  m-1 p-2 shadow" [ngClass]="night ? 'bg-black-light-2 ': 'bg-white'" >
                             <div class="d-flex justify-content-between ">
                                 <span class="text-fade small font-weight-bold">Users</span>
-                                <span class="numbers bg-black-light border-0" style="width: 60px; height: 60px; line-height: 70px;">
+                                <span  class="numbers  border-0" [ngClass]="night ? 'bg-black-light ': 'bg-back'" style="width: 60px; height: 60px; line-height: 70px;"
+                                >
                                     <ly-icon color="primary">people</ly-icon>
                                 </span>
                             </div>
 
                             <div>
-                                <h4 class="lead text-light display-4 text-center"><strong>672</strong></h4>
+                                <h4 class="lead display-4 text-center" [ngClass]="night ? 'text-light ': 'text-dark'">
+                                    <strong>{{user_count}}</strong>
+                                    <strong class="spinner-grow spinner-grow-lg" [hidden]="user_count"></strong>
+                                </h4>
                             </div>
 
                             <div class="text-center">
@@ -32,19 +36,23 @@
                                 &nbsp;
                                 <span class="small text-fade">January, 2019</span>
                             </div>
-                        </div>
+                        </div> 
 
                         <!-- accounts -->
-                        <div class=" col-md bg-white m-1 p-2 bg-black-light-2 shadow">
+                        <div class=" col-md  m-1 p-2 shadow" [ngClass]="night ? 'bg-black-light-2 ': 'bg-white'">
                                 <div class="d-flex justify-content-between">
                                     <span class="text-fade small font-weight-bold">Web Sites</span>
-                                    <span class="numbers  bg-black-light border-0" style="width: 60px; height: 60px; line-height: 70px;">
+                                    <span class="numbers  border-0" [ngClass]="night ? 'bg-black-light ': 'bg-back'" style="width: 60px; height: 60px; line-height: 70px;">
                                         <ly-icon color="primary">language</ly-icon>
                                     </span>
                                 </div>
     
                                 <div>
-                                    <h4 class="lead  display-4 text-center text-light"><strong>200</strong></h4>
+                                    <h4 class="lead  display-4 text-center " [ngClass]="night ? 'text-light ': 'text-dark'">
+                                        <strong>{{site_count}}</strong>
+                                        <strong class="spinner-grow spinner-grow-lg" [hidden]="site_count"></strong>
+
+                                    </h4>
                                 </div>
     
     
@@ -61,16 +69,20 @@
                     <!-- //////////// -->
                     <div class="  row">
                             <!-- stores -->
-                            <div class="col-md bg-white m-1 p-3 bg-black-light-2 shadow">
+                            <div class="col-md bg-white m-1 p-3 shadow" [ngClass]="night ? 'bg-black-light-2 ': 'bg-white'">
                                     <div class="d-flex justify-content-between">
                                         <span class="text-fade small font-weight-bold">Stores</span>
-                                        <span class="numbers bg-black-light border-0" style="width: 60px; height: 60px; line-height: 70px;">
+                                        <span class="numbers  border-0" [ngClass]="night ? 'bg-black-light ': 'bg-back'" style="width: 60px; height: 60px; line-height: 70px;">
                                             <ly-icon color="primary">shopping_cart</ly-icon>
                                         </span>
                                     </div>
         
                                     <div>
-                                        <h4 class="lead text-light display-4 text-center"><strong>200</strong></h4>
+                                        <h4 class="lead text-light display-4 text-center" [ngClass]="night ? 'text-light ': 'text-dark'">
+                                            <strong>{{store_count}}</strong>
+                                            <strong class="spinner-grow spinner-grow-lg" [hidden]="store_count"></strong>
+                                        
+                                        </h4>
                                     </div>
         
         
@@ -83,16 +95,16 @@
                                     </div>
                                 </div>
                                 <!-- analysis -->
-                                <div class=" col-md bg-white m-1 p-3 bg-black-light-2 shadow">
+                                <div class=" col-md bg-white m-1 p-3  shadow" [ngClass]="night ? 'bg-black-light-2 ': 'bg-white'">
                                         <div class="d-flex justify-content-between">
                                             <span class="text-fade small font-weight-bold">Reports</span>
-                                            <span class="numbers bg-black-light border-0" style="width: 60px; height: 60px; line-height: 70px;">
+                                            <span class="numbers  border-0" [ngClass]="night ? 'bg-black-light ': 'bg-back'" style="width: 60px; height: 60px; line-height: 70px;">
                                                 <ly-icon color="primary">info</ly-icon>
                                             </span>
                                         </div>
             
                                         <div>
-                                            <h4 class="lead  display-4 text-center text-light"><strong>102</strong></h4>
+                                            <h4 class="lead  display-4 text-center " [ngClass]="night ? 'text-light ': 'text-dark'"><strong>102</strong></h4>
                                         </div>
             
             
@@ -119,10 +131,13 @@
              ------------------------------>
         <div class="col-md-4 px-3 pb-3 pt-1 ">
         
-            <div class="bg-black-light-2 p-2 h-100  shadow">
+            <div class=" p-2 h-100  shadow" [ngClass]="night ? 'bg-black-light-2 ': 'bg-white'">
 
-                    <div>
+                    <div class="d-flex justify-content-between">
                             <span class="text-fade small font-weight-bold">site Reports</span>
+                            <span class="numbers border-0 " [ngClass]="night ? 'bg-black-light ': 'bg-back'" style="width: 60px; height: 60px; line-height: 70px;">
+                                <ly-icon color="primary">pie_chart</ly-icon>
+                            </span>
                     </div>
                     <br>
 
@@ -134,39 +149,39 @@
                           </thead> -->
 
                           <tbody>
-                              <tr>
-                                  <td class="small text-light" style="width: 50px;">Blog</td>
+                              <tr> 
+                                  <td class="small " [ngClass]="night ? 'text-light ': 'text-dark'" style="width: 50px;">Blog ({{blog_count}})</td>
                                   <td>
                                         <div class="progress" style="height: 1.5em;">
-                                                <div class="progress-bar my-primary"  style="width: 45%;"></div>
+                                                <div class="progress-bar my-primary"  [style.width]="blog_per + '%'">{{blog_per}}%</div>
                                         </div>
                                      
                                   </td>
                               </tr>
                               <tr>
-                                    <td class="small text-light" style="width: 50px;">Store</td>
+                                    <td class="small " [ngClass]="night ? 'text-light ': 'text-dark'" style="width: 50px;">Store ({{store_count}})</td>
                                     <td>
                                           <div class="progress" style="height: 1.5em;">
-                                                  <div class="progress-bar my-primary" role="progressbar" style="width: 25%;"></div>
+                                                  <div class="progress-bar my-primary" role="progressbar" [style.width]="store_per + '%'">{{store_per}}%</div>
                                           </div>
                                           
                                        
                                     </td>
                                 </tr>
                                 <tr>
-                                        <td class="small text-light" style="width: 50px;">Portfolio</td>
+                                        <td class="small " [ngClass]="night ? 'text-light ': 'text-dark'" style="width: 50px;">Portfolio ({{port_count}})</td>
                                         <td>
                                               <div class="progress" style="height: 1.5em;">
-                                                      <div class="progress-bar my-primary" role="progressbar" style="width: 70%;"></div>
+                                                      <div class="progress-bar my-primary" role="progressbar" [style.width]="port_per + '%'">{{store_per}}%</div>
                                               </div>
                                            
                                         </td>
                                     </tr>
                                     <tr>
-                                            <td class="small text-light" style="width: 50px;">Business</td>
+                                            <td class="small " [ngClass]="night ? 'text-light ': 'text-dark'" style="width: 50px;">Business ({{biz_count}})</td>
                                             <td>
                                                   <div class="progress" style="height: 1.5em;">
-                                                          <div class="progress-bar my-primary" role="progressbar" style="width: 25%;"></div>
+                                                          <div class="progress-bar my-primary" role="progressbar" [style.width]="biz_per + '%'">{{biz_per}}%</div>
                                                   </div>
                                                
                                             </td>
@@ -190,10 +205,10 @@
     <div class="row">
 
         <div class="col-md">
-                <div class=" bg-black-light-2 p-3 shadow">
+                <div class="  p-3 shadow" [ngClass]="night ? 'bg-black-light-2 ': 'bg-white'">
                         <div class="d-flex justify-content-between">
                                 <span class="text-fade small font-weight-bold">Recent Payment Log</span>
-                                <span class="numbers border-0 bg-black-light" style="width: 60px; height: 60px; line-height: 70px;">
+                                <span class="numbers border-0 " [ngClass]="night ? 'bg-black-light ': 'bg-back'" style="width: 60px; height: 60px; line-height: 70px;">
                                     <ly-icon color="primary">payment</ly-icon>
                                 </span>
                             </div>
@@ -211,7 +226,7 @@
                                 <tbody>
                                     <tr *ngFor="let h of [1,2,3,4,5]">
                                         <td>
-                                            <a routerLink="/admin/dashboard" class="text-light">Henshaw Samuel</a>
+                                            <a routerLink="/admin/dashboard" class="" [ngClass]="night ? 'text-light ': 'text-dark'">Henshaw Samuel</a>
                                         </td>
                                         <td class="text-fade">  <span class="badge badge-dark text-fade p-2">VID</span> TR-27638</td>
                                         <td class=" text-fade">May 24th, 2019</td>
@@ -227,9 +242,12 @@
 
 
         <div class="col-md-4">
-            <div class="p-3 bg-black-light-2">
-                    <div>
+            <div class="p-3 shadow" [ngClass]="night ? 'bg-black-light-2 ': 'bg-white'">
+                    <div class="d-flex justify-content-between">
                             <span class="text-fade small font-weight-bold">Revenue</span>
+                            <span class="numbers border-0 " [ngClass]="night ? 'bg-black-light ': 'bg-back'" style="width: 60px; height: 60px; line-height: 70px;">
+                                <ly-icon color="primary">money</ly-icon>
+                            </span>
                     </div>
 
                     <div class="d-flex justify-content-center">

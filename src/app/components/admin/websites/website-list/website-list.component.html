@@ -6,9 +6,9 @@
             <div>
                 <span>  
                     <span class="small text-fade d-none d-md-inline">total </span>
-                    <span class="numbers bg-black text-fade border-0" style="width: 30px; height: 30px; line-height: 30px">{{total}}</span>&nbsp;
+                    <span class="numbers" [ngClass]="night ? 'bg-black-light text-fade border-0': 'bg-back border text-dark'"  style="width: 30px; height: 30px; line-height: 30px">{{total}}</span>&nbsp;
                     <span class="small text-fade d-none d-md-inline">current </span>
-                    <span class="numbers bg-black text-fade border-0" style="width: 30px; height: 30px; line-height: 30px">{{sites.length}}</span>
+                    <span class="numbers  " [ngClass]="night ? 'bg-black-light text-fade border-0': 'bg-back border text-dark'" style="width: 30px; height: 30px; line-height: 30px">{{sites.length}}</span>
             </span>
             </div>
     
@@ -16,14 +16,14 @@
                 <div class="   ">
                     <!-- <i class="fa fa-search  m-auto"></i> -->
                     
-                    <select  class=" form-control bg-black-light-2 text-fade border-0">
+                    <select  class=" form-control  " [ngClass]="night ? 'bg-black-light-2 text-light border-secondary border-0': ' border text-dark'">
                             <option *ngFor="let option of ['All', 'Online', 'Suspended']"
                                     [value]="option">
                                     <span class="small ">{{option}}</span>
                             </option>
                     </select>
             </div>
-                <input type="search" [(ngModel)]="qr" class="form-control bg-black-light-2 text-light  border-0" placeholder="Search..." (keyup)="search_sites(qr.value)">
+                <input type="search"  class="form-control"  [ngClass]="night ? 'bg-black-light-2 text-light border-0': ' border text-dark'" placeholder="Search..." (keyup)="search_sites($event)">
                
             </div>
         </div>
@@ -32,15 +32,37 @@
         <br>
 
         <div class="table-responsive ">
-            <table class="table table-borderless table-striped mat-elevation-z7">
-                <tbody class="bg-black-light-2">
+
+            <div class="row m-1" *ngIf="isQuery">
+                <div class="col p-2">
+                        <div class="theme1 " style="height: 35px; "></div>
+                </div>
+                <div class="col p-2">
+                        <div class=" theme2" style="height: 35px;"></div>
+                </div>
+                <div class="col p-2 d-none d-md-inline">
+                        <div class=" theme3 " style="height: 35px; "></div>
+                </div>
+                <div class="col p-2 d-none d-md-inline">
+                        <div class=" theme1 " style="height: 35px; "></div>
+                </div>
+            </div>
+
+            <table class="table shadow" *ngIf="!isQuery">
+
+               
+
+                <tbody class="" [ngClass]="night ? 'bg-black-light-2 ': 'bg-white'">
                     <tr class="    p-2" *ngFor="let site of sites; let i = index">
                         <td class="m-auto ">
-                            <p><a class="lead text_dark clickable text-light" (click)="viewSite(site.site_id)" ><strong>{{site.business_name}}</strong></a></p>
+                            <p class="lead">
+                            <strong class="badge text-light" [style.backgroundColor]="site.color" >{{site.business_name[0]}}</strong>
+                            &nbsp;
+                           <a class="lead  clickable " [ngClass]="night ? 'text-light ': 'text-dark'" (click)="viewSite(site.site_id)" ><strong>{{site.business_name}}</strong></a></p>
                         </td>
                         <td class=" m-auto">
-                            <span class="badge  badge-dark bg-black-light text-fade p-2 m-auto   ">{{site.category}}</span>&nbsp;
-                            <span class=" badge badge-dark bg-black-light text-fade p-2 m-auto  ">
+                            <span class="badge    text-fade p-2 m-auto   "  [ngClass]="night ? 'bg-black-light ': 'badge-light'">{{site.category}}</span>&nbsp;
+                            <span class=" badge   text-fade p-2 m-auto  " [ngClass]="night ? 'bg-black-light ': 'badge-light'">
                                 online
                                 <i class="fa fa-circle fa-lg" [ngClass]="site.online === 0 ? 'text-danger': 'running'"></i>
                                 
@@ -59,17 +81,27 @@
                         </td>
             
                         <td class=" m-auto">
-                            <a class="">
-                                <span class="text-fade" #sub>{{site.subscription | subDate |date:"MMM d, y"}}</span>
+                            <a class="" >
+                                <span [ngClass]="night ? 'text-light ': 'text-dark'" #sub>{{site.subscription | subDate }} Days Remaining</span>
                             </a>
                         </td>
             
                         <td>
-                            <span class="spinner-grow spinner-grow-lg text-light" [hidden]="i==prev ? false : true"></span>
-                            <button [hidden]="i!=prev ? false : true" class="text-light" ly-button appearance="icon" raised [ngClass]="site.online === 1 ? 'bg-warning': 'bg-success'" (click)="suspend(site.site_id, site.online, i);">
-                                <ly-icon >{{site.online === 1 ? 'block' : 'swap_horiz' }}</ly-icon>
+                            <button ly-button appearance="icon"  (click)="sendMail(site.user); prev = i" color="primary">
+                                <ly-icon [hidden]="i==prev ? true : false" [ngClass]="night ? 'text-light ': ''">email</ly-icon>
+                                <span class="spinner-grow spinner-grow-lg text-light" [hidden]="i==prev ? false : true"></span>
                                 
                             </button>
+
+                            
+                            <button  ly-button appearance="icon"  (click)="suspend(site.site_id, site.online, i);">
+                                <ly-icon [hidden]="i!=prev ? false : true" [ngClass]="site.online === 1 ? 'text-warning': 'text-success'">{{site.online === 1 ? 'block' : 'swap_horiz' }}</ly-icon>
+                                <span class="spinner-grow spinner-grow-lg text-light" [hidden]="i==prev ? false : true"></span>
+                                
+                            </button>
+
+
+                            
                         </td>
             
                     </tr>

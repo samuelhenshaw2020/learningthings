@@ -1,0 +1,7 @@
+<div>
+    <div class="content-container p-4 " [ngClass]="night ? 'bg-black-light-2': 'bg-light'">
+        <p class="text-center " [ngClass]="night ? 'text-fade': 'text-dark'">{{data}}</p>
+    </div>
+    <button mat-flat-button color="warn" class="w-50  text-light" style="border-radius: 0px; height: 47px;" [mat-dialog-close]='false'>No</button>
+    <button mat-flat-button class="w-50 bg-success  text-light" style="border-radius: 0px; height: 47px;" [mat-dialog-close]="true">Yes, please</button> 
+</div>

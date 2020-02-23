@@ -12,19 +12,22 @@ import { PortfolioComponent } from './portfolio/portfolio.component';
 import { PreviewComponent } from './preview/preview.component';
 import { WebformComponent } from './webform/webform.component';
 import { UsersGuard } from 'src/app/guards/users.guard';
+import { UserSettingsComponent } from './user-settings/user-settings.component';
+import { SiteTypeGuard } from 'src/app/guards/site-type.guard';
 
 
 const routes: Routes = [
   {path: 'overview', component: OverviewComponent},
   {path: 'manmedia', component: ManageMediaComponent, resolve: {media: UserResolverService},   loadChildren: ()=> import('./manage-media/manage-media.module').then(mod => mod.ManageMediaModule)},
-  {path: 'product', component: ProductComponent , resolve: {product: UserResolverService}, loadChildren: ()=> import('./product/product.module').then( mod => mod.ProductModule)},
+  {path: 'product', component: ProductComponent , canLoad: [SiteTypeGuard], resolve: {product: UserResolverService}, loadChildren: ()=> import('./product/product.module').then( mod => mod.ProductModule)},
   {path: 'website', component: WebeditorComponent , loadChildren: ()=> import('./webeditor/webeditor.module').then(mod => mod.WebeditorModule)},
   {path: 'support', component: SupportComponent},
   {path: 'post', component: PostComponent , resolve:{post: UserResolverService} ,loadChildren: ()=> import('./post/post.module').then(mod => mod.PostModule)},
-  {path: 'customer', component: CustomersComponent,  loadChildren: ()=> import('./customers/customers.module').then(mod => mod.CustomersModule) },
-  {path: 'portfolio', component: PortfolioComponent },
+  {path: 'customer', component: CustomersComponent,  canLoad: [SiteTypeGuard],   loadChildren: ()=> import('./customers/customers.module').then(mod => mod.CustomersModule) },
+  {path: 'portfolio', component: PortfolioComponent , canActivate: [SiteTypeGuard]},
   {path: 'preview', component: PreviewComponent },
   {path: 'webform', component: WebformComponent ,  loadChildren: ()=> import('./webform/webform.module').then(mod => mod.WebformModule)},
+  {path: 'p', component: UserSettingsComponent},
   {path: '', redirectTo: 'overview', pathMatch: 'full'},
   {path: '**', component: OverviewComponent}
 ];

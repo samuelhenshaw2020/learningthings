@@ -1,25 +1,28 @@
+<main  [style.height]="height" [ngClass]="night ? 'bg-black-light-2 ': 'back2 '"  >
+    
+<div   >
+    
 <!-- <app-navbar></app-navbar> -->
 <br>
-<main class="sh  mx-auto form ">
+<main class=" mx-auto form  " [ngClass]="night ? 'bg-black-light-2 shadow': 'bg-light m-shadow'" >
+<mat-progress-bar [hidden]="!submitted"  mode="indeterminate" ></mat-progress-bar>
+
     <br>
         <!-- <mat-progress-bar mode="indeterminate" color="primary" [hidden]='!submitted'></mat-progress-bar> -->
   <div class="p-2 " [style.opacity]="submitted ? 0.9 : 1">
-        <p class="text-center">
-            <button mat-icon-button routerLink="/home">
-                    <span class="numbers " style="width: 50px; height: 50px; line-height: 45px;">
-                            <i class="	fa fa-home fa-lg" [hidden]="submitted "></i>
-                            <span class="spinner-grow spinner-grow-sm " [hidden]="!submitted "></span>
-                        </span>
-            </button>
+     
+     
+      
+    <h1  class="text-center font-weight-bold m-blue-f">
+        <img src="/assets/logos/logo.png" alt="" style="width: 100px;">    
+    </h1>
+        <p class="lead text-center" style="font-size: 16px;">
+            <span class="lead " [ngClass]="night ? 'text-fade' : ''">Sign in to your account.</span><br>
         </p>
-        <p class="lead text-center" style="font-size: 15px;">
-            <span class="lead">Sign in to your account.</span><br>
-            <a routerLink="/login/signup" class="font-weight-bold">Sign Up?</a></p>
+       
         
         
         <div class="container d-flex justify-content-center ">
-        
-        
         
             <form novalidate class="" [formGroup]='formData' (submit)="submitForm()">
         
@@ -29,14 +32,19 @@
                 <!-- </p> -->
         
                 <!-- <mat-form-field class="w-100" floatLabel='never' appearance="outline"  > -->
-                <div class=" form-group d-flex ">
-                   <div class="w-100 form-search d-flex  border p-2   " [ngClass]="email.touched && email.invalid ? 'border-danger anim-glow': ''" >
-                        <input  placeholder="Email  address" formControlName='email' class="w-100  lead text-secondary" style="font-size: 15px; font-weight: 500;" >
-                   </div>
-                    <!-- <button mat-icon-button type="button" class="m-auto">
-                        <mat-icon class="text-danger" *ngIf="email.dirty && email.invalid">cancel</mat-icon>
-                        <mat-icon *ngIf="email.dirty && email.valid">check_circle</mat-icon>
-                    </button> -->
+                <div class=" form-group  ">
+                       <mat-form-field class="w-100 "  >
+                           <mat-label [ngClass]="night ? 'text-fade': ''">Email  address</mat-label>
+                        <input matInput formControlName='email'   
+                        [ngClass]="night ? 'bg-black-light-2 text-light': 'bg-light'" style="font-size: 15px; font-weight: 500;" >
+                       
+                        <mat-hint align="end" class="text-danger small pl-1 " *ngIf="email.touched && email.invalid">
+                            <i class="fa fa-exclamation-triangle small fa-sm"></i>
+                            Problem with email, please check.
+                        </mat-hint>
+                    </mat-form-field>
+                   
+                 
                 </div>
                 
                 <!-- </mat-form-field> -->
@@ -44,46 +52,52 @@
         
         
         
-                <p style="line-height: 1px;" class="text-right mr-3 clickable small mt-4  font-weight-bold ">
-                        <a  
-                        routerLink="/login/rpwd">Forget Password?</a>
-                </p>
+               
                 <div class="form-group  ">
-                    <div class="w-100 form-search d-flex  border p-0 pl-2" [ngClass]="password.dirty && password.invalid ? 'border-danger': ''">
-                            <input  class="w-100  lead text-secondary" style="font-size: 15px; font-weight: 500;" placeholder="Password" [type]="hide ? 'password' : 'text'"
-                            formControlName='password'>
-                            <button mat-icon-button (click)="hide = !hide" type="button" class="m-auto">
-                                    <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-                                </button>
+                    <div class="w-100    p-0" [ngClass]="password.dirty && password.invalid ? 'border-danger': ''">
+                        <mat-form-field class="w-100" >
+                            <mat-label [ngClass]="night ? 'text-fade': ''">Password</mat-label>
+                            <input  matInput
+                            [ngClass]="night ? 'bg-black-light-2  text-light': 'bg-light'" style="font-size: 15px; font-weight: 500;"  [type]="hide ? 'password' : 'text'"
+                            formControlName='password' >
+                            <button mat-icon-button (click)="hide = !hide" matSuffix  type="button" class="m-auto  " matSuffix>
+                                <mat-icon  class="text-secondary">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                            </button>
+                            <mat-hint align="end" class="mt-1"><a   routerLink="/login/rpwd" href="#" class="text-secondary " style="font-size: 13px;" (click)="prevent($event)">Forget Password?</a></mat-hint>
+                        </mat-form-field>
+                            
                     </div>
                    
                 </div>
-                <br>
+                
 
                 <div>
-                    <p class="text-secondary lead" style="font-size: 14px; ">By clicking Sign In, you agree to our 
-                         <a href="/login/signin" class="font-weight-bold">Terms of Use</a>
+                    <p class=" lead" style="font-size: 12px; " [ngClass]="night ? 'text-fade' : 'text-secondary'">By clicking SignIn, you agree to our 
+                         <a routerLink="/login/signin" class="font-weight-bold">Terms of Use</a>
                          and our 
-                         <a href="/login/signin" class="font-weight-bold">Privacy Policy</a>
+                         <a routerLink="/login/signin" class="font-weight-bold">Privacy Policy</a>
                     </p>
                 </div>
-                <br>
+                
         
         
         
                 
                 <div class="form-group">
-                    <button color="primary" mat-raised-button class="w-100  p-1      " type="submit"
+                    <button  mat-raised-button class="w-100 br-30 p-2 shadow bg-primary" type="submit"
                         [disabled]="submitted">
-                        <span class="spinner-grow spinner-grow-lg" [hidden]="!submitted"></span>
-                        <span class="d-none d-md-inline ">{{!submitted ? 'SIGN IN' : 'AUTHENTICATING...'}}</span>&nbsp;&nbsp;
-                        <i class="fa fa-sign-in font-weight-bold fa-lg d-md-none" [hidden]="submitted"></i>
-                        
-                        <!-- <i class="fa fa-circle-o-notch fa-spin font-weight-bold fa-lg" [hidden]="!submitted"></i> -->
-                        <!-- <span [hidden]="!submitted">
-                            <app-loaderdot></app-loaderdot>
-                        </span> -->
+                        <span class="font-weight-bold text-light">{{!submitted ? 'SIGN IN' : 'AUTHENTICATING...'}}</span>&nbsp;&nbsp;
+                        <!-- <i class="fa fa-sign-in font-weight-bold fa-lg d-md-none text-light lead" [hidden]="submitted"></i> -->
+                        <i class="	fa fa-circle-o-notch fa-spin text-light" [hidden]="!submitted"></i>
                     </button>
+                    
+                </div>
+
+                <div class="form-group">
+                    <a color="" routerLink="/login/signup" mat-stroked-button class="w-100 br-30  p-2    " type="button">
+                        <span class=" font-weight-bold text-primary" >SIGN UP</span>&nbsp;&nbsp;
+                        <!-- <mat-icon  class="text-primary d-md-none">	person_add</mat-icon> -->
+                    </a>
                 </div>
             </form>
         
@@ -91,29 +105,32 @@
         
         </div>
         
-        <br>
+        
         <div class="d-flex justify-content-center">
-            <hr class="w-25 bg-dark">
-            <span class="font-wight-bold" style="font-family: cursive;">Or</span>
-            <hr class="w-25 bg-dark">
+            <hr class="w-25 ">
+            <span class="font-wight-bold text-secondary small">Or</span>
+            <hr class="w-25 ">
         </div>
-        <br>
+
         
         
         
-        <div class="container  d-flex justify-content-center ">
-            <div class="form">
+        <div class="  d-flex justify-content-center ">
+            <div class="form d-flex justify-content-around">
                 <div>
-                    <button mat-stroked-button class="w-100  p-1 mat-elevation-z4  " type="button">
-                        <i class="fa fa-facebook fa-lg text-primary lead"></i>&nbsp;&nbsp;
-                        <span class="d-none d-md-inline text-secondary">Sign in with Facebook</span>
+                    <button mat-flat-button   class="w-100 bg-primary  p-1 px-3   br-30" type="button" (click)="facebookLogin() ">
+                        <i class="fa fa-facebook fa-lg text-light lead"></i>&nbsp;&nbsp;
+                        <span class=" text-light">FACEBOOK</span>
                     </button>
                 </div>
                 <br>
                 <div>
-                    <button mat-stroked-button class="w-100 mat-elevation-z4  p-1 " type="button">
-                        <i class="fa fa-google fa-lg text-danger lead"></i> &nbsp;&nbsp;
-                        <span class="d-none d-md-inline text-secondary">Sign in with Google</span>
+                    <button mat-flat-button color="warn" class="w-100  br-30  p-2 px-3 " type="button" (click)="googleSignin()">
+                        <span [hidden]="goStatus">
+                            <i class="fa fa-google fa-lg text-light lead"></i> &nbsp;&nbsp;
+                            <span class=" text-light">GOOGLE</span>
+                        </span>
+                        <app-loaderdot [hidden]="!goStatus"></app-loaderdot>
                     </button>
                 </div>
             </div>
@@ -126,5 +143,7 @@
     
     
     
-    
+    <br><br>
+</main>
+</div>
 </main>

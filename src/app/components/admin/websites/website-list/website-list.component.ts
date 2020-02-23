@@ -3,6 +3,9 @@ import { AdminserviceService } from 'src/app/services/adminservice.service';
 import { MatDialog } from '@angular/material';
 import { AdminService } from '../../admin.service';
 import { ViewSiteComponent } from '../../view-site/view-site.component';
+import { AdminMailComponent } from '../../admin-mail/admin-mail.component';
+import { interval } from 'rxjs';
+import { AppService } from 'src/app/app.service';
 
 @Component({
   selector: 'app-website-list',
@@ -15,14 +18,21 @@ export class WebsiteListComponent implements OnInit {
   sites = [];
   ended  = false;
   total = 0;
+  night;
 
   constructor(
     private dialog: MatDialog,
     private adminServ: AdminserviceService,
-    private innerServ: AdminService
+    private innerServ: AdminService,
+    private rootServ: AppService
   ) { }
 
   ngOnInit() {
+
+    this.innerServ.night.subscribe( d => {
+      this.night =d;
+    })
+
     this.innerServ.sitesItems.subscribe(d => {
       this.sites = d.message;
       this.total = d.total;
@@ -93,6 +103,27 @@ export class WebsiteListComponent implements OnInit {
    
   }
 
+  prev;
+  sendMail(user) {
+ 
+    this.adminServ.get_user_mail(user).subscribe(async d => {
+      console.log(d)
+
+      this.dialog.open(AdminMailComponent, {
+        data: { email: d.message[0].user_mail, task: '_target' },
+        width: "350px",
+        disableClose: true
+
+
+      })
+    },
+      err => {
+        console.log(err)
+      }, () => {
+        this.prev = null;
+      })
+  }
+
 
   viewSite(val){
      let data = this.sites.filter(d => {
@@ -102,13 +133,14 @@ export class WebsiteListComponent implements OnInit {
 
     this.dialog.open(ViewSiteComponent, {
       data: data[0],
-      panelClass: ['bg-black-light'],
+      minWidth: '100%',
+      height: '100%',
       
     })
 
   }
 
-  prev;
+  
   suspend(id, act, index){
     this.prev = index
     if(act ===0){
@@ -137,12 +169,45 @@ export class WebsiteListComponent implements OnInit {
     }
     )}
 
+  isQuery = false;
+  async search_sites($event){
+    let val = $event.target.value;
+    let event: KeyboardEvent = $event;
+    
 
-  search_sites(){
-    this.adminServ.search_items({word: "henshaw"} ,'search').subscribe(d => {
-      console.log(d)
-    })
+    if($event instanceof KeyboardEvent){
+      $event.preventDefault();
+      
+      if($event.keyCode === 13 ){
+        this.isQuery = true;
+        this.adminServ.search_items({word: val})
+        .subscribe(
+          s => {
+          this.innerServ.sitesItems.next(s)
+        }, 
+        err => {
+          console.log(err)
+        }, 
+        ()=> {
+          this.isQuery = false;
+        })
+      }else{
+        if(val.length < 10){
+          this.rootServ.filterTable(val, 0);
+        }
+      }
+
+     
+      
+
+     
+    }
+
+    
   }
+
+
+  
 
 
 }

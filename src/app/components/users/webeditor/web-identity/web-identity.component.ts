@@ -5,6 +5,7 @@ import { AngularEditorConfig } from '@kolkov/angular-editor';
 import { UserserviceService } from 'src/app/services/userservice.service';
 import { FormBuilder } from '@angular/forms';
 import { identity_model, social_model, vission, mission, about } from '../web.model';
+import { AppService } from 'src/app/app.service';
 
 
 
@@ -57,13 +58,16 @@ export class WebIdentityComponent implements OnInit, AfterContentInit{
   };
   
   imgbaseUrl;
+  color: string = 'red';
+  color_list: any;
   
    
 
   constructor(
     private dialog: MatDialog,
     private serv: UserserviceService,
-    private snackbar: MatSnackBar
+    private snackbar: MatSnackBar,
+    private rootS: AppService
   ) { 
    this.imgbaseUrl = this.serv.baseImgUrl;
   }
@@ -75,7 +79,7 @@ export class WebIdentityComponent implements OnInit, AfterContentInit{
   ngOnInit() {
     
     
-    this.serv.siteData.subscribe((data:identity_model) => {
+    this.serv.siteData().subscribe((data:identity_model) => {
       // console.log(data);
       let info = data;
       // console.log(data.site_data.logo)
@@ -93,6 +97,7 @@ export class WebIdentityComponent implements OnInit, AfterContentInit{
       this.description = info.description;
     });
 
+    this.getColor()
     
    
   }
@@ -100,6 +105,19 @@ export class WebIdentityComponent implements OnInit, AfterContentInit{
   ngAfterContentInit(){
     
    
+  }
+
+  getColor(){
+    this.serv.site_color.subscribe(
+      col => {
+        this.color =col;
+      }
+    );
+  }
+
+  showColor($event){
+    console.log(this.color)
+    
   }
 
   save_site_data(){
@@ -111,21 +129,21 @@ export class WebIdentityComponent implements OnInit, AfterContentInit{
             about: this.about.about
         },
         business_name: this.business_name,
-        color: this.serv.siteData.value.color,
+        color: this.color,
         contact: {
-            address: this.serv.siteData.value.contact.address,
-            email: this.serv.siteData.value.contact.email,
-            enabled: this.serv.siteData.value.contact.enabled,
-            phone: this.serv.siteData.value.contact.phone
+            address: this.serv.siteData().value.contact.address,
+            email: this.serv.siteData().value.contact.email,
+            enabled: this.serv.siteData().value.contact.enabled,
+            phone: this.serv.siteData().value.contact.phone
         },
-        description: this.serv.siteData.value.description,
+        description: this.serv.siteData().value.description,
         gallery: {
-            enabled: this.serv.siteData.value.gallery.enabled,
-            gallery: this.serv.siteData.value.gallery.gallery
+            enabled: this.serv.siteData().value.gallery.enabled,
+            gallery: this.serv.siteData().value.gallery.gallery
         },
         header_image:  this.imglink,
         header_title: this.head_title,
-        link: this.serv.siteData.value.link,
+        link: this.serv.siteData().value.link,
         logo:  this.logolink,
         mission: {
             enabled:  this.mission.enabled ,
@@ -133,24 +151,24 @@ export class WebIdentityComponent implements OnInit, AfterContentInit{
            
         },
         portfolio: {
-            description:  this.serv.siteData.value.portfolio.description,
-            image: this.serv.siteData.value.portfolio.image,
-            profile: this.serv.siteData.value.portfolio.profile,
-            skills: this.serv.siteData.value.portfolio.skills
+            description:  this.serv.siteData().value.portfolio.description,
+            image: this.serv.siteData().value.portfolio.image,
+            profile: this.serv.siteData().value.portfolio.profile,
+            skills: this.serv.siteData().value.portfolio.skills
     
         },
         service: {
-            enabled: this.serv.siteData.value.service.enabled,
-            services: this.serv.siteData.value.service.services
+            enabled: this.serv.siteData().value.service.enabled,
+            services: this.serv.siteData().value.service.services
         },
-        short: this.serv.siteData.value.short,
-        site_id: this.serv.siteData.value.site_id,
+        short: this.serv.siteData().value.short,
+        id: this.serv.siteData().value.id,
         social_media: {
             enabled: this.socialMedia.enabled,
             handles: this.socialMedia.handles
         },
-        template_id: this.serv.siteData.value.template_id,
-        user_id: this.serv.siteData.value.user_id,
+        template_id: this.serv.siteData().value.template_id,
+        user_id: this.serv.siteData().value.user_id,
         vission: {
             enabled: this.vission.enabled,
             vission: this.vission.vission
@@ -160,15 +178,24 @@ export class WebIdentityComponent implements OnInit, AfterContentInit{
     
       //  }
     }
-    // this.serv.siteData.next(newData);
+    // this.serv.siteData().next(newData);
     this.serv.postWebIdentityData(newData).subscribe((d) => {
       console.log(d);
       this.submitted = false;
-      this.serv.siteData.next(d);
-      this.snackbar.open("Data saved Successfully!", '', {
-        panelClass: ["bg-white", "text-dark"],
-        duration: 4000
-      })
+      if(d.success === true){
+        this.serv.siteData().next(d.site);
+        this.serv.site_color.next(d.site.color);
+        this.snackbar.open("Data saved Successfully!", '', {
+          panelClass: ["bg-white", "text-dark"],
+          duration: 4000
+        })
+      }
+      if(d.success === false){
+        this.snackbar.open("Data was not Updated!", '', {
+          panelClass: ["bg-white", "text-danger"],
+          duration: 4000
+        })
+      }
     }, err=>{
       this.submitted = false;
       this.snackbar.open("An error occured!", " close", {duration: 4000})
@@ -180,13 +207,9 @@ export class WebIdentityComponent implements OnInit, AfterContentInit{
 
 
  
-  openMedia(el, index?){
-    const dialogRef = this.dialog.open(MediaManagerComponent, {
-      minWidth: '90%',
-      minHeight: "500px",
-      maxHeight: "500px",
-      disableClose: true
-    });
+  openMedia( $event: MouseEvent, index?){
+    $event.preventDefault();
+    const dialogRef = this.rootS.mediaBox();
 
     // console.log(el)
       dialogRef.afterClosed().subscribe(link => {

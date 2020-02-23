@@ -10,7 +10,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
       <i class="fa fa-check-circle fa-lg text-success numbers  display-2" *ngIf="data.success"></i>
       <i class="fa fa-close fa-lg text-danger numbers  display-2" *ngIf="!data.success"></i>
    </p>
-  <p class="small text-center font-2">{{data.msg}}</p>
+  <p class="text-center font-28">{{data.msg}}</p>
 </div>
 <br>
 <div mat-dialog-actions align="center">

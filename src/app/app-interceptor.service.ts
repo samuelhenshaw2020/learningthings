@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 import { PostService } from './components/users/post/post.service';
 import { AdminserviceService } from './services/adminservice.service';
 import { DropListRef } from '@angular/cdk/drag-drop';
+import { HomeService } from './services/home.service';
  
 @Injectable({
   providedIn: 'root'
@@ -24,23 +25,21 @@ export class AppInterceptorService{
   ) { }
 
   handleError(error: HttpErrorResponse){
-    // let admin = this.injector.get(AdminserviceService);
+    
     if(error.status === 401){
-      this.serv.logOut();
-      window.location.reload(true);
+      localStorage.removeItem('_itk');
+      window.location.reload();
     }
-    console.log(error.error.message);
-    return throwError('Server Error! Please try again later.');
+    // console.log(error);
+    return throwError('Unauthorised!.');
   }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> | Observable<HttpResponse<any>>{
 
-      let getToken = this.injector.get(UserserviceService);
-      // let adm = this.injector.get(AdminserviceService);
+      let getToken = this.injector.get(HomeService);
       
-
       let header = new HttpHeaders({
-        'Authorization': `Bearer ${getToken.getUserToken()}`
+        'Authorization': `Bearer ${getToken.retreive()}`
       })
 
       let clone;

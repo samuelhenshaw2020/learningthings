@@ -2,7 +2,6 @@ import { Component, OnInit, Inject, HostListener, ViewChild, ElementRef} from '@
 import { inject } from '@angular/core/testing';
 import { MAT_DIALOG_DATA, MatDialogRef, MatSnackBar } from '@angular/material';
 import { UserserviceService } from 'src/app/services/userservice.service';
-import { HttpEventType } from '@angular/common/http';
 
 @Component({
   selector: 'app-media-manager',
@@ -14,6 +13,7 @@ export class MediaManagerComponent implements OnInit {
   task = "list";
   imgList = [];
   baseUrl;
+  link:any;
   @ViewChild('dropzone', {static: false}) dropzone : ElementRef;
 
   constructor(
@@ -30,10 +30,13 @@ export class MediaManagerComponent implements OnInit {
     this.getImages();
   }
 
+  loading = false;
   getImages(){
+  this.loading = true;
+
     this.service.postUploadedImg().subscribe( event =>{
       this.imgList = event; 
-      console.log(this.imgList);
+      this.loading = false
     })
   }
 
@@ -78,7 +81,7 @@ export class MediaManagerComponent implements OnInit {
   uploading = false;
   uploadimage(view){
     this.uploading = true;
-    this.formdata.set('site_id', String(this.service.siteData.value.site_id));
+    this.formdata.set('site_id', String(this.service.siteData().value.id));
     this.service.postuploadImg(this.formdata).subscribe(d=>{
       console.log(d);
       this.imgList.unshift(d.image)

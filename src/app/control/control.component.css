@@ -1,6 +1,23 @@
-.form{
-    width: 400px;
+
+.content{
+  width: 350px;
+  z-index: 1000;
+  /* border-radius: 3%; */
 }
+
+@media (max-width: 900px){
+  .content {
+      width: 300px;
+      /* box-shadow: none !important; */
+  }
+}
+/* .form{
+    width: 400px;
+    box-shadow: 0 15px 30px 0 rgba(0,0,0,.11), 0 5px 15px 0 rgba(136, 102, 102, 0.08) inset;
+
+}
+
+
 
 .otp-box{
     height: 50px;
@@ -15,6 +32,75 @@
     transition: all 0.1s;
 }
 
+.back{
+  background: url('/assets/a.svg') no-repeat!important;
+}
+ 
+
+
+
+
+
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 50px !important;
+    height: 34px !important;
+  }
+  
+  .switch input { 
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+  
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgb(221, 219, 219) !important;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: transparent !important;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  
+  input:checked + .slider {
+    background-color: rgb(221, 219, 219) !important;
+  }
+  
+
+  
+  input:checked + .slider:before {
+    -webkit-transform: translateX(20px);
+    -ms-transform: translateX(20px);
+    transform: translateX(20px);
+  }
+  
+
+  .slider.round {
+    border-radius: 34px;
+  }
+  
+  .slider.round:before {
+    border-radius: 50%;
+  }
+  
+
 @-webkit-keyframes enter{
     from{opacity: 0.3; transform: scale(0.9)}
     to{ opacity: 1;  transform: scale(1)}
@@ -27,5 +113,11 @@
 @media (max-width: 900px){
      .form{
          width: 90%;
+         box-shadow: none;
+         background-color: transparent !important;
+
      }
- }
+
+     
+
+ } */

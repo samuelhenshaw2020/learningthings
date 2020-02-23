@@ -1,5 +1,5 @@
 <main class="container-fluid">
-                <br> <br><br>
+                
          <!----------------------------
                  LOader
         -------------------------- -->
@@ -41,118 +41,140 @@
                  Site Header Edit
         -------------------------- -->
 
-        <div class="p-3 text-center m-blue      ">
-                
-                        <h6 class="lead text-light">SITE HEADER EDIT</h6>
-                </div>
-                <br>
         
-                <div class="bg-white  ">
+        
+                <div class="  ">
                                
-                           <!----------------------------
+                           <!---------- ------------------
                          Logo
                 -------------------------- -->
         
                                
-                                <div class="bg-white p-2 col-md">
-                                                <p>Edit Logo</p>
+                                <div class=" p-2 col-md" style="position: relative;">
+                                                <p class="text-secondary lead small font-weight-bold">LOGO</p>
                                                
-                                                <div class=" bg-dark  d-flex mx-auto mat-elevation-z7 logo-container" (click)="openMedia(display, 0)" style="cursor: pointer;">
-                                                        <div class=" align-self-center">
-                                                                <img src="{{imgbaseUrl+ logolink}}" style="width: 100%; height: 150px; clip-path: circle(50%);" #display>
-                                                        </div>
+                                                <div class="text-center">
+                                                        <a href="#"  class="m-auto">
+                                                            <img src="{{imgbaseUrl+ logolink}}" class="card-img-top  "  style="width: 200px;">
+                                                        </a>
+                                                        
+                                                    </div>
+                                                
+                                                    
+
+                                                        <div style="position: absolute; top: 0%; left: 0%; right: 0%; bottom: 0%; " class=" d-flex justify-content-center">
+                                                                <a href="#" (click)="openMedia( $event, 0)" class=" align-self-center">
+                                                                    <!-- <i class="	fa fa-instagram text-dark display-1" style="opacity: 0.4;"></i> -->
+                                                        <mat-icon class="text-secondary display-1" style="opacity: 0.4;">add_a_photo</mat-icon>
+
+                                                                </a>
+                                                            </div>
                                                    
         
-                                                </div>
+                                                
                                         </div>
                 
                              
         
                 </div>
                 <br><br>
-        
-                <div class="bg-white p-2">
-                        <span>Edit Business Name</span>
-                        <button type="button" (click)="isEditTitle = !isEditTitle" mat-icon-button><mat-icon>{{!isEditTitle ? 'edit': 'check'}}</mat-icon></button>
-                        <div class="d-flex justify-content-center">
-                                        <div class="form-search pl-2 d-flex w-100" >
-                                                        <input  [(ngModel)]="business_name" type="text"  class="lead py-2 text-center w-100 ">
-                                        </div>
-                              
-                                
-                        </div>
-                       
-                       
-                </div>
-                <br><br>
 
-                <div class="bg-white p-2">
-                        <span>Edit Header Title </span>
-                <div class="d-flex justify-content-center">
-                        <div class="form-search pl-2 d-flex w-100" >
-                                        <input  [(ngModel)]="head_title" type="text"  class="lead py-2 text-center w-100 ">
-                        </div>
-              
-                
-        </div>
-                </div>
-        <br><br>
-       
-
-           <!----------------------------
+                   <!----------------------------
                          Header Image
                 -------------------------- -->
         
-               <div class="bg-white">
-                       <p class="m-3">Edit Header Image</p>
-                        <div class="container px-0 " style="position: relative; cursor: pointer;" >
-                               
-                                        <div class="" style="max-height: 400px; overflow: hidden;">
-                                                <img #img src="{{imgbaseUrl+imglink}}" alt="" class="img img-fluid w-100">
-                                        </div>
-                                        <div style="position: absolute; top: 0%; left: 0%; right: 0%; bottom: 0%; background: rgba(0,0,0,0.2)" class=" d-flex justify-content-center">
-                                                        <a mat-fab color class="clickable mat-elevation-z7 align-self-center " (click)="openMedia(img, 1)"><mat-icon>image</mat-icon></a>
-                                                    </div>
-                                </div>
-               </div>
-                <br><br>
-        
-        
+               <div class="">
+                <p class="m-3 text-secondary lead small font-weight-bold">HEADER IMAGE</p>
+                 <div class="container px-0 " style="position: relative; cursor: pointer;" >
+                        
+                                 <div class="" style="max-height: 400px; overflow: hidden;">
+                                         <img #img src="{{imgbaseUrl+imglink}}" alt="" class="img img-fluid  w-100">
+                                 </div>
+                                 <div style="position: absolute; top: 0%; left: 0%; right: 0%; bottom: 0%; " class=" d-flex justify-content-center">
+                                                 <a class="clickable  align-self-center " (click)="openMedia($event, 1 )" href="#">
+                                                        <!-- <i class="	fa fa-instagram text-dark display-1" style="opacity: 0.4;"></i> -->
+                                                        <mat-icon class="text-secondary display-1" style="opacity: 0.4;">add_a_photo</mat-icon>
+                                                 </a>
+                                             </div>
+                         </div>
+        </div>
+         <br><br>
+ 
+ 
+  
+ 
+         <br>
+ 
+      
+ 
          
-        
+
+            <!----------------------------
+                        fileds
+                -------------------------- -->
+
+
+
+                <div class="row">
+                        <div class="col-md">
+                                <div class=" w-100 formg-group" >
+                                        <span class="small text-secondary font-weight-bold small">SITE COLOR</span>
+                                        <input hidden  [(ngModel)]="color" type="color"  class=" form-control lead py-2 text-center w-100 " #col (change)="showColor($event)">
+                                        <button class=" shadow w-100"mat-button [style.backgroundColor]="color" (click)="col.click()">Select site color</button>
+                                </div>
+                        </div>
+
+                        <div class="col-md">
+                                <div class="form-group">
+                                        <span class="small text-secondary font-weight-bold small">BUSINESS NAME</span>
+                                        <input  [(ngModel)]="business_name" type="text"  class="form-control w-100 ">
+                                        
+                                                
+                                </div>
+                        </div>
+
+                        <div class="col-md">
+
+                                <div class="form-group" >
+                                        <span class="small text-secondary font-weight-bold small">HEADER TITLE </span>
+                                        <input  [(ngModel)]="head_title" type="text"  class="form-control w-100 ">
+                                </div>
+                        </div>
+                </div>
                 <br>
+
+            
         
-             
+               
+
+
+ 
+       
+
         
-                <br>
                 <!--------------------------------------------
                         MISSION and VISSION
                 ---------------------------------------------->
-                <div class="p-3 text-center m-blue">
-                        
-                                <h6 class="lead text-light">MISSION & VISSION</h6>
-                        </div>
-                <br>
+              
                 
-                
-                                <div class="bg-white p-2">
+                                <div class=" p-2">
                                                 <div class="formg-group">
                                                         
-                                                        <label class="switch ">
+                                                        <!-- <label class="switch ">
                                                                         <input type="checkbox" [checked]="vission.enabled" >
                                                                         <span class="slider round"></span>
-                                                        </label>
-                                                        <strong> Vision</strong>
+                                                        </label> -->
+                                                        <span class="small text-secondary font-weight-bold small"> VISION</span>
                                                         <angular-editor [(ngModel)]="vission.vission"  [placeholder]="'What is the vision'"
                                                                 [config]="editorConfig"></angular-editor>
                                                 </div>
                                                 <br>
                                                 <div class="formg-group">
-                                                        <label class="switch ">
+                                                        <!-- <label class="switch ">
                                                                         <input type="checkbox" [checked]="mission.enabled" >
                                                                         <span class="slider round"></span>
-                                                        </label>
-                                                        <strong > Mission</strong>
+                                                        </label> -->
+                                                        <span class="small font-weight-bold text-secondary"> MISSION</span>
                                                         <angular-editor [(ngModel)]="mission.mission"  [placeholder]="'What is the Mission'"
                                                                 [config]="editorConfig"></angular-editor>
                                                 </div>
@@ -166,42 +188,32 @@
                  <!--------------------------------------------
                         SOCIAL MEDIA SITES
                 ---------------------------------------------->
-                <div class="p-3 text-center m-blue">
-                                <h6 class="lead text-light">SITE SOCIAL LINKS</h6>
-                        </div>
+              
+                   
         
-                        <br>
-        
-                        <div class="d-flex  my-2" *ngFor="let soc of socialMedia.handles"> <!--Facebook-->
-                                <span class=" text-light p-2  m-blue" >
-                                        <i class="{{'fa fa-'+ soc.name}}"></i>
+                       <div class="form-group card-columns ">
+                        <div class="  card bg-light border-0" *ngFor="let soc of socialMedia.handles"> <!--Facebook-->
+                                <span class=" text-secondary p-2  " >
+                                        <i class="{{'fa fa-'+ soc.name}} fa-lg"></i>
                                 </span>
-                                <input  type="text" class="w-100 text-center small" [(ngModel)]="soc.link">
-                                &nbsp;
-                                <div class="p-0">
-                                                <label class="switch h-100">
-                                                                <input type="checkbox" class="" #fb_check [checked]="soc.enabled" >
-                                                                <span class="slider round my-auto"></span>
-                                                </label>
-                                                              
-                                </div>
-                                
+                                <!-- <label class="switch">
+                                        <input type="checkbox" class="" #fb_check [checked]="soc.enabled" >
+                                        <span class="slider round my-auto"></span>
+                                </label> -->
+                                <input  type="text" class="form-control " [(ngModel)]="soc.link">
                         </div>
                         <br>
+                       </div>
 
                       
         
                 <!--------------------------------------------
                         BUSINESS DESCRIPTION ABOUT US
                 ---------------------------------------------->
-                <div class="p-3 text-center m-blue">
-                                <h6 class="lead text-light">SHORT DESCRIPTION OF BUSINESS</h6>
-                        </div>
-                        <br>
                 <div class="formg-group">
-                                <mat-form-field class="w-100" appearance="outline">
-                                        <textarea matInput  [(ngModel)]="description" [placeholder]="'About '" rows="10px"></textarea>
-                                </mat-form-field>
+                                <span class="small text-secondary font-weight-bold small">DESCRIPTION</span>
+
+                                        <textarea class="form-control"  [(ngModel)]="description" [placeholder]="'About '" rows="10px"></textarea>
                 </div>
         
         
@@ -212,9 +224,9 @@
                 <!--------------------------------------------
                         Save Button
                 ---------------------------------------------->
-                <div class="p-2 d-flex justify-content-center">
-                                <button [disabled]="submitted" (click)="save_site_data()" mat-raised-button color='primary' class="" >
-                                        <span>Save</span>
+                <div class="p-2 text-center">
+                                <button [disabled]="submitted" (click)="save_site_data()"   class="br-30 shadow   p-3 w-50 btn btn-primary " >
+                                        <span>Save changes</span>
                                          &nbsp;&nbsp;
                                          <i [hidden]="!submitted" class="fa fa-circle-o-notch fa-spin"></i>
                                 </button>

@@ -15,7 +15,7 @@ import { AdminService } from '../admin.service';
 })
 export class WebsitesComponent implements OnInit {
 
-
+  night;
   constructor(
     private activeRoute: ActivatedRoute,
     
@@ -23,6 +23,11 @@ export class WebsitesComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+
+    this.innerServ.night.subscribe(d =>{
+      this.night = d;
+    })
+
     this.activeRoute.data.subscribe(
       data => {
         console.log(data);

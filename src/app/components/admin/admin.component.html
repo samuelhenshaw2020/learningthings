@@ -1,16 +1,19 @@
 <app-notification [not_open]="not_open" [not]="not"></app-notification>
 <app-float-menu></app-float-menu>
 
+
+
+
 <ly-paper >
    
   
     <ly-drawer-container [withClass]="classes.drawerContainer" >
   
-      <ly-drawer #_drawer="lyDrawer" ly-paper opened position="before" [width]="width"  class="bg-black " >
+      <ly-drawer #_drawer="lyDrawer"  opened position="before" [width]="width" class="bg-black sticky-top"  >
         <ly-list>
 
           <div ly-list-item class="text-center">
-            <ly-icon  disablePadding color="primary" style="font-size: 45px;">cloud_queue</ly-icon>
+            <ly-icon  disablePadding class="m-blue-f" style="font-size: 45px;">cloud_queue</ly-icon>
             <mat-divider></mat-divider>
           </div>
           
@@ -38,7 +41,7 @@
               <span  class="text-fade small" routerLinkActive="text-light">Payment</span>
              </p>
           </button>
-          <br><br><br>
+          <br>
           <button ly-list-item routerLink="/admin/settings" routerLinkActive="bg-black-light">
             <p class="text-center m-auto py-2">
               <ly-icon  disablePadding class="text-fade" routerLinkActive="m-blue-f" style="font-size: 35px;">build</ly-icon>
@@ -46,30 +49,43 @@
           </button>
           <button ly-list-item (click)="logout()">
             <p class="text-center m-auto py-2">
-              <ly-icon  disablePadding class="text-fade" style="font-size: 35px;">power_settings_new</ly-icon>
+              <ly-icon  disablePadding class="text-fade" style="font-size: 35px;" [hidden]="isOut">power_settings_new</ly-icon>
+              <strong class="spinner-grow spinner-grow-lg text-light" [hidden]="!isOut"></strong>
              </p>
           </button>
+          <div ly-list-item>
+           
+            <p class="text-center">
+              <label class="switch ">
+                <input type="checkbox"  (change)="nightMode($event)" [checked]="night">
+                <span class="slider round pt-1">
+                  <i [hidden]="!night" class="fa fa-moon-o fa-lg text-fade "></i>
+                  <i [hidden]="night" class="fa fa-sun-o fa-lg  text-light"></i>
+                </span>
+              </label>
+            </p>
+            <br>
+            <!-- <mat-button-toggle-group name="fontStyle" aria-label="Font Style">
+              <mat-button-toggle value="day"><i class="	fa fa-moon-o"></i></mat-button-toggle>
+              <mat-button-toggle value="night"><i class="	fa fa-sun-o"></i></mat-button-toggle>
+            </mat-button-toggle-group> -->
+        </div>
         </ly-list>
-        <!-- <div [className]="classes.icon">
-          <button ly-button (click)="toggleMini()" appearance="icon">
-            <ly-icon *ngIf="mini" class="text-light">chevron_left</ly-icon>
-            <ly-icon *ngIf="!mini" class="text-light">chevron_right</ly-icon>
-          </button>
-        </div> -->
+       
        
       </ly-drawer>
 
      
   
-      <ly-drawer-content [withClass]="classes.drawerContent" class="bg-black-light p-0 h-100">
-          <ly-toolbar position="static"  [elevation]="0"  class="bg-black " >
+      <ly-drawer-content [withClass]="classes.drawerContent" class=" p-0 h-100" [ngClass]="night ? 'bg-black-light ': 'bg-light'">
+          <ly-toolbar position="static"  [elevation]="0"    [ngClass]="night ? 'bg-black': 'bg-back'" >
               <button ly-button color="primary"  appearance="icon" (click)="_drawer.toggle()" lyShow="XSmall">
                 <ly-icon>menu</ly-icon>
               </button>
         
               <h6 lyTyp="title " >
-                  <strong class="lead d-none d-md-inline text-fade" >Welcome back </strong>
-                  <span class="font-weight-bold text-fade">Henshaw</span>
+                  <strong class="lead d-none d-md-inline "  [ngClass]="night ? 'text-fade': 'text-dark'" >Welcome back </strong>
+                  <span class="font-weight-bold " [ngClass]="night ? 'text-fade': 'text-dark'">Henshaw</span>
                   <!-- <span class="small d-none d-md-inline">, Monday, 29 April, 2019</span> -->
               </h6>
 
@@ -77,31 +93,32 @@
       
         
               <button color="primary:contrast" ly-button appearance="icon" (click)="not_open = !not_open" >
-                  <ly-icon color="primary">message<ly-badge bg="warn" >{{not.length}}</ly-badge></ly-icon>
+                  <ly-icon class="m-blue-f">message<ly-badge bg="warn" >{{not.length}}</ly-badge></ly-icon>
                 </button>
         
               <button color="primary:contrast" ly-button  routerLink="/admin/analysis" >
-                    <ly-icon color="primary">pie_chart</ly-icon>
-                    <span class=" text-fade lead d-none d-md-inline">&nbsp;&nbsp;Insights</span>
+                    <ly-icon class="m-blue-f">pie_chart</ly-icon>
+                    <span class=" lead d-none d-md-inline" [ngClass]="night ? 'text-fade': 'text-dark'">&nbsp;&nbsp;Insights</span>
               </button>
 
               <span [withClass]="classes.grow"></span>
              
               <!-- &nbsp; -->
             
-              <a ly-button  color="primary" class="clickable">
+              <a ly-button   class="clickable m-blue-f">
                   <ly-avatar>
                       <img alt="Larm Rmah" src="https://firebasestorage.googleapis.com/v0/b/alyle-ui.appspot.com/o/img%2Flarm-rmah-47685-unsplash.jpeg?alt=media&token=1db05ae5-9c03-437b-9e8c-764dfb257061">
                     </ly-avatar>
                    
-                <span class="d-none d-md-inline lead  text-fade" > &nbsp;&nbsp;Samuel Henshaw </span>
+                <span class="d-none d-md-inline lead " [ngClass]="night ? 'text-fade': 'text-dark'"> &nbsp;&nbsp;Samuel Henshaw </span>
               </a>
               
             </ly-toolbar>
 
             <mat-divider></mat-divider>
-         <div class="">
+         <div class="" style="overflow-y: scroll;" [style.height]="innerWidth">
              <router-outlet></router-outlet>
+             <br><br><br><br><br>
          </div>
       </ly-drawer-content>
   

@@ -1,69 +1,80 @@
-<div mat-dialog-content  style="height: 400px">
-  <ul class="nav nav-tabs" >
-    <li class="nav-item clickable">
-      <a class="nav-link" [class.active]="task == 'upload'"  (click)="task = 'upload'" >Upload</a>
-    </li>
-    <li class="nav-item  clickable">
-      <a class="nav-link" [class.active]="task == 'list'" (click)="task='list'" #mediaview>Media</a>
-    </li>
+<div class="container-fluid px-0 pb-2">
+  <div class="content-container" >
+   <nav class="sticky-top bg-light p-1">
+    <button mat-icon-button (click)="closeDialog()" class=" float-right " color='warn'><mat-icon>close</mat-icon></button>
+    <button  [mat-dialog-close]="link" class="float-right btn btn-success btn-sm mr-3 border my-1 br-30" >select</button>
+    <ul class="nav nav-tabs" >
+      <li class="nav-item clickable">
+        <a class="nav-link" [class.active]="task == 'upload'"  (click)="task = 'upload'" >Upload</a>
+      </li>
+      <li class="nav-item  clickable">
+        <a class="nav-link" [class.active]="task == 'list'" (click)="task='list'" #mediaview>Media</a>
+      </li>
+      
+     
+    </ul> 
+   </nav>
    
-  </ul>
+    
+    <!-- Tab panes -->
+    <div class="" [ngSwitch]="task" ly-dialog-content>
+      <div class="d-flex justify-content-center " #dropzone *ngSwitchCase="'upload'" >
+         
+         <div class="form-group py-5" >
+              <div  [hidden]="media.value != ''">
+                  <p class="text-center">Drag and drop files</p>
+                  <p class="small text-center">or</p>
+                  <input type="file" hidden #media (change)="previewimage($event)" >
+                  <button mat-button (click)="media.click()">Click to upload a media file</button>
+              </div>
+              <br>
+              <div class="" [hidden]="media.value == ''">
+                  <div style="position: relative;">
+                      <img [src]="imagelink" alt="" class="img img-fluid" style="width: 200px;">
+                      <div  style="position: absolute; top: 0%; left: 0%; right: 0%; bottom: 0%; background: rgba(0,0,0,0.2)" class=" d-flex justify-content-center">
+                          <i [hidden]="!uploading" style="font-size: 30px"  class=" align-self-center fa fa-circle-o-notch fa-spin fa-lg" ></i>
+                      </div>
+                  </div>
+                  <br>
+                 <div>
+                    <button  mat-stroked-button (click)="media.click()" >Change</button>
+                    &nbsp;&nbsp;
+                  <button [disabled]="uploading" type="button" mat-raised-button (click)="uploadimage(mediaview)">
+                    <span [hidden]="uploading">Upload</span>
+                    <span [hidden]="!uploading">Uploading...</span>
+                  </button>
+                 </div> 
+              </div>
+         </div>
   
-  <!-- Tab panes -->
-  <div class="" [ngSwitch]="task">
-    <div class="d-flex justify-content-center " #dropzone *ngSwitchCase="'upload'" >
+      </div>
+  
+      <!-- //////////////////////// -->
+      <div class="p-2"  *ngSwitchCase="'list'">
+  
+        <!-- <input type="text" [(ngModel)]="link" hidden> -->
+  
+         
+  
+          <div class="card-columns" >
+              <div class="card border " [ngClass]="i==prev? ' shadow': ''" (click)="selectLink(i); link = image.src" *ngFor="let img of imgList; let i =index" 
+              style="max-height: 100%; max-width: 100%;overflow: hidden;">
+                      <img  #image  src="{{baseUrl+img.link}}" alt="" class="card-img-top" style="display: block; max-width: 100%; height: auto; vertical-align: middle;">
+              </div>
+              
+          </div>
        
-       <div class="form-group py-5" >
-            <div  [hidden]="media.value != ''">
-                <p class="text-center">Drag and drop files</p>
-                <p class="small text-center">or</p>
-                <input type="file" hidden #media (change)="previewimage($event)" >
-                <button mat-button (click)="media.click()">Click to upload a media file</button>
-            </div>
-            <br>
-            <div class="" [hidden]="media.value == ''">
-                <div style="position: relative;">
-                    <img [src]="imagelink" alt="" class="img img-fluid" style="width: 200px;">
-                    <div  style="position: absolute; top: 0%; left: 0%; right: 0%; bottom: 0%; background: rgba(0,0,0,0.2)" class=" d-flex justify-content-center">
-                        <i [hidden]="!uploading" style="font-size: 30px"  class=" align-self-center fa fa-circle-o-notch fa-spin fa-lg" ></i>
-                    </div>
-                </div>
-                <br>
-               <div>
-                  <button  mat-stroked-button (click)="media.click()" >Change</button>
-                  &nbsp;&nbsp;
-                <button [disabled]="uploading" type="button" mat-raised-button (click)="uploadimage(mediaview)">
-                  <span [hidden]="uploading">Upload</span>
-                  <span [hidden]="!uploading">Uploading...</span>
-                </button>
-               </div>
-            </div>
-       </div>
-
-    </div>
-
-    <!-- //////////////////////// -->
-    <div class="p-2"  *ngSwitchCase="'list'">
-
-      <input type="text" [(ngModel)]="link" hidden>
-
-       
-
-        <div class="card-columns" >
-            <div class="card border m-1" [ngClass]="i==prev? 'bt mat-elevation-z4': ''" (click)="selectLink(i); link = image.src" *ngFor="let img of imgList; let i =index" style="max-height: 150px; max-width: 150px;overflow: hidden;">
-                    <img  #image  src="{{baseUrl+img.link}}" alt="" class="card-img-top" >
+            <div [hidden]="!loading" class="text-center text-primary p-3 ">
+              <i class="fa fa-circle-o-notch fa-spin lead"></i>
+              <br>
+              Please wait...
             </div>
             
-        </div>
-        <div [hidden]="isLoading">
-            <p class="text-center">Loading Images</p>
-          </div>
-        
+          
+      </div>
     </div>
   </div>
+  
+  
 </div>
 
-<div mat-dialog-actions align="end">
-  <button mat-button (click)="closeDialog()">Cancel</button>
-  <button mat-button [mat-dialog-close]="link" cdkFocusInitial>Use</button>
-</div>

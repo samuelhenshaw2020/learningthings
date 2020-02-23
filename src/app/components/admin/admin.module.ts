@@ -36,6 +36,7 @@ import { PaymentComponent } from './payment/payment.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { AdminGuard } from 'src/app/guards/admin.guard';
 import { AdminMailComponent } from './admin-mail/admin-mail.component';
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
 
 import { ViewSiteComponent } from './view-site/view-site.component';
 
@@ -73,6 +74,7 @@ import { ViewSiteComponent } from './view-site/view-site.component';
     DragDropModule,
     MatProgressSpinnerModule,
     MatAutocompleteModule,
+    MatButtonToggleModule,
 
     LyThemeModule.setTheme('minima-light'),
     LyCommonModule,

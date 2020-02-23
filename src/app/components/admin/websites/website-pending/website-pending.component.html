@@ -1,11 +1,11 @@
 <br>
 <main class="container ">
     <div class="table-responsive ">
-        <table class="table table-borderless table-striped mat-elevation-z7">
-            <tbody class="bg-black-light-2">
+        <table class="table table-borderless table-striped shadow">
+            <tbody [ngClass]="night ? 'bg-black-light-2 ': 'bg-white'">
                 <tr class="    p-2" *ngFor="let site of sites; let i = index">
                     <td class="m-auto ">
-                        <p><a class="lead text_dark clickable text-light" (click)="viewSite(site.site_id)" >
+                        <p><a class="lead  clickable " [ngClass]="night ? 'text-light ': 'text-dark'" (click)="viewSite(site.site_id)" >
                             <strong class="badge" [style.backgroundColor]="site.color" >{{site.business_name[0]}}</strong>
                             &nbsp;
                             <strong>{{site.business_name}}</strong>
@@ -23,21 +23,21 @@
                    
         
                     <td >
-                        <button ly-button appearance="icon" color='white' [hidden]="i==prev ? true : false" (click)=" approveSite(site.site_id);  prev = i">
-                            <ly-icon [hidden]="i==prev ? true : false">check</ly-icon>
+                        <button ly-button appearance="icon" color='white' [hidden]="i==prev ? true : false" [ngClass]="night ? ' ': 'shadow'" (click)=" approveSite(site.site_id);  prev = i">
+                            <ly-icon [hidden]="i==prev ? true : false" [ngClass]="night ? 'text-light ': 'text-dark'">check</ly-icon>
                             <span class="spinner-grow spinner-grow-lg text-light" [hidden]="i==prev ? false : true"></span>
                         </button>
-                        <button ly-button appearance="icon" color='warn' [hidden]="i==prev ? true : false">
-                            <ly-icon [hidden]="i==prev ? true : false">delete</ly-icon>
+                        <button ly-button appearance="icon" color='warn' [hidden]="i==prev ? true : false" [ngClass]="night ? ' ': 'shadow'">
+                            <ly-icon [hidden]="i==prev ? true : false" [ngClass]="night ? 'text-light ': 'text-dark'">delete</ly-icon>
                             <span class="spinner-grow spinner-grow-lg text-light" [hidden]="i==prev ? false : true"></span>
                         </button>
-                        <button ly-button appearance="icon" color='white' (click)="sendMail(site.user); prev = i" >
-                            <ly-icon [hidden]="i==prev ? true : false">email</ly-icon>
+                        <button ly-button appearance="icon" color='white' (click)="sendMail(site.user); prev = i" [ngClass]="night ? ' ': 'shadow'">
+                            <ly-icon [hidden]="i==prev ? true : false" [ngClass]="night ? 'text-light ': 'text-dark'">email</ly-icon>
                             <span class="spinner-grow spinner-grow-lg text-light" [hidden]="i==prev ? false : true"></span>
                             
                         </button>
-                        <button ly-button appearance="icon" color='white' (click)="userProfile(site.user, $event); prev = i" >
-                            <ly-icon [hidden]="i==prev ? true : false">person</ly-icon>
+                        <button ly-button appearance="icon" color='white' (click)="userProfile(site.user, $event); prev = i" [ngClass]="night ? ' ': 'shadow'">
+                            <ly-icon [hidden]="i==prev ? true : false" [ngClass]="night ? 'text-light ': 'text-dark'">person</ly-icon>
                             <span class="spinner-grow spinner-grow-lg text-light" [hidden]="i==prev ? false : true"></span>
                         </button>
                         

@@ -1,61 +1,60 @@
-
-<!-- <app-navbar></app-navbar> -->
-<br><br>
-<main class="  mx-auto form ">
-        
-    <br>
+<!-- <main class="back " >
     
-  <div class="p-2 " [style.opacity]="submitted ? 0.9 : 1">
-        <p class="text-center">
-            <button mat-icon-button routerLink="/home">
-                    <span class="numbers " style="width: 50px; height: 50px; line-height: 45px;">
-                            <i class="	fa fa-home fa-lg" [hidden]="submitted "></i>
-                            <span class="spinner-grow spinner-grow-sm " [ngClass]="color" [hidden]="!submitted "></span>
-                        </span>
-            </button>
-        </p>
-        <p class="lead text-center" style="font-size: 15px;">
-            <span lyTyp="title">{{display}}</span><br>
+    <div  [style.height]="height" [ngClass]="night ? 'control-night ': ''" >
+
+<br class="d-none d-md-inline"><br class="d-none d-md-inline"><br class="d-none d-md-inline">
+<main class="  mx-auto form  bg-white"  >
+   
+    
+  <div class="p-2 " [style.opacity]="submitted ? 0.9 : 1" [ngClass]="night ? 'bg-black-light-2 ': 'bg-light'">
         
-        
-        <div class="container d-flex justify-content-center ">
-        
-        
-        
-            <form novalidate class="form" [formGroup]="adminFG" (submit)="authenticate()">
-        
-        
-                <!-- <mat-form-field class="w-100" floatLabel='never' appearance="outline"  > -->
-                <div class=" form-group d-flex ">
-                   <div class="w-100 form-search d-flex shadow border p-2   " [ngClass]="mail.touched && mail.invalid ? 'border-danger ': ''">
-                        <input  formControlName="mail" placeholder="Email  address"  class="w-100  lead text-secondary" style="font-size: 15px; font-weight: 500;" >
-                   </div>
-                </div>
+       <div>
+        <h1  class="font-weight-bold text-center m-blue-f pt-5">
+            <a routerLink="/home" class="m-blue-f" >Ihifix</a></h1>
+    
+            <p class=" text-center " [ngClass]="night ? 'text-fade ': 'text-dark'">
                 
-                <!-- </mat-form-field> -->
+                <span >{{display}}</span><br>
+            </p>
+            
+       </div>
         
         
+        <div class="container    py-4 px-md-5 rounded  justify-content-center " >
+        
+        
+        
+            <form novalidate  [formGroup]="adminFG" (submit)="authenticate()">
+
+             
         
         
                
-                <div class="form-group  ">
-                    <div class="w-100 form-search d-flex shadow border p-1" [ngClass]="password.touched && password.invalid ? 'border-danger ': ''" >
-                            <input formControlName="password"  class="w-100  lead text-secondary" style="font-size: 15px; font-weight: 500;" placeholder="Password" [type]="hide ? 'password' : 'text'"
-                           >
-                            <button ly-button appearance="icon" (click)="hide = !hide" type="button" class="m-auto">
-                                    <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-                                </button>
-                    </div>
+                   <div class="w-100  form-group  " [ngClass]="mail.touched && mail.invalid ? 'border-danger ': ''">
+                        <label class="  text-secondary">Email</label>
+                        <input  formControlName="mail" placeholder="Email  address"  class="w-100  p-3 light  form-control lead text-secondary" [ngClass]="night ? 'bg-black-light-2': 'bg-light'">
+                   </div>
+                
+                
                    
-                </div>
-                <br>
+                    <div class="w-100   form-group" [ngClass]="password.touched && password.invalid ? 'border-danger ': ''" >
+                        <label class=" text-secondary">Password</label>
+                            <input formControlName="password"   class="w-100  p-3 light  form-control lead text-secondary" [ngClass]="night ? 'bg-black-light-2': 'bg-light'"  
+                            placeholder="Password" [type]="hide ? 'password' : 'text'"
+                           >  
+                           
+                    </div>
+                  
+                   
+                
+                
 
               
         
         
                 
                 <div class="form-group">
-                    <button bg="primary" ly-button class="w-100  p-1" raised type="submit" [disabled]="adminFG.invalid">
+                    <button  ly-button class="m-blue text-light  w-100  " raised type="submit" [disabled]="adminFG.invalid">
                         <span class="spinner-grow spinner-grow-lg" [hidden]="!submitted"></span>
                         <span class="d-none d-md-inline ">{{!submitted ? 'SIGN IN' : 'AUTHENTICATING...'}}</span>&nbsp;&nbsp;
                         <ly-icon class="font-weight-bold  d-md-none" [hidden]="submitted">send</ly-icon>
@@ -75,12 +74,93 @@
         <br>
   </div>
 
-  <!-- <div style="position: relative;">
-    <app-val-num></app-val-num>
-</div> -->
-    
     
     
     
     
 </main>
+    </div>
+
+</main> -->
+
+
+
+
+
+<!-- ///////////////////////// -->
+
+<main class="container-fluid px-0 bg-light  h-100" >
+
+    <!-- <div class="st-back"  >
+       
+    </div> -->
+    
+    <div class=" d-flex justify-content-center st-back" [style.height]="height">
+
+        <div class="content bg-light  align-content-center   my-auto " >
+            
+            <div class=" py-2  text-center">
+                <div>
+                    <h1  class="font-weight-bold text-center m-blue-f pt-5">
+                        <a routerLink="/home" class="m-blue-f" >Ihifix</a></h1>
+                   </div>
+                <h6 class="text-center   my-auto "  >Admin Portal</h6>
+            </div>
+
+            <form novalidate class="p-4" [formGroup]="adminFG" (submit)="authenticate()">
+
+                <div class="form-group">
+                   
+                    <mat-form-field class="w-100">
+                        <mat-label>Email address</mat-label>
+                        <input type="email" matInput class=" text-info " formControlName="mail" >
+                    </mat-form-field>
+                   
+                    <span class="text-danger" *ngIf="mail.touched && mail.invalid">
+                        <i class="fa fa-exclamation-triangle fa-sm"></i>
+                        <span class="small"> Email invalid</span>
+                    </span>
+                </div>
+
+                <div class="form-group">
+                  <mat-form-field class="w-100">
+                    <mat-label>Password</mat-label>
+                    <input [type]="hide ? 'password': 'text'" matInput class="" formControlName="password">
+                     <button type="button" mat-icon-button color="primary" matSuffix (click)="hide = !hide">
+                        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </button>
+                  </mat-form-field>
+                    <span class="text-danger" *ngIf="password.touched && password.invalid">
+                        <i class="fa fa-exclamation-triangle fa-sm"></i>
+                        <span class="small"> Password invalid</span>
+                    </span>
+                </div>
+                
+                <br>
+                <div class="form-group">
+                    <button  ly-button class="m-blue text-light  w-100 br-30 " raised type="submit" [disabled]="adminFG.invalid">
+                        <span class="spinner-grow spinner-grow-lg" [hidden]="!submitted"></span>
+                        <span class="d-none d-md-inline ">{{!submitted ? 'SIGN IN' : 'AUTHENTICATING...'}}</span>&nbsp;&nbsp;
+                        <ly-icon class="font-weight-bold  d-md-none" [hidden]="submitted">send</ly-icon>
+                        
+                    </button>
+                </div>
+
+
+            </form>
+           
+            <p class="text-center">
+                <img src="/assets/img/jowael.jpg" alt="" style="width: 30px;"><br>
+                <span class="small text-secondary" style="font-size: 10px; font-family:Arial, Helvetica, sans-serif">Developed by ihifix Technology</span>
+            </p>
+           
+
+        </div>
+
+    </div>
+
+    
+    
+
+</main>
+

@@ -1,0 +1,23 @@
+<div>
+    <div class="content-container p-4 ">
+        <h5 class="text-primary">Add a new Category</h5>
+        <div class="form-group">
+            <input type="text" [(ngModel)]="category" class="form-control border-0 light">
+        </div>
+
+        <div class="form-group text-center">
+            <button class="btn btn-primary shadow" (click)="addNew()">
+                <span>Add </span>
+                <span [hidden]="!checking">
+                    <i class="	fa fa-circle-o-notch fa-spin text-light"></i>
+                </span>
+            </button>
+        </div>
+
+        <div class="text-center">
+            <a href="#" (click)="close($event)" class="text-secondary small">close</a>
+        </div>
+    </div>
+
+   
+</div>

@@ -7,7 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FooterComponent } from './includes/footer/footer.component';
 import { InfoComponent } from './includes/info/info.component';
 import { MatDialogModule,  MatCheckboxModule, MatMenuModule, MatListModule, MatToolbarModule, MatButtonModule, MatIconModule,
-  MatInputModule, MatBadgeModule, MatTooltipModule, MatGridListModule, MatCardModule, MatChipsModule, MatStepperModule, MatSnackBarModule, MatProgressBarModule} from '@angular/material';
+  MatInputModule, MatBadgeModule, MatTooltipModule, MatGridListModule, MatCardModule, MatChipsModule, MatStepperModule, MatSnackBarModule, MatProgressBarModule, MatButtonToggleModule} from '@angular/material';
 import { NavbarComponent } from './includes/navbar/navbar.component';
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
@@ -29,10 +29,6 @@ import { AppInterceptorService } from './app-interceptor.service';
 import { VerifyMailComponent } from './components/verify-mail/verify-mail.component';
 import { RightAsideComponent } from './includes/right-aside/right-aside.component';
 import { AngularEditorModule } from '@kolkov/angular-editor';
-import { SocialMediaComponent } from './includes/social-media/social-media.component';
-import { LoaderBlockOneComponent } from './includes/loader-block-one/loader-block-one.component';
-import { UsersGuard } from './guards/users.guard';
-import { LoginGuard } from './guards/login.guard';
 import { NotificationComponent } from './components/users/notification/notification.component';
 import { ProductPipe } from './pipes/product.pipe';
 import { ScrollProdDirective } from './directives/scroll-prod.directive';
@@ -63,6 +59,36 @@ import { FloatMenuComponent } from './includes/float-menu/float-menu.component';
 import { WebsiteListComponent } from './components/admin/websites/website-list/website-list.component';
 import { MiniProfileComponent } from './includes/mini-profile/mini-profile.component';
 import { RecaptchaModule, RecaptchaFormsModule } from 'ng-recaptcha';
+import { FacebookLoginProvider, AuthServiceConfig, GoogleLoginProvider, SocialLoginModule } from 'angularx-social-login';
+import { ConfirmDialogComponent } from './dialogs/confirm-dialog/confirm-dialog.component';
+import { AddProductComponent } from './components/users/product/add-product/add-product.component';
+import { LyDialogModule } from '@alyle/ui/dialog';
+import { AddCategoryComponent } from './users/product/add-category/add-category.component';
+import { AddCategoryDialogComponent } from './components/users/product/add-category-dialog/add-category-dialog.component';
+import { ViewProductDialogComponent } from './components/users/product/view-product-dialog/view-product-dialog.component';
+import { MediaManagerComponent } from './components/users/media-manager/media-manager.component';
+import { AddExperienceComponent } from './dialogs/add-experience/add-experience.component';
+import { AddEducationComponent } from './dialogs/add-education/add-education.component';
+import { AddProjectComponent } from './dialogs/add-project/add-project.component';
+import { DeleteBadTokenComponent } from './dialog/delete-bad-token/delete-bad-token.component';
+
+
+
+
+const config = new AuthServiceConfig([
+  {
+    id: FacebookLoginProvider.PROVIDER_ID,
+    provider: new FacebookLoginProvider('1837407539717598')
+  },
+  {
+    id: GoogleLoginProvider.PROVIDER_ID,
+    provider: new GoogleLoginProvider('229148738185-afk333csv0utocqubf5vajuhf8naq4de.apps.googleusercontent.com')
+  }
+])
+
+export function providerConfig(){
+  return config;
+}
 
 
 @NgModule({
@@ -91,7 +117,20 @@ import { RecaptchaModule, RecaptchaFormsModule } from 'ng-recaptcha';
     ControlComponent,
     ValNumComponent,
     FloatMenuComponent,
-    MiniProfileComponent
+    MiniProfileComponent,
+    ConfirmDialogComponent,
+    AddCategoryComponent,
+    ViewProductDialogComponent,
+    MediaManagerComponent,
+
+
+    // Dialog
+    AddCategoryDialogComponent,
+    AddExperienceComponent,
+    AddEducationComponent,
+    AddProjectComponent,
+    DeleteBadTokenComponent
+   
   ],
   imports: [
     BrowserModule,
@@ -121,6 +160,8 @@ import { RecaptchaModule, RecaptchaFormsModule } from 'ng-recaptcha';
     MatSidenavModule,
     ScrollingModule,
     DragDropModule,
+    MatButtonToggleModule,
+    
 
     LyThemeModule.setTheme('minima-light'),
     LyCommonModule,
@@ -141,9 +182,11 @@ import { RecaptchaModule, RecaptchaFormsModule } from 'ng-recaptcha';
     LyAvatarModule,
     LyGridModule,
     LyDividerModule,
+    LyDialogModule,
 
     RecaptchaModule,
-    RecaptchaFormsModule
+    RecaptchaFormsModule,
+    SocialLoginModule
     
     
     
@@ -151,7 +194,16 @@ import { RecaptchaModule, RecaptchaFormsModule } from 'ng-recaptcha';
   entryComponents: [
     PwdForgetComponent,
     ProdVariationComponent,
-    MiniProfileComponent
+    MiniProfileComponent,
+    ConfirmDialogComponent,
+    AddCategoryDialogComponent,
+    ViewProductDialogComponent,
+    MediaManagerComponent,
+    AddExperienceComponent,
+    AddEducationComponent,
+    AddProjectComponent,
+    DeleteBadTokenComponent
+
   ],
   providers: [
     {
@@ -161,9 +213,14 @@ import { RecaptchaModule, RecaptchaFormsModule } from 'ng-recaptcha';
     },
     { provide: LY_THEME, useClass: MinimaLight, multi: true },
     { provide: LY_THEME, useClass: MinimaDark, multi: true },
-    { provide: HAMMER_GESTURE_CONFIG, useClass: LyHammerGestureConfig }
+    { provide: HAMMER_GESTURE_CONFIG, useClass: LyHammerGestureConfig },
+    {provide: AuthServiceConfig, useFactory: providerConfig }
   ],
-  bootstrap: [AppComponent],
+  bootstrap: [
+    AppComponent,
+    AddExperienceComponent,
+    AddEducationComponent
+  ],
   exports: [
     AppComponent
   ]

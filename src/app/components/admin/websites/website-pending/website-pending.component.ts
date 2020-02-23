@@ -21,6 +21,7 @@ export class WebsitePendingComponent implements OnInit {
   total = 0;
   prev;
   reqMail = false;
+  night;
 
   constructor(
     private dialog: MatDialog,
@@ -30,6 +31,11 @@ export class WebsitePendingComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+
+    this.innerServ.night.subscribe(d =>{
+      this.night = d
+    })
+
     this.activeRoute.data
       .subscribe(d => {
         this.sites = d.pending.message;

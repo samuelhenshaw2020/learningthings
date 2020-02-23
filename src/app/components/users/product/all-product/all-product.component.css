@@ -1,9 +1,9 @@
 
 .prod_img{
     flex-shrink: 0;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    /* border-radius: 50%; */
     object-fit: cover;
     overflow: hidden;
 }
@@ -12,7 +12,12 @@
     vertical-align: middle;
     border-style: none;
     width: 40px;
-    height: 40px;
+   
+}
+
+.anim{
+    -webkit-transition: all 1s !important;
+    transition: all 1s !important;
 }
 
 

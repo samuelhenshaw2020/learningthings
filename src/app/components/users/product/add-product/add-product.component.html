@@ -1,571 +1,324 @@
-<main class="container">
-        <br>
 
-        <div class=" m-blue d-flex">
-                        <button mat-icon-button routerLink="/dash/product/all">
-                                <mat-icon class="text-light">arrow_back</mat-icon>
-                        </button>
-                        <p class="text-light m-auto">ADD PRODUCT</p>
-                </div>
+ 
 
 
 
-        <form novalidate (submit)="sendProd()" [formGroup]='prodForm'>
 
-
-                <!-- ///////////////////////////////////////////////////////////////// -->
+<div >
+        <div class="">
                 <br>
-
-                <div class=" row ">
-
-                                <!-- column one -->
-                                <div class="col-md p-md-3">
-                
-                                        <label for="">Product Name</label>
-                                        <div class="d-flex form-search border">
-                                                <input type="text" class=" p-2 w-100  " placeholder="Product Name" formControlName="product_name">
-                                        </div>
-                                        <br>
-                
-                                        <label for="">Product Price</label>
-                                        <div class="d-flex  form-search border pl-1">
-                                                <span class="font-weight-bold  m-auto" style="text-decoration: line-through;">N</span>
-                                                <input #p type="number" class=" w-100 p-2" placeholder="Price"  formControlName="price" (keyup)="getDiscount()">
-                
-                                        </div>
-                
-                                        <br>
-                                        <label for="">Sales Price</label>
-                                        <div class="d-flex form-search border pl-3">
-                                                <span class="font-weight-bold  m-auto" style="text-decoration: line-through;">N</span>
-                                                <input type="number" class=" w-100 p-2" placeholder="Sales Price"  formControlName="sales_price" (keyup)="getDiscount()">
-                
-                                        </div>
-                
-                                        <br>
-                                        <label for="">Discount</label>
-                                        <div class="form-search border">
-                                                <input [value]="discount" disabled class=" p-2 w-100  " placeholder="Discount">
-                                        </div>
-                                        <br>
-                
-                                        <label for="">Stock</label>
-                                        <div class="d-flex form-search px-2 p-0 border">
-                
-                                                <select class="w-100 ml-1 py-2" formControlName="stock_status">
-                                                        <option value="In Stock" selected>In Stock
-                                                        </option>
-                                                        <option value="Out of Stock">Out of Stock
-                                                        </option>
-                                                </select>
-                
-                                        </div>
-                                        <br>
-                
-                                        <label for="">Qualtity</label>
-                                        <div class="d-flex form-search px-2 p-0 border">
-                
-                                                <input type="number" class="w-100 ml-1 py-2" formControlName="amount_in_stock">
-                
-                                        </div>
-                
-                                        <br>
-                                        <label for="">Category</label>
-                                        <div class="form-search px-2 p-0 border">
-                
-                                                <select class="w-100 ml-1 py-2" formControlName="category_id">
-                                                        <option value="In Stock" selected>Food
-                                                        </option>
-                                                        <option value="Out of Stock">Phone
-                                                        </option>
-                                                </select>
-                                        </div>
-                
-                                        <br>
-                
-                                        <label for="">Sub-Category</label>
-                                        <div class="form-search border">
-                                                <input type="text" class=" w-100 p-2" placeholder="" formControlName="sub_category">
-                
-                                        </div>
-                
-                                        
-                                </div>
-                
-                
-                                <!-- column two -->
-                                <div class="col-md p-md-3">
-
-                                                
-                                                <label for="">Product Description</label>
-                                                <div>
-                                                                <angular-editor formControlName="product_description"
-                                                                [placeholder]="'Enter text here...'"
-                                                                [config]="editorConfig"></angular-editor>
-                                                </div>
-                                                <br>
-
-                                        <!-- product Variation -->
-                                        <div class="">
-                                                
+                <div class="text-center p-2">
+                        <a routerLink="/dash/product/all" class="float-left" mat-icon-button>
+                                <mat-icon>arrow_back</mat-icon>
+                        </a>
+                        <span class=" lead font-28 ">UPLOAD PRODUCT</span>
+                </div>
+                <main class="container">
 
 
-
-
-                                                        <br>
-                                                        <div class="">
-                                                                <div class="form-group container bg-white p-3 ">
-        
-        
-                                                                        <br>
-                                                                        <div>
-                                                                                <p>Product Variation</p>
-                                                                                <small>The variant can be size, color, height,
-                                                                                        width, weight and so on.</small>
-                                                                        </div>
-        
-                                                                        <div class="row">
-                                                                                        <div class="form-group col-md">
-                                                                                                        <div class="form-search p-1 border">
-                                                                                                                        <input type="text" class="w-100   "
-                                                                                                                        placeholder="Property key" #key>
-                                                                                                        </div>
-                                
-                                                                                                </div>
-                                                                                                <div class="form-group col-md ">
-                                
-                                                                                                                <div class="form-search p-1 border">
-                                                                                                                                <input type="text" class=" w-100  "
-                                                                                                                                placeholder="Property key" #value>
-                                                                                                                </div>
-                                                                                                </div>
-                                                                                                <div class="form-group col-md">
-                                                                                                        <button mat-stroked-button type="button" color=primary class=""
-                                                                                                                (click)="addVariant(key.value, value.value)">
-                                                                                                                <mat-icon>add</mat-icon>
-                                                                                                                Add
-                                                                                                        </button>
-
-                                                                                                        <button mat-icon-button (click)="add_variation()"><mat-icon>add</mat-icon></button>
-                                                                                                </div>
-                                                                        </div>
-        
-        
-        
-                                                                        <br>
-                                                                        <div>
-                                                                                <!-- <table class="table table-sm  small"> -->
-                                                                                       
-                                                                                        
-                                                                                        <div *ngFor="let items of prodVariants; let i = index" class="d-flex my-1">
-                                                                                                <strong>{{items.key}}: </strong>&nbsp;
-                                                                                                <mat-chip-list>
-                                                                                                        <mat-chip   *ngFor="let f of items.value" >
-                                                                                                                {{f}}
-                                                                                                        </mat-chip>
-                                                                                                        <mat-chip (click)="remove(i, 1)" >
-                                                                                                                        
-                                                                                                                <i class="fa fa-close fa-lg"></i>
-                                                                                                        </mat-chip>
-                                                                                                </mat-chip-list>
-                                                                                        </div>
-                                                                                <!-- </table> -->
-                                                                        </div>
-                                                                </div>
-                                                        </div>
-                                                </div>
-
-
-
-                                                <!-- product images -->
-                                                <div class="row">
-
-                                                                <div class="col-md">
-                                                                        <p class="text-center">Featured Image</p>
-                                                                        <div class="" style="position: relative;">
-        
-                                                                                <div style="cursor: pointer;"
-                                                                                        class="border-0 card"
-                                                                                        style=" overflow: hidden;">
-                                                                                        <!-- <input type="text" [value]="imglink" formControlName="prof_img"hidden> -->
-                                                                                        <img #fimg src="{{baseImgUrl+imglink[0]}}"
-                                                                                                class="card-img-top">
-                                                                                </div>
-        
-                                                                                <div style="position: absolute; top: 0%; left: 0%; right: 0%; bottom: 0%; background: rgba(0,0,0,0.2)"
-                                                                                        class=" d-flex justify-content-center">
-                                                                                        <a mat-fab color
-                                                                                                class="clickable mat-elevation-z7 align-self-center "
-                                                                                                (click)="addImage(0)">
-                                                                                                <mat-icon>image</mat-icon>
-                                                                                        </a>
-                                                                                </div>
-                                                                        </div>
-                                                                        <br>
-        
-        
-        
-        
-        
-                                                                </div>
-                                                                <div class="col-md">
-                                                                        <p>Additional Images</p>
-        
-                                                                        <div class="d-flex flex-wrap p-2">
-        
-                                                                                <div class="card  p-0 m-1"
-                                                                                        *ngFor="let selimg of imglink; let i = index"
-                                                                                        style="position: relative;"
-                                                                                        [hidden]="i ==0">
-        
-                                                                                        <mat-list style="position: relative;" class="p-0">
-                                                                                                <mat-list-item class="p-0" style="position: relative;">
-                                                                                                                <img src="{{baseImgUrl+selimg}}" alt="" matListAvatar style=" border-radius: 0px;" >
-                                                                                                </mat-list-item>
-                                                                                        </mat-list>
-                                                                                        <!-- <div style="position: absolute; top: -2px;  right: -2px; background: rgba(0,0,0,0.2)"
-                                                                                                class=" d-flex justify-content-center">
-                                                                                                <a mat-icon-button color
-                                                                                                        class="clickable mat-elevation-z7  "
-                                                                                                        (click)="remove(i, 0)">
-                                                                                                        <mat-icon>close
-                                                                                                        </mat-icon>
-                                                                                                </a>
-                                                                                        </div> -->
-        
-                                                                                </div>
-                                                                                <!-- <button  ><mat-icon>edit</mat-icon>Add additional image</button> -->
-                                                                                <div *ngIf="!(imglink.length > 5 )">
-                                                                                        <div *ngIf="(imglink.length > 0)"
-                                                                                                (click)="addImage(1)"
-                                                                                                class="clickable bg-light  border d-flex justify-content-center m-1"
-                                                                                                style="width: 72px; height: 56px;">
-                                                                                                <mat-icon color=primary
-                                                                                                        class="align-self-center">
-                                                                                                        add</mat-icon>
-                                                                                        </div>
-                                                                                </div>
-        
-        
-                                                                        </div>
-                                                                </div>
-                                                        </div>
-
-                                                              <!------------------------------------------
-                                                save button
-                                        -------------------------------------------->
-                                <div class="form-group bg-white p-2">
-                                                <button mat-raised-button color=primary type="submit" (click)="sendProd()">Save</button>
-                                        </div>
-        
-                
-                
-                
-                                </div>
-                        </div>
-                        <br><br><br>
-
-
-                <!-- ////////////////////////////////////////////////////////////////////// -->
-
-
-
-                <!-- <div class="row ">
                        
-                        <div class="col-md ">
-                                <div class="  bg-white p-2">
+                        
 
-                                        <p><span class=" ml-3 font-1 font-weight-bold" style="font-size: 9px">Basic
-                                                        infomarion</span></p>
-                                      
-                                        <div class=" row container ">
-
-                                                <div class=" mr-md-3 col-md">
-                                                        <label for="">Product Name</label>
-                                                        <div class="d-flex form-search border">
-                                                                <input type="text" class=" p-2 w-100  "
-                                                                        placeholder="Product Name"
-                                                                        formControlName="product_name">
+                
+                        
+                
+                       
+                
+                        <form novalidate (submit)="sendProd()" [formGroup]='prodForm'>
+                
+                
+                                <!-- ///////////////////////////////////////////////////////////////// -->
+                                <br>
+                
+                                <div class=" row ">
+                
+                                                <!-- column one -->
+                                                <div class="col-md p-md-5 ">
+                                
+                                                        
+                                                        <div class="form-group">
+                                                                <span class="text-secondary small">Product Name</span>
+                                                                <input type="text" class=" p-2 w-100 form-control "  formControlName="product_name">
                                                         </div>
-                                                </div>
-
-                                                <div class="col-md-4 mt-md-0 mt-4">
-                                                        <label for="">Product Price</label>
-                                                        <div class="d-flex ml-2 form-search border pl-1">
-                                                                <span class="font-weight-bold  m-auto"
-                                                                        style="text-decoration: line-through;">N</span>
-                                                                <input #p type="number" class=" w-100 p-2"
-                                                                        placeholder="Price"
-                                                                        formControlName="price" (keyup)="getDiscount()">
-
+                                                        
+                                
+                                                      
+                                                        <div class="form-group">
+                                                                <span class="text-secondary small">Product Price</span>
+                                                                <input #p type="number" class=" p-2 w-100 form-control "  formControlName="price" (keyup)="getDiscount()">
+                                
                                                         </div>
-                                                </div>
-                                        </div>
-                                        <br>
-
-
-                                        <div class=" row container">
-                                       
-                                                <div class="col-md mt-md-0 mt-4">
-                                                        <label for="">Sales Price</label>
-                                                        <div class="d-flex form-search border pl-3">
-                                                                <span class="font-weight-bold  m-auto"
-                                                                        style="text-decoration: line-through;">N</span>
-                                                                <input type="number" class=" w-100 p-2"
-                                                                        placeholder="Sales Price"
-                                                                        formControlName="sales_price" (keyup)="getDiscount()">
-
+                                                        
+                                                        <div class="form-group">
+                                                                <span class="text-secondary small">Sales price</span>
+                                                                <input type="number"  class=" p-2 w-100 form-control "  formControlName="sales_price" (keyup)="getDiscount()">
+                                
                                                         </div>
-                                                </div>
-
-                                                <div class=" mr-md-3 col-md">
-                                                        <label for="">Discount</label>
-                                                        <div class="d-flex form-search border">
-                                                                <input [value]="discount"  disabled  class=" p-2 w-100  "
-                                                                        placeholder="Discount">
+                                
+                                                       
+                                                        <div class="form-group">
+                                                                <span class="text-secondary small">Discount</span>
+                                                                <input [value]="discount" disabled class=" p-2 w-100 form-control ">
                                                         </div>
-                                                </div>
-
-
-                                                <div class="col-md mt-md-0 mt-4">
-                                                        <label for="">Stock</label>
-                                                        <div class="d-flex form-search px-2 p-0 border">
-
-                                                                <select class="w-100 ml-1 py-2"
-                                                                        formControlName="stock_status">
+                                
+                                                        <div class="form-group">
+                                                                <span class="text-secondary small">Stock</span>
+                                                                <select class=" p-2 w-100 form-control "  formControlName="stock_status">
                                                                         <option value="In Stock" selected>In Stock
                                                                         </option>
                                                                         <option value="Out of Stock">Out of Stock
                                                                         </option>
                                                                 </select>
-
+                                
                                                         </div>
-                                                </div>
-
-                                                <div class="col-md mt-md-0 mt-4">
-                                                                <label for="">Qualtity</label>
-                                                                <div class="d-flex form-search px-2 p-0 border">
-        
-                                                                        <input type="number" class="w-100 ml-1 py-2"
-                                                                                formControlName="amount_in_stock">
-        
-                                                                </div>
+                                
+                                                        <div class="form-group">
+                                                                <span class="text-secondary small">Quantity</span>
+                                                                <input type="number" class=" p-2 w-100 form-control " formControlName="amount_in_stock">
                                                         </div>
-                                        </div>
-                                        <br>
 
+                                                        <div class="form-group">
+                                                                <span class="text-secondary small">weight</span>
+                                                                <input type="text" class=" p-2 w-100 form-control " formControlName="weight">
+                                                        </div>
+                                                        
 
-                                        
-
-                                      
-                                        <div class=" row container ">
-
-                                                <div class=" mr-md-2 col-md">
-                                                        <label for="">Category</label>
-                                                        <div class="form-search px-2 p-0 border">
-                                                               
-                                                                <select class="w-100 ml-1 py-2"
-                                                                        formControlName="category_id">
-                                                                        <option value="In Stock" selected>Food
-                                                                        </option>
-                                                                        <option value="Out of Stock">Phone
-                                                                        </option>
+                                                        <div class="form-group">
+                                                                <span class="text-secondary small">Category</span>
+                                                                <a href="#" (click)="addCategory(s, $event)" class="small text-secondary float-right">Add category</a>
+                                                                <select #s class=" p-2 w-100 form-control " formControlName="category_id" >
+                                                                        <option value="" disabled >Select category</option>
+                                                                        <option *ngFor="let cat of categories;trackBy: trackByIndex" [value]="cat.category_id" >{{cat.category_name}}</option>
                                                                 </select>
+                                                               
                                                         </div>
-                                                </div>
+                                
+                                
+                                                        <div class="form-group">
+                                                                <span class="text-secondary small">Sub-Category </span>
+                                                                <i [hidden]="!subing" class="fa fa-circle-o-notch fa-spin text-light"></i>
 
-                                                <div class="col-md mt-md-0 mt-4">
-                                                        <label for="">Sub-Category</label>
-                                                        <div class="form-search border">
-                                                                <input type="text" class=" w-100 p-2"
-                                                                        placeholder="" formControlName="sub_category">
-
+                                                                <input type="text" list="suggest" class=" p-2 w-100 form-control " [matAutocomplete]="auto"  formControlName="sub_category">
+                                                                <mat-autocomplete #auto="matAutocomplete">
+                                                                        <mat-option *ngFor="let sub of sub_cat"
+                                                                                [value]="sub">
+                                                                                <span
+                                                                                        class="badge badge-dark p-1 px-2 small">{{sub[0].toUpperCase()}}</span>
+                                                                                &nbsp;
+                                                                                <span class="small">{{sub}}</span>
+                                                                        </mat-option>
+                                                                </mat-autocomplete>
+                                                                <!-- <datalist id="suggest" class="bg-light text-primary">
+                                                                        <option *ngFor="let sub of sub_cat" [value]="sub">
+                                                                 </datalist> -->
                                                         </div>
+                                
+                                                        
                                                 </div>
-
-                                                
-                                        </div>
-
-                                        <div class="">
-                                                        <div class="form-group p-2 form-search">
-                                                                <label for="">Product Description</label>
-                                                                <angular-editor formControlName="product_description"
-                                                                        [placeholder]="'Enter text here...'"
-                                                                        [config]="editorConfig"></angular-editor>
-                                                        </div>
-                                                </div>
-                                                
-
-
-                                        <br>
-                                        <div class="">
-                                                
-
-
-
-
-                                                <br>
-                                                <div class="">
-                                                        <div class="form-group container bg-white p-3 ">
-
-
-                                                                <br>
-                                                                <div>
-                                                                        <p>Product Variation</p>
-                                                                        <small>The variant can be size, color, height,
-                                                                                width, weight and so on.</small>
+                                
+                                
+                                                <!-- column two -->
+                                                <div class="col-md p-md-3">
+                
+                                                                
+                                                                
+                                                                <div class="form-group">
+                                                                        <span class="text-secondary small">Product Description</span>
+                                                                                <angular-editor formControlName="product_description"
+                                                                                [placeholder]="'Enter text here...'"
+                                                                                
+                                                                                [config]="editorConfig"></angular-editor>
                                                                 </div>
-
-                                                                <div class="row">
-                                                                                <div class="form-group col-md">
-                                                                                                <div class="form-search p-1 border">
-                                                                                                                <input type="text" class="w-100   "
-                                                                                                                placeholder="Property key" #key>
-                                                                                                </div>
+                                                                
+                
+                                                        <!-- product Variation -->
+                                                        <div class="form-group border">
+                                                                
+                
+                
+                
+                
+                                                                        <div class="">
+                                                                                <div class=" container-fluid  p-3 ">
                         
+                        
+                                                                                    
+                                                                                        <div>
+                                                                                                <p class="text-secondary small">
+                                                                                                       <span> Product Variation </span>
+                                                                                                        <br>
+                                                                                                        <span class="small">The variant can be size, color, height,
+                                                                                                                width, and so on.</span>
+                                                                                                </p>
+                                                                                                
                                                                                         </div>
-                                                                                        <div class="form-group col-md ">
                         
-                                                                                                        <div class="form-search p-1 border">
-                                                                                                                        <input type="text" class=" w-100  "
-                                                                                                                        placeholder="Property key" #value>
+                                                                                        <div class="row">
+                                                                                                                 <div class="px-1 col-md-3">
+                                                                                                                        <div class="form-group">
+                                                                                                                                <input type="text" 
+                                                                                                                                        class=" p-2 w-100 form-control "
+                                                                                                                                        placeholder="e.g size" #key [matAutocomplete]="varAuto">
+                                                                                                                                        <mat-autocomplete #varAuto="matAutocomplete">
+                                                                                                                                                <mat-option *ngFor="let keys of ['size', 'color', 'RAM', 'inches']"
+                                                                                                                                                        [value]="keys">
+                                                                                                                                                        <span
+                                                                                                                                                                class="badge badge-primary p-1 px-2 small">{{keys[0].toUpperCase()}}</span>
+                                                                                                                                                        &nbsp;
+                                                                                                                                                        <span class="small">{{keys}}</span>
+                                                                                                                                                </mat-option>
+                                                                                                                                        </mat-autocomplete>
+                                                                                                                        </div>
+                                                
+                                                                                                                </div>
+                                                                                                                <div class="col-md px-1">
+                                                
+                                                                                                                                <div class="form-group">
+                                                                                                                                                <input type="text" 
+                                                                                                                                                class="  w-100 form-control "
+                                                                                                                                                placeholder="e.g 34kg, 20kg, 50kg" #value>
+                                                                                                                                </div>
+                                                                                                                </div>
+                                                                                                                <div class="col-md-2">
+                                                                                                                       <div class="form-group">
+                                                                                                                        <button type="button"   class="btn btn-primary"
+                                                                                                                        (click)="addVariant(key.value, value.value)">
+                                                                                                                        add
+                                                                                                                </button>
+        
+                                                                                                                       </div>
+                                                                                                                        <!-- <button mat-icon-button (click)="add_variation()"><mat-icon>add</mat-icon></button> -->
+                                                                                                                </div>
+                                                                                        </div>
+                        
+                        
+                        
+                                                                                        
+                                                                                        <div>
+                                                                                                <!-- <table class="table table-sm  small"> -->
+                                                                                                       
+                                                                                                        
+                                                                                                        <div *ngFor="let items of prodVariants; let i = index" class="my-1">
+                                                                                                                <span class="light p-2">{{items.key}}: </span>&nbsp;
+                                                                                                                <span class="p-2 light mx-1 small"  *ngFor="let f of items.value" >
+                                                                                                                        {{f}}
+                                                                                                                </span>
+                                                                                                                <button type="button" mat-icon-button (click)="remove(i, 1)"><mat-icon>close</mat-icon></button>
+                                                                                                               
                                                                                                         </div>
+                                                                                                <!-- </table> -->
                                                                                         </div>
-                                                                                        <div class="form-group col-md">
-                                                                                                <button mat-stroked-button type="button" color=primary class=""
-                                                                                                        (click)="addVariant(key.value, value.value)">
-                                                                                                        <mat-icon>add</mat-icon>
-                                                                                                        Add
-                                                                                                </button>
-                                                                                        </div>
-                                                                </div>
-
-
-
-                                                                <br>
-                                                                <div>
-                                                                       
-                                                                               
-                                                                                
-                                                                                <div *ngFor="let items of prodVariants; let i = index" class="d-flex my-1">
-                                                                                        <strong>{{items.key}}: </strong>&nbsp;
-                                                                                        <mat-chip-list>
-                                                                                                <mat-chip   *ngFor="let f of items.value" >
-                                                                                                        {{f}}
-                                                                                                </mat-chip>
-                                                                                                <mat-chip (click)="remove(i, 1)" >
-                                                                                                                
-                                                                                                        <i class="fa fa-close fa-lg"></i>
-                                                                                                </mat-chip>
-                                                                                        </mat-chip-list>
                                                                                 </div>
-                                                                       
+                                                                        </div>
                                                                 </div>
-                                                        </div>
-                                                </div>
-                                        </div>
+                
+                
+                
+                                                                <!-- product images -->
+                                                              <div class="form-group border p-2">
+                                                                <div class="row">
+                
+                                                                        <div class="col-md">
+                                                                                <p class="text-secondary small">Featured Image</p>
+                                                                                <div class="" style="position: relative;">
+                
+                                                                                        <div    (click)="addImage(0)"
+                                                                                                class="light"
+                                                                                                style=" overflow: hidden; min-height: 120px; ">
+                                                                                                <!-- <input type="text" [value]="imglink" formControlName="prof_img"hidden> -->
+                                                                                                <img #fimg src="{{baseImgUrl+imglink[0]}}"
+                                                                                                        class="card-img-top">
+                                                                                        </div>
+                
+                                                                                        <div  (click)="addImage(0)" style="position: absolute; top: 0%; left: 0%; right: 0%; bottom: 0%; cursor: pointer;"
+                                                                                                class=" d-flex justify-content-center ">
+                                                                                                <a mat-icon color
+                                                                                                        class="clickable  align-self-center "
+                                                                                                        >
+                                                                                                        <mat-icon>image</mat-icon>
+                                                                                                </a>
+                                                                                        </div>
+                                                                                </div>
+                                                                                <br>
+                
+                
+                
+                
+                
+                                                                        </div>
+                                                                        <div class="col-md">
+                                                                                <p class="small">Additional Images</p>
+                
+                                                                                <div class="d-flex flex-wrap p-2">
+                
+                                                                                        <div class="card border-0  p-0 m-1"
+                                                                                                *ngFor="let selimg of imglink; let i = index"
+                                                                                                style="position: relative;"
+                                                                                                [hidden]="i ==0">
+                
+                                                                                                <mat-list style="position: relative;" class="p-0">
+                                                                                                        <mat-list-item class="p-0" style="position: relative;">
+                                                                                                                        <img src="{{baseImgUrl+selimg}}" alt="" matListAvatar style=" border-radius: 0px;" >
+                                                                                                        </mat-list-item>
+                                                                                                </mat-list>
+                                                                                             
+                
+                                                                                        </div>
 
-
-                                        
-
-                                        <div>
+                                                                                        <div *ngIf="!(imglink.length > 5 )">
+                                                                                                <div *ngIf="(imglink.length > 0)"
+                                                                                                        (click)="addImage(1)"
+                                                                                                        class="clickable bg-light  border d-flex justify-content-center m-1"
+                                                                                                        style="width: 72px; height: 56px;">
+                                                                                                        <mat-icon color=primary
+                                                                                                                class="align-self-center">
+                                                                                                                add</mat-icon>
+                                                                                                </div>
+                                                                                        </div>
+                
+                
+                                                                                </div>
+                                                                        </div>
+                                                                </div>
+        
+                                                              </div>
+                                                                              <!------------------------------------------
+                                                                save button
+                                                        -------------------------------------------->
                                                 
-
-                                                <div class="row">
-
-                                                        <div class="col-md">
-                                                                <p class="text-center">Featured Image</p>
-                                                                <div class="" style="position: relative;">
-
-                                                                        <div style="cursor: pointer;"
-                                                                                class="border-0 card"
-                                                                                style=" overflow: hidden;">
-                                                                                
-                                                                                <img #fimg src="{{baseImgUrl+imglink[0]}}"
-                                                                                        class="card-img-top">
-                                                                        </div>
-
-                                                                        <div style="position: absolute; top: 0%; left: 0%; right: 0%; bottom: 0%; background: rgba(0,0,0,0.2)"
-                                                                                class=" d-flex justify-content-center">
-                                                                                <a mat-fab color
-                                                                                        class="clickable mat-elevation-z7 align-self-center "
-                                                                                        (click)="addImage(0)">
-                                                                                        <mat-icon>image</mat-icon>
-                                                                                </a>
-                                                                        </div>
-                                                                </div>
-                                                                <br>
-
-
-
-
-
-                                                        </div>
-                                                        <div class="col-md">
-                                                                <p>Additional Images</p>
-
-                                                                <div class="d-flex flex-wrap p-2">
-
-                                                                        <div class="card  p-0 m-1"
-                                                                                *ngFor="let selimg of imglink; let i = index"
-                                                                                style="position: relative;"
-                                                                                [hidden]="i ==0">
-
-                                                                                <mat-list style="position: relative;" class="p-0">
-                                                                                        <mat-list-item class="p-0" style="position: relative;">
-                                                                                                        <img src="{{baseImgUrl+selimg}}" alt="" matListAvatar style=" border-radius: 0px;" >
-                                                                                        </mat-list-item>
-                                                                                </mat-list>
-                                                                               
-
-                                                                        </div>
-                                                                        
-                                                                        <div *ngIf="!(imglink.length > 5 )">
-                                                                                <div *ngIf="(imglink.length > 0)"
-                                                                                        (click)="addImage(1)"
-                                                                                        class="clickable bg-light  border d-flex justify-content-center m-1"
-                                                                                        style="width: 72px; height: 56px;">
-                                                                                        <mat-icon color=primary
-                                                                                                class="align-self-center">
-                                                                                                add</mat-icon>
-                                                                                </div>
-                                                                        </div>
-
-
-                                                                </div>
-                                                        </div>
+                                
+                                
+                                
                                                 </div>
                                         </div>
 
 
+                                        <div class="form-group  py-3 text-center">
+                                                <button  class="br-30 shadow  p-3 w-50 btn btn-primary " type="submit" >
+                                                        <i class="fa fa-cart-plus"></i> 
+                                                        Add product 
+                                                        <span [hidden]="!adding">
+                                                            <i class="	fa fa-circle-o-notch fa-spin text-light"></i>
+                                                        </span>
+                                                       
+                                                </button>
+                                        </div>
+        
+                                        
+                
+                
+                            
+                
+                
+                
+                        </form>
+                </main>
+        </div>
+</div>
 
-                                </div>
+<br><br><br><br><br>
 
-
-                                       
-                                <div class="form-group bg-white p-2">
-                                        <button mat-raised-button color=primary type="submit" (click)="sendProd()">Save</button>
-                                </div>
-
-
-
-
-
-
-
-
-
-                        </div>
-
-
-                       
-
-                </div> -->
-
-
-
-
-
-
-        </form>
-</main>
+<!-- <ly-grid container justify="end" ly-dialog-actions>
+        <button ly-button color="primary" (click)="dialogRef.close()">CLOSE</button>
+        <button ly-button color="primary" >UPLOAD</button>
+</ly-grid> -->

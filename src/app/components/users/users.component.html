@@ -1,5 +1,5 @@
 
-<app-notification [not_open]="not_open" [not]="not"></app-notification>
+<!-- <app-notification [not_open]="not_open" [not]="not"></app-notification>
 
 <mat-sidenav-container class="sidenav-container" (contextmenu)="conf($event)" >
 
@@ -20,11 +20,7 @@
                    <i class="fa fa-angle-down fg-lg text-light"></i>
               </button>
 
-              <!-- <div > -->
-                  <!-- <select class="form-control w-100 bg-dark text-light " >
-                     <option class="small " value="">Ihifix site</option>
-                  </select> -->
-              <!-- </div> -->
+  
               
 
            
@@ -89,7 +85,7 @@
          
     
          <div>
-           <!-- <a mat-button class="small m-auto">Henshaw Samuel</a>&nbsp; -->
+          
              <div >
                   <span style="font-size: 12px"   [class]="no_site ? 'p-1 badge badge-sm badge-success small m-auto': 'p-1 badge badge-sm badge-danger small m-auto'">
                       <span class="d-none d-md-inline">active</span>
@@ -100,7 +96,7 @@
                       <mat-icon >notifications</mat-icon>
                   </a>
                  
-                  <!-- <a class=" small "  mat-icon-button color=primary (click)="fetchData()"><mat-icon class="d-md-none">refresh</mat-icon></a>&nbsp; -->
+     
 
                   <a class=" small d-md-none" routerLink="/dash/preview" mat-icon-button color><mat-icon class="d-md-none">visibility</mat-icon></a>&nbsp;
                   <a class=" small d-none d-md-inline" routerLink="/dash/preview" mat-button color>Preview</a>&nbsp;
@@ -111,11 +107,11 @@
                
     
          </div>
-            <!-- <button mat-icon-button (click)='minimize = !minimize'><mat-icon class="lead font-weight-bold" >	person_outline</mat-icon></button> -->
+            
          </div>
        </mat-toolbar>
 
-      <!-- Add Content Here -->
+      
 
      <main class="container-fluid px-0 bg-back h-100" (click)="not_open = false">
 
@@ -124,7 +120,6 @@
               <router-outlet></router-outlet>
             </div>
 
-            <!-- <app-right-aside></app-right-aside> -->
             
 
 
@@ -136,32 +131,28 @@
 
     </mat-sidenav-content>
 
-  </mat-sidenav-container>
+  </mat-sidenav-container> -->
 
-
-
-
-
-
-
-
-
-
-
-  <!-- the drop down menw -->
 
   <mat-menu #rootMenu="matMenu">
    
-    <button mat-menu-item class="d-flex px-3"  *ngFor="let site of othersites" (click)="newsite(site.id)" style="outline: none; border: none;">
-      <div style="overflow: hidden; width: 30px; height: 100%; border-radius: 10px;" >
-          <img src="{{imgBaseUrl + site.logo}}" alt="" style="width: 40px;">
-      </div>
-      &nbsp;&nbsp;&nbsp;
-      <!-- <span class="badge badge-dark p-1 px-2 small m-auto">{{site.business_name[0].toUpperCase()}}</span> -->
+    <button mat-menu-item class=""  *ngFor="let site of othersites" (click)="newsite(site.id)" style="outline: none; border: none;">
+
+     <mat-icon mat-list-icon class="text-primary">{{site.short == 'cmc'? 'shopping_cart': 'language'}}</mat-icon>
+  
       <span>{{site.business_name}}</span>
     </button>
+
+    <button mat-menu-item routerLink="/start">
+       <mat-icon mat-list-icon class="text-primary">add</mat-icon>
+        Create new Site
+    </button>
+
+
     
   </mat-menu>
+
+
 
 
   <mat-menu #userMenu="matMenu">
@@ -175,16 +166,253 @@
           </button>
   </mat-menu>
 
-<!-- ////////dropdown menu - end////// -->
+
+  <!-- <app-notification [not_open]="not_open" [not]="not"></app-notification> -->
+<!-- <app-float-menu></app-float-menu>  -->
 
 
-<mat-action-list  [hidden]="isContext" class="bg-light div-shadow  rounded " id="menu" style="position: fixed; z-index: 2000;">
-    <mat-list-item (click)="closeContext('forward')"> <mat-icon mat-list-icon>arrow_forward</mat-icon><span mat-line >Forward</span></mat-list-item>
-    <mat-list-item (click)="closeContext('back')"><mat-icon mat-list-icon>arrow_back</mat-icon><span mat-line>Back</span></mat-list-item>
-    <mat-list-item (click)="closeContext('users')"><mat-icon mat-list-icon>person_outline</mat-icon><span mat-line>User Profile</span></mat-list-item>
-    <mat-list-item (click)="closeContext('site')"><mat-icon mat-list-icon>web</mat-icon><span mat-line>site information</span></mat-list-item>
-    <mat-list-item (click)="closeContext()"><mat-icon mat-list-icon>close</mat-icon><span mat-line>close</span></mat-list-item>
-</mat-action-list>
+<!-- //////////////////////////////////////////////////// -->
+
+<ly-paper >
+   
+  
+    <ly-drawer-container [withClass]="classes.drawerContainer" >
+  
+      <ly-drawer #_drawer="lyDrawer"  opened position="before" [width]="width" class="bg-black sticky-top side"  >
+
+        <!-- <span class="spinner-grow spinner-grow-lg m-auto" [hidden]="!isfetching"></span> -->
+                <!-- <span [hidden]="!isfetching || count == 0 ? true: false" >
+                  <span class="small font-weight-bold" style="font-size: small;">Reload</span>
+                    <span class="small numbers badge" style="width: 30px; height: 30px; line-height: 20px; font-size: medium;">{{count}}</span>
+                </span> -->
+             
+    
+    <button [hidden]="isfetching || !no_site" mat-button   [matMenuTriggerFor]="rootMenu"  class="w-100 text-fade bg-black-light-2 shadow py-1" style="overflow: hidden;" >
+       <span class="text-light small font-weight-bold">{{selected_site | uppercase | slice:0:7}} ..</span>
+       &nbsp; &nbsp; 
+       <i class="fa fa-angle-down fg-lg text-light"></i>
+    </button>
+
+
+
+        <ly-list>
+
+          <div ly-list-item class="text-center">
+            <!-- <ly-icon  disablePadding class="m-blue-f" style="font-size: 45px;">cloud_queue</ly-icon> -->
+            <a mat-icon-button  class="m-auto logo" >
+              <img src="{{imgBaseUrl+logo}}" alt=""   [hidden]="isfetching" style="width: 35px;">
+            </a>
+            <mat-divider></mat-divider>
+          </div>
+          
+          <button ly-list-item  routerLink="/dash/overview" routerLinkActive="bg-black-light" (click)="closeDr(_drawer)">
+             <p class="text-center m-auto py-2" >
+              <ly-icon  disablePadding class="text-fade " routerLinkActive="m-blue-f" style="font-size: 35px;">dashboard</ly-icon><br>
+              <span  class="text-fade small font-weight-bold" routerLinkActive="text-light">DASHBOARD</span>
+             </p>
+          </button>
+     
+          <button  *ngIf="web_type == 'ecommerce'" ly-list-item routerLink="/dash/product/all"  routerLinkActive="bg-black-light" (click)="closeDr(_drawer)">
+            <p class="text-center m-auto py-2">
+              <ly-icon  disablePadding class="text-fade" routerLinkActive="m-blue-f" style="font-size: 35px;">add_shopping_cart</ly-icon>
+              <span  class="text-fade small font-weight-bold" routerLinkActive="text-light">PRODUCT</span>
+             </p>
+          </button>
+         
+          <button  *ngIf="web_type == 'ecommerce'" ly-list-item routerLink="/dash/customer/list" routerLinkActive="bg-black-light" (click)="closeDr(_drawer)">
+           <p class="text-center m-auto py-2">
+            <ly-icon  disablePadding class="text-fade"  routerLinkActive="m-blue-f" style="font-size: 35px;">supervisor_account</ly-icon>
+            <span  class="text-fade small font-weight-bold" routerLinkActive="text-light">CUSTOMERS</span>
+           </p>
+          </button>
+          <button ly-list-item routerLink="/dash/post/all" routerLinkActive="bg-black-light" (click)="closeDr(_drawer)" [hidden]="!no_site">
+            <p class="text-center m-auto py-2">
+             <ly-icon  disablePadding class="text-fade"  routerLinkActive="m-blue-f" style="font-size: 35px;">chrome_reader_mode</ly-icon><br>
+             <span  class="text-fade small font-weight-bold" routerLinkActive="text-light">BLOG</span>
+            </p>
+           </button>
+           
+           <button *ngIf="web_type == 'portfolio'" ly-list-item routerLink="/dash/portfolio" routerLinkActive="bg-black-light" (click)="closeDr(_drawer)">
+            <p class="text-center m-auto py-2">
+             <ly-icon  disablePadding class="text-fade"  routerLinkActive="m-blue-f" style="font-size: 35px;">person</ly-icon>
+             <span  class="text-fade small font-weight-bold" routerLinkActive="text-light">PORTFOLIO</span>
+            </p>
+           </button>
+
+           <button ly-list-item routerLink="/dash/website"  routerLinkActive="bg-black-light" (click)="closeDr(_drawer)" [hidden]="!no_site">
+            <p class="text-center m-auto py-2">
+             <ly-icon disablePadding class="text-fade" routerLinkActive="m-blue-f" style="font-size: 35px;">language</ly-icon><br>
+             <span class="text-fade small font-weight-bold" routerLinkActive="text-light">WEBSITE</span>
+            </p>
+           </button>
+           
+           <button ly-list-item routerLink="/dash/manmedia" routerLinkActive="bg-black-light" (click)="closeDr(_drawer)" [hidden]="!no_site">
+            <p class="text-center m-auto py-2">
+             <ly-icon  disablePadding class="text-fade"  routerLinkActive="m-blue-f" style="font-size: 35px;">perm_media</ly-icon><br>
+             <span  class="text-fade small font-weight-bold" routerLinkActive="text-light">MEDIA</span>
+            </p>
+           </button>
+             
+         <hr>
+
+          <button ly-list-item routerLink="/dash/p" routerLinkActive="bg-black-light" (click)="closeDr(_drawer)" [hidden]="!no_site">
+            <p class="text-center m-auto py-2">
+              <ly-icon  disablePadding class="text-fade" routerLinkActive="m-blue-f" style="font-size: 35px;">build</ly-icon>
+             </p>
+          </button>
+          <button ly-list-item (click)="logout()" >
+            <p class="text-center m-auto py-2">
+              <ly-icon  disablePadding class="text-fade" style="font-size: 35px;" [hidden]="isOut">power_settings_new</ly-icon>
+              <strong class="fa fa-circle-o-notch fa-spin fa-lg text-light" [hidden]="!isOut"></strong>
+             </p>
+          </button>
+          <div ly-list-item>
+           
+            <p class="text-center">
+              <label class="switch ">
+                <input type="checkbox"  (change)="nightMode($event)" [checked]="night">
+                <span class="slider round pt-1">
+                  <i [hidden]="!night" class="fa fa-moon-o fa-lg text-fade "></i>
+                  <i [hidden]="night" class="fa fa-sun-o fa-lg  text-warning"></i>
+                </span>
+              </label>
+            </p>
+            <br><br><br><br><br><br><br><br><br>
+            <!-- <mat-button-toggle-group name="fontStyle" aria-label="Font Style">
+              <mat-button-toggle value="day"><i class="	fa fa-moon-o"></i></mat-button-toggle>
+              <mat-button-toggle value="night"><i class="	fa fa-sun-o"></i></mat-button-toggle>
+            </mat-button-toggle-group> -->
+        </div>
+        </ly-list>
+       
+       
+      </ly-drawer>
+
+     
+  
+      <ly-drawer-content [withClass]="classes.drawerContent" class=" p-0 h-100" [ngClass]="night ? 'bg-black-light ': 'bg-white'">
+          <ly-toolbar position="static"  [elevation]="0"    [ngClass]="night ? 'bg-black': 'bg-back'" class="d-flex justify-content-between">
+              
+
+             
+        <!--
+           
+
+            <span class="d-none d-md-inline">&nbsp;&nbsp;</span>
+      
+        
+              <button color="primary:contrast" ly-button appearance="icon" (click)="not_open = !not_open" >
+                  <ly-icon class="m-blue-f">message<ly-badge bg="warn" >{{not.length}}</ly-badge></ly-icon>
+                </button>
+        
+              <button color="primary:contrast" ly-button  routerLink="/admin/analysis" >
+                    <ly-icon class="m-blue-f">pie_chart</ly-icon>
+                    <span class=" lead d-none d-md-inline" [ngClass]="night ? 'text-fade': 'text-dark'">&nbsp;&nbsp;Insights</span>
+              </button>
+
+              <span [withClass]="classes.grow"></span>
+     
+            
+              <a ly-button   class="clickable m-blue-f">
+                  <ly-avatar>
+                      <img alt="Larm Rmah" src="https://firebasestorage.googleapis.com/v0/b/alyle-ui.appspot.com/o/img%2Flarm-rmah-47685-unsplash.jpeg?alt=media&token=1db05ae5-9c03-437b-9e8c-764dfb257061">
+                    </ly-avatar>
+                   
+                <span class="d-none d-md-inline lead " [ngClass]="night ? 'text-fade': 'text-dark'"> &nbsp;&nbsp;Samuel Henshaw </span>
+              </a> -->
+
+              <div class="d-flex">
+                <button mat-icon-button color   (click)="_drawer.toggle()" >
+                  <ly-icon class="font-weight-bold "  [ngClass]="night ? 'text-fade': 'text-secondary'" >dehaze</ly-icon>
+                </button>
+
+                  <span class="hd m-auto ml-1 " [hidden]="!isfetching">
+                     <span class="	fa fa-circle-o-notch fa-spin m-auto text-primary" [hidden]="!isfetching"></span>
+                  </span>
+
+                  <!-- <span lyTyp="title " >
+                    <strong class="lead d-none d-md-inline "  [ngClass]="night ? 'text-fade': 'text-dark'" >Welcome back </strong>
+                    <span class="font-weight-bold " [ngClass]="night ? 'text-fade': 'text-dark'">Henshaw</span>
+                </span> -->
+
+                <span lyTyp="title " class="my-auto">
+                  <strong [style.color]="color"  [ngClass]="night ? 'text-fade': ''">{{sitename | slice:0:8 | uppercase}} <span>{{sitename.length > 8 ? '...': ''}}</span></strong>&nbsp;
+                  <!-- <strong class="  text-light d-md-none m-blue br-30" [ngClass]="night ? 'text-fade': 'text-dark'">{{sitename[0]+sitename[1]}}</strong> -->
+              
+                </span>
+
+                </div>
+              
+              
+          
+              <div>
+               
+                  <div >
+                        <span class="text-center" [hidden]="!no_site">
+                          <label class="dash-switch ">
+                            <input #pub type="checkbox" class="check" [checked]="published === 1 ? true : false" (change)="publish(pub, published)">
+                            <span class="dash-slider round">
+                              <i  class="text-secondary	fa fa-circle-o-notch fa-spin fa-sm" [hidden]="!publishing"></i>
+                            </span>
+                          </label>
+                          <span class="small m-auto font-weight-bold d-none d-md-inline"  [ngClass]="night ? 'text-fade': ''" [style.color]="published ==1 ? '#007bff': '#ccc'"> LIVE </span>
+                        </span >
+                        &nbsp;&nbsp;
+                       <span style="font-size: 11px"   [class]="no_site ? 'p-1 badge badge-sm badge-success small m-auto': 'p-1 badge badge-sm badge-danger small m-auto'">
+                           <span class="d-none d-md-inline">ACTIVE</span>
+                           <span class=" d-md-none">A</span>
+                       </span>
+                       &nbsp;&nbsp;
+                       
+                       <!-- <a mat-icon-button [matBadge]="not.length" matBadgeColor="" matBadgePosition="after"  matBadgeSize="small" color="primary" (click)="not_open = !not_open" >
+                           <mat-icon >notifications</mat-icon>
+                       </a> -->
+                      
+          
+     
+                       <!-- <a class=" small d-md-none" routerLink="/dash/preview" mat-icon-button color><mat-icon class="d-md-none">visibility</mat-icon></a>&nbsp; -->
+                       <button [hidden]="!no_site" class="br-30  px-0  " [ngClass]="night ? 'text-fade': 'text-secondary'" mat-button  routerLink="/dash/preview" ><span class="small font-weight-bold">PREVIEW</span> </button>&nbsp;
+                       
+                       <button [hidden]="no_site" class="btn btn-primary shadow btn-sm" routerLink="/start">
+                        <i class="fa fa-plus"></i>
+                        Create site
+                      </button>
+                       
+                    
+         
+              </div>
+                 
+              </div>
+              
+            </ly-toolbar>
+
+            <mat-divider></mat-divider>
+         <div class="" style="overflow-y: scroll;" [style.height]="innerWidth">
+             <router-outlet></router-outlet>
+             <br><br><br><br><br><br><br>
+         </div>
+      </ly-drawer-content>
+  
+    </ly-drawer-container>
+  </ly-paper>
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

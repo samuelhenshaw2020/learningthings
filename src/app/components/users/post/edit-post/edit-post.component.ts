@@ -10,6 +10,7 @@ import { MediaManagerComponent } from '../../media-manager/media-manager.compone
 import { MatDialog, MatSnackBar } from '@angular/material';
 import { UserserviceService } from 'src/app/services/userservice.service';
 import { HttpProgressEvent, HttpClient } from '@angular/common/http';
+import { AppService } from 'src/app/app.service';
 
 @Component({
   selector: 'app-edit-post',
@@ -33,7 +34,8 @@ export class EditPostComponent implements OnInit {
     private dialog: MatDialog,
     private serv: UserserviceService,
     private router: Router,
-    private snackbar: MatSnackBar
+    private snackbar: MatSnackBar,
+    private rootS: AppService
   ) {
      
    }
@@ -158,12 +160,7 @@ this.currentPage = this.postServ.blogall.value.current_page;
 
 
   openMedia(){
-    const dialogRef = this.dialog.open(MediaManagerComponent, {
-      minWidth: '90%',
-      minHeight: "500px",
-      maxHeight: "500px",
-      disableClose: true
-    });
+    const dialogRef = this.rootS.mediaBox();
 
     // console.log(el)
       dialogRef.afterClosed().subscribe(link => {

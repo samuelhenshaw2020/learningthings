@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material';
+import { MatDialog, MatSnackBar } from '@angular/material';
 import { MediaManagerComponent } from '../../media-manager/media-manager.component';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
 import { UserserviceService } from 'src/app/services/userservice.service';
 import { FormBuilder, Validators, FormControl } from '@angular/forms';
 import { PostService } from '../post.service';
+import { AppService } from 'src/app/app.service';
 // import { angularEditorConfig } from '@kolkov/angular-editor/lib/config';
 
 @Component({
@@ -20,8 +21,9 @@ export class CreatePostComponent implements OnInit {
     private dialog: MatDialog,
     private serv: UserserviceService,
     private fb: FormBuilder,
-    private postServ: PostService
-    
+    private postServ: PostService,
+    private snackbar: MatSnackBar,
+    private rootS: AppService
   ) { }
 
   createpostFG = this.fb.group({
@@ -47,12 +49,7 @@ export class CreatePostComponent implements OnInit {
   imglink = null;
   openMediaManager(){
     this.spin = true;
-    const dialogRef = this.dialog.open(MediaManagerComponent, {
-      minWidth: '90%',
-      minHeight: "500px",
-      maxHeight: "500px",
-      disableClose: true
-    });
+    const dialogRef = this.rootS.mediaBox();
 
     dialogRef.afterClosed().subscribe(link => {
       this.spin = false;
@@ -65,24 +62,29 @@ export class CreatePostComponent implements OnInit {
 
   submitted= false;
   createPost(){
-    alert();
+    
     let newPost = {
       featured_image:  this.featured_image.value.substr(this.featured_image.value.search('images'), this.featured_image.value.length),
       post_title: this.title.value,
       post_body: this.content.value,
-      site_id: this.serv.siteData.value.site_id,
+      site_id: this.serv.siteData().value.id,
       category: this.category.value
     }
 
     this.submitted = true;
     this.serv.postCreatePost(newPost).subscribe(d=>{
-      console.log(d);
+      if(d.success ==  true){
+        this.snackbar.open(d.message, 'close', {duration: 5000, panelClass: ['bg-light', 'bg-success']})
+      }else{
+        this.snackbar.open(d.message, 'close', {duration: 5000, panelClass: ['bg-light', 'bg-danger']})
+
+      }
       this.submitted = false;
       this.serv.getAllPost().subscribe(d=>{
         this.postServ.blogall.next(d)
         this.serv.postPostCategory()
         .subscribe(  async data => {
-          console.log(data)
+          
          await  this.postServ.category.next(data);
      
         })

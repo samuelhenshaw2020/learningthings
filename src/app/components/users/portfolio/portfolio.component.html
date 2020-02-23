@@ -1,120 +1,347 @@
-<main class="container-fluid">
+<main class="container px-md-5" >
 
-    <br>
+    
     <!-- <form novalidate (submit)="submitPort()" [formGroup]="portForm"> -->
 
         <div class="row">
-            <div class="col-md-2"></div>
+            <!-- <div class="col-md-2"></div> -->
             <!-----------------------------------
-                Data aspect
+                Data aspect 
           ---------------------------------------->
             <div class="col-md   p-md-2 px-0">
 
-                <div class="bg-dark  p-2">
-                    <p class="font-weight-bold text-light text-center lead">Portfolio Image</p>
-                </div>
-
+             
                 <!---------------------------------
                 Profile Image
           ---------------------------------------->
-                <div class="bg-white  p-1" style="position: relative;">
-                    <div style="cursor: pointer;" class="border-0 card" style="height: 350px; overflow: hidden;">
-                        <!-- <input type="text" [value]="imglink" formControlName="prof_img"hidden> -->
-                        <img src="{{imglink}}" class="card-img-top">
+                <div class="  p-2" style="position: relative;">
+                    <p class="text-secondary lead small font-weight-bold">PORTFOLIO PHOTO</p>
+                    <div class="text-center">
+                        <a href="#"  class="m-auto ux1">
+                            <img src="{{imagebase+imglink}}" class="card-img-top border m-shadow  "  style="width: 300px; clip-path: circle(45%);">
+                        </a>
+                        
                     </div>
 
-                    <div style="position: absolute; top: 0%; left: 0%; right: 0%; bottom: 0%; background: rgba(0,0,0,0.2)" class=" d-flex justify-content-center">
-                        <a mat-fab color class="clickable mat-elevation-z7 align-self-center " (click)="openMediaManager()"><mat-icon>image</mat-icon></a>
+                    <div style="position: absolute; top: 0%; left: 0%; right: 0%; bottom: 0%; " 
+                        (click)="openMediaManager($event)" class="clickable d-flex justify-content-center ux1" 
+                        
+                        >
+                        <a href="#" class=" align-self-center" [hidden]="imglink==null">
+                            <i class="	fa fa-camara text-dark display-1" style="opacity: 0.4;"></i>
+                        </a>
                     </div>
                 </div>
                 <!-------------------------------
                 Form data
           ---------------------------------------->
                 <br>
-                <div class="bg-white ">
-                        <p class="bg-dark text-light text-center p-2">Personal Details</p>
+                <div class=" ">
+                        <p class="text-secondary lead small font-weight-bold">PERSONAL DETAILS</p>
                         <div class="form-group p-3">
                                 <div class="row">
                                     <div class="col-md">
-                                        <mat-form-field class="w-100" appearance="outline">
-                                            <mat-label>Personal name</mat-label>
-                                            <input type="text" matInput >
-                                        </mat-form-field>
+                                        
+                                        <div class="form-group">
+                                            <span class="text-secondary small">First Name</span>
+                                            <input type="text" class="form-control " [(ngModel)]="profile.firstname">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <span class="text-secondary small">Last Name</span>
+                                            <input type="text" class="form-control  " [(ngModel)]="profile.lastname">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <span class="text-secondary small">Birthday</span>
+                                            <input type="date" class="form-control  " [(ngModel)]="profile.birthday">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <span class="text-secondary small">Nationality</span>
+                                            <input type="text" class="form-control  " [(ngModel)]="profile.nationality" [matAutocomplete]="nationAuto" >
+                                            <mat-autocomplete #nationAuto="matAutocomplete">
+                                                <mat-option *ngFor="let nation of nationality"
+                                                        [value]="nation.nationality">
+                                                        <img [src]="'https://www.countryflags.io/'+nation.alpha_2_code +'/flat/32.png'" [alt]="nation.alpha_2_code" loading="lazy">
+                                                        &nbsp;
+                                                        <span class="small">{{nation.nationality}}</span>
+                                                </mat-option>
+                                        </mat-autocomplete>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <span class="text-secondary small">Years of Experience</span>
+                                            <!-- <input type="number" class="form-control  " [(ngModel)]="profile.year_of_experience"> -->
+                                            <select class="form-control  " [(ngModel)]="profile.year_of_experience">
+                                                <option *ngFor="let ex of [1,2,3,4,5,6,7,8,9,10,11,12,13,14]" [value]="ex">{{ex}}</option>
+                                                <option value="15+">15+</option>
+                                            </select>
+                                        </div>
+
                                     </div>
                                     <div class="col-md">
-                                        <mat-form-field class="w-100" appearance="outline">
-                                            <mat-label>Years of Professional Experience</mat-label>
-                                            <input type="text" matInput >
-                                        </mat-form-field>
+
+                                       <div class="form-group">
+                                            <span class="text-secondary small" >Language</span>
+                                            <input type="text" class="form-control  " [(ngModel)]="profile.lang">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <span class="text-secondary small">Phone</span>
+                                            <input type="tel" class="form-control  " [(ngModel)]="profile.phone">
+                                        </div>
+
+                                       
+                                        <div class="form-group">
+                                            <span class="text-secondary small">Address</span>
+                                            <input type="text" class="form-control  " [(ngModel)]="profile.address">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <span class="text-secondary small">Freelance</span>
+                                            <!-- <input type="text" > -->
+                                            <select class="form-control  " [(ngModel)]="profile.freelance">
+                                                <option value="available">available</option>
+                                                <option value="not available">not available</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <span class="text-secondary small">Email</span>
+                                            <input type="email" class="form-control  " [(ngModel)]="profile.email">
+                                        </div>
+
+                                      
+                                    </div>
+
+                                    <div class="col-md">
+
+                                     
+
+                                        <div class="form-group">
+                                            <span class="text-secondary small">LinkedIn</span>
+                                            <input type="url" class="form-control  " [(ngModel)]="profile.linkedin">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <span class="text-secondary small">Twitter</span>
+                                            <input type="url" class="form-control  " [(ngModel)]="profile.twitter">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <span class="text-secondary small">Facebook</span>
+                                            <input type="url" class="form-control  " [(ngModel)]="profile.facebook">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <span class="text-secondary small">Instagram</span>
+                                            <input type="url" class="form-control  " [(ngModel)]="profile.instagram">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <span class="text-secondary small">Github</span>
+                                            <input type="url" class="form-control  " [(ngModel)]="profile.github" >
+                                        </div>
+
                                     </div>
                                 </div>
                             </div>
                             
-                            <div class="p-3">
-                               
-                                    <mat-label>Describe your self</mat-label>
-                                    <!-- <textarea matInput cdkTextareaAutosize  cdkAutosizeMinRows="10"
-                                        cdkAutosizeMaxRows="20"></textarea> -->
-                                        <angular-editor [(ngModel)]="portfolio.description" [placeholder]="'Enter text here...'"  [config]="editorConfig"></angular-editor>
-
-                                
-                            </div>
+                           
                 </div>
+                <br>
+
+
+                <div class="p-3 ">
+                               
+                    <p class="text-secondary lead small font-weight-bold">PERSONAL DESCRIPTION</p >
+                    <textarea  class="form-control  " cdkTextareaAutosize  cdkAutosizeMinRows="10"
+                        cdkAutosizeMaxRows="20" [(ngModel)]="description"></textarea>
+                        <!-- <angular-editor  [placeholder]="'Enter text here...'"  [config]="editorConfig"></angular-editor> -->
+
+                
+            </div>
+            <br>
+
+
+                <div class="p-2 ">
+                        <div class="">
+                            <span class="text-secondary lead small font-weight-bold">EXPERIENCES</span >
+                                &nbsp; &nbsp;
+                            <button class="m-shadow" mat-icon-button (click)="experience()"><mat-icon class="text-primary ">add</mat-icon></button>
+                        </div>
+                        <br>
+
+                        <div     class="card-columns cdkDragContent " cdkDropList (cdkDropListDropped)="dropExperience($event)">
+                            <div *ngFor="let exp of experience_list; let i = index; trackBy: trackExpBy" class="card border-0  cdkDrap-box " cdkDrag >
+                               <div class="shadow">
+                                <div class="example-handle my-auto p-2 " cdkDragHandle>
+                                    <button mat-icon-button> <mat-icon class="text-secondary">drag_handle</mat-icon></button>
+                                   </div>
+                                <div class="cdkDrag-placeholder" *cdkDragPlaceholder></div>
+                                <div class="card-body" >
+                                    <button mat-icon-button class="float-right" (click)="removeExp(i)" color="warn"><mat-icon>delete</mat-icon></button>
+                                    <strong   class=" text-success  font-weight-bold" >{{exp.position | uppercase}}</strong>
+                                    <span  class="d-block small">{{exp.company | uppercase}}</span>
+                                    <span class="badge badge-success " >{{exp.from}} -  {{exp.to}}</span>
+                                    <span style="font-size: 15px;" class="text-justify d-block">{{exp.desc | slice:0:150}} ...</span>
+                                    <!-- <hr> -->
+                                </div>
+                                
+                               </div>
+                            </div>
+                            <br><br>
+                        </div>
+                </div>
+                
+
+                <div class="p-2 ">
+
+                        <div class="">
+                             <span class="text-secondary lead small font-weight-bold">EDUCATION</span >
+                                &nbsp; &nbsp;
+                            <button class=" m-shadow" mat-icon-button (click)="education()"><mat-icon class="text-info">add</mat-icon></button>
+                        </div>
+                        <br>
+
+                   <div class="card-columns cdkDragContent"  cdkDropList (cdkDropListDropped)="dropEducation($event)">
+                    <div *ngFor="let edu of education_list; let i = index; trackBy: trackEduBy" class=" card border-0  cdkDrag-box p-2" cdkDrag>
+                       <div class="shadow">
+                        <div class="example-handle my-auto p-2" cdkDragHandle>
+                            <button mat-icon-button> <mat-icon class="text-secondary">drag_handle</mat-icon></button>
+                           </div>
+                           
+                        <div class="cdkDrag-placeholder" *cdkDragPlaceholder></div>
+                        <div class="card-body">
+                            <button mat-icon-button class="float-right" (click)="removeEdu(i)" color="warn"><mat-icon>delete</mat-icon></button>
+                            <strong   class=" d-block text-success font-weight-bold" >{{edu.course | uppercase}}</strong>
+                            <span  class="d-block small">{{edu.university | uppercase}}</span>
+                            <span class="badge badge-success" >{{edu.from}} -  {{edu.to}}</span><br>
+                            <span  class="text-justify d-block" style="font-size: 15px;">{{edu.desc | slice:0:150}} ...</span>
+                            <!-- <hr> -->
+                        </div>
+                       </div>
+                    </div>
+                    <br><br>
+                   </div>
+        
+                </div>
+
+
+                
+                <div class="p-2 ">
+
+                    <div class="">
+                         <span class="text-secondary lead small font-weight-bold">PROJECTS RECORD</span >
+                            &nbsp; &nbsp;
+                        <button class=" m-shadow" mat-icon-button (click)="project()"><mat-icon class="text-success">add</mat-icon></button>
+                    </div>
+                    <br>
+
+                <div class="card-columns cdkDragContent"  cdkDropList (cdkDropListDropped)="dropProject($event)">
+                    <div *ngFor="let pro of project_list; let i = index; trackBy: trackProBy" class=" card border-0 m-shadow cdkDrag-box p-2" cdkDrag>
+
+                        <div class="shadow">
+                            <div class="example-handle my-auto p-2" cdkDragHandle>
+                                <button mat-icon-button> <mat-icon class="text-secondary">drag_handle</mat-icon></button>
+                               </div>
+                         
+                            <div class="card-body">
+                                <div class="cdkDrag-placeholder" *cdkDragPlaceholder></div>
+                                <button mat-icon-button class="float-right" (click)="removePro(i)" color="warn"><mat-icon>delete</mat-icon></button>
+                                <button mat-icon-button (click)="change(i)" class="float-right">
+                                    <mat-icon class="text-primary">add_a_photo</mat-icon>
+                                 </button>
+                                <div class="media  p-2 d-block d-md-flex ">
+                                    <img [src]="imagebase+pro.image" alt="" class="mr-3" style="width: 100px; clip-path: circle(45%);">
+                                    <div class="media-body my-auto">
+                                        <strong   class=" text-success font-28" >{{pro.projectname | uppercase}}</strong><br>
+                                        <span style="font-size: 15px;">{{pro.desc | slice:0:200}} ...</span>
+                                    </div>
+                               </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+
+               
+
+            </div>
             <!-------------------------------
                 The Percentage aspect
           ---------------------------------------->
                 <br><br>
-                <div class="bg-white ">
-                        <p class="bg-dark text-light text-center p-2">Personal Skills</p>
-                        <div class="p-3">
-                                <div class="form-group">
-                                        <mat-form-field class="w-100" appearance="outline">
-                                                <mat-label>Skill</mat-label>
-                                                <input type="text" matInput #skillname>
-                                        </mat-form-field>
-                                </div>
-        
-                                <div class="form-group">
-                                        <label for="formControlRange">Rate Skills %</label>
-                                        <mat-slider step="10" thumbLabel="true" class="w-100 " color="primary" #skillrange
-                                        >
-                                    </mat-slider>
+                <div class=" ">
+                        <p class="text-secondary lead small font-weight-bold">PERSONAL & PROFESSIONAL SKILLS</p>
+                        <div class="p-3 row  ">
+                               
+                                <div class="col-md bg-white m-shadow p-2">
+                                    <div class="form-group">
                                         
+                                        <span class="small text-secondary">Skill</span>
+                                        <input   type="text"  #skillname class="form-control ">
+                                        
+                                    </div>
+
+                                    <div class="form-group">
+                                            <label for="formControlRange" class="small text-secondary">Rate Skills %</label>
+                                            <mat-slider step="10" thumbLabel="true" class="w-100 " color="primary" #skillrange>
+                                                
+                                        </mat-slider>
+                                            
+                                    </div>
+
+                                    <div>
+                                        <button class="btn btn-primary btn-sm m-shadow"  (click)="pushSkill(skillname.value, skillrange.value)">
+                                            Add
+                                        </button>
+                                    </div>
                                 </div>
-        
-                                <div>
-                                    <button class="br-30" mat-raised-button (click)="pushSkill(skillname.value, skillrange.value)">Add</button>
+                               
+                                <div class="col-md ">
+                                   
+
+                                    <div class=" cdkDragContent"  cdkDropList (cdkDropListDropped)="dropSkills($event)">
+                                        <div *ngFor="let sk of skills; let i =index" class=" my-2  cdkDrag-box bg-white " cdkDrag>
+                                           <div class="shadow d-flex">
+                                                <div class="example-handle my-auto p-2" cdkDragHandle>
+                                                    <button mat-icon-button> <mat-icon class="text-secondary">drag_handle</mat-icon></button>
+                                                </div>
+                                            
+                                                <!-- <div class="cdkDrag-placeholder" *cdkDragPlaceholder></div> -->
+                                                <div class="w-100">
+                                                    <span class="">{{sk.value | uppercase}}  </span>
+                                                    <div class="progress " style="height: 5px;">
+                                                        <div class="progress-bar bg-secondary" role="progressbar" [style.width]="sk.range+'%'" ></div>
+                                                    </div>
+                                                </div>
+                                                <button mat-icon-button class="my-auto" color="warn" ><mat-icon (click)="remove(i)" >cancel</mat-icon></button>
+                                           </div>
+                                        </div>  
+                                    </div>
+
+                                   
                                 </div>
-                                <br>
-                                <span class="small">Skills:</span>
-                                <mat-chip-list>
-                                    <mat-chip style="overflow: visible; "  *ngFor="let sk of skills; let i =index" 
-                                       >{{sk.value + ' ' + sk.range + '%'}}  
-                                        <mat-icon (click)="remove(i)" >cancel</mat-icon>
-                                    </mat-chip>
-                                </mat-chip-list>
+                               
                         </div>
                 </div>
-<br>
-                <div class="p-3  bg-white">
-                    <button mat-raised-button color="primary" class="br-30 w-100">Save</button>
+
+                <div class="p-3  text-center">
+                    <button   class="br-30 shadow  p-3 px-5 btn btn-primary " (click)="submitPort()">
+                        Save changes
+                        <span [hidden]="!sending">
+                            <i class="	fa fa-circle-o-notch fa-spin" [hidden]="!sending"></i>
+                        </span>
+                    </button>
                 </div>
             </div>
 
             <!-------------------------------
                 The image aspect
           ---------------------------------------->
-            <div class="col-md-2 p-2 ">
-                <!-- <div class="bg-white  p-1" style="position: relative;">
-                    <div style="cursor: pointer;" class="border-0 card" style="height: 350px; overflow: hidden;">
-                        <img src="{{imglink}}" class="card-img-top">
-                    </div>
-
-                    <div style="position: absolute; top: 0%; left: 0%; right: 0%; bottom: 0%; background: rgba(0,0,0,0.2)" class=" d-flex justify-content-center">
-                        <a mat-fab color class="clickable mat-elevation-z7 align-self-center " (click)="openMediaManager()"><mat-icon>edit</mat-icon></a>
-                    </div>
-                </div> -->
-            </div>
+            <!-- <div class="col-md-2 p-2 "></div> -->
         </div>
  
     <!-- </form> -->

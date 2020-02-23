@@ -1,0 +1,47 @@
+<div>
+    <form class="content-container p-1 " [formGroup]="expGroup" novalidate (submit)="addNew()">
+        <h6 class="text-primary">New Experience</h6>
+        <br>
+
+        <div class="form-group">
+            <div class="row">
+                <div class="col">
+                    <span class="small text-center">From</span>
+                    <input type="number" formControlName="from" class="form-control border-0 light" placeholder="e.g 2017">
+                </div>
+                <div class="col">
+                    <span class="small text-center">To</span>
+                    <input type="number" formControlName="to" class="form-control border-0 light" placeholder="e.g 2017 or now if still on">
+                    <span class="small text-danger" *ngIf="to.touched && from.value > to.value">to must be greater than from</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <span class="small text-center">Position</span>
+            <input type="text" formControlName="position" class="form-control border-0 light" placeholder="e.g Web Designer">
+        </div>
+
+        <div class="form-group">
+            <span class="small text-center">Company / Organisation</span>
+            <input type="text" formControlName="company" class="form-control border-0 light" placeholder="e.g Ihifix Technology">
+        </div>
+
+        <div class="form-group">
+            <span class="small text-center">Description</span>
+            <textarea type="text" rows="5" formControlName="desc" class="form-control border-0 light" placeholder="e.g I design bueatiful site" ></textarea>
+        </div>
+
+        <div class="form-group text-center">
+            <button class="btn btn-primary shadow w-50" [disabled]="expGroup.invalid || from.value > to.value">
+                <span>Add </span>
+            </button>
+        </div>
+
+        <div class="text-center">
+            <a href="#" (click)="close($event)" class="text-secondary small">close</a>
+        </div>
+    </form>
+
+   
+</div>

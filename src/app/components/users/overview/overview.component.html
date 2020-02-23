@@ -1,101 +1,277 @@
-<div class="container-fluid">
-       <div class="row">
-                <div class="col-md">
-                        <main class="container">
+<div class="container-fluid px-md-4">
+    
+    <div class="text-right my-2">
+
+        <span class="small  p-2 text-secondary">Monday, 29 April, 2019</span>
+    </div>
 
 
-                                <br>
-                                <div class=" p-2 row">
-                        
-                                       
-                                               
-                                        <div class="  col" *ngIf="no_site" > 
-                                                        <div *ngIf="!temp" class="w-100 h-100 bg-secondary theme1">
-                                               
-                                                         </div>
-                        
-                                                <div class="card  div-shadow h-100 w-100"  *ngFor="let tm of temp">
-                                                        <img src="{{tm.image}}" alt="" class="card-img-top"  >
-                                                        <div class="card-body">
-                                                                <p class="card-text small text-center font-1 font-weight-bold">{{tm.template_name}}</p>
-                                                        </div>
-                                                </div>
-                                                &nbsp;
-                                                &nbsp;
-                                                
-                                        </div>
-                                        <div class="col">
-                                                        <div class="card div-shadow h-100" >
-                                                                        <button mat-stroked-button color=primary class="my-auto w-100 h-100  " routerLink="/start">
-                                                                                        <mat-icon>add</mat-icon>
-                                                                                        <p>Create Website</p>
-                                                                        </button>
-                                                               </div>
-                                        </div>
+  <div style="font-family: monospace;" >
+    <span class="small font-weight-bold ">LINK URL</span>
+    <div class="p-2 m-shadow "  [ngClass]="night ? 'bg-black-light-2 text-fade': 'bg-white text-dark'">
+        <span  [ngClass]="night ? 'text-light': ''">{{prev_link}}</span>
+       <button mat-icon-button class="text-primary " (click)="copyurl(prev_link)"><mat-icon>content_copy</mat-icon></button>
+    </div>
+  </div>
+    <br>
+
+
+    <div class="row">
+        <div class="col-md ">
+            <main class="container-fluid">
+
+            
+                    <div class="  row">
+                        <!-- Websites -->
+                        <div class=" col-md  m-1 p-2 shadow" [ngClass]="night ? 'bg-black-light-2 ': 'bg-white'" >
+                            <div class="d-flex justify-content-between ">
+                                <span class="text-fade small font-weight-bold">CUSTOMERS</span>
+                                <span  class="numbers  border-0" [ngClass]="night ? 'bg-black-light ': 'bg-back'" style="width: 60px; height: 60px; line-height: 70px;"
+                                >
+                                    <mat-icon color="primary">people</mat-icon>
+                                </span>
+                            </div>
+
+                            <div>
+                                <h4 class="lead display-4 text-center" [ngClass]="night ? 'text-light ': 'text-dark'">
+                                    <strong>{{customer_count}}</strong>
+                                    <!-- <strong class="fa fa-circle-o-notch fa-spin" [hidden]="acc_count"></strong> -->
+                                </h4>
+                            </div>
+
+                            <div class="text-center">
+                                &nbsp;
+                                <span class="small text-fade">Count</span>
+                            </div>
+                        </div> 
+
+                        <!-- accounts -->
+                        <div class=" col-md  m-1 p-2 shadow" [ngClass]="night ? 'bg-black-light-2 ': 'bg-white'">
+                                <div class="d-flex justify-content-between">
+                                    <span class="text-fade small font-weight-bold">ORDERS</span>
+                                    <span class="numbers  border-0" [ngClass]="night ? 'bg-black-light ': 'bg-back'" style="width: 60px; height: 60px; line-height: 70px;">
+                                        <mat-icon color="primary">language</mat-icon>
+                                    </span>
                                 </div>
-                        
-                                <br>
-                        
-                               <div *ngIf="no_site" >
-                                        <div class=" bg-white">
-                                                        <p class="m-blue p-2 text-light">Customers</p>
-                                                        <div class="p-5">
+    
+                                <div>
+                                    <h4 class="lead  display-4 text-center " [ngClass]="night ? 'text-light ': 'text-dark'">
+                                        <strong>{{order_count}}</strong>
+                                        <!-- <strong class="spinner-grow spinner-grow-lg" [hidden]="site_count"></strong> -->
+
+                                    </h4>
+                                </div>
+    
+    
+                                <div class="text-center">
+                                    &nbsp;
+                                    <span class="small text-fade">Total order</span>
+                                </div>
+                            </div>
+                    </div>
+
+                    <!-- //////////// -->
+                    <div class="  row">
+                            <!-- stores -->
+                            <div class="col-md bg-white m-1 p-3 shadow" [ngClass]="night ? 'bg-black-light-2 ': 'bg-white'">
+                                    <div class="d-flex justify-content-between">
+                                        <span class="text-fade small font-weight-bold">BLOG POST</span>
+                                        <span class="numbers  border-0" [ngClass]="night ? 'bg-black-light ': 'bg-back'" style="width: 60px; height: 60px; line-height: 70px;">
+                                            <mat-icon color="primary">	library_books</mat-icon>
+                                        </span>
+                                    </div>
+        
+                                    <div>
+                                        <h4 class="lead text-light display-4 text-center" [ngClass]="night ? 'text-light ': 'text-dark'">
+                                            <strong>{{post_count}}</strong>
+                                            <!-- <strong class="spinner-grow spinner-grow-lg" [hidden]="store_count"></strong> -->
                                         
-                                                        </div>
-                                                </div>
-                                                 <br>
-                                        
-                                                 <div class=" bg-white">
-                                                                <p class="m-blue p-2 text-light">Products</p>
-                                                                <div class="p-5">
-                                                
-                                                                </div>
-                                                        </div>
-                                        <br>
-                                                        <div class=" bg-white">
-                                                                        <p class="m-blue p-2 text-light">Blog Review</p>
-                                                                        <div class="p-5">
-                                                        
-                                                                        </div>
-                                                                </div>
-                                        
-                               </div>
-                        
-                        </main>
-                </div>
+                                        </h4>
+                                    </div>
+        
+        
+                                    <div class="text-center">
+                                        &nbsp;
+                                        <span class="small text-fade">January, 2019</span>
+                                    </div>
+                                </div>
+                                <!-- analysis -->
+                                <div class=" col-md bg-white m-1 p-3  shadow" [ngClass]="night ? 'bg-black-light-2 ': 'bg-white'">
+                                        <div class="d-flex justify-content-between">
+                                            <span class="text-fade small font-weight-bold">FEEDS/REPORTS</span>
+                                            <span class="numbers  border-0" [ngClass]="night ? 'bg-black-light ': 'bg-back'" style="width: 60px; height: 60px; line-height: 70px;">
+                                                <mat-icon color="primary">info</mat-icon>
+                                            </span>
+                                        </div>
+            
+                                        <div>
+                                            <h4 class="lead  display-4 text-center " [ngClass]="night ? 'text-light ': 'text-dark'"><strong>{{feeds_count}}</strong></h4>
+                                        </div>
+            
+            
+                                        <div class="text-center">
+                                            &nbsp;
+                                            <span class="small text-fade">from customers</span>
+                                        </div>
+                                    </div>
+                    </div>
+                    <br>
+
+                  
 
 
-                <!--------------------------
-                        site information
-                ------------------------------>
-                <div class="col-md-3">
-                                <br><br>        
-                        <div class="bg-white">
+            </main>
+        </div>
+
+
+        <!--------------------------
+                     site information
+             ------------------------------>
+        <div class="col-md-4 px-3 pb-3 pt-1 ">
+        
+            <div class=" p-2 h-100  shadow" [ngClass]="night ? 'bg-black-light-2 ': 'bg-white'">
+
+                    <div class="d-flex justify-content-between">
+                            <span class="text-fade small font-weight-bold">FEEDS PER SITES</span>
+                            <span class="numbers border-0 " [ngClass]="night ? 'bg-black-light ': 'bg-back'" style="width: 60px; height: 60px; line-height: 70px;">
+                                <mat-icon color="primary">pie_chart</mat-icon>
+                            </span>
+                    </div>
+                    <br>
+
+                  <div>
+                      <table class="table table-borderless table-striped">
+                          <!-- <thead>
+                              <th class="small text-fade">Type</th>
+                              <th class="small text-fade">%</th>
+                          </thead> -->
+
+                          <tbody>
+                              <!-- <tr>
+                                  <td class="small " [ngClass]="night ? 'text-light ': 'text-dark'" style="width: 50px;">Blog (20)</td>
+                                  <td>
+                                        <div class="progress" style="height: 1.5em;">
+                                                <div class="progress-bar my-primary"  [style.width]="'30%'">30%</div>
+                                        </div>
+                                     
+                                  </td>
+                              </tr> -->
+                              <tr>
+                                    <td class="small " [ngClass]="night ? 'text-light ': 'text-dark'" style="width: 50px;">Store (10)</td>
+                                    <td>
+                                          <div class="progress" style="height: 1.5em;">
+                                                  <div class="progress-bar my-primary" role="progressbar" [style.width]="'40%'">40%</div>
+                                          </div>
+                                          
                                        
-                                        <p class="m-blue p-2 text-light">site information</p>
-                                       <div class="p-2 small">
-                                                <p>
-                                                                <strong>Site Name:</strong>&nbsp;
-                                                                <span>Henshaw</span>
-                                                        </p>
-                                                        <p>
-                                                                <strong>IP Address</strong>&nbsp;
-                                                                <span>192.168.43.101</span>
-                                                        </p>
-                                                        <p>
-                                                                        <strong>Customers</strong>&nbsp;
-                                                                        <span>101</span>
-                                                                </p>
-                                                                <p>
-                                                                                <strong>Blog post</strong>&nbsp;
-                                                                                <span>10</span>
-                                                                        </p>
-                                                                        <p>
-                                                                                        <strong>Notifications</strong><br>
-                                                                                        <span>Who is you mother?</span>
-                                                                                </p>
-                                       </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                        <td class="small " [ngClass]="night ? 'text-light ': 'text-dark'" style="width: 50px;">Portfolio (45)</td>
+                                        <td>
+                                              <div class="progress" style="height: 1.5em;">
+                                                      <div class="progress-bar my-primary" role="progressbar" [style.width]="'10%'">10%</div>
+                                              </div>
+                                           
+                                        </td>
+                                    </tr>
+                                    <!-- <tr>
+                                            <td class="small " [ngClass]="night ? 'text-light ': 'text-dark'" style="width: 50px;">Business (22)</td>
+                                            <td>
+                                                  <div class="progress" style="height: 1.5em;">
+                                                          <div class="progress-bar my-primary" role="progressbar" [style.width]="'22%'">22%</div>
+                                                  </div>
+                                               
+                                            </td>
+                                        </tr> -->
+                          </tbody>
+                      </table>
+                        
+
+                  </div>
+               
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<!-- Payment and revenue -->
+<main class="container-fluid px-md-4">
+    <div class="row">
+
+        <div class="col-md">
+                <div class="  p-3 shadow" [ngClass]="night ? 'bg-black-light-2 ': 'bg-white'">
+                        <div class="d-flex justify-content-between">
+                                <span class="text-fade small font-weight-bold">Recent Payment Log</span>
+                                <span class="numbers border-0 " [ngClass]="night ? 'bg-black-light ': 'bg-back'" style="width: 60px; height: 60px; line-height: 70px;">
+                                    <mat-icon color="primary">payment</mat-icon>
+                                </span>
+                            </div>
+                        <br>
+            
+                        <div class="table-responsive">
+                            <table class="table table-md table-borderless table-striped">
+                                <!-- <thead class="small  text-secondary">
+                                    <th>User</th>
+                                    <th>VID</th>
+                                    <th>Date</th>
+                                    <th>Category</th>
+                                </thead> -->
+            
+                                <tbody>
+
+                                   
+                                    <!-- <tr *ngFor="let h of [1,2,3,4,5]">
+                                        <td>
+                                            <a routerLink="/admin/dashboard" class="" [ngClass]="night ? 'text-light ': 'text-dark'">Henshaw Samuel</a>
+                                        </td>
+                                        <td class="text-fade">  <span class="badge badge-dark text-fade p-2">VID</span> TR-27638</td>
+                                        <td class=" text-fade">May 24th, 2019</td>
+                                        <td>
+                                            <span class="badge  my-primary-fade text-fade p-2">E-commerce</span>
+                                        </td>
+                                    </tr> -->
+                                </tbody>
+                            </table>
+
+                            <div class="text-center ">
+                                <p class="alert alert-warning">
+                                    <i class="fa fa-exclamation-triangle fa-sm"></i>
+                                    <span> No Orders yet from customers, </span>
+                                    <a routerLink="/dash">please opt for Promotion?</a>
+                                 </p>
+                            </div>
                         </div>
                 </div>
-       </div>
-</div>
+        </div>
+
+
+        <div class="col-md-4">
+            <div class="p-3 shadow" [ngClass]="night ? 'bg-black-light-2 ': 'bg-white'">
+                    <div class="d-flex justify-content-between">
+                            <span class="text-fade small font-weight-bold">Revenue</span>
+                            <span class="numbers border-0 " [ngClass]="night ? 'bg-black-light ': 'bg-back'" style="width: 60px; height: 60px; line-height: 70px;">
+                                <mat-icon color="primary">money</mat-icon>
+                            </span>
+
+                           
+                    </div>
+
+                    <p class="alert alert-warning">
+                        <i class="fa fa-exclamation-triangle fa-sm"></i>
+                        <span> No transaction yet!</span>
+                    </p>
+
+                   
+
+                  
+            </div>
+        </div>
+    </div>
+   
+</main>
+
+<br><br>

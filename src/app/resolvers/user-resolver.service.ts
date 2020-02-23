@@ -18,7 +18,7 @@ export class UserResolverService implements Resolve<any>{
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> | Promise<any> | any{
 
       let path = route.url[0].path;
-      console.log(path)
+      // console.log(path)
 
       // for path: /dash
       if(path === 'dash'){

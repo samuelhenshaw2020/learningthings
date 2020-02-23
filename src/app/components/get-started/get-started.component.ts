@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef, AfterContentInit, } from '@angular/core';
-import { fade } from 'src/app/animations/getstatedAnim';
+import { fade } from 'src/app/animations';
 import { FormBuilder, Validators } from '@angular/forms';
 import { UserserviceService } from 'src/app/services/userservice.service';
 import { MatSnackBar } from '@angular/material';
@@ -33,6 +33,8 @@ export class GetStartedComponent implements OnInit, AfterContentInit {
   templates = [];
   template_property;
   filterTemplate = [];
+
+  imagebase = ''
  
 
 
@@ -45,7 +47,9 @@ export class GetStartedComponent implements OnInit, AfterContentInit {
     private snackbar: MatSnackBar,
     private sanitize: DomSanitizer,
     private activeRoute: ActivatedRoute
-  ) { }
+  ) { 
+    this,this.imagebase = service.baseImgUrl;
+  }
 
   /**
    * Validates the forms 
@@ -93,12 +97,13 @@ export class GetStartedComponent implements OnInit, AfterContentInit {
 
 
   businessCat: object[] = [
-    { name: 'Education', icon: "		fa fa-graduation-cap fa-lg", type: 'blog', short_name: 'blg'},
-    { name: 'Portfolio and CV', icon: "fa fa-address-card-o fa-lg", type: 'portfolio', short_name: 'ptf' },
-    { name: 'Business', icon: "fa fa-bar-chart fa-lg" , type: 'portfolio', short_name: 'bis'},
-    { name: 'Photography and Media', icon: "	fa fa-camera fa-lg", type: 'blog', short_name: 'blg' },
-    { name: 'Entertainment', icon: "fa fa-video-camera fa-lg", type:'blog', short_name: 'blg' },
     { name: 'E-commerce', icon: "fa fa-shopping-cart fa-lg", type: 'ecommerce', short_name: 'cmc' },
+    { name: 'Portfolio and CV', icon: "fa fa-address-card-o fa-lg", type: 'portfolio', short_name: 'ptf' },
+    // { name: 'Education', icon: "		fa fa-graduation-cap fa-lg", type: 'blog', short_name: 'blg'},
+    { name: 'Business', icon: "fa fa-bar-chart fa-lg" , type: 'portfolio', short_name: 'bis'},
+    // { name: 'Photography and Media', icon: "	fa fa-camera fa-lg", type: 'blog', short_name: 'blg' },
+    // { name: 'Entertainment', icon: "fa fa-video-camera fa-lg", type:'blog', short_name: 'blg' },
+    
     { name: 'Blog', icon: "fa fa-book fa-lg", type: 'blog', short_name: 'blg' }
 
   ]
@@ -128,11 +133,19 @@ export class GetStartedComponent implements OnInit, AfterContentInit {
     })
   }
   
-  bindTemplate(val){
+  bindTemplate(val: any){
     this.filterTemplate = this.templates.filter(tem => {
       return tem.type === val;
     });
     console.log(this.filterTemplate);
+  }
+
+  setWebType(val:any){
+    this.webtype.setValue(val); 
+  }
+
+  setTheme(tem: any){
+    this.theme.setValue(tem);
   }
 
 
@@ -140,7 +153,7 @@ export class GetStartedComponent implements OnInit, AfterContentInit {
    * @param {Number} index - for selecting the theme and business type.
    * @author: Henshaw Samuel.
    */
-  async colorate(index) {
+  async colorate(index: any) {
     if (this.count == (this.START_COUNT + 5)) {
       this.prev2 = index;
     } else {
@@ -191,7 +204,7 @@ export class GetStartedComponent implements OnInit, AfterContentInit {
    * @param {number} value Hides the form component from view
    * Shows form component in view
    */
-  hideComponents(value) {
+  hideComponents(value: any) {
     value = this.count;
     for (let a = 1; a <= document.getElementsByClassName('con').length; a++) {
       document.getElementById("comp" + a).style.display = "none";
@@ -283,7 +296,7 @@ export class GetStartedComponent implements OnInit, AfterContentInit {
   }
 
 
-  shortName(val){
+  shortName(val: any){
     this.data.set('shortname', val);
   }
 

@@ -14,29 +14,44 @@ import { UsersGuard } from './guards/users.guard';
 import { LoginGuard } from './guards/login.guard';
 import { ControlComponent } from './control/control.component';
 import { AdminGuard } from './guards/admin.guard';
+import { AdminResolverService } from './resolvers/admin-resolver.service';
+import { AfterUserLoginGuard } from './guards/after-user-login.guard';
+import { BeforeUserLoginGuard } from './guards/before-user-login.guard';
 
 
 const routes: Routes = [
-  {path: 'home', component: HomeComponent},
-
+  
+  // HOME
   {path: 'login', component: LoginComponent, children: [
     {path: 'signin', component: SignInComponent},
     {path: 'signup', component: RegComponent},
     {path: 'rpwd', component: OtpComponent},
-    {path: 'verify', component: VerifyMailComponent},
     {path: '', redirectTo: 'signin', pathMatch: 'full'}
-  ]},
+  ],  data: {animation: 'LoginPage'}, canActivate: [BeforeUserLoginGuard]},
 
-  {path: 'control', component: ControlComponent},
+  // USER
+  {
+    path: 'dash', component: UsersComponent  ,  resolve: {site_data: UserResolverService}, 
+    loadChildren: ()=> import('./components/users/user.module').then(mod => mod.UserModule),
+    data: {animation: 'DashPage'},
+    canActivate: [AfterUserLoginGuard], canLoad: [UsersGuard]
+  },
+  {path: 'verify', component: VerifyMailComponent, canActivate: [AfterUserLoginGuard]},
+  {path: 'start', component: GetStartedComponent,  resolve: {temp: UserResolverService}, canActivate: [AfterUserLoginGuard]},
 
-  {path: 'start', component: GetStartedComponent,  resolve: {temp: UserResolverService}},
-  // {path: 'dash', component: UsersComponent, loadChildren: ()=> import('./components/users/user.module').then(mod => mod.UserModule)},
+  // ADMIN
+  {path: 'control', component: ControlComponent, data: {animation: 'ControlPage'}},
+  {
+      path: 'admin',  component: AdminComponent,  
+      loadChildren: ()=> import('./components/admin/admin.module').then(mod => mod.AdminModule),
+      data: {animation: 'AdminPage',
+      canActivate: [AdminGuard]
+    }
+  },
 
-  {path: 'dash', component: UsersComponent  , loadChildren: ()=> import('./components/users/user.module').then(mod => mod.UserModule)},
-  {path: 'admin',  component: AdminComponent, canActivate: [AdminGuard], canLoad: [AdminGuard], loadChildren: ()=> import('./components/admin/admin.module').then(mod => mod.AdminModule)},
-
-  {path: '', redirectTo: 'home', pathMatch: 'full'},
-  {path: '**', component: HomeComponent}
+  // ANY ROUTE
+  {path: '', redirectTo: 'login', pathMatch: 'full'},
+  {path: '**', component: LoginComponent}
 
 ];
 

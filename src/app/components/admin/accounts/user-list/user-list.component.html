@@ -37,20 +37,29 @@
                     <tr class="    p-2" *ngFor="let acc of user_acc; let i = index">
 
                         <td class="m-auto ">
-                            <p>
-                                <span class="badge  badge-dark bg-black-light text-fade p-2 m-auto   ">{{acc.country_code}}</span>&nbsp;
-                                <a class="lead text_dark clickable text-light"  ><strong>{{acc.user_name}}</strong></a>
+                            <p class="my-auto">
+                               
+                                <a class="lead text_dark clickable text-light"  >
+                                    <span class="  text-fade p-2 m-auto  ">
+                                        <img [src]="'https://www.countryflags.io/'+acc.country_code +'/flat/32.png'" [alt]="acc.country_code" loading="lazy">
+                                       {{ acc.country}}
+                                        
+                                    </span>
+                                    &nbsp;
+                                    <strong>{{acc.user_name}}</strong>
+                                 
+                                </a>
                             </p>
                         </td>
 
-                        <td class=" m-auto">
+                        <!-- <td class=" m-auto">
                             
                             <span class="  text-fade p-2 m-auto  ">
                                 <img [src]="'https://www.countryflags.io/'+acc.country_code +'/flat/32.png'" [alt]="acc.country_code" loading="lazy">
                                {{ acc.country}}
                                 
                             </span>
-                        </td>
+                        </td> -->
 
                         <td>
                             <span class=" badge badge-dark bg-black-light text-fade p-2 m-auto  ">

@@ -8,7 +8,7 @@ import { map, first, last, switchMap, delay, tap, endWith } from 'rxjs/operators
 })
 export class AdminserviceService {
 
-  private baseUrl = "admin/";
+  private baseUrl = "/api/admin/";
   private isLoggedInStatus = false;
   private isTokenStatus = false;
 
@@ -22,33 +22,19 @@ export class AdminserviceService {
 
    Postlogin(val){
     return this.http.post<any>(this.baseUrl+ 'login', val, {observe: 'events', reportProgress: true})
-    // .pipe(
-    //   delay(1000),
-    //   tap((t:any) => {
-    //     if(t.type ===4 ){
-    //       console.log(t.body.success)
-    //       if(t.body.success){
-    //           this.isLoggedInStatus = true;
-    //       }
-
-    //       if(!t.body.success){
-    //         this.isLoggedInStatus = false;
-    //       }
-    //     }
-    //   })
-    // )
+   
    }
 
-   postLoggedAdmin(){
-     return this.http.get<any>(this.baseUrl+"logged_admin", {observe: 'events', reportProgress: true});
-   }
+  //  postLoggedAdmin(){
+  //    return this.http.get<any>(this.baseUrl+"logged_admin", {observe: 'events', reportProgress: true});
+  //  }
 
    postLogout(){
      return this.http.get<any>(this.baseUrl+"logout");
    }
 
    getToken(){
-    return localStorage.getItem('_token') ? true : false;
+    return !!localStorage.getItem('_itk');
   }
 
   send_email(val){
@@ -63,8 +49,8 @@ export class AdminserviceService {
     return this.http.post<any>(this.baseUrl + "acc_suspend", val);
   }
 
-  search_items(val, endpoint){
-    return this.http.post<any>(this.baseUrl+ endpoint, val);
+  search_items(val){
+    return this.http.post<any>(this.baseUrl+ 'search', val);
   }
 
   pending_acc(){
@@ -91,6 +77,10 @@ export class AdminserviceService {
     return this.http.post<any>(this.baseUrl + 'check_token', {token: val})
  }
 
+ siteInfo(){
+   return this.http.get<any>(this.baseUrl+ 'site_info');
+ }
+
   
 
   isLoggedIn(){
@@ -100,11 +90,11 @@ export class AdminserviceService {
  
   logOut(){
     this.isLoggedInStatus = false;
-    localStorage.removeItem('_token');
+    localStorage.removeItem('_itk');
   }
 
   get islogged(){
-    console.log(this.isLoggedInStatus)
+    // console.log(this.isLoggedInStatus)
     return this.isLoggedInStatus;
   }
 

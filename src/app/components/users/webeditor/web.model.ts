@@ -37,7 +37,7 @@ export interface identity_model {
         services: object[]
     },
     short: string,
-    site_id: number,
+    id: number,
     social_media?: {
         enabled: boolean,
         handles: Object[]

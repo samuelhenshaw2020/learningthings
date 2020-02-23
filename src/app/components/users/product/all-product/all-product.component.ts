@@ -6,6 +6,8 @@ import { interval, timer } from 'rxjs';
 import { ProductService } from '../product.service';
 import { merge, tap, mergeMapTo, mergeAll, concat, map } from 'rxjs/operators';
 import { product_model } from './all-product.model';
+import { AppService } from 'src/app/app.service';
+import { MatSnackBar } from '@angular/material';
 
 
 @Component({
@@ -23,42 +25,109 @@ export class AllProductComponent implements OnInit {
   loading = false;
   total = null;
   no_data = false;
+  imageurl;
+  categories;
+  prev = null;
 
   constructor(
     private service: UserserviceService,
     private activeRoute: ActivatedRoute,
-    private prodServ: ProductService
-  ) {
+    private prodServ: ProductService,
+    private rootS: AppService,
+    private snackbar: MatSnackBar
+
     
+  ) {
+    this.imageurl =prodServ.imageurl;
    }
 
   ngOnInit() {
    
    this.init_fetch();
    
-    console.log(this.total) 
+   this.getCategory()
   }
 
-  init_fetch(){
-    this.service.product.subscribe(d => {
-      this.total = d.total;
-      this.productList = d.data;
-      console.log(d)
-      if(d.data.length < 1){
-        this.service.postGetProducts().subscribe((nd:any) => {
-          this.service.product.next(nd);
-         
-           
-        })
-       
+  getCategory(){
+    this.prodServ.categories.subscribe(
+      data => {
+        this.categories = data;
+        // console.log(data)
+
       }
+    )
+  }
+
+  fetching = false;
+  init_fetch(){
+    this.fetching= true;
+    this.service.product.subscribe(d => {
+      this.total = d.product.total;
+      this.productList = d.product.data;
+     
+      this.fetching = false
+
     },
     err =>{
-       console.log(err)
+       this.fetching = false;
     })
   }
 
 
+  addProduct(){
+    this.rootS.addProduct();
+  }
+
+  viewProd($event: MouseEvent, id){
+    $event.preventDefault();
+
+    let select_prod: Array<any> = this.productList.filter(f => {
+      return f.product_id == id
+    })[0]
+
+    this.prodServ.view_prod(select_prod);
+  }
+
+  trackByIndex(index, prod){
+    // console.log(prod.product_id)
+    return prod.product_id;
+  }
+
+  deleteProd(prod){
+
+    this.rootS.confirmDialog(`Do you want to delete product: ${prod.product_name}`).afterClosed().subscribe(
+      condition => {
+        if(condition === true){
+          this.initiateDelete(prod)
+        }else{
+          this.prev = null;
+        }
+      }
+    )
+  }
+
+  initiateDelete(prod){
+    
+    let info = {
+      product_id: prod.product_id,
+      site_id: this.service.siteData().value.id
+    }
+   
+    this.prodServ.delProd(info).subscribe(
+      data => {
+        this.prev = null;
+        this.snackbar.open(data.message, 'close', {duration: 5000, panelClass: ['text-primary', 'bg-light']})
+        if(data.success == true){
+          let index =this.productList.indexOf(prod);
+          this.productList.splice(index, 1);
+        }
+      }, 
+      err => {
+        this.prev = null;
+
+      }
+    );
+  }
   
 
   
@@ -96,7 +165,7 @@ export class AllProductComponent implements OnInit {
      
       newArr.push(...this.productList);
       newArr.push(...nd.data);
-      console.log(newArr)
+      // console.log(newArr)
 
      
       let newProd: product_model = {
@@ -144,10 +213,10 @@ export class AllProductComponent implements OnInit {
       if(td){
         textval = td.innerText.toUpperCase() || td.textContent.toUpperCase();
         if(textval.indexOf(inputtext) > -1){
-          console.log('yes')
+          // console.log('yes')
           tr[i].style.display = "";
         }else{
-          console.log('no');
+          // console.log('no');
           tr[i].style.display = "none";
         }
       }

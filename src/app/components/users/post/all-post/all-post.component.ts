@@ -8,6 +8,7 @@ import { map, mapTo } from 'rxjs/operators';
 import { post_model } from '../post.model';
 import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
 import { Router } from '@angular/router';
+import { AppService } from 'src/app/app.service';
 
 @Component({
   selector: 'app-all-post',
@@ -38,7 +39,8 @@ export class AllPostComponent implements OnInit {
     private snackbar: MatSnackBar,
     private dialog: MatDialog,
     private postServ: PostService,
-    private router: Router
+    private router: Router,
+    private rootServ: AppService
   ) { }
 
   ngOnInit() {
@@ -52,14 +54,14 @@ export class AllPostComponent implements OnInit {
         this.currentPage = this.postServ.blogall.value.current_page;
         console.log(data)
 
-        if(data.data.length < 1){
-          this.service.getAllPost().subscribe((nd:any) => {
-           console.log(nd)
-           this.postServ.blogall.next(nd)
-          })
+        // if(data.data.length < 1){
+        //   this.service.getAllPost().subscribe((nd:any) => {
+        //    console.log(nd)
+        //    this.postServ.blogall.next(nd)
+        //   })
 
-          console.log(3)
-        }
+        //   console.log(3)
+        // }
         
       })
 
@@ -140,24 +142,7 @@ export class AllPostComponent implements OnInit {
   // Filter Table model
   filterTable(val, index){
     this.sel_category = (val == ''? 'All Categories': val);  //checks if val is empty or not
-    let tbody = document.getElementsByTagName('tbody')[0];
-    let tr = tbody.getElementsByTagName('tr');
-    let td;
-    let textval: string;
-    let inputtext = val.toUpperCase();
-    for(var i=0; i<tr.length; i++){
-      td = tr[i].getElementsByTagName('td')[index]
-      if(td){
-        textval = td.innerText.toUpperCase() || td.textContent.toUpperCase();
-        if(textval.indexOf(inputtext) > -1){
-          console.log('yes')
-          tr[i].style.display = "";
-        }else{
-          console.log('no');
-          tr[i].style.display = "none";
-        }
-      }
-    }
+    this.rootServ.filterTable(val, index);
     
   }
 

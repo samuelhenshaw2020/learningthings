@@ -1,19 +1,19 @@
-<!-- <mat-progress-bar mode="indeterminate" color="primary" [hidden]='!resolving'></mat-progress-bar> -->
-<button ly-button [hidden]='!resolving' color='primary' class="bg-dark text-light" style="position: absolute; top: 2%; left: 45%; z-index: 2000;">Loading...</button>
 
-<!-- <app-loadernav  [hidden]='!resolving'></app-loadernav> -->
+<!-- <button ly-button [hidden]='!resolving'  class="bg-light text-primary shadow" style="position: absolute; top: 2%; left: 45%; z-index: 2000;">
+     <span class="d-none d-md-inline">Loading...</span>
+     <i class="	fa fa-circle-o-notch fa-spin text-primary"></i>
+
+</button> -->
+
+<mat-progress-bar [hidden]='!resolving'  mode="indeterminate" ></mat-progress-bar>
+
 
 
      
-                        <router-outlet ></router-outlet>
+<div >
+    <router-outlet></router-outlet>
+</div>
 
-                        <!-- <div class="g-recaptcha" data-sitekey="6LfhYsoUAAAAAMSovXp6j_dzbUUVL7s10SYAY5fb"></div> -->
-
-                        
-
-
-                  
-      <!-- <button (click)="ifRobot()">click</button> -->
 
       
 

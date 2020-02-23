@@ -37,6 +37,10 @@ export class AdminResolverService implements Resolve<any>{
       return this.adminServ.get_users(headerOpt);
     }
 
+    if(path === 'admin'){
+      return this.adminServ.isLoggedIn();
+    }
+
   }
 
 

@@ -1,102 +1,161 @@
-<main class="container p-md-3">
-        <div class="p-2 m-blue d-flex">
-                <button mat-icon-button routerLink="/dash/product/all">
-                        <mat-icon class="text-light">arrow_back</mat-icon>
-                </button>
-                <p class="text-light m-auto">Edit product</p>
-        </div>
 
-        <br>
-        <!-------------------Product name-->
-        <div class=" row  ">
+ 
 
-                <!-- column one -->
-                <div class="col-md">
 
-                        <label for="">Product Name</label>
-                        <div class="d-flex form-search border">
-                                <input type="text" class=" p-2 w-100  " placeholder="Product Name">
-                        </div>
-                        <br>
 
-                        <label for="">Product Price</label>
-                        <div class="d-flex  form-search border pl-1">
-                                <span class="font-weight-bold  m-auto" style="text-decoration: line-through;">N</span>
-                                <input #p type="number" class=" w-100 p-2" placeholder="Price">
 
-                        </div>
-
-                        <br>
-                        <label for="">Sales Price</label>
-                        <div class="d-flex form-search border pl-3">
-                                <span class="font-weight-bold  m-auto" style="text-decoration: line-through;">N</span>
-                                <input type="number" class=" w-100 p-2" placeholder="Sales Price">
-
-                        </div>
-
-                        <br>
-                        <label for="">Discount</label>
-                        <div class="form-search border">
-                                <input [value]="discount" disabled class=" p-2 w-100  " placeholder="Discount">
-                        </div>
-                        <br>
-
-                        <label for="">Stock</label>
-                        <div class="d-flex form-search px-2 p-0 border">
-
-                                <select class="w-100 ml-1 py-2">
-                                        <option value="In Stock" selected>In Stock
-                                        </option>
-                                        <option value="Out of Stock">Out of Stock
-                                        </option>
-                                </select>
-
-                        </div>
-                        <br>
-
-                        <label for="">Qualtity</label>
-                        <div class="d-flex form-search px-2 p-0 border">
-
-                                <input type="number" class="w-100 ml-1 py-2">
-
-                        </div>
-
-                        <br>
-                        <label for="">Category</label>
-                        <div class="form-search px-2 p-0 border">
-
-                                <select class="w-100 ml-1 py-2">
-                                        <option value="In Stock" selected>Food
-                                        </option>
-                                        <option value="Out of Stock">Phone
-                                        </option>
-                                </select>
-                        </div>
-
-                        <br>
-
-                        <label for="">Sub-Category</label>
-                        <div class="form-search border">
-                                <input type="text" class=" w-100 p-2" placeholder="">
-
-                        </div>
-
-                        <br>
-                        <label for="">Product Description</label>
-                        <div>
-                                        <angular-editor formControlName="product_description"
-                                        [placeholder]="'Enter text here...'"
-                                        [config]="editorConfig"></angular-editor>
-                        </div>
+<div >
+        <div class="">
+                <br>
+                <div class="light text-center p-2">
+                        <a routerLink="/dash/product/all" class="float-left" mat-icon-button>
+                                <mat-icon>arrow_back</mat-icon>
+                        </a>
+                        <span class="lead">Product Update</span>
                 </div>
+                <main class="container">
 
 
-                <!-- column two -->
-                <div class="col-md">
+                       
+                        
+
+                
+                        
+                
+                       
+                
+                        <div  >
+                
+                
+                                <!-- ///////////////////////////////////////////////////////////////// -->
+                                <br>
+                
+                                <div class=" row ">
+                
+                                                <!-- column one -->
+                                                <div class="col-md p-md-3 border">
+                                
+                                                        
+                                                        <div class="form-group">
+                                                                <span class="text-primary">Product Name</span>
+                                                                <input type="text" class=" p-2 w-100 form-control light border-0"  [(ngModel)]="prod.product_name">
+                                                        </div>
+                                                        
+                                
+                                                      
+                                                        <div class="form-group">
+                                                                <span class="text-primary">Product Price</span>
+                                                                <input #p type="number" class=" p-2 w-100 form-control light border-0"  [(ngModel)]="prod.price" (keyup)="getDiscount()">
+                                
+                                                        </div>
+                                                        
+                                                        <div class="form-group">
+                                                                <span class="text-primary">Sales price</span>
+                                                                <input type="number"  class=" p-2 w-100 form-control light border-0"  [(ngModel)]="prod.sales_price" (keyup)="getDiscount()">
+                                
+                                                        </div>
+                                
+                                                       
+                                                        <div class="form-group">
+                                                                <span class="text-primary">Discount</span>
+                                                                <input [value]="discount" disabled class=" p-2 w-100 form-control light border-0">
+                                                        </div>
+                                
+                                                        <div class="form-group">
+                                                                <span class="text-primary">Stock</span>
+                                                                <select class=" p-2 w-100 form-control light border-0"  [(ngModel)]="prod.stock_status">
+                                                                        <option value="In Stock" selected>In Stock
+                                                                        </option>
+                                                                        <option value="Out of Stock">Out of Stock
+                                                                        </option>
+                                                                </select>
+                                
+                                                        </div>
+                                
+                                                        <div class="form-group">
+                                                                <span class="text-primary">Quantity</span>
+                                                                <input type="number" class=" p-2 w-100 form-control light border-0" [(ngModel)]="prod.amount_in_stock">
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                                <span class="text-primary">weight</span>
+                                                                <input type="text" class=" p-2 w-100 form-control light border-0" [(ngModel)]="prod.weight">
+                                                        </div>
+                                                        
+
+                                                        <div class="form-group">
+                                                                <span class="text-primary">Category</span>
+                                                                <select class=" p-2 w-100 form-control light border-0" [(ngModel)]="prod.category_name">
+                                                                        <option *ngFor="let cat of categories" [value]="cat.category_name" selected>{{cat.category_name}}</option>
+                                                                        
+                                                                </select>
+                                                        </div>
+                                
+                                
+                                                        <div class="form-group">
+                                                                <span class="text-primary">Sub-Category</span>
+                                                                <input type="text"  class=" p-2 w-100 form-control light border-0"  [(ngModel)]="prod.sub_category">
+                                
+                                                        </div>
+                                
+                                                        
+                                                </div>
+                                
+                                
+                                                <!-- column two -->
+                                                <div class="col-md p-md-3">
+                
+                                                                
+                                                                
+                                                                <div class="form-group">
+                                                                        <span class="text-primary">Product Description</span>
+                                                                                <angular-editor [(ngModel)]="prod.product_description"
+                                                                                [placeholder]="'Enter text here...'"
+                                                                                
+                                                                                [config]="editorConfig"></angular-editor>
+                                                                </div>
+                                                                
+                
+                                            
+                
+                
+                                                                                                                                       <!------------------------------------------
+                                                                save button
+                                                        -------------------------------------------->
+                                                
+                                
+                                
+                                
+                                                </div>
+                                        </div>
 
 
-
-                </div>
+                                        <div class="form-group  py-3">
+                                                <button class="btn btn-primary br-30 shadow" type="submit" (click)="updateProd()">
+                                                        <i class="fa fa-cart-plus"></i> 
+                                                        update product 
+                                                        <span [hidden]="!updating">
+                                                                <i class="	fa fa-circle-o-notch fa-spin text-light"></i>
+                                                            </span>
+                                                       
+                                                </button>
+                                        </div>
+        
+                                        
+                
+                
+                            
+                
+                
+                
+                                </div>
+                </main>
         </div>
-</main>
-<br><br><br>
+</div>
+
+
+
+<!-- <ly-grid container justify="end" ly-dialog-actions>
+        <button ly-button color="primary" (click)="dialogRef.close()">CLOSE</button>
+        <button ly-button color="primary" >UPLOAD</button>
+</ly-grid> -->

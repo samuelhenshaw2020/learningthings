@@ -1,5 +1,5 @@
 .form{
-    width: 400px;
+    width: 450px;
 }
 
 .otp-box{
@@ -31,7 +31,7 @@
 
 @media (max-width: 900px){
      .form{
-         width: 90%;
+         width: 100%;
      }
 
      .sh{
